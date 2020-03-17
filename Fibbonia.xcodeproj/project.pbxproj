@@ -12,8 +12,11 @@
 		A412AA762402295400216FDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A412AA742402295400216FDB /* Main.storyboard */; };
 		A412AA782402295500216FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A412AA772402295500216FDB /* Assets.xcassets */; };
 		A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A412AA792402295500216FDB /* LaunchScreen.storyboard */; };
-		A43BA71C241305B8006DFC10 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BA71B241305B8006DFC10 /* MainScreenViewController.swift */; };
-		A46CAD042403D14200036458 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A46CAD032403D14200036458 /* GoogleService-Info.plist */; };
+		A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BA71B241305B8006DFC10 /* ViewController.swift */; };
+		A457509A2413946200EAC86B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A45750992413946200EAC86B /* GoogleService-Info.plist */; };
+		A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEB9241F68E000381E82 /* SignUpViewController.swift */; };
+		A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBD241F690D00381E82 /* LoginViewController.swift */; };
+		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
 		DD81AC214019901077B193D6 /* Pods_Fibbonia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DADF0314F75F8FFBF0EE65 /* Pods_Fibbonia.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,8 +30,11 @@
 		A412AA772402295500216FDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A412AA7A2402295500216FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A412AA7C2402295500216FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A43BA71B241305B8006DFC10 /* MainScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
-		A46CAD032403D14200036458 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A43BA71B241305B8006DFC10 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A45750992413946200EAC86B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A487AEB9241F68E000381E82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A487AEBD241F690D00381E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		F136C1B80FC758A0774666EF /* Pods-Fibbonia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fibbonia.release.xcconfig"; path = "Target Support Files/Pods-Fibbonia/Pods-Fibbonia.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,16 +71,27 @@
 		A412AA6D2402295400216FDB /* Fibbonia */ = {
 			isa = PBXGroup;
 			children = (
-				A43BA71B241305B8006DFC10 /* MainScreenViewController.swift */,
+				A487AEB8241F686700381E82 /* ViewControllers */,
 				A412AA6E2402295400216FDB /* AppDelegate.swift */,
 				A412AA702402295400216FDB /* SceneDelegate.swift */,
 				A412AA742402295400216FDB /* Main.storyboard */,
 				A412AA772402295500216FDB /* Assets.xcassets */,
 				A412AA792402295500216FDB /* LaunchScreen.storyboard */,
+				A45750992413946200EAC86B /* GoogleService-Info.plist */,
 				A412AA7C2402295500216FDB /* Info.plist */,
-				A46CAD032403D14200036458 /* GoogleService-Info.plist */,
 			);
 			path = Fibbonia;
+			sourceTree = "<group>";
+		};
+		A487AEB8241F686700381E82 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */,
+				A43BA71B241305B8006DFC10 /* ViewController.swift */,
+				A487AEB9241F68E000381E82 /* SignUpViewController.swift */,
+				A487AEBD241F690D00381E82 /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		F3EBA9108AADFC500BED39EA /* Frameworks */ = {
@@ -106,6 +123,7 @@
 				A412AA682402295400216FDB /* Frameworks */,
 				A412AA692402295400216FDB /* Resources */,
 				2649253FD56C07876C107920 /* [CP] Embed Pods Frameworks */,
+				BFA05B5858209FA2C0EE2584 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -155,7 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */,
-				A46CAD042403D14200036458 /* GoogleService-Info.plist in Resources */,
+				A457509A2413946200EAC86B /* GoogleService-Info.plist in Resources */,
 				A412AA782402295500216FDB /* Assets.xcassets in Resources */,
 				A412AA762402295400216FDB /* Main.storyboard in Resources */,
 			);
@@ -203,6 +221,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BFA05B5858209FA2C0EE2584 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fibbonia/Pods-Fibbonia-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fibbonia/Pods-Fibbonia-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fibbonia/Pods-Fibbonia-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -212,7 +247,10 @@
 			files = (
 				A412AA6F2402295400216FDB /* AppDelegate.swift in Sources */,
 				A412AA712402295400216FDB /* SceneDelegate.swift in Sources */,
-				A43BA71C241305B8006DFC10 /* MainScreenViewController.swift in Sources */,
+				A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */,
+				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,
+				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
+				A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

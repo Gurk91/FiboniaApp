@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-Fibbonia/Pods-Fibbonia-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseEmailAuthUI.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle
+${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle

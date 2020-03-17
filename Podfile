@@ -9,5 +9,9 @@ target 'Fibbonia' do
 
 pod 'Firebase/Core'
 pod 'Firebase/Database'
+pod 'FirebaseUI/Auth'
+pod 'FirebaseUI/Google'
+pod 'FirebaseUI/Facebook'
+pod 'FirebaseUI/Email'
 
 end

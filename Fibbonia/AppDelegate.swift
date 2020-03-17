@@ -9,15 +9,15 @@
 import UIKit
 import Firebase
 
+var currUser: User = Auth.auth().currentUser!
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FirebaseApp.configure()
         
+        FirebaseApp.configure()
         return true
     }
 
