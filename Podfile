@@ -13,5 +13,6 @@ pod 'FirebaseUI/Auth'
 pod 'FirebaseUI/Google'
 pod 'FirebaseUI/Facebook'
 pod 'FirebaseUI/Email'
+pod 'Firebase/Firestore'
 
 end

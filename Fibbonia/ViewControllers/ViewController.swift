@@ -12,10 +12,19 @@ import FirebaseDatabase
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setUpElements()
+    }
+    
+    func setUpElements() {
+        Utils.styleFilledButton(signUpButton)
+        Utils.styleFilledButton(loginButton)
     }
     
 }

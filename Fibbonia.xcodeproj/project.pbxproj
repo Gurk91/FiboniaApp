@@ -13,10 +13,12 @@
 		A412AA782402295500216FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A412AA772402295500216FDB /* Assets.xcassets */; };
 		A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A412AA792402295500216FDB /* LaunchScreen.storyboard */; };
 		A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BA71B241305B8006DFC10 /* ViewController.swift */; };
-		A457509A2413946200EAC86B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A45750992413946200EAC86B /* GoogleService-Info.plist */; };
 		A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEB9241F68E000381E82 /* SignUpViewController.swift */; };
 		A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBD241F690D00381E82 /* LoginViewController.swift */; };
 		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
+		A487AEC2242175BB00381E82 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEC1242175BB00381E82 /* Utils.swift */; };
+		A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A487AEC32421900E00381E82 /* GoogleService-Info.plist */; };
+		A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2DB912421A6EF004B8A8A /* Constants.swift */; };
 		DD81AC214019901077B193D6 /* Pods_Fibbonia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DADF0314F75F8FFBF0EE65 /* Pods_Fibbonia.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +33,13 @@
 		A412AA7A2402295500216FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A412AA7C2402295500216FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A43BA71B241305B8006DFC10 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A45750992413946200EAC86B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A487AEB9241F68E000381E82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A487AEBD241F690D00381E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		A487AEC1242175BB00381E82 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A487AEC32421900E00381E82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A4C2DB912421A6EF004B8A8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fibonia.entitlements; sourceTree = "<group>"; };
 		F136C1B80FC758A0774666EF /* Pods-Fibbonia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fibbonia.release.xcconfig"; path = "Target Support Files/Pods-Fibbonia/Pods-Fibbonia.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,14 +76,16 @@
 		A412AA6D2402295400216FDB /* Fibbonia */ = {
 			isa = PBXGroup;
 			children = (
+				A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */,
+				A4C2DB902421A6C8004B8A8A /* Helpers */,
 				A487AEB8241F686700381E82 /* ViewControllers */,
 				A412AA6E2402295400216FDB /* AppDelegate.swift */,
 				A412AA702402295400216FDB /* SceneDelegate.swift */,
 				A412AA742402295400216FDB /* Main.storyboard */,
 				A412AA772402295500216FDB /* Assets.xcassets */,
 				A412AA792402295500216FDB /* LaunchScreen.storyboard */,
-				A45750992413946200EAC86B /* GoogleService-Info.plist */,
 				A412AA7C2402295500216FDB /* Info.plist */,
+				A487AEC32421900E00381E82 /* GoogleService-Info.plist */,
 			);
 			path = Fibbonia;
 			sourceTree = "<group>";
@@ -92,6 +99,15 @@
 				A487AEBD241F690D00381E82 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A4C2DB902421A6C8004B8A8A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A487AEC1242175BB00381E82 /* Utils.swift */,
+				A4C2DB912421A6EF004B8A8A /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		F3EBA9108AADFC500BED39EA /* Frameworks */ = {
@@ -173,9 +189,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */,
-				A457509A2413946200EAC86B /* GoogleService-Info.plist in Resources */,
 				A412AA782402295500216FDB /* Assets.xcassets in Resources */,
 				A412AA762402295400216FDB /* Main.storyboard in Resources */,
+				A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,9 +264,11 @@
 				A412AA6F2402295400216FDB /* AppDelegate.swift in Sources */,
 				A412AA712402295400216FDB /* SceneDelegate.swift in Sources */,
 				A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */,
+				A487AEC2242175BB00381E82 /* Utils.swift in Sources */,
 				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,
 				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
 				A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */,
+				A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +413,7 @@
 			baseConfigurationReference = 49F6E11F2796F7669B423730 /* Pods-Fibbonia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Fibbonia/Fibonia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 37Z8B8HWZZ;
 				INFOPLIST_FILE = Fibbonia/Info.plist;
@@ -414,6 +433,7 @@
 			baseConfigurationReference = F136C1B80FC758A0774666EF /* Pods-Fibbonia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Fibbonia/Fibonia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 37Z8B8HWZZ;
 				INFOPLIST_FILE = Fibbonia/Info.plist;

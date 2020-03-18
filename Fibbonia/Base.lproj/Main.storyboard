@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="EdZ-jo-eCG">
             <objects>
-                <viewController id="KfB-9j-oy5" customClass="ViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="KfB-9j-oy5" customClass="ViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QDf-VO-FOV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,12 +22,12 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O8r-Hd-EKJ">
-                                <rect key="frame" x="40" y="732" width="334" height="90"/>
+                                <rect key="frame" x="40" y="722" width="334" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgl-S9-hEu">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="7eq-vn-tqB"/>
+                                            <constraint firstAttribute="height" constant="40" id="fCW-UU-hSC"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Sign Up"/>
@@ -36,7 +36,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0F-JI-Mgj">
-                                        <rect key="frame" x="0.0" y="60" width="334" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="334" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="wzm-gk-A4K"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
@@ -44,9 +47,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="l0F-JI-Mgj" firstAttribute="height" secondItem="Qgl-S9-hEu" secondAttribute="height" multiplier="0.75" id="ZvA-XJ-W8A"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.94176772399999997" green="0.94848265570000001" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,6 +60,10 @@
                         <viewLayoutGuide key="safeArea" id="ISy-Qu-IFV"/>
                     </view>
                     <navigationItem key="navigationItem" id="xRg-Up-Bpr"/>
+                    <connections>
+                        <outlet property="loginButton" destination="l0F-JI-Mgj" id="C7e-6l-m8e"/>
+                        <outlet property="signUpButton" destination="Qgl-S9-hEu" id="KqI-RD-Opu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RsC-U9-b0L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,13 +72,13 @@
         <!--Sign Up View Controller-->
         <scene sceneID="vdM-HS-OTF">
             <objects>
-                <viewController id="7Xq-Dk-yS7" customClass="SignUpViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="7Xq-Dk-yS7" customClass="SignUpViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PGW-Al-cUC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3su-fa-Vom">
-                                <rect key="frame" x="40" y="84" width="334" height="324"/>
+                                <rect key="frame" x="40" y="84" width="334" height="384"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sdt-iK-ijd">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -107,8 +111,19 @@
                                             <action selector="signUpTapped:" destination="7Xq-Dk-yS7" eventType="touchUpInside" id="TiE-Vi-T2r"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6z6-H3-aVK">
+                                        <rect key="frame" x="0.0" y="300" width="334" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="1Dq-Ec-heo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <segue destination="KfB-9j-oy5" kind="showDetail" id="X1n-N3-hwX"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGU-Ia-gA5">
-                                        <rect key="frame" x="0.0" y="300" width="334" height="24"/>
+                                        <rect key="frame" x="0.0" y="360" width="334" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -132,6 +147,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="shT-DR-sqg"/>
                     <connections>
+                        <outlet property="backButton" destination="6z6-H3-aVK" id="wNF-go-aY8"/>
                         <outlet property="emailField" destination="SSx-U5-Uzr" id="1cW-hm-hLz"/>
                         <outlet property="errorTextDisplay" destination="jGU-Ia-gA5" id="b4g-XY-Ail"/>
                         <outlet property="firstNameField" destination="sdt-iK-ijd" id="XS3-Du-bfL"/>
@@ -164,13 +180,13 @@
         <!--Login View Controller-->
         <scene sceneID="5fD-yy-muL">
             <objects>
-                <viewController id="7dW-7i-Ju4" customClass="LoginViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="7dW-7i-Ju4" customClass="LoginViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4YV-Wy-PcH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cer-wD-6Iq">
-                                <rect key="frame" x="40" y="84" width="334" height="204"/>
+                                <rect key="frame" x="40" y="84" width="334" height="264"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pgF-v3-Dgu">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -193,8 +209,19 @@
                                             <action selector="loginTapped:" destination="7dW-7i-Ju4" eventType="touchUpInside" id="XTA-zu-WKC"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWm-BG-kIl">
+                                        <rect key="frame" x="0.0" y="180" width="334" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="aGu-IY-R6U"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <segue destination="KfB-9j-oy5" kind="showDetail" id="LaB-Ys-U1K"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGJ-oF-8xj">
-                                        <rect key="frame" x="0.0" y="180" width="334" height="24"/>
+                                        <rect key="frame" x="0.0" y="240" width="334" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -216,6 +243,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2Fk-t3-bmO"/>
                     <connections>
+                        <outlet property="backButton" destination="sWm-BG-kIl" id="tu6-Us-lJa"/>
                         <outlet property="emailField" destination="pgF-v3-Dgu" id="zbk-vz-hMM"/>
                         <outlet property="errorTextDisplay" destination="xGJ-oF-8xj" id="dQL-2N-mdX"/>
                         <outlet property="loginButton" destination="z4D-3T-xvZ" id="UBV-2i-h5H"/>
@@ -229,7 +257,7 @@
         <!--Home Screen View Controller-->
         <scene sceneID="Mvj-gn-jGA">
             <objects>
-                <viewController id="2ld-Ze-8HG" customClass="HomeScreenViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVC" id="2ld-Ze-8HG" customClass="HomeScreenViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UZ9-3P-3Bw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,4 +285,7 @@
     <resources>
         <image name="logo" width="277" height="268"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="X1n-N3-hwX"/>
+    </inferredMetricsTieBreakers>
 </document>

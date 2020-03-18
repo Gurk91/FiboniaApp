@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setUpElements()
     }
     
     @IBOutlet weak var emailField: UITextField!
@@ -21,9 +22,20 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorTextDisplay: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     @IBAction func loginTapped(_ sender: Any) {
         
+    }
+    
+    func setUpElements() {
+        errorTextDisplay.alpha = 0
+        
+        Utils.styleTextField(emailField)
+        Utils.styleTextField(passwordField)
+        
+        Utils.styleFilledButton(loginButton)
+        Utils.styleHollowButton(backButton)
     }
     
 
