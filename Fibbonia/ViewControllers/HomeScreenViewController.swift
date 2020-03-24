@@ -16,6 +16,7 @@ class HomeScreenViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    /*
     @IBAction func signOutTapped(_ sender: Any) {
         do
         {
@@ -33,7 +34,7 @@ class HomeScreenViewController: UIViewController {
         }
         
     }
-    
+   */
     
     
 }
