@@ -63,31 +63,43 @@ class SignUpViewController: UIViewController {
             let email = self.emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             //create the user
-            Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
-                //check for errors
-                if err != nil {
-                    //there is an error
-                    self.errorTextDisplay.text = "Error creating user"
+            let db = Firestore.firestore()
+            
+            //checking if the user already exists or if email is being reused
+            let docRef = db.collection("users").document(email)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    print("user exists")
+                    self.errorTextDisplay.text = "User Exists"
                     self.errorTextDisplay.alpha = 1
                 } else {
-                    //user created. now store first and last name
-                    let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["firstName":firstname, "lastName":lastname, "uid":result!.user.uid]) { (error) in
-                        if error != nil {
-                            self.errorTextDisplay.text = "First and Last Name not saved"
+                    //user is new. Proceed with sign up
+                    print("Proceed with signup")
+                    Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
+                        //check for errors
+                        if err != nil {
+                            //there is an error
+                            self.errorTextDisplay.text = "Error creating user"
                             self.errorTextDisplay.alpha = 1
+                        } else {
+                            //user created. now store first and last name
+                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":result!.user.uid, "email":email]) { (error) in
+                                if error != nil {
+                                    self.errorTextDisplay.text = "First and Last Name not saved"
+                                    self.errorTextDisplay.alpha = 1
+                                }
+                            }
+                            //set current user name
+                            currName = firstname
+                            //transition to home screen
+                            self.transitionToHome()
                         }
                     }
-                    //transition to home screen
-                    self.transitionToHome()
-                    
                 }
             }
-            
-            
         }
-        
-        
     }
     
     func transitionToHome() {

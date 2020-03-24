@@ -7,24 +7,33 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func signOutTapped(_ sender: Any) {
+        do
+        {
+            try Auth.auth().signOut()
+            currName = ""
+            
+            let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.ViewController) as? ViewController
+            self.view.window?.rootViewController = viewController
+            self.view.window?.makeKeyAndVisible()
+        }
+        catch let error as NSError
+        {
+            print(error.localizedDescription)
+            print("could not sign out well")
+        }
+        
     }
-    */
-
+    
+    
+    
 }

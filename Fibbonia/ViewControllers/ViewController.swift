@@ -17,14 +17,28 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        authenticateUser()
         setUpElements()
     }
     
     func setUpElements() {
         Utils.styleFilledButton(signUpButton)
         Utils.styleFilledButton(loginButton)
+    }
+    
+    func authenticateUser() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
+                
+                self.view.window?.rootViewController = homeViewController
+                self.view.window?.makeKeyAndVisible()
+            }
+        } else {
+            return 
+        }
     }
     
 }

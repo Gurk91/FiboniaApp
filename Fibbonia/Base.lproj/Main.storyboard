@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="EdZ-jo-eCG">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="KfB-9j-oy5" customClass="ViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="genVC" modalPresentationStyle="fullScreen" id="KfB-9j-oy5" customClass="ViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QDf-VO-FOV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +122,7 @@
                                             <segue destination="KfB-9j-oy5" kind="showDetail" id="X1n-N3-hwX"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGU-Ia-gA5">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGU-Ia-gA5">
                                         <rect key="frame" x="0.0" y="360" width="334" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -220,7 +220,7 @@
                                             <segue destination="KfB-9j-oy5" kind="showDetail" id="LaB-Ys-U1K"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGJ-oF-8xj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGJ-oF-8xj">
                                         <rect key="frame" x="0.0" y="240" width="334" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -268,24 +268,52 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fJ-tE-nqW">
+                                <rect key="frame" x="40" y="792" width="334" height="30"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOutTapped:" destination="2ld-Ze-8HG" eventType="touchUpInside" id="eff-AL-Gj8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="u0C-Yp-VPL" firstAttribute="centerY" secondItem="UZ9-3P-3Bw" secondAttribute="centerY" id="9rY-to-jgA"/>
+                            <constraint firstItem="6fJ-tE-nqW" firstAttribute="leading" secondItem="gEE-oh-0DL" secondAttribute="leading" constant="40" id="ZId-3X-lNC"/>
                             <constraint firstItem="u0C-Yp-VPL" firstAttribute="centerX" secondItem="UZ9-3P-3Bw" secondAttribute="centerX" id="kNV-Cg-i9a"/>
+                            <constraint firstItem="gEE-oh-0DL" firstAttribute="trailing" secondItem="6fJ-tE-nqW" secondAttribute="trailing" constant="40" id="wdh-Jf-kRy"/>
+                            <constraint firstItem="gEE-oh-0DL" firstAttribute="bottom" secondItem="6fJ-tE-nqW" secondAttribute="bottom" constant="40" id="y8w-Z0-FDR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gEE-oh-0DL"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2Aq-Yi-DRy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m52-C6-2Gk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2263" y="5"/>
+            <point key="canvasLocation" x="3228" y="31"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SNz-hy-hpK">
+            <objects>
+                <navigationController id="NV6-Vn-FDj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="icB-es-djc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2ld-Ze-8HG" kind="relationship" relationship="rootViewController" id="XqA-VH-iVc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s7H-jj-zHm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2277" y="31"/>
         </scene>
     </scenes>
     <resources>
         <image name="logo" width="277" height="268"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X1n-N3-hwX"/>
+        <segue reference="qud-DY-T5r"/>
+        <segue reference="LaB-Ys-U1K"/>
     </inferredMetricsTieBreakers>
 </document>
