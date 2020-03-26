@@ -272,7 +272,7 @@
                                 <rect key="frame" x="40" y="792" width="334" height="30"/>
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
-                                    <action selector="signOutTapped:" destination="2ld-Ze-8HG" eventType="touchUpInside" id="eff-AL-Gj8"/>
+                                    <action selector="signOutButton:" destination="2ld-Ze-8HG" eventType="touchUpInside" id="0XL-U3-5px"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -287,6 +287,9 @@
                         <viewLayoutGuide key="safeArea" id="gEE-oh-0DL"/>
                     </view>
                     <navigationItem key="navigationItem" id="2Aq-Yi-DRy"/>
+                    <connections>
+                        <outlet property="labelText" destination="u0C-Yp-VPL" id="dVl-vW-N6w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m52-C6-2Gk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -313,7 +316,6 @@
         <image name="logo" width="277" height="268"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qud-DY-T5r"/>
         <segue reference="LaB-Ys-U1K"/>
     </inferredMetricsTieBreakers>
 </document>

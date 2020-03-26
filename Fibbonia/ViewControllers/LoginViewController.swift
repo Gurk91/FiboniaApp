@@ -41,11 +41,28 @@ class LoginViewController: UIViewController {
             }
             else {
                 let db = Firestore.firestore()
-                
-                let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
-                
-                self.view.window?.rootViewController = homeViewController
-                self.view.window?.makeKeyAndVisible()
+                let docRef = db.collection("users").document(email)
+                docRef.getDocument { (document, error) in
+                    // Check for error
+                    if error == nil {
+                        // Check that this document exists
+                        if document != nil && document!.exists {
+                            let documentData = document!.data()
+                            print("************ PRINTING DOC VALS ************")
+                            let name = documentData!["firstName"] as Any? as? String
+                            currName = name!
+                            
+                            let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
+                                
+                            self.view.window?.rootViewController = homeViewController
+                            self.view.window?.makeKeyAndVisible()
+                        }
+                    }
+                }
+            
+            
+            
+            
             }
         }
         

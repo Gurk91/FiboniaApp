@@ -14,27 +14,36 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print(currName)
+        labelText.text = "Welcome – " + currName
     }
     
-    /*
-    @IBAction func signOutTapped(_ sender: Any) {
-        do
-        {
+    @IBOutlet weak var labelText: UILabel!
+    
+    @IBAction func signOutButton(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Sign Out", message: "Are you sure you wish to sign out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        
+        do {
             try Auth.auth().signOut()
-            currName = ""
-            
-            let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.ViewController) as? ViewController
+            let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
             self.view.window?.rootViewController = viewController
             self.view.window?.makeKeyAndVisible()
+            
+        } catch let error {
+            print("sign out failed", error)
+            let alert = UIAlertController(title: "Hmm Something's wrong", message: "Error Signing out", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
         }
-        catch let error as NSError
-        {
-            print(error.localizedDescription)
-            print("could not sign out well")
-        }
+        currName = ""
         
     }
-   */
+    
+    
     
     
 }

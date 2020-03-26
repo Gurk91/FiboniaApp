@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 var currUser: User = Auth.auth().currentUser!
-var currName: String = ""
+var currName: String = "nope"
 
 
 @UIApplicationMain
