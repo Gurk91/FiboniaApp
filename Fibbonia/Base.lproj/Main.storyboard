@@ -254,7 +254,42 @@
             </objects>
             <point key="canvasLocation" x="1534" y="466"/>
         </scene>
-        <!--Home Screen View Controller-->
+        <!--Appointments-->
+        <scene sceneID="cCK-74-tKD">
+            <objects>
+                <viewController id="Lhv-kQ-1nT" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lPs-vn-V3W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="VVk-Ls-Vdn"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Appointments" image="calendar.circle" catalog="system" id="OUO-NW-7HF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Lx-Zf-3HX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3965" y="70"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="uKb-nJ-Uth">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBarID" id="cFh-Vy-v9l" customClass="TabBarController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vpm-pN-RYw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Lhv-kQ-1nT" kind="relationship" relationship="viewControllers" id="XBO-gW-lHL"/>
+                        <segue destination="1TD-YJ-VEC" kind="relationship" relationship="viewControllers" id="2Rs-UW-lwq"/>
+                        <segue destination="2ld-Ze-8HG" kind="relationship" relationship="viewControllers" id="yN0-HR-33J"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j3F-oF-YW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2403" y="900"/>
+        </scene>
+        <!--Profile-->
         <scene sceneID="Mvj-gn-jGA">
             <objects>
                 <viewController storyboardIdentifier="HomeVC" id="2ld-Ze-8HG" customClass="HomeScreenViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
@@ -269,7 +304,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fJ-tE-nqW">
-                                <rect key="frame" x="40" y="792" width="334" height="30"/>
+                                <rect key="frame" x="40" y="743" width="334" height="30"/>
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
                                     <action selector="signOutButton:" destination="2ld-Ze-8HG" eventType="touchUpInside" id="0XL-U3-5px"/>
@@ -286,6 +321,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gEE-oh-0DL"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" selectedImage="person" id="eQ7-PF-Jsb"/>
                     <navigationItem key="navigationItem" id="2Aq-Yi-DRy"/>
                     <connections>
                         <outlet property="labelText" destination="u0C-Yp-VPL" id="dVl-vW-N6w"/>
@@ -293,29 +329,47 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m52-C6-2Gk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3228" y="31"/>
+            <point key="canvasLocation" x="2546" y="78"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="SNz-hy-hpK">
+        <!--Home-->
+        <scene sceneID="1YW-fi-JRr">
             <objects>
-                <navigationController id="NV6-Vn-FDj" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="icB-es-djc">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="2ld-Ze-8HG" kind="relationship" relationship="rootViewController" id="XqA-VH-iVc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s7H-jj-zHm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="1TD-YJ-VEC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nJn-Ry-EV1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BLr-zP-FCl">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BLr-zP-FCl" id="riB-IE-GjJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1TD-YJ-VEC" id="Noo-4b-qey"/>
+                            <outlet property="delegate" destination="1TD-YJ-VEC" id="EAZ-Po-JpH"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="TdJ-7x-2WL"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zmy-5H-w9u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2277" y="31"/>
+            <point key="canvasLocation" x="3242" y="70"/>
         </scene>
     </scenes>
     <resources>
+        <image name="calendar.circle" catalog="system" width="64" height="60"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
         <image name="logo" width="277" height="268"/>
+        <image name="person" catalog="system" width="64" height="58"/>
+        <image name="person.circle" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="qud-DY-T5r"/>
         <segue reference="LaB-Ys-U1K"/>
     </inferredMetricsTieBreakers>
 </document>

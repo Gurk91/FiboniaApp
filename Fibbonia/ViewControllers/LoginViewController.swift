@@ -52,10 +52,22 @@ class LoginViewController: UIViewController {
                             let name = documentData!["firstName"] as Any? as? String
                             currName = name!
                             
+                            /*
                             let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
                                 
                             self.view.window?.rootViewController = homeViewController
                             self.view.window?.makeKeyAndVisible()
+                            */
+                            
+                            
+                            print("entering bar sequence")
+                            
+                            let homeController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
+                            (TabBarController.currentInstance?.selectedViewController as? UINavigationController)?.pushViewController(homeController!, animated: true)
+                            
+                            
+                            //self.navigationController?.pushViewController(viewController: UIViewController, animated: Bool)
+
                         }
                     }
                 }
