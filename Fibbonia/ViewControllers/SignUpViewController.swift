@@ -85,7 +85,9 @@ class SignUpViewController: UIViewController {
                             self.errorTextDisplay.alpha = 1
                         } else {
                             //user created. now store first and last name
-                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":result!.user.uid, "email":email]) { (error) in
+                            let dummy = Appointment(tutorEmail: "gurkarn.goindi@berkely.edy", tutorFN: "GK", tutorLN: "Goin", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
+                            let entryVal = dummy.toDict()
+                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":result!.user.uid, "email":email, "appointments":["dummy":entryVal]]) { (error) in
                                 if error != nil {
                                     self.errorTextDisplay.text = "First and Last Name not saved"
                                     self.errorTextDisplay.alpha = 1
@@ -104,10 +106,11 @@ class SignUpViewController: UIViewController {
     
     func transitionToHome() {
         
-        let HomeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
+        print("entering bar sequence")
         
-        view.window?.rootViewController = HomeViewController
-        view.window?.makeKeyAndVisible()
+        let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+        self.view.window?.rootViewController = tabBarController
+        self.view.window?.makeKeyAndVisible()
     }
     
     func setUpElements() {

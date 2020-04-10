@@ -59,14 +59,12 @@ class LoginViewController: UIViewController {
                             self.view.window?.makeKeyAndVisible()
                             */
                             
-                            
                             print("entering bar sequence")
                             
-                            let homeController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController)
-                            (TabBarController.currentInstance?.selectedViewController as? UINavigationController)?.pushViewController(homeController!, animated: true)
+                            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+                            self.view.window?.rootViewController = tabBarController
+                            self.view.window?.makeKeyAndVisible()
                             
-                            
-                            //self.navigationController?.pushViewController(viewController: UIViewController, animated: Bool)
 
                         }
                     }
