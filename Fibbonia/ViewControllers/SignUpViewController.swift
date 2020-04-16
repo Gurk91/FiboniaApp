@@ -85,7 +85,7 @@ class SignUpViewController: UIViewController {
                             self.errorTextDisplay.alpha = 1
                         } else {
                             //user created. now store first and last name
-                            let dummy = Appointment(tutorEmail: "gurkarn.goindi@berkely.edy", tutorFN: "GK", tutorLN: "Goin", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
+                            let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
                             let entryVal = dummy.toDict()
                             db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":result!.user.uid, "email":email, "appointments":["dummy":entryVal]]) { (error) in
                                 if error != nil {

@@ -15,10 +15,10 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print(currName)
-        labelText.text = "Welcome – " + currName
+        //labelText.text = "Welcome – " + currName
     }
     
-    
+    /*
     func createAlert(title: String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Sign Out", style: .default, handler: { (action) in
@@ -45,14 +45,9 @@ class HomeScreenViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     
     }
+   */
     
-    @IBOutlet weak var labelText: UILabel!
     
-    @IBAction func signOutButton(_ sender: Any) {
-        
-        createAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
-        
-        }
         
 }
 
