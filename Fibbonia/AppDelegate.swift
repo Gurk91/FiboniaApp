@@ -11,6 +11,7 @@ import Firebase
 
 var currUser: User = Auth.auth().currentUser!
 var currName: String = "nope"
+var currEmail: String = ""
 
 
 @UIApplicationMain

@@ -95,6 +95,7 @@ class SignUpViewController: UIViewController {
                             }
                             //set current user name
                             currName = firstname
+                            currEmail = email
                             //transition to home screen
                             self.transitionToHome()
                         }
