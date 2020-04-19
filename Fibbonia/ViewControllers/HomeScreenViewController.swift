@@ -61,6 +61,17 @@ class HomeScreenViewController: UIViewController {
         print("address updated")
     }
     
+    
+    @IBAction func tutorPressed(_ sender: Any) {
+        
+        let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
+        self.view.window?.rootViewController = tutorVC
+        self.view.window?.makeKeyAndVisible()
+        
+        print("becoming tutor")
+        
+    }
+    
 
     func signOutNCreateAlert(title: String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

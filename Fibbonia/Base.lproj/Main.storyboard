@@ -276,10 +276,10 @@
             </objects>
             <point key="canvasLocation" x="2396" y="771"/>
         </scene>
-        <!--View Controller-->
+        <!--Tutor Sign Up View Controller-->
         <scene sceneID="r0p-Zw-0HO">
             <objects>
-                <viewController id="CSM-i3-WlJ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorSUVC" id="CSM-i3-WlJ" customClass="TutorSignUpViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vae-lj-u38">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -289,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sEY-tn-EV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1537" y="-952"/>
+            <point key="canvasLocation" x="1610" y="-938"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Mvj-gn-jGA">
@@ -363,6 +363,9 @@
                                         <rect key="frame" x="0.0" y="604.5" width="354" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Become a Tutor!"/>
+                                        <connections>
+                                            <action selector="tutorPressed:" destination="2ld-Ze-8HG" eventType="touchUpInside" id="Y6m-pv-8hj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGj-ZI-AMP">
                                         <rect key="frame" x="0.0" y="658" width="354" height="32"/>

@@ -14,5 +14,6 @@ struct Constants {
         static let homeViewController = "HomeVC"
         static let viewController = "genVC"
         static let tabBarCont = "tabBarID"
+        static let tutorSignUpVC = "TutorSUVC"
     }
 }

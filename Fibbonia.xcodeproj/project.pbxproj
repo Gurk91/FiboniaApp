@@ -14,6 +14,7 @@
 		A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A412AA792402295500216FDB /* LaunchScreen.storyboard */; };
 		A424454B243D5EBB005E98ED /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A424454A243D5EBB005E98ED /* Appointment.swift */; };
 		A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BA71B241305B8006DFC10 /* ViewController.swift */; };
+		A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */; };
 		A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A5998242D8DBB007C6AC0 /* TabBarController.swift */; };
 		A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEB9241F68E000381E82 /* SignUpViewController.swift */; };
 		A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBD241F690D00381E82 /* LoginViewController.swift */; };
@@ -38,6 +39,7 @@
 		A412AA7C2402295500216FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A424454A243D5EBB005E98ED /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		A43BA71B241305B8006DFC10 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSignUpViewController.swift; sourceTree = "<group>"; };
 		A46A5998242D8DBB007C6AC0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A487AEB9241F68E000381E82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A487AEBD241F690D00381E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				A487AEBD241F690D00381E82 /* LoginViewController.swift */,
 				A46A5998242D8DBB007C6AC0 /* TabBarController.swift */,
 				A4E5750A2442322C009D5E4A /* NewAppointmentVC.swift */,
+				A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */,
 				A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */,
 				A487AEC2242175BB00381E82 /* Utils.swift in Sources */,
+				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,
 				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,
 				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
 				A4FC402424454BDB009D9721 /* IntUser.swift in Sources */,
