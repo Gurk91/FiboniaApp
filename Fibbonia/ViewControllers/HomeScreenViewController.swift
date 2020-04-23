@@ -31,7 +31,7 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var cityline: UITextField!
     @IBOutlet weak var zipcodeline: UITextField!
     
-    var tutor: Bool = false
+    var tut: Bool = false
     
     @IBAction func signOutPressed(_ sender: Any) {
         signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
@@ -66,7 +66,7 @@ class HomeScreenViewController: UIViewController {
     
     @IBAction func tutorPressed(_ sender: Any) {
         
-        if tutor {
+        if tut {
             print("already tutor")
             let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
             self.view.window?.rootViewController = tutorTBC
@@ -120,22 +120,6 @@ class HomeScreenViewController: UIViewController {
         
     }
     
-    func checkTutor(){
-        let db = Firestore.firestore()
-        let docref = db.collection("users").document(currEmail)
-        docref.getDocument { (document, error) in
-            //checking if tutor already exists
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-                print("user exists")
-                self.becomeTutorButton.setTitle("Go To Tutor View", for: .normal)
-                self.tutor = true
-            } else {
-                self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
-            }
-        }
-    }
     
     
     func setUp() {
@@ -143,6 +127,30 @@ class HomeScreenViewController: UIViewController {
         Utils.styleFilledButton(becomeTutorButton)
         Utils.styleHollowButton(saveInfobutton)
         
+    }
+    
+    func checkTutor() {
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(currEmail)
+            .getDocument { (document, error) in
+            // Check for error
+            if error == nil {
+                // Check that this document exists
+                if document != nil && document!.exists {
+                    
+                    let documentData = document!.data()
+                    if documentData!["tutor"] as! Bool == true {
+                        self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
+                        self.tut = true
+                    } else {
+                        self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
+                    }
+                }
+                
+            }
+            
+        }
     }
     
         
