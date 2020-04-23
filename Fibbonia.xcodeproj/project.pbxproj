@@ -17,6 +17,7 @@
 		A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */; };
 		A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A5998242D8DBB007C6AC0 /* TabBarController.swift */; };
 		A479C346244D1EB000D59809 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479C345244D1EB000D59809 /* Tutor.swift */; };
+		A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479C3472451D36A00D59809 /* TutorTabBarController.swift */; };
 		A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEB9241F68E000381E82 /* SignUpViewController.swift */; };
 		A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBD241F690D00381E82 /* LoginViewController.swift */; };
 		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
@@ -42,6 +43,7 @@
 		A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSignUpViewController.swift; sourceTree = "<group>"; };
 		A46A5998242D8DBB007C6AC0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A479C345244D1EB000D59809 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
+		A479C3472451D36A00D59809 /* TutorTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorTabBarController.swift; sourceTree = "<group>"; };
 		A487AEB9241F68E000381E82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A487AEBD241F690D00381E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				A46A5998242D8DBB007C6AC0 /* TabBarController.swift */,
 				A4E5750A2442322C009D5E4A /* NewAppointmentVC.swift */,
 				A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */,
+				A479C3472451D36A00D59809 /* TutorTabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */,
 				A479C346244D1EB000D59809 /* Tutor.swift in Sources */,
 				A424454B243D5EBB005E98ED /* Appointment.swift in Sources */,
+				A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

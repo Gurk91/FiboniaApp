@@ -68,6 +68,10 @@ class HomeScreenViewController: UIViewController {
         
         if tutor {
             print("already tutor")
+            let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
+            self.view.window?.rootViewController = tutorTBC
+            self.view.window?.makeKeyAndVisible()
+            
         } else {
             let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
             self.view.window?.rootViewController = tutorVC

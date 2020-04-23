@@ -112,21 +112,20 @@ class TutorSignUpViewController: UIViewController {
                                                                         "phone": phoneNumer,
                                                                         "major": major,
                                                                         "GPA":gpa,
-                                                                        "GradYear": gradYear]) { (error) in
+                                                                        "GradYear": gradYear,
+                                                                        "Appointments":entryVal]) { (error) in
                                                                             if error != nil {
-                                                                                self.errorTextDisplay.text = "Tutor Not Created"
+                                                                            self.errorTextDisplay.text = "Tutor Not Created"
                                                                                 self.errorTextDisplay.alpha = 1
                                                                             }
                     }
                     
-                    //set current user name
-                    //currName = firstname
-                    //currEmail = email
-                    //transition to home screen
-                    //self.transitionToHome()
-                    
                     //Attaching tutor profile to user profile
                     db.collection("users").document(currEmail).setData(["tutor": true, "calEmail": calEmail], merge: true)
+                    //Transitioning to Tutor Home
+                    let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
+                    self.view.window?.rootViewController = tutorTBC
+                    self.view.window?.makeKeyAndVisible()
                     }
                 }
             }

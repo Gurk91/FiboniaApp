@@ -408,7 +408,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Vo6-uf-nzx">
             <objects>
-                <tabBarController id="aHn-84-iI7" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TutorHomeVC" id="aHn-84-iI7" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CrM-0J-jcP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -723,11 +723,11 @@
             </objects>
             <point key="canvasLocation" x="2544.9275362318845" y="77.678571428571431"/>
         </scene>
-        <!--Item 1-->
+        <!--Appointments-->
         <scene sceneID="BUA-5u-xRK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cll-aa-V8x" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="EIv-D3-WYw"/>
+                    <tabBarItem key="tabBarItem" title="Appointments" image="calendar" catalog="system" id="EIv-D3-WYw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ndj-u6-ArU">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -743,11 +743,11 @@
             </objects>
             <point key="canvasLocation" x="2545" y="-1983"/>
         </scene>
-        <!--Item 2-->
+        <!--Classes-->
         <scene sceneID="qE5-XE-LNK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eY5-Ie-ZJE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="ApE-lD-OSz"/>
+                    <tabBarItem key="tabBarItem" title="Classes" image="book" catalog="system" id="ApE-lD-OSz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="emn-jF-uLb">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -765,6 +765,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book" catalog="system" width="64" height="50"/>
         <image name="calendar" catalog="system" width="64" height="52"/>
         <image name="logo" width="277" height="268"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
