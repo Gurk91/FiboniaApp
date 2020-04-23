@@ -15,11 +15,12 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print(currName)
-        welcomeLabel.text = "Welcome – " + currName + "!"
+        //welcomeLabel.text = "Welcome – " + currName + "!"
         setUp()
+        checkTutor()
     }
     
-    @IBOutlet weak var welcomeLabel: UILabel!
+
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var saveInfobutton: UIButton!
@@ -30,6 +31,7 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var cityline: UITextField!
     @IBOutlet weak var zipcodeline: UITextField!
     
+    var tutor: Bool = false
     
     @IBAction func signOutPressed(_ sender: Any) {
         signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
@@ -64,11 +66,16 @@ class HomeScreenViewController: UIViewController {
     
     @IBAction func tutorPressed(_ sender: Any) {
         
-        let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
-        self.view.window?.rootViewController = tutorVC
-        self.view.window?.makeKeyAndVisible()
+        if tutor {
+            print("already tutor")
+        } else {
+            let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
+            self.view.window?.rootViewController = tutorVC
+            self.view.window?.makeKeyAndVisible()
+            
+            print("becoming tutor")
+        }
         
-        print("becoming tutor")
         
     }
     
@@ -107,6 +114,23 @@ class HomeScreenViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    func checkTutor(){
+        let db = Firestore.firestore()
+        let docref = db.collection("users").document(currEmail)
+        docref.getDocument { (document, error) in
+            //checking if tutor already exists
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                print("user exists")
+                self.becomeTutorButton.setTitle("Go To Tutor View", for: .normal)
+                self.tutor = true
+            } else {
+                self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
+            }
+        }
     }
     
     

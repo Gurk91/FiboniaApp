@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Foundation
+import Firebase
+import FirebaseAuth
 
 class TutorSignUpViewController: UIViewController {
 
@@ -14,7 +17,123 @@ class TutorSignUpViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setUp()
     }
     
-
+    //Buttons
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var errorTextDisplay: UILabel!
+    
+    //Text Fields
+    @IBOutlet weak var calEmailField: UITextField!
+    @IBOutlet weak var phoneNumberField: UITextField!
+    @IBOutlet weak var GPAField: UITextField!
+    @IBOutlet weak var majorField: UITextField!
+    @IBOutlet weak var gradYearField: UITextField!
+    
+    
+    @IBAction func backPressed(_ sender: Any) {
+        
+        self.transitionToStudentHome()
+    }
+    
+    
+    func setUp() {
+        errorTextDisplay.alpha = 0
+        
+        Utils.styleTextField(calEmailField)
+        Utils.styleTextField(phoneNumberField)
+        Utils.styleTextField(GPAField)
+        Utils.styleTextField(majorField)
+        Utils.styleTextField(gradYearField)
+        
+        Utils.styleFilledButton(signUpButton)
+        Utils.styleHollowButton(backButton)
+    }
+    
+    func transitionToStudentHome() {
+        print("entering student home sequeence")
+        
+        let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+        self.view.window?.rootViewController = tabBarController
+        self.view.window?.makeKeyAndVisible()
+    }
+    
+    func validateFields() -> String? {
+        
+        if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || phoneNumberField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            GPAField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            majorField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            return "Please fill in all fields"
+        }
+        if Utils.validCalEmail(email: calEmailField.text!) != true {
+            return "Enter Valid Cal Email"
+        }
+        if Utils.validPhone(phone: phoneNumberField.text!) != true {
+            return "Enter Valid Phone Number"
+        }
+        
+        return nil
+    }
+    
+    @IBAction func signUpPressed(_ sender: Any) {
+        
+        let errorText = validateFields()
+        if errorText != nil {
+            errorTextDisplay.text = errorText!
+            errorTextDisplay.alpha = 1
+        } else {
+            //Reassigning fields
+            let calEmail = self.calEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let phoneNumer = self.phoneNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let major = self.majorField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let gradYear = self.gradYearField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let gpa = self.GPAField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            //Creating user
+            let db = Firestore.firestore()
+            let docref = db.collection("tutors").document(calEmail)
+            docref.getDocument { (document, error) in
+                //checking if tutor already exists
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    print("user exists")
+                    self.errorTextDisplay.text = "User Exists"
+                    self.errorTextDisplay.alpha = 1
+                } else {
+                    //user is new. Proceed with sign up
+                    //user created. now store first and last name
+                    let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
+                    let entryVal = dummy.toDict()
+                    db.collection("tutors").document(calEmail).setData(["calEmail": calEmail,
+                                                                        "phone": phoneNumer,
+                                                                        "major": major,
+                                                                        "GPA":gpa,
+                                                                        "GradYear": gradYear]) { (error) in
+                                                                            if error != nil {
+                                                                                self.errorTextDisplay.text = "Tutor Not Created"
+                                                                                self.errorTextDisplay.alpha = 1
+                                                                            }
+                    }
+                    
+                    //set current user name
+                    //currName = firstname
+                    //currEmail = email
+                    //transition to home screen
+                    //self.transitionToHome()
+                    
+                    //Attaching tutor profile to user profile
+                    db.collection("users").document(currEmail).setData(["tutor": true, "calEmail": calEmail], merge: true)
+                    }
+                }
+            }
+        }
+       
+    
 }
+        
+    
+

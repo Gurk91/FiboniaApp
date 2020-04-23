@@ -52,10 +52,10 @@ class LoginViewController: UIViewController {
                             let name = documentData!["firstName"] as Any? as? String
                             currName = name!
                             currEmail = email
-                            if documentData!["appointments"] == nil {
+                            if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
                                 let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
                                 let entryVal = dummy.toDict()
-                                docRef.setData(["appointments":entryVal], merge:true)
+                                docRef.setData(["appointments":entryVal, "tutor": false], merge:true)
                             }
                             
                             /*

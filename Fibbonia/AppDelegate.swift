@@ -12,6 +12,7 @@ import Firebase
 var currUser: User = Auth.auth().currentUser!
 var currName: String = "nope"
 var currEmail: String = ""
+var currTutorEmail: String = ""
 
 
 @UIApplicationMain
@@ -23,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        
+        Database.database().isPersistenceEnabled = true
+
         return true
     }
 
