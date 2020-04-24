@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class HomeScreenViewController: UIViewController {
+class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,18 +18,51 @@ class HomeScreenViewController: UIViewController {
         //welcomeLabel.text = "Welcome – " + currName + "!"
         setUp()
         checkTutor()
+        states = ["Alabama", "Alaska", "Arizona", "Arkansas",
+        "California", "Colorado", "Connecticut", "Delaware",
+        "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
+        "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
+        "Maine", "Maryland", "Massachusetts", "Michigan",
+        "Minnesota", "Mississippi", "Missouri", "Montana",
+        "Nebraska", "Nevada", "New Hampshire", "New Jersey",
+        "New Mexico", "New York", "North Carolina", "North Dakota",
+        "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+        "South Carolina", "South Dakota", "Tennessee", "Texas",
+        "Utah", "Vermont", "Virginia", "Washington",
+        "West Virginia", "Wisconsin", "Wyoming"]
+        self.statePickerView.delegate = self
+        self.statePickerView.dataSource = self
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        states.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerSelecter = states[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return states[row]
+    }
+    
+    private var states: [String] = [String]()
+    var pickerSelecter: String = ""
 
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var saveInfobutton: UIButton!
-    
 
     @IBOutlet weak var addline1: UITextField!
     @IBOutlet weak var addline2: UITextField!
     @IBOutlet weak var cityline: UITextField!
     @IBOutlet weak var zipcodeline: UITextField!
+    
+    @IBOutlet weak var statePickerView: UIPickerView!
     
     var tut: Bool = false
     
@@ -46,6 +79,7 @@ class HomeScreenViewController: UIViewController {
             createAlert(title: "Empty Fields", message: "Please fill out all fields", buttonMsg: "Okay")
             return
         }
+        print(pickerSelecter)
         
         let add1 = addline1.text!
         let add2 = addline2.text!
@@ -153,6 +187,9 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
+    
         
 }
+
+
 

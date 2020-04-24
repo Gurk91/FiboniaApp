@@ -611,6 +611,7 @@
                         <outlet property="cityline" destination="Rwf-OL-5hV" id="SNs-VZ-nwu"/>
                         <outlet property="saveInfobutton" destination="183-ZH-Pe4" id="lqO-EW-YMB"/>
                         <outlet property="signOutButton" destination="rGj-ZI-AMP" id="CZr-KP-9d8"/>
+                        <outlet property="statePickerView" destination="8EW-Kk-bMR" id="A0U-ns-bqf"/>
                         <outlet property="zipcodeline" destination="kJs-9d-sjl" id="xQB-ne-mHk"/>
                     </connections>
                 </viewController>
