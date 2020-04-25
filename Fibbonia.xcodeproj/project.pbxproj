@@ -18,6 +18,7 @@
 		A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A5998242D8DBB007C6AC0 /* TabBarController.swift */; };
 		A479C346244D1EB000D59809 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479C345244D1EB000D59809 /* Tutor.swift */; };
 		A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479C3472451D36A00D59809 /* TutorTabBarController.swift */; };
+		A47A18E1245476C100A8D91B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A47A18E0245476BF00A8D91B /* icon.png */; };
 		A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEB9241F68E000381E82 /* SignUpViewController.swift */; };
 		A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBD241F690D00381E82 /* LoginViewController.swift */; };
 		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
@@ -44,6 +45,7 @@
 		A46A5998242D8DBB007C6AC0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A479C345244D1EB000D59809 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		A479C3472451D36A00D59809 /* TutorTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorTabBarController.swift; sourceTree = "<group>"; };
+		A47A18E0245476BF00A8D91B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A487AEB9241F68E000381E82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A487AEBD241F690D00381E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				A412AA772402295500216FDB /* Assets.xcassets */,
 				A412AA792402295500216FDB /* LaunchScreen.storyboard */,
 				A412AA7C2402295500216FDB /* Info.plist */,
+				A47A18E0245476BF00A8D91B /* icon.png */,
 				A487AEC32421900E00381E82 /* GoogleService-Info.plist */,
 			);
 			path = Fibbonia;
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */,
+				A47A18E1245476C100A8D91B /* icon.png in Resources */,
 				A412AA782402295500216FDB /* Assets.xcassets in Resources */,
 				A412AA762402295400216FDB /* Main.storyboard in Resources */,
 				A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */,

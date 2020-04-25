@@ -18,7 +18,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="P40-AH-gqR">
                                 <rect key="frame" x="68.5" y="314" width="277" height="268"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="P40-AH-gqR" secondAttribute="height" multiplier="277:268" id="LK0-Vx-cxh"/>
+                                    <constraint firstAttribute="width" secondItem="P40-AH-gqR" secondAttribute="height" multiplier="277:268" id="XrQ-eM-YEN"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O8r-Hd-EKJ">
@@ -48,14 +48,54 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="-200" translatesAutoresizingMaskIntoConstraints="NO" id="WeN-nR-Zb5">
+                                <rect key="frame" x="20" y="852" width="364" height="20"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goldenbear" translatesAutoresizingMaskIntoConstraints="NO" id="W4N-Pd-hyd">
+                                        <rect key="frame" x="0.0" y="0.0" width="82" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Built with passion at UC Berkeley 2020" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fE-49-xd4">
+                                        <rect key="frame" x="82" y="1.5" width="282" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="9tz-8x-t3b"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Jli-aI-rzu">
+                                <rect key="frame" x="20" y="84" width="374" height="113.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fibonia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-rM-ah9">
+                                        <rect key="frame" x="101" y="0.0" width="172.5" height="51"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="40"/>
+                                        <color key="textColor" red="0.0" green="0.57418763640000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learning Made Easy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frp-qT-aJO">
+                                        <rect key="frame" x="50" y="71" width="274" height="42.5"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="30"/>
+                                        <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="P40-AH-gqR" firstAttribute="centerY" secondItem="QDf-VO-FOV" secondAttribute="centerY" id="AhK-1u-e6l"/>
-                            <constraint firstItem="P40-AH-gqR" firstAttribute="centerX" secondItem="QDf-VO-FOV" secondAttribute="centerX" id="Jzw-k3-LbW"/>
-                            <constraint firstItem="ISy-Qu-IFV" firstAttribute="trailing" secondItem="O8r-Hd-EKJ" secondAttribute="trailing" constant="40" id="L4b-hc-oa4"/>
-                            <constraint firstItem="O8r-Hd-EKJ" firstAttribute="leading" secondItem="ISy-Qu-IFV" secondAttribute="leading" constant="40" id="lDE-lf-qNf"/>
-                            <constraint firstItem="ISy-Qu-IFV" firstAttribute="bottom" secondItem="O8r-Hd-EKJ" secondAttribute="bottom" constant="40" id="zBD-Ih-ADc"/>
+                            <constraint firstItem="Jli-aI-rzu" firstAttribute="top" secondItem="ISy-Qu-IFV" secondAttribute="top" constant="40" id="30a-LO-bxS"/>
+                            <constraint firstItem="P40-AH-gqR" firstAttribute="centerY" secondItem="QDf-VO-FOV" secondAttribute="centerY" id="B4R-NI-dDu"/>
+                            <constraint firstItem="ISy-Qu-IFV" firstAttribute="trailing" secondItem="Jli-aI-rzu" secondAttribute="trailing" constant="20" id="E4j-Kf-OLH"/>
+                            <constraint firstItem="ISy-Qu-IFV" firstAttribute="trailing" secondItem="O8r-Hd-EKJ" secondAttribute="trailing" constant="40" id="XLw-T5-rxD"/>
+                            <constraint firstItem="WeN-nR-Zb5" firstAttribute="leading" secondItem="QDf-VO-FOV" secondAttribute="leading" constant="20" id="gEZ-1w-mPd"/>
+                            <constraint firstItem="P40-AH-gqR" firstAttribute="centerX" secondItem="QDf-VO-FOV" secondAttribute="centerX" id="j53-uC-s68"/>
+                            <constraint firstAttribute="trailing" secondItem="WeN-nR-Zb5" secondAttribute="trailing" constant="30" id="uIJ-HB-hrN"/>
+                            <constraint firstItem="O8r-Hd-EKJ" firstAttribute="leading" secondItem="ISy-Qu-IFV" secondAttribute="leading" constant="40" id="uJ4-ks-btI"/>
+                            <constraint firstItem="Jli-aI-rzu" firstAttribute="leading" secondItem="ISy-Qu-IFV" secondAttribute="leading" constant="20" id="vbI-A2-l4D"/>
+                            <constraint firstItem="WeN-nR-Zb5" firstAttribute="top" secondItem="O8r-Hd-EKJ" secondAttribute="bottom" constant="30" id="wfk-Rk-pAY" userLabel="Stack View.top = Stack View.bottom + 30"/>
+                            <constraint firstItem="WeN-nR-Zb5" firstAttribute="bottom" secondItem="ISy-Qu-IFV" secondAttribute="bottom" constant="10" id="yxM-0o-AqZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ISy-Qu-IFV"/>
                     </view>
@@ -851,6 +891,7 @@
     <resources>
         <image name="book" catalog="system" width="64" height="50"/>
         <image name="calendar" catalog="system" width="64" height="52"/>
+        <image name="goldenbear" width="900" height="480"/>
         <image name="logo" width="277" height="268"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="person" catalog="system" width="64" height="58"/>
@@ -859,7 +900,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0In-Bx-xyX"/>
-        <segue reference="LaB-Ys-U1K"/>
+        <segue reference="y46-n7-1jt"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
