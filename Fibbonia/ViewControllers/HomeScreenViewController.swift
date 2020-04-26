@@ -79,6 +79,8 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         let address = add1 + " " + add2
         
+        currStudent.setAddress(addr: address, cty: city, ste: state, zp: zip)
+        
         let db = Firestore.firestore()
         db.collection("users").document(currEmail).setData(
             ["address":address,

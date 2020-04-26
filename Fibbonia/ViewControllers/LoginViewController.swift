@@ -50,12 +50,14 @@ class LoginViewController: UIViewController {
                             let documentData = document!.data()
                             print("************ PRINTING DOC VALS ************")
                             let name = documentData!["firstName"] as Any? as? String
+                            let ln = documentData!["lastName"] as Any? as? String
                             currName = name!
                             currEmail = email
                             if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
                                 let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
                                 let entryVal = dummy.toDict()
                                 docRef.setData(["appointments":entryVal, "tutor": false], merge:true)
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: entryVal)
                             }
                             
                             /*
@@ -66,6 +68,7 @@ class LoginViewController: UIViewController {
                             */
                             
                             print("entering bar sequence")
+                            
                             
                             let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
                             self.view.window?.rootViewController = tabBarController

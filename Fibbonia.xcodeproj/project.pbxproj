@@ -26,6 +26,7 @@
 		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
 		A487AEC2242175BB00381E82 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEC1242175BB00381E82 /* Utils.swift */; };
 		A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A487AEC32421900E00381E82 /* GoogleService-Info.plist */; };
+		A4A86D932455ABF50009AE7A /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A86D922455ABF50009AE7A /* Student.swift */; };
 		A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2DB912421A6EF004B8A8A /* Constants.swift */; };
 		A4E5750B2442322C009D5E4A /* NewAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E5750A2442322C009D5E4A /* NewAppointmentVC.swift */; };
 		DD81AC214019901077B193D6 /* Pods_Fibbonia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DADF0314F75F8FFBF0EE65 /* Pods_Fibbonia.framework */; };
@@ -55,6 +56,7 @@
 		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		A487AEC1242175BB00381E82 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A487AEC32421900E00381E82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A4A86D922455ABF50009AE7A /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		A4C2DB912421A6EF004B8A8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fibonia.entitlements; sourceTree = "<group>"; };
 		A4E5750A2442322C009D5E4A /* NewAppointmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppointmentVC.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				A4C2DB912421A6EF004B8A8A /* Constants.swift */,
 				A424454A243D5EBB005E98ED /* Appointment.swift */,
 				A479C345244D1EB000D59809 /* Tutor.swift */,
+				A4A86D922455ABF50009AE7A /* Student.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				A4E5750B2442322C009D5E4A /* NewAppointmentVC.swift in Sources */,
 				A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */,
 				A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */,
+				A4A86D932455ABF50009AE7A /* Student.swift in Sources */,
 				A487AEC2242175BB00381E82 /* Utils.swift in Sources */,
 				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,
 				A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */,

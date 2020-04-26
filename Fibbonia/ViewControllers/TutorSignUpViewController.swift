@@ -123,6 +123,10 @@ class TutorSignUpViewController: UIViewController {
                     //Attaching tutor profile to user profile
                     db.collection("users").document(currEmail).setData(["tutor": true, "calEmail": calEmail], merge: true)
                     //Transitioning to Tutor Home
+                    currStudent.calEmail = calEmail
+                    currStudent.tutor = true
+                    currTutor = Tutor(calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major)
+                    currTutor.setAddress(addr: currStudent.address, cty: currStudent.city, ste: currStudent.state)
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                     self.view.window?.rootViewController = tutorTBC
                     self.view.window?.makeKeyAndVisible()
