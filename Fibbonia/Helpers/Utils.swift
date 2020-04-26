@@ -65,4 +65,18 @@ class Utils {
         return regex.firstMatch(in: phone, options: [], range: range) != nil
     }
     
+    static func getClasses(subject: String) -> [String] {
+        if subject == "EECS" {
+            return Constants.EECSsubjects
+        }
+        if subject == "Economics" {
+            return Constants.econSubjects
+        }
+        if subject == "Math" {
+            return Constants.mathSubjects
+        } else {
+            return Constants.physicsSubjects
+        }
+    }
+    
 }

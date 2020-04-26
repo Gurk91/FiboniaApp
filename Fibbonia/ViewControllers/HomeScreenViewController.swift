@@ -18,18 +18,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         //welcomeLabel.text = "Welcome – " + currName + "!"
         setUp()
         checkTutor()
-        states = ["Alabama", "Alaska", "Arizona", "Arkansas",
-        "California", "Colorado", "Connecticut", "Delaware",
-        "Florida", "Georgia", "Hawaii", "Idaho", "Illinois",
-        "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
-        "Maine", "Maryland", "Massachusetts", "Michigan",
-        "Minnesota", "Mississippi", "Missouri", "Montana",
-        "Nebraska", "Nevada", "New Hampshire", "New Jersey",
-        "New Mexico", "New York", "North Carolina", "North Dakota",
-        "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
-        "South Carolina", "South Dakota", "Tennessee", "Texas",
-        "Utah", "Vermont", "Virginia", "Washington",
-        "West Virginia", "Wisconsin", "Wyoming"]
+        states = Constants.states
         self.statePickerView.delegate = self
         self.statePickerView.dataSource = self
     }
@@ -74,7 +63,8 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     @IBAction func saveInfoPressed(_ sender: Any) {
         if addline1.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || addline2.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             cityline.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            zipcodeline.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            zipcodeline.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+        pickerSelecter == ""{
             
             createAlert(title: "Empty Fields", message: "Please fill out all fields", buttonMsg: "Okay")
             return
@@ -85,6 +75,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let add2 = addline2.text!
         let city = cityline.text!
         let zip = zipcodeline.text!
+        let state = pickerSelecter
         
         let address = add1 + " " + add2
         
@@ -92,9 +83,11 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         db.collection("users").document(currEmail).setData(
             ["address":address,
             "city":city,
-            "zip": zip], merge: true)
+            "zip": zip, "state": state], merge: true)
         
         print("address updated")
+        createAlert(title: "Info Updated!", message: "Your information has been updated", buttonMsg: "Okay")
+        return
     }
     
     
@@ -160,6 +153,11 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         Utils.styleHollowButton(signOutButton)
         Utils.styleFilledButton(becomeTutorButton)
         Utils.styleHollowButton(saveInfobutton)
+        
+        Utils.styleTextField(addline1)
+        Utils.styleTextField(addline2)
+        Utils.styleTextField(zipcodeline)
+        Utils.styleTextField(cityline)
         
     }
     

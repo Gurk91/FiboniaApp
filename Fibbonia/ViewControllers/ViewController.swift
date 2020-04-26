@@ -40,8 +40,8 @@ class ViewController: UIViewController, CAAnimationDelegate {
         // overlap the colors and make it 3 sets of colors
         gradientSet.append([colorOne, colorTwo])
         gradientSet.append([colorTwo, colorThree])
-        gradientSet.append([colorThree, colorTwo])
-        gradientSet.append([colorTwo, colorOne])
+        gradientSet.append([colorThree, colorOne])
+        //gradientSet.append([colorTwo, colorOne])
         
         // set the gradient size to be the entire screen
         gradient.frame = self.view.bounds
@@ -65,7 +65,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         
         // animate over 3 seconds
         let gradientChangeAnimation = CABasicAnimation(keyPath: "colors")
-        gradientChangeAnimation.duration = 2.0
+        gradientChangeAnimation.duration = 1.0
         gradientChangeAnimation.toValue = gradientSet[currentGradient]
         gradientChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
         gradientChangeAnimation.isRemovedOnCompletion = false

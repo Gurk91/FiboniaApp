@@ -14,7 +14,7 @@ class TutorTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tabBar.unselectedItemTintColor = UIColor.black
         // Do any additional setup after loading the view.
     }
 
