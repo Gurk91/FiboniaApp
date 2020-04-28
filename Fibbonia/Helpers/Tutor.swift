@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 
 class Tutor {
@@ -21,6 +22,8 @@ class Tutor {
     var address: String
     var city: String
     var state: String
+    var phone: String
+    //var classRating: [String: Double]
     
     init(calEmail: String, GPA: Double, gradYear: Int, major: String) {
         self.calEmail = calEmail
@@ -33,6 +36,8 @@ class Tutor {
         self.address = ""
         self.city = ""
         self.state = ""
+        self.phone = ""
+        //self.classRating = [:]
     }
     
     func addClass(clas: String) {
@@ -54,6 +59,30 @@ class Tutor {
         self.address = addr
         self.city = cty
         self.state = ste
+    }
+    
+    func setFirebaseData() {
+        let db = Firestore.firestore()
+        db.collection("tutors")
+            .document(self.calEmail)
+            .getDocument { (document, error) in
+            
+            // Check for error
+            if error == nil {
+                
+                // Check that this document exists
+                if document != nil && document!.exists {
+                    
+                    let documentData = document!.data()
+                    self.classes = documentData!["classes"] as! [String]
+                    self.GPA = documentData!["GPA"] as! Double
+                    self.gradYear = documentData!["GradYear"] as! Int
+                    self.major = documentData!["major"] as! String                    
+                }
+                
+            }
+            
+        }
     }
     
 }

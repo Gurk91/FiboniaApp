@@ -15,6 +15,9 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var subjectPicker: UIPickerView!
     @IBOutlet weak var classPicker: UIPickerView!
     
+    
+    @IBOutlet weak var pricePHfield: UITextField!
+    @IBOutlet weak var availabilityField: UITextField!
     @IBOutlet weak var newClassButton: UIButton!
     
     private var subjects: [String] = [String]()
@@ -25,15 +28,19 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Utils.styleFilledButton(newClassButton)
+        setUp()
         subjects = Constants.subjects
         classes = Constants.emptyList
         self.classPicker.delegate = self
         self.classPicker.delegate = self
         self.subjectPicker.delegate = self
         self.subjectPicker.delegate = self
-
-        // Do any additional setup after loading the view.
+    }
+    
+    func setUp() {
+        Utils.styleFilledButton(newClassButton)
+        Utils.styleTextField(availabilityField)
+        Utils.styleTextField(pricePHfield)
     }
     
     
@@ -70,9 +77,11 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     }
 
     @IBAction func newClassPressed(_ sender: Any) {
-        let email = "shitit"
+        let email = currTutor.calEmail
         let db = Firestore.firestore()
         let tutorInfo = currTutor.getData()
+        let price = pricePHfield.text!
+        let times = availabilityField.text!
         var data: [String] = []
         
         db.collection(selectedClass).getDocuments() { (querySnapshot, err) in
@@ -85,9 +94,14 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
                 if data.contains(email) {
                     self.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay")
                 } else {
-                    print("FFS")
-                     db.collection("CS61B").document(email).setData(["firstName":"firstname", "lastName":"lastname", "uid":"result", "email":"email", "appointments":["dummy":"entryVal"]])
+                    print("class added")
+                    db.collection(self.selectedClass).document(email).setData(["info":tutorInfo, "price": price, "times": times])
+                    print("step 1")
+                    currTutor.addClass(clas: self.selectedClass)
+                    print(currTutor.classes)
                     self.createAlert(title: "Class Added", message: "You can now teach " + self.selectedClass, buttonMsg: "Okay")
+                    db.collection("tutors").document(email).setData(["classes": currTutor.classes], merge: true)
+                    print("all through")
                 }
             }
         }

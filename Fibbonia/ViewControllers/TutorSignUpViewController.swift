@@ -113,7 +113,7 @@ class TutorSignUpViewController: UIViewController {
                                                                         "major": major,
                                                                         "GPA":gpa,
                                                                         "GradYear": gradYear,
-                                                                        "Appointments":entryVal]) { (error) in
+                                                                        "Appointments":entryVal, "classes": []]) { (error) in
                                                                             if error != nil {
                                                                             self.errorTextDisplay.text = "Tutor Not Created"
                                                                                 self.errorTextDisplay.alpha = 1

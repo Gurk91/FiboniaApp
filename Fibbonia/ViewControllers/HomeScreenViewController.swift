@@ -76,6 +76,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let city = cityline.text!
         let zip = zipcodeline.text!
         let state = pickerSelecter
+
         
         let address = add1 + " " + add2
         
@@ -173,10 +174,40 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
                 // Check that this document exists
                 if document != nil && document!.exists {
                     
-                    let documentData = document!.data()
-                    if documentData!["tutor"] as! Bool == true {
+                    let data = document!.data()
+                    if data!["tutor"] as! Bool == true {
                         self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
                         self.tut = true
+                        currTutorEmail = data!["calEmail"] as! String
+                        db.collection("tutors")
+                            .document(currTutorEmail)
+                            .getDocument { (document, error) in
+                            
+                            // Check for error
+                            if error == nil {
+                                
+                                // Check that this document exists
+                                if document != nil && document!.exists {
+                                    
+                                    let documentData = document!.data()
+                                    
+                                    let gpa = documentData!["GPA"] as! String
+                                    let gradyear = documentData!["GradYear"] as! String
+                                    
+                                    let tutor = Tutor(calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String)
+                                    let ph = documentData!["phone"] as! String
+                                    if documentData!["classes"] == nil {
+                                        db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
+                                    } else {
+                                        tutor.classes = documentData!["classes"] as! [String]
+                                    }
+                                    currTutor = tutor
+                                    print(currTutor.classes)
+                                    currTutor.phone = ph
+                                }
+                            }
+                                
+                        }
                     } else {
                         self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
                     }
@@ -185,6 +216,8 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
             }
             
         }
+        
+        
     }
     
     
