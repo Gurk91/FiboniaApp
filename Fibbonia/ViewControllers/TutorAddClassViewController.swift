@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -69,10 +70,41 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     }
 
     @IBAction func newClassPressed(_ sender: Any) {
+        let email = "shitit"
+        let db = Firestore.firestore()
+        let tutorInfo = currTutor.getData()
+        var data: [String] = []
         
-        print(selectedSubject)
-        print(selectedClass)
+        db.collection(selectedClass).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    data.append(document.documentID)
+                }
+                if data.contains(email) {
+                    self.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay")
+                } else {
+                    print("FFS")
+                     db.collection("CS61B").document(email).setData(["firstName":"firstname", "lastName":"lastname", "uid":"result", "email":"email", "appointments":["dummy":"entryVal"]])
+                    self.createAlert(title: "Class Added", message: "You can now teach " + self.selectedClass, buttonMsg: "Okay")
+                }
+            }
+        }
+        
+        print(self.selectedSubject)
+        print(self.selectedClass)
+    }
+    
+    func createAlert(title: String, message: String, buttonMsg: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     
 }
+
