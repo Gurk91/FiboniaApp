@@ -559,15 +559,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="I8C-nu-rOA">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="classCell" id="I8C-nu-rOA">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I8C-nu-rOA" id="vAF-Lx-Lct">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1R-XG-B8C">
-                                                    <rect key="frame" x="20" y="12" width="60" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1R-XG-B8C">
+                                                    <rect key="frame" x="20" y="22" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -594,6 +594,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="y8Z-Hm-EAV" id="2ha-UO-HMr"/>
                         <segue destination="xUi-lA-ndg" kind="show" identifier="classDisplay" id="FRu-fL-fSc"/>
                     </connections>
                 </viewController>
@@ -687,56 +688,56 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Fg9-HI-PWl">
-                                <rect key="frame" x="30" y="98" width="320" height="695"/>
+                                <rect key="frame" x="30" y="98" width="354" height="695"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilephoto" translatesAutoresizingMaskIntoConstraints="NO" id="BA5-Vb-ExP">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="CFh-cP-j6P"/>
                                             <constraint firstAttribute="width" constant="150" id="sjb-Ja-a2s"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4S-Vu-oz3">
-                                        <rect key="frame" x="0.0" y="182.5" width="320" height="33"/>
+                                        <rect key="frame" x="0.0" y="182.5" width="354" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Set Profile Photo"/>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address Line 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tte-Lf-gWc">
-                                        <rect key="frame" x="0.0" y="247.5" width="320" height="34"/>
+                                        <rect key="frame" x="0.0" y="247.5" width="354" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address Line 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Du9-qS-B40">
-                                        <rect key="frame" x="0.0" y="314" width="320" height="34"/>
+                                        <rect key="frame" x="0.0" y="314" width="354" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="aB7-rD-qe5">
-                                        <rect key="frame" x="0.0" y="380.5" width="320" height="34"/>
+                                        <rect key="frame" x="0.0" y="380.5" width="354" height="34"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rwf-OL-5hV">
-                                                <rect key="frame" x="0.0" y="0.0" width="155.5" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zipcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kJs-9d-sjl">
-                                                <rect key="frame" x="164.5" y="0.0" width="155.5" height="34"/>
+                                                <rect key="frame" x="181.5" y="0.0" width="172.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EW-Kk-bMR">
-                                        <rect key="frame" x="0.0" y="446.5" width="320" height="100"/>
+                                        <rect key="frame" x="0.0" y="446.5" width="354" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="HAi-4J-1AL"/>
                                         </constraints>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Isx-87-h8d">
-                                        <rect key="frame" x="0.0" y="579" width="320" height="116"/>
+                                        <rect key="frame" x="0.0" y="579" width="354" height="116"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="183-ZH-Pe4">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Save Information"/>
                                                 <connections>
@@ -744,7 +745,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qn-gT-gkS">
-                                                <rect key="frame" x="0.0" y="42" width="320" height="32"/>
+                                                <rect key="frame" x="0.0" y="42" width="354" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Become a Tutor!"/>
                                                 <connections>
@@ -752,7 +753,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGj-ZI-AMP">
-                                                <rect key="frame" x="0.0" y="84" width="320" height="32"/>
+                                                <rect key="frame" x="0.0" y="84" width="354" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Sign Out"/>
                                                 <connections>
