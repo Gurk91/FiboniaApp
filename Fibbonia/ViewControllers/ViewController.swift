@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
+import CoreData
 
 
 class ViewController: UIViewController, CAAnimationDelegate {
@@ -89,10 +90,54 @@ class ViewController: UIViewController, CAAnimationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("home entered")
         // Do any additional setup after loading the view.
         //authenticateUser()
         setUpElements()
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        if Utils.Connection() == false {
+            print("bad connection")
+            
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserData")
+            
+            var classList = [String]()
+            
+            do {
+                let results = try context.fetch(request)
+                for data in results as! [NSManagedObject] {
+                    currName = data.value(forKey: "name") as! String
+                    currEmail =  data.value(forKey: "email") as! String
+                }
+            } catch {
+                print("data pull fail")
+            }
+            
+            let tutrequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TutorData")
+            do {
+                let results = try context.fetch(tutrequest)
+                
+                for data in results as! [NSManagedObject] {
+                    currTutorEmail = data.value(forKey: "tutorEmail") as! String
+                    classList.append(data.value(forKey: "classes") as! String)
+                }
+            } catch {
+                print("data pull fail")
+            }
+            print(classList)
+            print("entering bar sequence from VC")
+            
+            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+            self.view.window?.rootViewController = tabBarController
+            self.view.window?.makeKeyAndVisible()
+            
+        }
     }
     
     func setUpElements() {

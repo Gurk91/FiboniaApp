@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class TutorClassListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -19,6 +20,7 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
     
         tableView.dataSource = self
         tableView.delegate = self
+        savetoCoreData()
         // Do any additional setup after loading the view.
     }
     
@@ -27,22 +29,52 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
     
     var data = currTutor.classes
     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("stuff 1")
-        print(data)
+        
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("stuff 2")
+        
         return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath)
         cell.textLabel?.text = data[indexPath.row]
-        print("stuff 3")
+        
         return cell
+    }
+    
+    func savetoCoreData() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entry = NSEntityDescription.insertNewObject(forEntityName: "TutorData", into: context)
+        entry.setValue(currTutor.calEmail, forKey: "tutorEmail")
+        print("saved: ", currTutor.calEmail)
+        let classlist = self.data
+        for clas in classlist{
+            print("class:", clas)
+            entry.setValue(clas, forKey: "classes")
+        }
+        do {
+            try context.save()
+            print("saved")
+        } catch  {
+            print("error")
+        }
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "TutorData")
+        do {
+            let results = try context.fetch(request)
+            for data in results as! [NSManagedObject] {
+                print(data)
+            }
+        } catch {
+            print("data pull fail")
+        }
+        
     }
     
 }

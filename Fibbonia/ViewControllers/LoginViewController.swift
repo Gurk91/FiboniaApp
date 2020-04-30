@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import CoreData
 
 class LoginViewController: UIViewController {
 
@@ -18,6 +19,8 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         setUpElements()
     }
+    
+    
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -69,7 +72,6 @@ class LoginViewController: UIViewController {
                             
                             print("entering bar sequence")
                             
-                            
                             let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
                             self.view.window?.rootViewController = tabBarController
                             self.view.window?.makeKeyAndVisible()
@@ -83,6 +85,7 @@ class LoginViewController: UIViewController {
             
             }
         }
+        
         
     }
     

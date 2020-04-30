@@ -8,35 +8,31 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print(currName)
+        //print(currName)
         //welcomeLabel.text = "Welcome – " + currName + "!"
+        
+        
+        if Utils.Connection() == true {
+            print("good connection")
+            checkTutor()
+        } else if currTutorEmail != "" {
+            self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
+            tut = true
+        }
+        
         setUp()
-        checkTutor()
         states = Constants.states
         self.statePickerView.delegate = self
         self.statePickerView.dataSource = self
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        states.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerSelecter = states[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return states[row]
+        self.saveToCoreDate()
+        
     }
     
     private var states: [String] = [String]()
@@ -55,6 +51,22 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     var tut: Bool = false
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        states.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerSelecter = states[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return states[row]
+    }
+    
     @IBAction func signOutPressed(_ sender: Any) {
         signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
     }
@@ -69,8 +81,6 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
             createAlert(title: "Empty Fields", message: "Please fill out all fields", buttonMsg: "Okay")
             return
         }
-        print(pickerSelecter)
-        
         let add1 = addline1.text!
         let add2 = addline2.text!
         let city = cityline.text!
@@ -121,7 +131,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
                 try Auth.auth().signOut()
                 print("signed out")
                 currName = ""
-                print()
+                
                 let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
                 self.present(viewController!, animated: true, completion: nil)
                 //self.view.window?.rootViewController = viewController
@@ -202,8 +212,9 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
                                         tutor.classes = documentData!["classes"] as! [String]
                                     }
                                     currTutor = tutor
-                                    print(currTutor.classes)
+                                    //print(currTutor.classes)
                                     currTutor.phone = ph
+                                
                                 }
                             }
                                 
@@ -217,6 +228,34 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
             
         }
         
+        
+    }
+    
+    func saveToCoreDate() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let newUser = NSEntityDescription.insertNewObject(forEntityName: "UserData", into: context)
+        newUser.setValue(currEmail, forKey: "email")
+        newUser.setValue(currName, forKey: "name")
+        
+        
+        do {
+            try context.save()
+            print("saved")
+        } catch  {
+            print("error")
+        }
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserData")
+        
+        do {
+            let results = try context.fetch(request)
+            for data in results as! [NSManagedObject] {
+                print(data)
+            }
+        } catch {
+            print("data pull fail")
+        }
         
     }
     

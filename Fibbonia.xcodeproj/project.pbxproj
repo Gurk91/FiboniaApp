@@ -19,6 +19,7 @@
 		A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */; };
 		A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */; };
 		A45EF77B2458946800B1C64F /* TutorClassListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45EF77A2458946800B1C64F /* TutorClassListViewController.swift */; };
+		A463C6862459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A463C6842459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld */; };
 		A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46A5998242D8DBB007C6AC0 /* TabBarController.swift */; };
 		A479C346244D1EB000D59809 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479C345244D1EB000D59809 /* Tutor.swift */; };
 		A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479C3472451D36A00D59809 /* TutorTabBarController.swift */; };
@@ -51,6 +52,7 @@
 		A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSignUpViewController.swift; sourceTree = "<group>"; };
 		A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorClassDisplayViewController.swift; sourceTree = "<group>"; };
 		A45EF77A2458946800B1C64F /* TutorClassListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorClassListViewController.swift; sourceTree = "<group>"; };
+		A463C6852459AAEE00A3B6A8 /* Fibbonia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fibbonia.xcdatamodel; sourceTree = "<group>"; };
 		A46A5998242D8DBB007C6AC0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A479C345244D1EB000D59809 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		A479C3472451D36A00D59809 /* TutorTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorTabBarController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				A412AA7C2402295500216FDB /* Info.plist */,
 				A47A18E0245476BF00A8D91B /* icon.png */,
 				A487AEC32421900E00381E82 /* GoogleService-Info.plist */,
+				A463C6842459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld */,
 			);
 			path = Fibbonia;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				A487AEBA241F68E000381E82 /* SignUpViewController.swift in Sources */,
 				A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */,
 				A4A86D932455ABF50009AE7A /* Student.swift in Sources */,
+				A463C6862459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld in Sources */,
 				A487AEC2242175BB00381E82 /* Utils.swift in Sources */,
 				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,
 				A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */,
@@ -518,6 +522,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A463C6842459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A463C6852459AAEE00A3B6A8 /* Fibbonia.xcdatamodel */,
+			);
+			currentVersion = A463C6852459AAEE00A3B6A8 /* Fibbonia.xcdatamodel */;
+			path = Fibbonia.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A412AA632402295400216FDB /* Project object */;
 }
