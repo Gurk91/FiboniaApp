@@ -23,9 +23,12 @@ class Tutor {
     var city: String
     var state: String
     var phone: String
+    var name: String
+    var online: String
     //var classRating: [String: Double]
     
-    init(calEmail: String, GPA: Double, gradYear: Int, major: String) {
+    init(name: String ,calEmail: String, GPA: Double, gradYear: Int, major: String) {
+        self.name = name
         self.calEmail = calEmail
         self.GPA = GPA
         self.gradYear = gradYear
@@ -37,6 +40,7 @@ class Tutor {
         self.city = ""
         self.state = ""
         self.phone = ""
+        self.online = ""
         //self.classRating = [:]
     }
     
@@ -51,14 +55,19 @@ class Tutor {
     }
     
     func getData() -> [String:Any] {
-        return ["email":self.calEmail, "GPA": self.GPA, "Major": self.major, "classes": self.classes, "rating": self.rating, "experience": self.experience,
-                "address": self.address, "city": self.city, "state": self.state]
+        return ["name": self.name, "email":self.calEmail, "GPA": self.GPA, "Major": self.major, "classes": self.classes, "rating": self.rating, "experience": self.experience,
+                "address": self.address, "city": self.city, "state": self.state, "onlineID": self.online]
     }
+    
     
     func setAddress(addr: String, cty: String, ste: String) {
         self.address = addr
         self.city = cty
         self.state = ste
+    }
+    
+    func setOnline(ID: String) {
+        self.online = ID
     }
     
     func setFirebaseData() {

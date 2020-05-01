@@ -204,7 +204,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
                                     let gpa = documentData!["GPA"] as! String
                                     let gradyear = documentData!["GradYear"] as! String
                                     
-                                    let tutor = Tutor(calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String)
+                                    let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String)
                                     let ph = documentData!["phone"] as! String
                                     if documentData!["classes"] == nil {
                                         db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)

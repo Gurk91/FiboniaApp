@@ -16,6 +16,8 @@ class TutorProfileViewController: UIViewController {
     @IBOutlet weak var GPAField: UITextField!
     @IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
+    @IBOutlet weak var onlineIDfield: UITextField!
+    
     
     @IBOutlet weak var saveInfoButton: UIButton!
     @IBOutlet weak var studentViewButton: UIButton!
@@ -49,6 +51,7 @@ class TutorProfileViewController: UIViewController {
         Utils.styleTextField(GPAField)
         Utils.styleTextField(majorField)
         Utils.styleTextField(gradYearField)
+        Utils.styleTextField(onlineIDfield)
     }
     
     func signOutNCreateAlert(title: String, message:String) {
@@ -76,6 +79,18 @@ class TutorProfileViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     
+    }
+    
+    
+    @IBAction func savePressed(_ sender: Any) {
+        let db = Firestore.firestore()
+        if onlineIDfield.text! != "" {
+            let online = onlineIDfield.text!
+            db.collection("tutors").document(currTutor.calEmail).setData(["onlineID": online], merge: true)
+            currTutor.setOnline(ID: online)
+        }
+        
+        
     }
     
     

@@ -19,8 +19,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         setUpElements()
     }
-    
-    
+
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -54,7 +53,7 @@ class LoginViewController: UIViewController {
                             print("************ PRINTING DOC VALS ************")
                             let name = documentData!["firstName"] as Any? as? String
                             let ln = documentData!["lastName"] as Any? as? String
-                            currName = name!
+                            currName = name! + " " + ln!
                             currEmail = email
                             if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
                                 let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")

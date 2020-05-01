@@ -41,6 +41,13 @@ struct Constants {
         static let tabBarCont = "tabBarID"
         static let tutorSignUpVC = "TutorSUVC"
         static let tutorHomeVC = "TutorHomeVC"
+        static let tlist2Class = "TlistToDetail"
         
+    }
+    
+    struct tutorField {
+        var name: String
+        var rating: String
+        var price: String
     }
 }

@@ -31,6 +31,7 @@ class TutorSignUpViewController: UIViewController {
     @IBOutlet weak var GPAField: UITextField!
     @IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
+    @IBOutlet weak var onlineID: UITextField!
     
     
     @IBAction func backPressed(_ sender: Any) {
@@ -47,6 +48,7 @@ class TutorSignUpViewController: UIViewController {
         Utils.styleTextField(GPAField)
         Utils.styleTextField(majorField)
         Utils.styleTextField(gradYearField)
+        Utils.styleTextField(onlineID)
         
         Utils.styleFilledButton(signUpButton)
         Utils.styleHollowButton(backButton)
@@ -65,7 +67,8 @@ class TutorSignUpViewController: UIViewController {
         if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || phoneNumberField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             GPAField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             majorField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
             return "Please fill in all fields"
         }
         if Utils.validCalEmail(email: calEmailField.text!) != true {
@@ -91,6 +94,7 @@ class TutorSignUpViewController: UIViewController {
             let major = self.majorField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let gradYear = self.gradYearField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let gpa = self.GPAField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let online = self.onlineID.text!
             
             //Creating user
             let db = Firestore.firestore()
@@ -113,7 +117,9 @@ class TutorSignUpViewController: UIViewController {
                                                                         "major": major,
                                                                         "GPA":gpa,
                                                                         "GradYear": gradYear,
-                                                                        "Appointments":entryVal, "classes": []]) { (error) in
+                                                                        "Appointments":entryVal, "classes": [],
+                                                                        "name": currName,
+                                                                        "online": online]) { (error) in
                                                                             if error != nil {
                                                                             self.errorTextDisplay.text = "Tutor Not Created"
                                                                                 self.errorTextDisplay.alpha = 1
@@ -125,8 +131,9 @@ class TutorSignUpViewController: UIViewController {
                     //Transitioning to Tutor Home
                     currStudent.calEmail = calEmail
                     currStudent.tutor = true
-                    currTutor = Tutor(calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major)
+                    currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major)
                     currTutor.setAddress(addr: currStudent.address, cty: currStudent.city, ste: currStudent.state)
+                    currTutor.setOnline(ID: online)
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                     self.view.window?.rootViewController = tutorTBC
                     self.view.window?.makeKeyAndVisible()

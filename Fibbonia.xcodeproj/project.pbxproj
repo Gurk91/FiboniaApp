@@ -17,6 +17,9 @@
 		A44ABE782454CE8200475CDD /* TutorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ABE772454CE8200475CDD /* TutorProfileViewController.swift */; };
 		A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ABE792455111600475CDD /* TutorAddClassViewController.swift */; };
 		A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */; };
+		A453D7C4245B1AF000566824 /* StudentNewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453D7C3245B1AF000566824 /* StudentNewAppointmentViewController.swift */; };
+		A453D7CC245B4B3E00566824 /* TutorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453D7CB245B4B3D00566824 /* TutorSelectionTableViewCell.swift */; };
+		A453D7CE245B574300566824 /* SelectTutorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453D7CD245B574300566824 /* SelectTutorTableViewController.swift */; };
 		A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */; };
 		A45EF77B2458946800B1C64F /* TutorClassListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45EF77A2458946800B1C64F /* TutorClassListViewController.swift */; };
 		A463C6862459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A463C6842459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld */; };
@@ -50,6 +53,9 @@
 		A44ABE772454CE8200475CDD /* TutorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorProfileViewController.swift; sourceTree = "<group>"; };
 		A44ABE792455111600475CDD /* TutorAddClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorAddClassViewController.swift; sourceTree = "<group>"; };
 		A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSignUpViewController.swift; sourceTree = "<group>"; };
+		A453D7C3245B1AF000566824 /* StudentNewAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNewAppointmentViewController.swift; sourceTree = "<group>"; };
+		A453D7CB245B4B3D00566824 /* TutorSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		A453D7CD245B574300566824 /* SelectTutorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTutorTableViewController.swift; sourceTree = "<group>"; };
 		A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorClassDisplayViewController.swift; sourceTree = "<group>"; };
 		A45EF77A2458946800B1C64F /* TutorClassListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorClassListViewController.swift; sourceTree = "<group>"; };
 		A463C6852459AAEE00A3B6A8 /* Fibbonia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fibbonia.xcdatamodel; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 				A44ABE792455111600475CDD /* TutorAddClassViewController.swift */,
 				A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */,
 				A45EF77A2458946800B1C64F /* TutorClassListViewController.swift */,
+				A453D7C3245B1AF000566824 /* StudentNewAppointmentViewController.swift */,
+				A453D7CB245B4B3D00566824 /* TutorSelectionTableViewCell.swift */,
+				A453D7CD245B574300566824 /* SelectTutorTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -302,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A412AA6F2402295400216FDB /* AppDelegate.swift in Sources */,
+				A453D7CC245B4B3E00566824 /* TutorSelectionTableViewCell.swift in Sources */,
 				A412AA712402295400216FDB /* SceneDelegate.swift in Sources */,
 				A44ABE782454CE8200475CDD /* TutorProfileViewController.swift in Sources */,
 				A4E5750B2442322C009D5E4A /* NewAppointmentVC.swift in Sources */,
@@ -317,10 +327,12 @@
 				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
 				A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */,
 				A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */,
+				A453D7CE245B574300566824 /* SelectTutorTableViewController.swift in Sources */,
 				A479C346244D1EB000D59809 /* Tutor.swift in Sources */,
 				A424454B243D5EBB005E98ED /* Appointment.swift in Sources */,
 				A45EF77B2458946800B1C64F /* TutorClassListViewController.swift in Sources */,
 				A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */,
+				A453D7C4245B1AF000566824 /* StudentNewAppointmentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

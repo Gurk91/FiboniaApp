@@ -15,13 +15,16 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.reloadData()
-        data = currTutor.classes
-    
-        tableView.dataSource = self
-        tableView.delegate = self
         savetoCoreData()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+        data = currTutor.classes
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -45,6 +48,18 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
         cell.textLabel?.text = data[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = data[indexPath.row]
+        performSegue(withIdentifier: Constants.Storyboard.tlist2Class, sender: cell)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.Storyboard.tlist2Class{
+            let destination = segue.destination as! TutorClassDisplayViewController
+            destination.takenClass = sender as? String
+        }
     }
     
     func savetoCoreData() {

@@ -15,8 +15,9 @@ var currName: String = "nope"
 var currEmail: String = ""
 var currTutorEmail: String = ""
 var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: ["":""])
-var currTutor: Tutor = Tutor(calEmail: "", GPA: 0.0, gradYear: 0, major: "")
-var defaultTutor: Tutor = Tutor(calEmail: "", GPA: 0.0, gradYear: 0, major: "")
+var currTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
+var defaultTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
+var pickedClass: [TutorData] = [TutorData]()
 
 
 @UIApplicationMain
