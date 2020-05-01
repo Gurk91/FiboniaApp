@@ -47,14 +47,34 @@ class StudentTutorDetailViewController: UIViewController {
     
     
     @IBAction func appointmentPressed(_ sender: Any) {
-        var currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!)
-        currStudent.addAppointment(appy: currAppt.toDict())
+        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!)
+        var dict = currAppt.toDict()
+        let time = datePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        let inputDate = dateFormatter.string(from: time)
+        dict["time"] = inputDate
+        currStudent.addAppointment(appy: dict)
         let db = Firestore.firestore()
         let appts = currStudent.appointments
-        var tutappts = currentValue.appointments
-        tutappts.append(currAppt.toDict())
-        db.collection("tutors").document(currentValue.email).setData(["appointments": tutappts], merge: true)
         db.collection("users").document(currStudent.email).setData(["appointments": appts], merge: true)
+        db.collection("tutors")
+            .document(self.currentValue.email)
+            .getDocument { (document, error) in
+            
+            // Check for error
+            if error == nil {
+                
+                // Check that this document exists
+                if document != nil && document!.exists {
+                    
+                    let documentData = document!.data()
+                    var tutorappts = documentData!["appointments"] as! [[String: Any]]
+                    tutorappts.append(dict)
+                    db.collection("tutors").document(self.currentValue.email).setData(["appointments": tutorappts], merge: true)
+                }
+            }
+        }
         createAlert(title: "Appointment Created!", message: "Your appointment with " + currentValue.name + " has been set", buttonMsg: "Okay")
         
     }

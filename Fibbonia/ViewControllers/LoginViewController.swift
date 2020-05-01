@@ -61,6 +61,11 @@ class LoginViewController: UIViewController {
                                 let entryVal = dummy.toDict()
                                 docRef.setData(["appointments":[entryVal], "tutor": false], merge:true)
                                 currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [entryVal])
+                                
+                            } else {
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]])
+                                print("set student")
+                                print(currStudent)
                             }
                             
                             /*
@@ -79,9 +84,6 @@ class LoginViewController: UIViewController {
                         }
                     }
                 }
-            
-            
-            
             
             }
         }

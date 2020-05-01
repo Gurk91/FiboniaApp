@@ -73,6 +73,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     
     @IBAction func findPressed(_ sender: Any) {
         desperate = Constants.classTutors[selectedClass]!
+        pickedClass = selectedClass
     }
     
     

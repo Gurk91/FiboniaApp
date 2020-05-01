@@ -33,6 +33,9 @@
 		A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A487AEC32421900E00381E82 /* GoogleService-Info.plist */; };
 		A4A49893245C621A00A92E1A /* DesperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49892245C621A00A92E1A /* DesperationViewController.swift */; };
 		A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */; };
+		A4A49897245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */; };
+		A4A49899245C9FE400A92E1A /* AppointmentViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */; };
+		A4A4989B245CA9C300A92E1A /* StudentDisplayApptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */; };
 		A4A86D932455ABF50009AE7A /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A86D922455ABF50009AE7A /* Student.swift */; };
 		A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2DB912421A6EF004B8A8A /* Constants.swift */; };
 		A4E5750B2442322C009D5E4A /* NewAppointmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E5750A2442322C009D5E4A /* NewAppointmentVC.swift */; };
@@ -70,6 +73,9 @@
 		A487AEC32421900E00381E82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A4A49892245C621A00A92E1A /* DesperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesperationViewController.swift; sourceTree = "<group>"; };
 		A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTutorDetailViewController.swift; sourceTree = "<group>"; };
+		A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAppointmentsTableViewController.swift; sourceTree = "<group>"; };
+		A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewTableViewCell.swift; sourceTree = "<group>"; };
+		A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDisplayApptViewController.swift; sourceTree = "<group>"; };
 		A4A86D922455ABF50009AE7A /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		A4C2DB912421A6EF004B8A8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fibonia.entitlements; sourceTree = "<group>"; };
@@ -145,6 +151,9 @@
 				A453D7CB245B4B3D00566824 /* TutorSelectionTableViewCell.swift */,
 				A4A49892245C621A00A92E1A /* DesperationViewController.swift */,
 				A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */,
+				A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */,
+				A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */,
+				A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -322,6 +331,7 @@
 				A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */,
 				A4A86D932455ABF50009AE7A /* Student.swift in Sources */,
 				A463C6862459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld in Sources */,
+				A4A4989B245CA9C300A92E1A /* StudentDisplayApptViewController.swift in Sources */,
 				A487AEC2242175BB00381E82 /* Utils.swift in Sources */,
 				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,
 				A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */,
@@ -335,7 +345,9 @@
 				A424454B243D5EBB005E98ED /* Appointment.swift in Sources */,
 				A45EF77B2458946800B1C64F /* TutorClassListViewController.swift in Sources */,
 				A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */,
+				A4A49897245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift in Sources */,
 				A453D7C4245B1AF000566824 /* StudentNewAppointmentViewController.swift in Sources */,
+				A4A49899245C9FE400A92E1A /* AppointmentViewTableViewCell.swift in Sources */,
 				A4A49893245C621A00A92E1A /* DesperationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
