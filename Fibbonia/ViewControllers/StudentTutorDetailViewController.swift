@@ -47,7 +47,7 @@ class StudentTutorDetailViewController: UIViewController {
     
     
     @IBAction func appointmentPressed(_ sender: Any) {
-        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!)
+        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!, studentName: currName, selfEmail: currEmail)
         var dict = currAppt.toDict()
         let time = datePicker.date
         let dateFormatter = DateFormatter()

@@ -41,7 +41,10 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     private var states: [String] = [String]()
     var pickerSelecter: String = ""
-
+    
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var saveInfobutton: UIButton!
@@ -167,6 +170,8 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     
     func setUp() {
+        nameLabel.text! = "Welcome " + currStudent.firstName + "!"
+        
         Utils.styleHollowButton(signOutButton)
         Utils.styleFilledButton(becomeTutorButton)
         Utils.styleHollowButton(saveInfobutton)
@@ -216,6 +221,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
                                         tutor.classes = documentData!["classes"] as! [String]
                                     }
                                     currTutor = tutor
+                                    currTutor.appointments = documentData!["appointments"] as! [[String : Any]]
                                     //print(currTutor.classes)
                                     currTutor.phone = ph
                                 
