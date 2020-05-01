@@ -54,6 +54,7 @@ class LoginViewController: UIViewController {
                             let name = documentData!["firstName"] as Any? as? String
                             let ln = documentData!["lastName"] as Any? as? String
                             currName = name! + " " + ln!
+                            print(currName)
                             currEmail = email
                             if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
                                 let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")

@@ -15,16 +15,14 @@ class TutorSelectionTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setVals(input: Constants.tutorField) {
+        nameLabel.text! = input.name
+        if Double(input.rating) == 0 {
+            ratingLabel.text! = "Rating: " + input.rating + (" (New Tutor)")
+        } else{
+            ratingLabel.text! = "Rating: " + input.rating
+        }
+        priceLabel.text! = "Price ($/hr): " + input.price
     }
 
 }

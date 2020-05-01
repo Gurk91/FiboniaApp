@@ -35,6 +35,10 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        loadData()
+    }
+    
     private var states: [String] = [String]()
     var pickerSelecter: String = ""
 
@@ -255,6 +259,41 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
             }
         } catch {
             print("data pull fail")
+        }
+        
+    }
+    
+    
+    func loadData() {
+        for clas in Constants.activeClasses{
+            var output: [Constants.tutorField] = []
+            let db = Firestore.firestore()
+                db.collection(clas)
+                    .getDocuments { (snapshot, error) in
+                    
+                    if error == nil && snapshot != nil {
+                        if snapshot!.documents.count > 0 {
+                        
+                        for document in snapshot!.documents {
+                            let documentData = document.data()
+                            let info = documentData["info"] as! [String: Any]
+                            let name = info["name"] as! String
+                            let rating = info["rating"] as! Double
+                            let price = documentData["price"] as! String
+                            let GPA = info["GPA"] as! Double
+                            let online = info["onlineID"] as! String
+                            let major = info["Major"] as! String
+                            let email = info["email"] as! String
+                            let time = documentData["times"] as! String
+                            let object = Constants.tutorField(name: name, rating: String(rating), price: price, GPA: String(GPA), onlineID: online, major: major, email: email, timings: time)
+                            print(name, rating, price)
+                            output.append(object)
+                        }
+                            Constants.classTutors[clas] = output
+                            output = []
+                        }
+                    }
+                }
         }
         
     }

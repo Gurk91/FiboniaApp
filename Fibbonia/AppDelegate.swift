@@ -17,7 +17,8 @@ var currTutorEmail: String = ""
 var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: ["":""])
 var currTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
 var defaultTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
-var pickedClass: [TutorData] = [TutorData]()
+var pickedClass: String = ""
+var desperate: [Constants.tutorField] = []
 
 
 @UIApplicationMain

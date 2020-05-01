@@ -11,6 +11,7 @@ import Firebase
 
 class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    var output : [Constants.tutorField] = []
     
     @IBOutlet weak var subjectPicker: UIPickerView!
     @IBOutlet weak var classPicker: UIPickerView!
@@ -23,7 +24,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     var selectedSubject: String = ""
     var selectedClass: String = ""
     
-    var data = [TutorData]()
+    var data = [Constants.tutorField]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,24 +72,9 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     }
     
     @IBAction func findPressed(_ sender: Any) {
-        
-        let db = Firestore.firestore()
-        db.collection(selectedClass)
-            .getDocuments { (snapshot, error) in
-            
-            if error == nil && snapshot != nil {
-                
-                for document in snapshot!.documents {
-                    
-                    let documentData = document.data()
-                    //let name = documentData[""]
-                    
-                }
-                
-            }
-        }
-        
+        desperate = Constants.classTutors[selectedClass]!
     }
+    
     
 
 }
