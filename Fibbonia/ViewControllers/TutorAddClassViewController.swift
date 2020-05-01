@@ -95,6 +95,10 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
                     self.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay")
                 } else {
                     print("class added")
+                    print(tutorInfo)
+                    print(self.selectedClass)
+                    print(price)
+                    print(times)
                     db.collection(self.selectedClass).document(email).setData(["info":tutorInfo, "price": price, "times": times])
                     print("step 1")
                     currTutor.addClass(clas: self.selectedClass)

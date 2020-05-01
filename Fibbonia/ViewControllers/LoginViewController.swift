@@ -57,10 +57,10 @@ class LoginViewController: UIViewController {
                             print(currName)
                             currEmail = email
                             if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
-                                let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
+                                let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
                                 let entryVal = dummy.toDict()
-                                docRef.setData(["appointments":entryVal, "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: entryVal)
+                                docRef.setData(["appointments":[entryVal], "tutor": false], merge:true)
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [entryVal])
                             }
                             
                             /*

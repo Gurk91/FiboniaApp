@@ -54,6 +54,7 @@ struct Constants {
         var major: String
         var email: String
         var timings: String
+        var appointments: [[String: Any]]
     }
     
     static var classTutors = ["CS61A": [Constants.tutorField](),

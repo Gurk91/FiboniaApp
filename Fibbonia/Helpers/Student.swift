@@ -21,7 +21,7 @@ class Student {
     var tutor: Bool
     var calEmail: String
     
-    init(fn: String, ln: String, eml: String, appt: [String: Any]) {
+    init(fn: String, ln: String, eml: String, appt: [[String: Any]]) {
         self.firstName = fn
         self.lastName = ln
         self.email = eml
@@ -29,7 +29,7 @@ class Student {
         self.city = ""
         self.zip = ""
         self.state = ""
-        self.appointments = [appt]
+        self.appointments = appt
         self.tutor = false
         self.calEmail = ""
     }

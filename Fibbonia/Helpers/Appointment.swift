@@ -11,17 +11,15 @@ import Foundation
 class Appointment {
     
     var email: String
-    var tutorFN: String
-    var tutorLN: String
+    var name: String
     var time: Date
     var location: String
     var className: String
     var notes: String
     
-    init(tutorEmail: String, tutorFN: String, tutorLN: String, time: Date, location: String, className: String, notes: String) {
+    init(tutorEmail: String, name: String, time: Date, location: String, className: String, notes: String) {
         self.email = tutorEmail
-        self.tutorFN = tutorFN
-        self.tutorLN = tutorLN
+        self.name = name
         self.time = time
         self.location = location
         self.className = className
@@ -29,7 +27,7 @@ class Appointment {
     }
     
     func toDict() -> Dictionary<String, Any>{
-        return ["tutorEmail": self.email, "tutorFN": self.tutorFN, "tutorLN": self.tutorLN, "time": self.time, "location": self.location, "classname": self.className, "notes": self.notes]
+        return ["tutorEmail": self.email, "tutorFN": self.name, "time": self.time, "location": self.location, "classname": self.className, "notes": self.notes]
     }
     
 }

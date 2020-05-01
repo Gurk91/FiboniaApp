@@ -110,14 +110,14 @@ class TutorSignUpViewController: UIViewController {
                 } else {
                     //user is new. Proceed with sign up
                     //user created. now store first and last name
-                    let dummy = Appointment(tutorEmail: "anemail@email.com", tutorFN: "RandDude", tutorLN: "RandGirl", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
+                    let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node")
                     let entryVal = dummy.toDict()
                     db.collection("tutors").document(calEmail).setData(["calEmail": calEmail,
                                                                         "phone": phoneNumer,
                                                                         "major": major,
                                                                         "GPA":gpa,
                                                                         "GradYear": gradYear,
-                                                                        "Appointments":entryVal, "classes": [],
+                                                                        "appointments":[entryVal], "classes": [],
                                                                         "name": currName,
                                                                         "online": online]) { (error) in
                                                                             if error != nil {

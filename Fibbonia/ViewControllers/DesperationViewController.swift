@@ -20,7 +20,6 @@ class DesperationViewController: UIViewController {
         tableView.delegate = self
         
         tutors = desperate
-        print("desperation", tutors)
         // Do any additional setup after loading the view.
     }
     
@@ -29,17 +28,14 @@ class DesperationViewController: UIViewController {
 extension DesperationViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("counts")
         return tutors.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellForRowAt")
         let tutor = tutors[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "tutorCell") as! TutorSelectionTableViewCell
         cell.setVals(input: tutor)
-        print("cellForRowAt")
         return cell
     }
     
