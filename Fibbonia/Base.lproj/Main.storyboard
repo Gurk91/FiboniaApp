@@ -1460,6 +1460,7 @@
                                         <state key="normal" title="Appointment Completed"/>
                                         <connections>
                                             <action selector="appointmentPressed:" destination="3dR-U6-CT5" eventType="touchUpInside" id="2uh-Dc-jiz"/>
+                                            <action selector="completedAction:" destination="5P5-E8-zMH" eventType="touchUpInside" id="IMu-cp-S9Q"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGo-To-YNr">

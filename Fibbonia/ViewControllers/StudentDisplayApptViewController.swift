@@ -103,6 +103,19 @@ class StudentDisplayApptViewController: UIViewController {
     self.present(alert, animated: true, completion: nil)
     
     }
+    
+    @IBAction func completedAction(_ sender: Any) {
+        createAlert(title: "Not Yet!", message: "This appointment hasn't begun yet. You can complete it and rate your tutor after it has begun", buttonMsg: "Okay")
+    }
+    
+    func createAlert(title: String, message: String, buttonMsg: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 
 
 }
