@@ -1468,6 +1468,7 @@
                                         <state key="normal" title="Cancel Appointment"/>
                                         <connections>
                                             <action selector="appointmentPressed:" destination="3dR-U6-CT5" eventType="touchUpInside" id="4er-8Q-lUC"/>
+                                            <action selector="cancelPressed:" destination="5P5-E8-zMH" eventType="touchUpInside" id="RkN-Bp-onm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1566,7 +1567,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="5TE-g2-Ic5">
-                                <rect key="frame" x="40" y="160" width="334" height="378.5"/>
+                                <rect key="frame" x="40" y="160" width="334" height="318.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDt-1y-eYi">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="36"/>
@@ -1659,20 +1660,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMS-VE-kEV">
-                                        <rect key="frame" x="0.0" y="282.5" width="334" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Appointment Completed"/>
-                                        <connections>
-                                            <action selector="appointmentPressed:" destination="3dR-U6-CT5" eventType="touchUpInside" id="nua-nz-64D"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a99-tq-K4h">
-                                        <rect key="frame" x="0.0" y="342.5" width="334" height="36"/>
+                                        <rect key="frame" x="0.0" y="282.5" width="334" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Cancel Appointment"/>
                                         <connections>
                                             <action selector="appointmentPressed:" destination="3dR-U6-CT5" eventType="touchUpInside" id="juQ-ad-JLh"/>
+                                            <action selector="cancelPressed:" destination="zsX-Pz-vYE" eventType="touchUpInside" id="qZJ-PN-FIg"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1688,7 +1682,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Appointment Details" id="coM-nh-S7d"/>
                     <connections>
-                        <outlet property="ApptFinButton" destination="aMS-VE-kEV" id="7ko-ol-hb7"/>
                         <outlet property="cancelButton" destination="a99-tq-K4h" id="fHb-1s-qSt"/>
                         <outlet property="classLabel" destination="cBv-Mh-qFz" id="v8I-TZ-EPj"/>
                         <outlet property="emailLabel" destination="mWT-2e-qvo" id="Wpu-Pb-jgU"/>

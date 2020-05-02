@@ -38,7 +38,9 @@ class StudentAppointmentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let current = data[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-        cell.setVals(input: current)
+        if self.data.count > 0 {
+            cell.setVals(input: current)
+        }
         return cell
     }
     

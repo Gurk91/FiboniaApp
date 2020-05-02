@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class StudentDisplayApptViewController: UIViewController {
     
@@ -47,5 +48,61 @@ class StudentDisplayApptViewController: UIViewController {
     }
     
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        deleteNCreateAlert(title: "Cancel Appointment", message: "Are you sure you want to cancel this appointment?")
+    }
+    
+    func deleteNCreateAlert(title: String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete Appointment", style: .default, handler: { (action) in
+            var count = 0
+            for appt in currStudent.appointments{
+                if appt["notes"] as! String == self.currAppt["notes"] as! String {
+                    currStudent.appointments.remove(at: count)
+                    break
+                }
+                count += 1
+            }
+            let db = Firestore.firestore()
+            db.collection("users").document(currStudent.email).setData(["appointments": currStudent.appointments], merge: true)
+            print("student side appointment deleted")
+            db.collection("tutors")
+                .document(self.currAppt["tutorEmail"] as! String)
+                .getDocument { (document, error) in
+                
+                // Check for error
+                if error == nil {
+                    
+                    // Check that this document exists
+                    if document != nil && document!.exists {
+                        
+                        let documentData = document!.data()
+                        var tutAppts = documentData!["appointments"] as! [[String: Any]]
+                        var count = 0
+                        for appt in tutAppts{
+                            if appt["notes"] as! String == self.currAppt["notes"] as! String {
+                                tutAppts.remove(at: count)
+                                break
+                            }
+                            count += 1
+                        }
+                    db.collection("tutors").document(self.currAppt["tutorEmail"] as! String).setData(["appointments": tutAppts], merge: true)
+                    }
+                    
+                }
+                
+            }
+            
+            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+            self.view.window?.rootViewController = tabBarController
+            self.view.window?.makeKeyAndVisible()
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+        self.dismiss(animated: true, completion: nil)
+    }))
+    self.present(alert, animated: true, completion: nil)
+    
+    }
+
 
 }
