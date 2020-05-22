@@ -13,7 +13,7 @@ class TutApptTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         data = currTutor.appointments
-        print(data)
+        //print(data)
         tableView.reloadData()
     }
     

@@ -419,7 +419,7 @@
             </objects>
             <point key="canvasLocation" x="-32" y="-841"/>
         </scene>
-        <!--Profile-->
+        <!--Edit Profile-->
         <scene sceneID="ccD-Qr-p8I">
             <objects>
                 <viewController id="aU4-fn-DZA" customClass="TutorProfileViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
@@ -428,7 +428,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Mn8-vx-ym5">
-                                <rect key="frame" x="40" y="128" width="334" height="456"/>
+                                <rect key="frame" x="40" y="180" width="334" height="456"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5oT-AC-KOA">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -498,7 +498,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="igf-Kg-CpZ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="9Au-tb-Tl5"/>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="9Au-tb-Tl5"/>
                     <connections>
                         <outlet property="GPAField" destination="Yjl-1P-3oJ" id="8cW-OB-avz"/>
                         <outlet property="gradYearField" destination="zQU-uB-gtM" id="8Ln-Ao-c6a"/>
@@ -512,7 +512,129 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WeA-VH-aOU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832" y="-2630"/>
+            <point key="canvasLocation" x="1041" y="-2631"/>
+        </scene>
+        <!--Tutor Home-->
+        <scene sceneID="ue0-9C-bbg">
+            <objects>
+                <viewController id="sby-08-jle" customClass="NewTutorHomeViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e5G-ZQ-xdA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Appointments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cq3-Hp-DWR">
+                                <rect key="frame" x="20" y="170" width="237.5" height="80.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5bV-CM-w8W">
+                                <rect key="frame" x="0.0" y="272" width="414" height="370"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="display" rowHeight="82" id="Cj5-xZ-0r3" customClass="AppointmentViewTableViewCell" customModule="Fibonia" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="82"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cj5-xZ-0r3" id="DNa-ah-dYq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPT-wG-4eA">
+                                                    <rect key="frame" x="20" y="21" width="56.5" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hB4-pn-XWY">
+                                                    <rect key="frame" x="275.5" y="6" width="123.5" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Es5-8C-goc" userLabel="Time Label">
+                                                            <rect key="frame" x="43" y="0.0" width="38" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location: Online" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgi-QG-aHL">
+                                                            <rect key="frame" x="0.0" y="40" width="123.5" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="hB4-pn-XWY" secondAttribute="trailing" constant="15" id="Ii1-Nx-6Gb"/>
+                                                <constraint firstItem="QPT-wG-4eA" firstAttribute="leading" secondItem="DNa-ah-dYq" secondAttribute="leadingMargin" id="Iwe-pr-8Ef"/>
+                                                <constraint firstAttribute="bottom" secondItem="hB4-pn-XWY" secondAttribute="bottom" constant="6" id="p9j-jZ-QbO"/>
+                                                <constraint firstItem="hB4-pn-XWY" firstAttribute="top" secondItem="DNa-ah-dYq" secondAttribute="top" constant="6" id="qAG-kY-rPQ"/>
+                                                <constraint firstItem="QPT-wG-4eA" firstAttribute="top" secondItem="DNa-ah-dYq" secondAttribute="topMargin" constant="10" id="vdD-yc-CSg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="QPT-wG-4eA" id="Mb5-8d-hOd"/>
+                                            <outlet property="timeLabel" destination="Es5-8C-goc" id="iPq-PN-zCS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="FbB-Dx-8hM" id="mcC-mD-CpV"/>
+                                    <outlet property="delegate" destination="FbB-Dx-8hM" id="ROO-0Y-EA8"/>
+                                </connections>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="wCj-9l-tIj">
+                                <rect key="frame" x="40" y="713" width="334" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="194-xS-uGw">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Switch to Student View"/>
+                                        <connections>
+                                            <action selector="becomeTutorPressed:" destination="sby-08-jle" eventType="touchUpInside" id="lOb-tw-DTt"/>
+                                            <action selector="tutorPressed:" destination="JZG-je-P4H" eventType="touchUpInside" id="7dV-pj-GxR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oyw-iM-xcD">
+                                        <rect key="frame" x="0.0" y="48" width="334" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Sign Out"/>
+                                        <connections>
+                                            <action selector="signOutPressed:" destination="sby-08-jle" eventType="touchUpInside" id="dOU-G7-8ac"/>
+                                            <action selector="signOutPressed:" destination="JZG-je-P4H" eventType="touchUpInside" id="uWY-04-KqB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cq3-Hp-DWR" firstAttribute="top" secondItem="O0A-Xe-QAZ" secondAttribute="top" constant="30" id="7kT-1J-rGV"/>
+                            <constraint firstItem="cq3-Hp-DWR" firstAttribute="leading" secondItem="O0A-Xe-QAZ" secondAttribute="leading" constant="20" id="H5x-gq-9fu"/>
+                            <constraint firstItem="O0A-Xe-QAZ" firstAttribute="bottom" secondItem="wCj-9l-tIj" secondAttribute="bottom" constant="20" id="LyF-0c-1Aw"/>
+                            <constraint firstItem="O0A-Xe-QAZ" firstAttribute="trailing" secondItem="wCj-9l-tIj" secondAttribute="trailing" constant="40" id="SSo-Lo-FVz"/>
+                            <constraint firstItem="wCj-9l-tIj" firstAttribute="leading" secondItem="O0A-Xe-QAZ" secondAttribute="leading" constant="40" id="XOX-ry-0hG"/>
+                            <constraint firstItem="5bV-CM-w8W" firstAttribute="top" secondItem="cq3-Hp-DWR" secondAttribute="bottom" constant="21.5" id="z0f-Pc-P47"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="O0A-Xe-QAZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tutor Home" id="z4v-ec-9he">
+                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="BDI-O0-XDb">
+                            <connections>
+                                <segue destination="aU4-fn-DZA" kind="show" id="oCO-Gu-ahD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="becomeTutorButton" destination="194-xS-uGw" id="3qQ-gH-7rU"/>
+                        <outlet property="signOutButton" destination="Oyw-iM-xcD" id="sd1-z4-0Tg"/>
+                        <outlet property="tableView" destination="5bV-CM-w8W" id="Hym-kB-nbV"/>
+                        <segue destination="zsX-Pz-vYE" kind="show" identifier="apptDetails" id="H1O-AR-bDV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ca-VH-ksi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1846.376811594203" y="-2632.3660714285711"/>
         </scene>
         <!--Appointments-->
         <scene sceneID="Mo8-mQ-e9v">
@@ -791,7 +913,7 @@
             </objects>
             <point key="canvasLocation" x="4086" y="-2630"/>
         </scene>
-        <!--Profile-->
+        <!--Edit Profile-->
         <scene sceneID="Mvj-gn-jGA">
             <objects>
                 <viewController storyboardIdentifier="HomeVC" id="2ld-Ze-8HG" customClass="HomeScreenViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
@@ -800,26 +922,20 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Fg9-HI-PWl">
-                                <rect key="frame" x="40" y="128" width="334" height="486.5"/>
+                                <rect key="frame" x="40" y="180" width="334" height="428"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSB-hn-Dey">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="38.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
-                                        <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address Line 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tte-Lf-gWc">
-                                        <rect key="frame" x="0.0" y="58.5" width="334" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address Line 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Du9-qS-B40">
-                                        <rect key="frame" x="0.0" y="112.5" width="334" height="34"/>
+                                        <rect key="frame" x="0.0" y="54" width="334" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="aB7-rD-qe5">
-                                        <rect key="frame" x="0.0" y="166.5" width="334" height="34"/>
+                                        <rect key="frame" x="0.0" y="108" width="334" height="34"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rwf-OL-5hV">
                                                 <rect key="frame" x="0.0" y="0.0" width="162.5" height="34"/>
@@ -834,13 +950,13 @@
                                         </subviews>
                                     </stackView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EW-Kk-bMR">
-                                        <rect key="frame" x="0.0" y="220.5" width="334" height="120"/>
+                                        <rect key="frame" x="0.0" y="162" width="334" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="HAi-4J-1AL"/>
                                         </constraints>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Isx-87-h8d">
-                                        <rect key="frame" x="0.0" y="360.5" width="334" height="126"/>
+                                        <rect key="frame" x="0.0" y="302" width="334" height="126"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="183-ZH-Pe4">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="32"/>
@@ -879,13 +995,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KKx-0z-AOE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="2Aq-Yi-DRy"/>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="2Aq-Yi-DRy"/>
                     <connections>
                         <outlet property="addline1" destination="Tte-Lf-gWc" id="rtZ-K1-ztf"/>
                         <outlet property="addline2" destination="Du9-qS-B40" id="EAb-G5-Pga"/>
                         <outlet property="becomeTutorButton" destination="6Qn-gT-gkS" id="X5q-Os-DrS"/>
                         <outlet property="cityline" destination="Rwf-OL-5hV" id="SNs-VZ-nwu"/>
-                        <outlet property="nameLabel" destination="WSB-hn-Dey" id="PEZ-ZS-aqs"/>
                         <outlet property="saveInfobutton" destination="183-ZH-Pe4" id="lqO-EW-YMB"/>
                         <outlet property="signOutButton" destination="rGj-ZI-AMP" id="CZr-KP-9d8"/>
                         <outlet property="statePickerView" destination="8EW-Kk-bMR" id="A0U-ns-bqf"/>
@@ -894,7 +1009,127 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m52-C6-2Gk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2545" y="-599"/>
+            <point key="canvasLocation" x="1533" y="-924"/>
+        </scene>
+        <!--Student Home-->
+        <scene sceneID="tzm-Td-98f">
+            <objects>
+                <viewController id="JZG-je-P4H" customClass="NewStudentHomeViewController" customModule="Fibonia" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qu5-j0-jA7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MPd-Fp-Eod">
+                                <rect key="frame" x="40" y="713" width="334" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tr-A3-m2o">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Become a Tutor!"/>
+                                        <connections>
+                                            <action selector="tutorPressed:" destination="JZG-je-P4H" eventType="touchUpInside" id="c6M-bb-8U0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Po3-Fw-qkp">
+                                        <rect key="frame" x="0.0" y="48" width="334" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Sign Out"/>
+                                        <connections>
+                                            <action selector="signOutPressed:" destination="JZG-je-P4H" eventType="touchUpInside" id="43y-M8-Ouj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="x6n-zB-s82">
+                                <rect key="frame" x="0.0" y="218" width="414" height="370"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="display" rowHeight="82" id="6HZ-FV-EKh" customClass="AppointmentViewTableViewCell" customModule="Fibonia" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="82"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6HZ-FV-EKh" id="gt8-FZ-Enq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwx-k2-ogn">
+                                                    <rect key="frame" x="20" y="21" width="56.5" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LQ2-Rw-hr3">
+                                                    <rect key="frame" x="275.5" y="6" width="123.5" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWv-ca-5Jx" userLabel="Time Label">
+                                                            <rect key="frame" x="43" y="0.0" width="38" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location: Online" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69v-rb-c9l">
+                                                            <rect key="frame" x="0.0" y="40" width="123.5" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LQ2-Rw-hr3" firstAttribute="top" secondItem="gt8-FZ-Enq" secondAttribute="top" constant="6" id="4Jy-nl-1q0"/>
+                                                <constraint firstAttribute="trailing" secondItem="LQ2-Rw-hr3" secondAttribute="trailing" constant="15" id="Cys-2E-ygs"/>
+                                                <constraint firstAttribute="bottom" secondItem="LQ2-Rw-hr3" secondAttribute="bottom" constant="6" id="LYe-3U-0Pz"/>
+                                                <constraint firstItem="cwx-k2-ogn" firstAttribute="leading" secondItem="gt8-FZ-Enq" secondAttribute="leadingMargin" id="o8A-SX-1jn"/>
+                                                <constraint firstItem="cwx-k2-ogn" firstAttribute="top" secondItem="gt8-FZ-Enq" secondAttribute="topMargin" constant="10" id="rlM-od-5m0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="cwx-k2-ogn" id="CDS-Y6-R6G"/>
+                                            <outlet property="timeLabel" destination="OWv-ca-5Jx" id="6LV-id-kwW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="FbB-Dx-8hM" id="vdI-Yh-jwO"/>
+                                    <outlet property="delegate" destination="FbB-Dx-8hM" id="7Vl-LJ-cjL"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Appointments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDN-9T-MXj">
+                                <rect key="frame" x="20" y="170" width="237.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1lx-6G-6eJ" firstAttribute="trailing" secondItem="MPd-Fp-Eod" secondAttribute="trailing" constant="40" id="2lx-LQ-9Dl"/>
+                            <constraint firstItem="1lx-6G-6eJ" firstAttribute="bottom" secondItem="MPd-Fp-Eod" secondAttribute="bottom" constant="20" id="AWT-K1-h3t"/>
+                            <constraint firstItem="yDN-9T-MXj" firstAttribute="leading" secondItem="1lx-6G-6eJ" secondAttribute="leading" constant="20" id="WuU-7E-taI"/>
+                            <constraint firstItem="MPd-Fp-Eod" firstAttribute="leading" secondItem="1lx-6G-6eJ" secondAttribute="leading" constant="40" id="YnY-Hh-XdK"/>
+                            <constraint firstItem="x6n-zB-s82" firstAttribute="top" secondItem="yDN-9T-MXj" secondAttribute="bottom" constant="21.5" id="jIU-Sy-ahJ"/>
+                            <constraint firstItem="yDN-9T-MXj" firstAttribute="top" secondItem="1lx-6G-6eJ" secondAttribute="top" constant="30" id="sSc-M7-qtT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1lx-6G-6eJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Student Home" largeTitleDisplayMode="always" id="2qo-QV-Mdh">
+                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="RtM-5S-pv3">
+                            <connections>
+                                <segue destination="2ld-Ze-8HG" kind="show" id="E96-FA-iK3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="becomeTutorButton" destination="4tr-A3-m2o" id="3cA-ii-6CI"/>
+                        <outlet property="signOutButton" destination="Po3-Fw-qkp" id="805-ZU-2kZ"/>
+                        <outlet property="tableView" destination="x6n-zB-s82" id="u1a-uc-1xN"/>
+                        <segue destination="5P5-E8-zMH" kind="show" identifier="apptDisplay" id="YbO-7P-TL0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LiZ-pO-E25" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2544.8000000000002" y="-589.65517241379314"/>
         </scene>
         <!--Appointments-->
         <scene sceneID="k5i-ma-ClH">
@@ -1311,20 +1546,20 @@
             </objects>
             <point key="canvasLocation" x="3341" y="690"/>
         </scene>
-        <!--Profile-->
+        <!--Home-->
         <scene sceneID="L6C-jn-VUd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RGR-6Y-3IO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" selectedImage="person" id="eQ7-PF-Jsb"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" selectedImage="person" id="eQ7-PF-Jsb"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yAS-ID-RvU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="yAS-ID-RvU">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.57418763637542725" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="2ld-Ze-8HG" kind="relationship" relationship="rootViewController" id="q65-zc-seN"/>
+                        <segue destination="JZG-je-P4H" kind="relationship" relationship="rootViewController" id="wb7-2r-xMi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPi-Uh-7IZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1505,14 +1740,14 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hqx-3U-t7k" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="TS3-3G-aAi"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PbD-81-CVo">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="PbD-81-CVo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.57254901960000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="aU4-fn-DZA" kind="relationship" relationship="rootViewController" id="7hA-0L-kmU"/>
+                        <segue destination="sby-08-jle" kind="relationship" relationship="rootViewController" id="j4S-qe-vV7"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0oG-fA-weI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1701,13 +1936,15 @@
         <image name="book" catalog="system" width="64" height="50"/>
         <image name="calendar" catalog="system" width="64" height="52"/>
         <image name="goldenbear" width="900" height="480"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
         <image name="logo" width="277" height="268"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="person" catalog="system" width="64" height="58"/>
-        <image name="person.circle" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LaB-Ys-U1K"/>
+        <segue reference="H1O-AR-bDV"/>
+        <segue reference="YbO-7P-TL0"/>
+        <segue reference="X1n-N3-hwX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -43,7 +43,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     var pickerSelecter: String = ""
     
     
-    @IBOutlet weak var nameLabel: UILabel!
+    //@IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var becomeTutorButton: UIButton!
@@ -170,7 +170,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     
     func setUp() {
-        nameLabel.text! = "Welcome " + currStudent.firstName + "!"
+        //nameLabel.text! = "Welcome " + currStudent.firstName + "!"
         
         Utils.styleHollowButton(signOutButton)
         Utils.styleFilledButton(becomeTutorButton)
