@@ -91,7 +91,10 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let current = data[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "displayStudent") as! ApptTutorTableViewCell
+        print(tableView)
+        print(data)
+        //print("messed up", tableView.dequeueReusableCell(withIdentifier: "displayStudent"))
+        let cell = tableView.dequeueReusableCell(withIdentifier: "displayStudent", for: indexPath) as! ApptTutorTableViewCell
         if self.data.count > 0 {
             cell.setVals(input: current)
         }
