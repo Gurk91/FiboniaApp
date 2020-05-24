@@ -14,15 +14,19 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        data = currTutor.classes
+        tableView.reloadData()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         
         savetoCoreData()
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
         data = currTutor.classes
-        
+        tableView.reloadData()
         tableView.dataSource = self
         tableView.delegate = self
     }

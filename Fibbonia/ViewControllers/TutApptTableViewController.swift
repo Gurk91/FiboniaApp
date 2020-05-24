@@ -18,6 +18,7 @@ class TutApptTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        data = currTutor.appointments
         tableView.reloadData()
     }
     

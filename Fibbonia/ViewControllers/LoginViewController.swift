@@ -18,6 +18,8 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setUpElements()
+        Utils.organizeSubjects()
+        Utils.organizeClasses()
     }
 
     
@@ -29,23 +31,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     @IBAction func loginTapped(_ sender: Any) {
-        // Begin pull from BerkeleyTime
-        Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
-        switch result {
-        case .success(let _):
-            //print("pull success")
-            do {
-                Constants.pulledOutput = try result.get()
-                print("pull complete")
-            } catch {
-                print("output not saved")
-            }
-        case .failure(let error):
-            self.errorTextDisplay.text = error.localizedDescription
-            self.errorTextDisplay.alpha = 1
-            }
-        }
-        
+                
         
         //validate text fields
         let email = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)

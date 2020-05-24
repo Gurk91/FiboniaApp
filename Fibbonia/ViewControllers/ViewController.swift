@@ -94,6 +94,22 @@ class ViewController: UIViewController, CAAnimationDelegate {
         // Do any additional setup after loading the view.
         //authenticateUser()
         setUpElements()
+        // Begin pull from BerkeleyTime
+        Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
+        switch result {
+        case .success(let _):
+            //print("pull success")
+            do {
+                Constants.pulledOutput = try result.get()
+                print("pull complete")
+            } catch {
+                print("output not saved")
+            }
+        case .failure(let error):
+            self.createAlert(title: "Error", message: error.localizedDescription + " Please try again later.", buttonMsg: "Okay")
+            }
+        }
+
         
         
     }
@@ -156,6 +172,15 @@ class ViewController: UIViewController, CAAnimationDelegate {
         } else {
             return 
         }
+    }
+    
+    func createAlert(title: String, message: String, buttonMsg: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
 }

@@ -23,8 +23,6 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Utils.organizeSubjects()
-        Utils.organizeClasses()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -45,6 +43,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        data = currStudent.appointments
         tableView.reloadData()
     }
     

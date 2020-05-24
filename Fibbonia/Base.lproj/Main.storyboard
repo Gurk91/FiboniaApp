@@ -1246,20 +1246,21 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Coming Soon!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idP-iC-9xk">
-                                <rect key="frame" x="79" y="762" width="256" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't find tutors for your class? Email us at info@fibonia.com!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idP-iC-9xk">
+                                <rect key="frame" x="10" y="745" width="394" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="idP-iC-9xk" firstAttribute="leading" secondItem="FTn-bQ-yrN" secondAttribute="leading" constant="10" id="8K1-xl-vDC"/>
                             <constraint firstItem="9MY-CO-q4V" firstAttribute="leading" secondItem="r0j-UW-3Eb" secondAttribute="leading" constant="40" id="ELu-pd-swU"/>
                             <constraint firstItem="r0j-UW-3Eb" firstAttribute="trailing" secondItem="9MY-CO-q4V" secondAttribute="trailing" constant="40" id="PmX-46-g1R"/>
-                            <constraint firstItem="idP-iC-9xk" firstAttribute="centerX" secondItem="FTn-bQ-yrN" secondAttribute="centerX" id="fnb-JP-VPE"/>
                             <constraint firstItem="9MY-CO-q4V" firstAttribute="top" secondItem="r0j-UW-3Eb" secondAttribute="top" constant="10" id="gis-vH-WD2"/>
                             <constraint firstItem="r0j-UW-3Eb" firstAttribute="bottom" secondItem="idP-iC-9xk" secondAttribute="bottom" constant="15" id="rAB-HZ-s3s"/>
+                            <constraint firstAttribute="trailing" secondItem="idP-iC-9xk" secondAttribute="trailing" constant="10" id="vmA-c0-aiD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="r0j-UW-3Eb"/>
                     </view>
@@ -1944,7 +1945,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jty-4L-q5z"/>
-        <segue reference="YbO-7P-TL0"/>
+        <segue reference="wMs-PI-0sh"/>
         <segue reference="X1n-N3-hwX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

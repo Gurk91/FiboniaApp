@@ -17,6 +17,7 @@ class StudentAppointmentsTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        data = currStudent.appointments
         tableView.reloadData()
     }
     

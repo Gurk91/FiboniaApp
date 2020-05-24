@@ -17,32 +17,8 @@ class SignUpViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setUpElements()
-        
-        //Begin pull from BerkeleyTime
-        Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
-        switch result {
-        case .success(let _):
-            //print("pull success")
-            do {
-                Constants.pulledOutput = try result.get()
-                print("pull complete")
-            } catch {
-                print("output not saved")
-            }
-        case .failure(let error):
-            switch error {
-            case .badURL:
-                self.errorTextDisplay.text = "Bad URL. Please Try Again Later"
-                self.errorTextDisplay.alpha = 1
-            case .requestFailed:
-                self.errorTextDisplay.text = "Network problems. Please Try Again Later"
-                self.errorTextDisplay.alpha = 1
-            case .unknown:
-                self.errorTextDisplay.text = "Unknown Error. Please Try Again Later"
-                self.errorTextDisplay.alpha = 1
-                }
-            }
-        }
+        Utils.organizeSubjects()
+        Utils.organizeClasses()
     }
 
     @IBOutlet weak var firstNameField: UITextField!
