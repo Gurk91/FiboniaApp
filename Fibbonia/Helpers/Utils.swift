@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 import SystemConfiguration
+import SwiftyJSON
 
 class Utils {
+    
     
     static func styleTextField(_ textfield:UITextField) {
         
@@ -113,9 +115,75 @@ class Utils {
         let ret = (isReachable && !needsConnection)
         
         return ret
-        
-        
     }
+    
+    enum NetworkError: Error {
+        case badURL, requestFailed, unknown
+    }
+
+
+    static func fetchData(from urlString: String, completion: @escaping (Result<JSON, NetworkError>) -> Void) {
+        // check the URL is OK, otherwise return with a failure
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.badURL))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            // the task has completed – push our work back to the main thread
+            DispatchQueue.main.async {
+                if let data = data {
+                
+                   do {
+                      let data = try Data(contentsOf: url, options: .alwaysMapped)
+                      let jsonObj = try JSON(data: data)
+                    let relevant = jsonObj["courses"]
+                    //print(relevant)
+                    //self.output = relevant
+                    completion(.success(relevant))
+                   } catch let error {
+                      print(error)
+                   }
+                }else if error != nil {
+                    // any sort of network failure
+                    completion(.failure(.requestFailed))
+                } else {
+                    // this ought not to be possible, yet here we are
+                    completion(.failure(.unknown))
+                }
+            }
+        }.resume()
+    }
+        
+    
+    static func organizeSubjects(){
+        for cell in Constants.pulledOutput{
+            let subject = cell.1["abbreviation"].rawString()!
+            if Constants.pulledSubjects.contains(subject) {
+                continue
+            } else {
+                Constants.pulledSubjects.append(subject)
+                Constants.pulledClasses[subject] = []
+            }
+        }
+        //print("subjects: ", Constants.pulledSubjects)
+        print("subject list organized")
+    }
+    
+    static func organizeClasses(){
+        for cell in Constants.pulledOutput{
+            let subject = cell.1["abbreviation"].rawString()!
+            let number = cell.1["course_number"].rawString()!
+            if Constants.pulledClasses[subject]!.contains(number) {
+                continue
+            } else {
+                Constants.pulledClasses[subject]?.append(number)
+            }
+        }
+        //print("class List: ", Constants.pulledClasses)
+        print("class list organized")
+    }
+    
     
     
 }

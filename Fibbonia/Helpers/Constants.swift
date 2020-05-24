@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct Constants {
     
@@ -70,4 +71,11 @@ struct Constants {
                               "Physics 7B": [Constants.tutorField]()]
     static let activeClasses = ["CS61A", "CS61B", "CS61C", "CS70", "Econ 100B", "Econ 1",
                               "Econ 2", "Math 1A", "Math 1B", "Physics 7A", "Physics 7B"]
+    
+    static var pulledOutput: JSON = []
+    
+    static var pulledSubjects = [String]()
+    
+    static var pulledClasses = [String:[String]]()
+    
 }
