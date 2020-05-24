@@ -29,7 +29,7 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        subjects = Constants.subjects
+        subjects = Constants.pulledSubjects
         classes = Constants.emptyList
         self.classPicker.delegate = self
         self.classPicker.delegate = self
@@ -67,11 +67,11 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             selectedSubject = subjects[row]
-            classes = Utils.getClasses(subject: selectedSubject)
+            classes = Constants.pulledClasses[selectedSubject]!
             classPicker.selectRow(0, inComponent: 0, animated: true)
             self.classPicker.reloadAllComponents()
         } else {
-            selectedClass = classes[row]
+            selectedClass = selectedSubject + " " + classes[row]
         }
         
     }

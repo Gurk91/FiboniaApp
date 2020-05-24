@@ -51,7 +51,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func setUp() {
-        Utils.styleHollowButton(signOutButton)
+        Utils.styleHollowDeleteButton(signOutButton)
         Utils.styleFilledButton(becomeTutorButton)
     }
     

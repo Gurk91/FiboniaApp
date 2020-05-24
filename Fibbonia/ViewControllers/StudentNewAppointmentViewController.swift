@@ -31,7 +31,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
         Utils.styleFilledButton(findTutorbutton)
 
         // Do any additional setup after loading the view.
-        subjects = Constants.subjects
+        subjects = Constants.pulledSubjects
         classes = Constants.emptyList
         self.classPicker.delegate = self
         self.classPicker.delegate = self
@@ -62,18 +62,72 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             selectedSubject = subjects[row]
-            classes = Utils.getClasses(subject: selectedSubject)
+            classes = Constants.pulledClasses[selectedSubject]!
             classPicker.selectRow(0, inComponent: 0, animated: true)
             self.classPicker.reloadAllComponents()
         } else {
-            selectedClass = classes[row]
+            selectedClass = selectedSubject + " " + classes[row]
+            print(selectedClass)
         }
         
     }
     
     @IBAction func findPressed(_ sender: Any) {
-        desperate = Constants.classTutors[selectedClass]!
+//        desperate = Constants.classTutors[selectedClass]!
         pickedClass = selectedClass
+        
+            
+            var output: [Constants.tutorField] = []
+            let db = Firestore.firestore()
+                db.collection(pickedClass)
+                    .getDocuments { (snapshot, error) in
+        
+                    if error == nil && snapshot != nil {
+                        if snapshot!.documents.count > 0 {
+    
+                        for document in snapshot!.documents {
+                            let documentData = document.data()
+                            let info = documentData["info"] as! [String: Any]
+                            let name = info["name"] as! String
+                            let rating = info["rating"] as! Double
+                            let price = documentData["price"] as! String
+                            let GPA = info["GPA"] as! Double
+                            let online = info["onlineID"] as! String
+                            let major = info["Major"] as! String
+                            let email = info["email"] as! String
+                            let time = documentData["times"] as! String
+                            let appointments = info["appointments"] as! [[String: Any]]
+                            let object = Constants.tutorField(name: name, rating: String(rating), price: price, GPA: String(GPA), onlineID: online, major: major, email: email, timings: time, appointments: appointments)
+    
+                            print(name, rating, price)
+                            output.append(object)
+                        }
+                        self.performSegue(withIdentifier: "showTutors", sender: output)
+                            
+                        } else {
+                            self.createAlert(title: "No Tutors Found", message: "Sorry, there are no tutors for this class :(", buttonMsg: "Okay")
+                        }
+                }
+                
+            }
+            
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTutors"{
+            let destination = segue.destination as! DesperationViewController
+            destination.tutors = sender as! [Constants.tutorField]
+        }
+    }
+    
+    func createAlert(title: String, message: String, buttonMsg: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     

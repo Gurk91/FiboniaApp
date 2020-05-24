@@ -77,5 +77,5 @@ struct Constants {
     static var pulledSubjects = [String]()
     
     static var pulledClasses = [String:[String]]()
-    
+        
 }

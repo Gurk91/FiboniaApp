@@ -30,6 +30,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        data = currTutor.appointments
         tableView.reloadData()
     }
     
@@ -73,7 +74,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func setUp() {
-        Utils.styleHollowButton(signOutButton)
+        Utils.styleHollowDeleteButton(signOutButton)
         Utils.styleFilledButton(becomeTutorButton)
     }
     

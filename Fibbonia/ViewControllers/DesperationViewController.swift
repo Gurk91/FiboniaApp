@@ -18,8 +18,7 @@ class DesperationViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
-        tutors = desperate
+        print(tutors)
         // Do any additional setup after loading the view.
     }
     
