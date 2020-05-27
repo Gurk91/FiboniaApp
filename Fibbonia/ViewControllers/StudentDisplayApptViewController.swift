@@ -57,7 +57,7 @@ class StudentDisplayApptViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Delete Appointment", style: .default, handler: { (action) in
             var count = 0
             for appt in currStudent.appointments{
-                if appt["notes"] as! String == self.currAppt["notes"] as! String {
+                if appt["uid"] as! String == self.currAppt["uid"] as! String {
                     currStudent.appointments.remove(at: count)
                     break
                 }
@@ -80,7 +80,7 @@ class StudentDisplayApptViewController: UIViewController {
                         var tutAppts = documentData!["appointments"] as! [[String: Any]]
                         var count = 0
                         for appt in tutAppts{
-                            if appt["notes"] as! String == self.currAppt["notes"] as! String {
+                            if appt["uid"] as! String == self.currAppt["uid"] as! String {
                                 tutAppts.remove(at: count)
                                 break
                             }
@@ -105,6 +105,12 @@ class StudentDisplayApptViewController: UIViewController {
     }
     
     @IBAction func completedAction(_ sender: Any) {
+        let time = timeLabel.text!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        let date = dateFormatter.date(from: time)
+        
+        
         createAlert(title: "Not Yet!", message: "This appointment hasn't begun yet. You can complete it and rate your tutor after it has begun", buttonMsg: "Okay")
     }
     

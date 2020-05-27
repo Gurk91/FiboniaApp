@@ -32,6 +32,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
+                                            <action selector="signUpPressed:" destination="KfB-9j-oy5" eventType="touchUpInside" id="qcA-LD-Zvh"/>
                                             <segue destination="7Xq-Dk-yS7" kind="show" id="1yp-DY-Ftg"/>
                                         </connections>
                                     </button>
@@ -43,6 +44,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
+                                            <action selector="loginPressed:" destination="KfB-9j-oy5" eventType="touchUpInside" id="VAu-xj-5Z4"/>
                                             <segue destination="7dW-7i-Ju4" kind="show" id="qud-DY-T5r"/>
                                         </connections>
                                     </button>
@@ -257,6 +259,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Back"/>
                                         <connections>
+                                            <action selector="backPressed:" destination="7dW-7i-Ju4" eventType="touchUpInside" id="Zjo-HY-h34"/>
                                             <segue destination="KfB-9j-oy5" kind="push" id="LaB-Ys-U1K"/>
                                         </connections>
                                     </button>
@@ -309,7 +312,7 @@
                         <outlet property="tabBar" destination="Vpm-pN-RYw" id="eVz-kq-Qdo"/>
                         <segue destination="RGR-6Y-3IO" kind="relationship" relationship="viewControllers" id="yN0-HR-33J"/>
                         <segue destination="Bun-mW-OSx" kind="relationship" relationship="viewControllers" id="u6c-9V-pYJ"/>
-                        <segue destination="3Mq-gI-klQ" kind="relationship" relationship="viewControllers" id="geh-jx-g47"/>
+                        <segue destination="PkU-Gm-aRg" kind="relationship" relationship="viewControllers" id="Dn9-ht-N8y"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j3F-oF-YW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -619,6 +622,7 @@
                         <viewLayoutGuide key="safeArea" id="O0A-Xe-QAZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Tutor Home" id="z4v-ec-9he">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="app.badge" catalog="system" id="9tJ-Mu-TQh"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="BDI-O0-XDb">
                             <connections>
                                 <segue destination="aU4-fn-DZA" kind="show" id="oCO-Gu-ahD"/>
@@ -1115,6 +1119,7 @@
                         <viewLayoutGuide key="safeArea" id="1lx-6G-6eJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Student Home" largeTitleDisplayMode="always" id="2qo-QV-Mdh">
+                        <barButtonItem key="leftBarButtonItem" image="app.badge" catalog="system" style="plain" id="mV7-Zn-TSF"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="RtM-5S-pv3">
                             <connections>
                                 <segue destination="2ld-Ze-8HG" kind="show" id="E96-FA-iK3"/>
@@ -1191,7 +1196,14 @@
                             <outlet property="delegate" destination="FbB-Dx-8hM" id="8VX-b8-Mw8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Appointments" id="DtL-l9-LiO"/>
+                    <navigationItem key="navigationItem" title="Appointments" id="DtL-l9-LiO">
+                        <barButtonItem key="rightBarButtonItem" title="New Appointment" image="plus" catalog="system" style="plain" id="26f-Vf-l19">
+                            <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="ulZ-CB-OJJ" kind="show" id="sXt-0Y-exP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="5P5-E8-zMH" kind="show" identifier="apptDisplay" id="wMs-PI-0sh"/>
                     </connections>
@@ -1274,7 +1286,72 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QsO-S5-gGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4085.507246376812" y="-599.33035714285711"/>
+            <point key="canvasLocation" x="4142" y="-652"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="hXp-Gc-c3O">
+            <objects>
+                <tableViewController id="Yiq-2y-wS7" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ult-2d-cc5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="display" rowHeight="82" id="sCq-59-Vzy" customClass="AppointmentViewTableViewCell" customModule="Fibonia" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="82"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sCq-59-Vzy" id="fcz-tX-pr1">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2j-sF-gba">
+                                            <rect key="frame" x="20" y="21" width="56.5" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1d2-dH-hFB">
+                                            <rect key="frame" x="275.5" y="6" width="123.5" height="70"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpA-ZH-3BT" userLabel="Time Label">
+                                                    <rect key="frame" x="43" y="0.0" width="38" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location: Online" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mju-gE-R1Z">
+                                                    <rect key="frame" x="0.0" y="40" width="123.5" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="1d2-dH-hFB" secondAttribute="trailing" constant="15" id="EeT-mI-ltw"/>
+                                        <constraint firstItem="u2j-sF-gba" firstAttribute="top" secondItem="fcz-tX-pr1" secondAttribute="topMargin" constant="10" id="K8p-Qq-DQA"/>
+                                        <constraint firstItem="u2j-sF-gba" firstAttribute="leading" secondItem="fcz-tX-pr1" secondAttribute="leadingMargin" id="PSL-qW-HOM"/>
+                                        <constraint firstItem="1d2-dH-hFB" firstAttribute="top" secondItem="fcz-tX-pr1" secondAttribute="top" constant="6" id="Wx4-7c-zdL"/>
+                                        <constraint firstAttribute="bottom" secondItem="1d2-dH-hFB" secondAttribute="bottom" constant="6" id="kAN-Fb-gSG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="u2j-sF-gba" id="UMh-nW-B74"/>
+                                    <outlet property="timeLabel" destination="BpA-ZH-3BT" id="h35-N9-xn2"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Yiq-2y-wS7" id="asd-OX-fcg"/>
+                            <outlet property="delegate" destination="Yiq-2y-wS7" id="yNa-Zw-tmS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="History" id="fBN-66-BHb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mou-wc-8zp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5619" y="-652"/>
         </scene>
         <!--Select Tutor-->
         <scene sceneID="6wP-xy-mae">
@@ -1353,7 +1430,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qlU-af-ery" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4824.6376811594209" y="-600"/>
+            <point key="canvasLocation" x="4828" y="95"/>
+        </scene>
+        <!--Complete Appointment-->
+        <scene sceneID="jc2-2w-H57">
+            <objects>
+                <viewController id="nf0-au-nYC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mfm-eG-oor">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Fy2-tU-WeS"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Complete Appointment" id="sKN-BG-ReA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aeQ-Fk-Lq2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4086" y="771"/>
         </scene>
         <!--Tutor Details-->
         <scene sceneID="Uhi-XA-Djh">
@@ -1502,7 +1595,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sh8-1M-FcK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5597.1014492753629" y="-606.02678571428567"/>
+            <point key="canvasLocation" x="4828" y="771"/>
         </scene>
         <!--New Appointment-->
         <scene sceneID="6Rw-5B-m40">
@@ -1546,7 +1639,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epL-au-cMf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3341" y="690"/>
+            <point key="canvasLocation" x="3338" y="771"/>
         </scene>
         <!--Home-->
         <scene sceneID="L6C-jn-VUd">
@@ -1698,6 +1791,7 @@
                                         <connections>
                                             <action selector="appointmentPressed:" destination="3dR-U6-CT5" eventType="touchUpInside" id="2uh-Dc-jiz"/>
                                             <action selector="completedAction:" destination="5P5-E8-zMH" eventType="touchUpInside" id="IMu-cp-S9Q"/>
+                                            <segue destination="nf0-au-nYC" kind="show" id="UvS-z2-Ozt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGo-To-YNr">
@@ -1933,8 +2027,29 @@
             </objects>
             <point key="canvasLocation" x="2596" y="-3318"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bi4-kz-WyM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PkU-Gm-aRg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="history" id="VEt-XK-enV"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NfT-w5-r1r">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.57254901960000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yiq-2y-wS7" kind="relationship" relationship="rootViewController" id="K6R-7c-OBK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ED-FV-bLd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5620" y="94"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="app.badge" catalog="system" width="64" height="58"/>
         <image name="book" catalog="system" width="64" height="50"/>
         <image name="calendar" catalog="system" width="64" height="52"/>
         <image name="goldenbear" width="900" height="480"/>
@@ -1942,11 +2057,13 @@
         <image name="logo" width="277" height="268"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="person" catalog="system" width="64" height="58"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jty-4L-q5z"/>
+        <segue reference="H1O-AR-bDV"/>
         <segue reference="wMs-PI-0sh"/>
-        <segue reference="X1n-N3-hwX"/>
+        <segue reference="sXt-0Y-exP"/>
+        <segue reference="LaB-Ys-U1K"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

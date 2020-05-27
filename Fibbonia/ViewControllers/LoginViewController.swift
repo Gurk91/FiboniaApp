@@ -18,8 +18,8 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setUpElements()
-        Utils.organizeSubjects()
-        Utils.organizeClasses()
+        //Utils.organizeSubjects()
+        //Utils.organizeClasses()
     }
 
     
@@ -30,8 +30,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var errorTextDisplay: UILabel!
     @IBOutlet weak var backButton: UIButton!
     
+    
+    @IBAction func backPressed(_ sender: UIButton) {
+        //sender.pulsate()
+    }
+    
+    
     @IBAction func loginTapped(_ sender: Any) {
-                
+        //(sender as! UIButton).pulsate()
         
         //validate text fields
         let email = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -60,11 +66,12 @@ class LoginViewController: UIViewController {
                             currName = name! + " " + ln!
                             print(currName)
                             currEmail = email
+                            
                             if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
-                                let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail)
-                                let entryVal = dummy.toDict()
-                                docRef.setData(["appointments":[entryVal], "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [entryVal])
+                                //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail, uid: "", timezone: "UTC")
+                                //let entryVal = dummy.toDict()
+                                docRef.setData(["appointments":[], "tutor": false], merge:true)
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [])
                                 
                             } else {
                                 currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]])

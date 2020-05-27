@@ -40,6 +40,12 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             tut = true
         }
         setUp()
+        
+        if alreadyEntered == false {
+            Utils.organizeSubjects()
+            Utils.organizeClasses()
+            alreadyEntered = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

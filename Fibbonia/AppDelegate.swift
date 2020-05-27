@@ -19,6 +19,7 @@ var currTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, majo
 var defaultTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
 var pickedClass: String = ""
 var desperate: [Constants.tutorField] = []
+var alreadyEntered: Bool = false
 
 
 @UIApplicationMain

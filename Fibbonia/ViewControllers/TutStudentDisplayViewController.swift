@@ -54,7 +54,7 @@ class TutStudentDisplayViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Delete Appointment", style: .default, handler: { (action) in
             var count = 0
             for appt in currTutor.appointments{
-                if appt["notes"] as! String == self.currAppt["notes"] as! String {
+                if appt["uid"] as! String == self.currAppt["uid"] as! String {
                     currTutor.appointments.remove(at: count)
                     break
                 }
@@ -77,7 +77,7 @@ class TutStudentDisplayViewController: UIViewController {
                         var studAppts = documentData!["appointments"] as! [[String: Any]]
                         var count = 0
                         for appt in studAppts{
-                            if appt["notes"] as! String == self.currAppt["notes"] as! String {
+                            if appt["uid"] as! String == self.currAppt["uid"] as! String {
                                 studAppts.remove(at: count)
                                 break
                             }

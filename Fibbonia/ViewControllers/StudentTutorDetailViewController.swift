@@ -47,13 +47,16 @@ class StudentTutorDetailViewController: UIViewController {
     
     
     @IBAction func appointmentPressed(_ sender: Any) {
-        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!, studentName: currName, selfEmail: currEmail)
-        var dict = currAppt.toDict()
         let time = datePicker.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, h:mm a"
+        let timezone = dateFormatter.timeZone.abbreviation()!
         let inputDate = dateFormatter.string(from: time)
-        dict["time"] = inputDate
+        let uid = UUID().uuidString
+        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!, studentName: currName, selfEmail: currEmail, uid: uid, timezone: timezone)
+        var dict = currAppt.toDict()
+        dict["time"] = inputDate //necessary to change input from Date to String
+        //dict["timezone"] = timezone //not necessary as input is already a string
         currStudent.addAppointment(appy: dict)
         let db = Firestore.firestore()
         let appts = currStudent.appointments

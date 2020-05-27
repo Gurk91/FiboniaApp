@@ -159,6 +159,7 @@ class Utils {
     static func organizeSubjects(){
         for cell in Constants.pulledOutput{
             let subject = cell.1["abbreviation"].rawString()!
+            //print("thats what she said")
             if Constants.pulledSubjects.contains(subject) {
                 continue
             } else {
@@ -172,6 +173,7 @@ class Utils {
     
     static func organizeClasses(){
         for cell in Constants.pulledOutput{
+            //print("gabagool")
             let subject = cell.1["abbreviation"].rawString()!
             let number = cell.1["course_number"].rawString()!
             if Constants.pulledClasses[subject]!.contains(number) {

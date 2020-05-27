@@ -102,6 +102,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
             do {
                 Constants.pulledOutput = try result.get()
                 print("pull complete")
+                print("length", Constants.pulledOutput.count)
             } catch {
                 print("output not saved")
             }
@@ -174,6 +175,16 @@ class ViewController: UIViewController, CAAnimationDelegate {
         }
     }
     
+    @IBAction func signUpPressed(_ sender: UIButton) {
+        sender.pulsate()
+    }
+    
+    @IBAction func loginPressed(_ sender: Any) {
+        (sender as! UIButton).pulsate()
+    }
+    
+    
+    
     func createAlert(title: String, message: String, buttonMsg: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
@@ -182,6 +193,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         self.present(alert, animated: true, completion: nil)
         
     }
+    
     
 }
 
