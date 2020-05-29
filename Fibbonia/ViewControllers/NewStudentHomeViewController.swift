@@ -20,6 +20,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     var tut: Bool = false
     var data = currStudent.appointments
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()

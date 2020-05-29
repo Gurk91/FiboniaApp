@@ -88,6 +88,8 @@ class ViewController: UIViewController, CAAnimationDelegate {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("home entered")
@@ -95,23 +97,22 @@ class ViewController: UIViewController, CAAnimationDelegate {
         //authenticateUser()
         setUpElements()
         // Begin pull from BerkeleyTime
-        Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
-        switch result {
-        case .success(let _):
-            //print("pull success")
-            do {
-                Constants.pulledOutput = try result.get()
-                print("pull complete")
-                print("length", Constants.pulledOutput.count)
-            } catch {
-                print("output not saved")
-            }
-        case .failure(let error):
-            self.createAlert(title: "Error", message: error.localizedDescription + " Please try again later.", buttonMsg: "Okay")
-            }
-        }
-
         
+        Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
+            switch result {
+            case .success(let _):
+                //print("pull success")
+                do {
+                    Constants.pulledOutput = try result.get()
+                    print("pull complete")
+                    print("length", Constants.pulledOutput.count)
+                } catch {
+                    print("output not saved")
+                }
+            case .failure(let error):
+                self.createAlert(title: "Error", message: error.localizedDescription + " Please try again later.", buttonMsg: "Okay")
+                }
+            }
         
     }
     

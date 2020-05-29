@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainMenuTableVC: UITableViewController {
 
@@ -55,8 +56,12 @@ class MainMenuTableVC: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "tutor")
             let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            var text = ""
+            if currTutor.name != "" {
+                text = "Go to Tutor View"
+            } else {
+                text = sectionData[indexPath.section]![indexPath.row]
+            }
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (0, 2):
@@ -155,59 +160,107 @@ class MainMenuTableVC: UITableViewController {
         return 50
     }
     
-    /*
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch (indexPath.section, indexPath.row) {
             
-        case (0,0):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+        case (0, 0):
+            performSegue(withIdentifier: "editProfile", sender: self)
+            
         case (0, 1):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+            if currTutor.name != "" {
+                let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
+                self.view.window?.rootViewController = tutorTBC
+                self.view.window?.makeKeyAndVisible()
+            } else {
+                let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
+                self.view.window?.rootViewController = tutorVC
+                self.view.window?.makeKeyAndVisible()
+            }
+            //return cell
         case (0, 2):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "payment")
+            let rightImg = UIImage(named: "forwardArrow")
+            let text = sectionData[indexPath.section]![indexPath.row]
+            print(text)
+            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
+            //return cell
         case (1, 0):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "history")
+            let rightImg = UIImage(named: "forwardArrow")
+            let text = sectionData[indexPath.section]![indexPath.row]
+            print(text)
+            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
+            //return cell
         case (1, 1):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
-        case (1, 2):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "statistics")
+            let rightImg = UIImage(named: "forwardArrow")
+            let text = sectionData[indexPath.section]![indexPath.row]
+            print(text)
+            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
+            //return cell
         case (2, 0):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "favourite")
+            let rightImg = UIImage(named: "forwardArrow")
+            let text = sectionData[indexPath.section]![indexPath.row]
+            print(text)
+            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
+            //return cell
         case (2, 1):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
-        case (2, 2):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
+            performSegue(withIdentifier: "help", sender: self)
+            
         case (3, 0):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
-        case (4, 0):
-            let text = String(indexPath.section) + String(indexPath.row)
-            performSegue(withIdentifier: "move", sender: text)
-        
+            performSegue(withIdentifier: "about", sender: self)
+            
+        case (3, 2):
+            signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
+            
+        case (3, 1):
+            performSegue(withIdentifier: "help", sender: self)
+            
         default:
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "forwardArrow")!
+            let rightImg = UIImage(named: "forwardArrow")!
+            let text = String(indexPath.section) + " " + String(indexPath.row)
+            cell.setUp(Rimg: rightImg, txt: text, Limg: leftImg)
+            //return cell
         }
     }
     
     
+    func signOutNCreateAlert(title: String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .default, handler: { (action) in
+            do {
+                try Auth.auth().signOut()
+                print("signed out")
+                currName = ""
+                
+                let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
+                self.present(viewController!, animated: true, completion: nil)
+                //self.view.window?.rootViewController = viewController
+                //self.view.window?.makeKeyAndVisible()
+                
+            } catch let error {
+                print("sign out failed", error)
+                let alt = UIAlertController(title: "Hmm Something's wrong", message: "Error Signing out", preferredStyle: .alert)
+                alt.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "move"{
-            let destination = segue.destination as! DisplayViewController
-            destination.display = sender as? String
-        }
     }
- */
+    
 
 
 

@@ -21,17 +21,17 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         if Utils.Connection() == true {
             print("good connection")
-            checkTutor()
+            //checkTutor()
         } else if currTutorEmail != "" {
-            self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
+            //self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
             tut = true
         }
         
-        setUp()
+        //setUp()
         states = Constants.states
         self.statePickerView.delegate = self
         self.statePickerView.dataSource = self
-        self.saveToCoreDate()
+        //self.saveToCoreDate()
         
     }
     
@@ -46,7 +46,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     //@IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var signOutButton: UIButton!
-    @IBOutlet weak var becomeTutorButton: UIButton!
+    //@IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var saveInfobutton: UIButton!
 
     @IBOutlet weak var addline1: UITextField!
@@ -173,7 +173,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         //nameLabel.text! = "Welcome " + currStudent.firstName + "!"
         
         Utils.styleHollowButton(signOutButton)
-        Utils.styleFilledButton(becomeTutorButton)
+        //Utils.styleFilledButton(becomeTutorButton)
         Utils.styleHollowButton(saveInfobutton)
         
         Utils.styleTextField(addline1)
@@ -183,6 +183,7 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
     }
     
+    /*
     func checkTutor() {
         let db = Firestore.firestore()
         db.collection("users")
@@ -237,9 +238,9 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
             }
             
         }
-        
-        
     }
+     
+   */
     
     func saveToCoreDate() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

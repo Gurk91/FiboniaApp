@@ -22,10 +22,12 @@ var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var hasAlreadyLaunched : Bool!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,7 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         
+        hasAlreadyLaunched = UserDefaults.standard.bool(forKey: "hasAlreadyLaunched")
+        
+        //check first launched
+        if (hasAlreadyLaunched) {
+           hasAlreadyLaunched = true
+        } else {
+            UserDefaults.standard.set(true, forKey: "hasAlreadyLaunched")
+        }
+        
         return true
+    }
+    
+    func sethasAlreadyLaunched(){
+        hasAlreadyLaunched = true
     }
 
     // MARK: UISceneSession Lifecycle
