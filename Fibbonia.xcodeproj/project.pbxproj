@@ -35,6 +35,7 @@
 		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
 		A487AEC2242175BB00381E82 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEC1242175BB00381E82 /* Utils.swift */; };
 		A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A487AEC32421900E00381E82 /* GoogleService-Info.plist */; };
+		A4A07F7C24813D9E0049ACC1 /* TutorMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */; };
 		A4A49893245C621A00A92E1A /* DesperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49892245C621A00A92E1A /* DesperationViewController.swift */; };
 		A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */; };
 		A4A49897245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */; };
@@ -82,6 +83,7 @@
 		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		A487AEC1242175BB00381E82 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A487AEC32421900E00381E82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorMenuTableVC.swift; sourceTree = "<group>"; };
 		A4A49892245C621A00A92E1A /* DesperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesperationViewController.swift; sourceTree = "<group>"; };
 		A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTutorDetailViewController.swift; sourceTree = "<group>"; };
 		A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAppointmentsTableViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		A412AA6D2402295400216FDB /* Fibbonia */ = {
 			isa = PBXGroup;
 			children = (
+				A4A07F7A24813D640049ACC1 /* Tutor Main Menu */,
 				A4B2D11C2480053F00467DA3 /* Student Main Menu */,
 				A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */,
 				A4C2DB902421A6C8004B8A8A /* Helpers */,
@@ -177,6 +180,14 @@
 				A4751B552478817700EDAF5B /* NewTutorHomeViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A4A07F7A24813D640049ACC1 /* Tutor Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */,
+			);
+			path = "Tutor Main Menu";
 			sourceTree = "<group>";
 		};
 		A4B2D11C2480053F00467DA3 /* Student Main Menu */ = {
@@ -367,6 +378,7 @@
 				A41E5522247C109600A5C456 /* UIButtonExtension.swift in Sources */,
 				A4A4989B245CA9C300A92E1A /* StudentDisplayApptViewController.swift in Sources */,
 				A487AEC2242175BB00381E82 /* Utils.swift in Sources */,
+				A4A07F7C24813D9E0049ACC1 /* TutorMenuTableVC.swift in Sources */,
 				A4F6A032245CDEF00073783C /* TutApptTableViewController.swift in Sources */,
 				A4751B5124782A3D00EDAF5B /* NewStudentHomeViewController.swift in Sources */,
 				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,

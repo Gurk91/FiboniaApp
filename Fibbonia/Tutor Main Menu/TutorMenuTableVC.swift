@@ -1,15 +1,15 @@
 //
-//  MainMenuTableVC.swift
+//  TutorMenuTableVC.swift
 //  Fibbonia
 //
-//  Created by Gurkarn Goindi on 28/May/20.
+//  Created by Gurkarn Goindi on 29/May/20.
 //  Copyright © 2020 Gurkarn Goindi. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class MainMenuTableVC: UITableViewController {
+class TutorMenuTableVC: UITableViewController {
 
     var sectionData = [Int: [String]]()
     
@@ -20,9 +20,9 @@ class MainMenuTableVC: UITableViewController {
         tableView.dataSource = self
         
         self.sectionData = [
-        0: ["Edit Profile", "Become Tutor", "Edit Payment Info"],
+        0: ["Edit Profile", "Student View", "Edit Payment Info"],
         1: ["History", "Stats"],
-        2: ["Favourite Tutors", "Preferences"],
+        2: ["Update/Upload Transcript", "My Classes"],
         3: ["About Fibonia", "Help and Support", "Sign Out"],
         4: []]
 
@@ -54,14 +54,9 @@ class MainMenuTableVC: UITableViewController {
             return cell
         case (0, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "tutor")
+            let leftImg = UIImage(named: "student")
             let rightImg = UIImage(named: "forwardArrow")
-            var text = ""
-            if currTutor.name != "" {
-                text = "Go to Tutor View"
-            } else {
-                text = sectionData[indexPath.section]![indexPath.row]
-            }
+            let text = "Student View"
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (0, 2):
@@ -90,7 +85,7 @@ class MainMenuTableVC: UITableViewController {
             return cell
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "favourite")
+            let leftImg = UIImage(named: "transcript")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
             print(text)
@@ -98,7 +93,7 @@ class MainMenuTableVC: UITableViewController {
             return cell
         case (2, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "preferences")
+            let leftImg = UIImage(named: "classes")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
             print(text)
@@ -145,7 +140,7 @@ class MainMenuTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         print(section)
-        return ["PERSONAL INFORMATION", "APPOINTMENTS", "TUTORS", " ", " "][section]
+        return ["PERSONAL INFORMATION", "APPOINTMENTS", "TUTORING", " ", " "][section]
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -169,30 +164,24 @@ class MainMenuTableVC: UITableViewController {
             performSegue(withIdentifier: "editProfile", sender: self)
             
         case (0, 1):
-            if currTutor.name != "" {
-                let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
-                self.view.window?.rootViewController = tutorTBC
-                self.view.window?.makeKeyAndVisible()
-            } else {
-                let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
-                self.view.window?.rootViewController = tutorVC
-                self.view.window?.makeKeyAndVisible()
-            }
+            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+            self.view.window?.rootViewController = tabBarController
+            self.view.window?.makeKeyAndVisible()
             
         case (0, 2):
             performSegue(withIdentifier: "maintenance", sender: self)
-
+            
         case (1, 0):
             performSegue(withIdentifier: "maintenance", sender: self)
-
+            
         case (1, 1):
             performSegue(withIdentifier: "maintenance", sender: self)
             
         case (2, 0):
-            performSegue(withIdentifier: "maintenance", sender: self)
+            performSegue(withIdentifier: "transcript", sender: self)
             
         case (2, 1):
-            performSegue(withIdentifier: "help", sender: self)
+            performSegue(withIdentifier: "classes", sender: self)
             
         case (3, 0):
             performSegue(withIdentifier: "about", sender: self)
@@ -205,7 +194,6 @@ class MainMenuTableVC: UITableViewController {
             
         default:
             performSegue(withIdentifier: "maintenance", sender: self)
-
         }
     }
     
@@ -236,8 +224,5 @@ class MainMenuTableVC: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     
     }
-    
-
-
 
 }
