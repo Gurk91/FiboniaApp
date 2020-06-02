@@ -83,31 +83,41 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
         let price = pricePHfield.text!
         let times = availabilityField.text!
         var data: [String] = []
-        
-        db.collection(selectedClass).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    data.append(document.documentID)
-                }
-                if data.contains(email) {
-                    self.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay")
+        print("step A")
+        var rand = db.collection(selectedClass)
+        print("step C")
+        print(rand)
+        do {
+            var attempt = try db.collection(selectedClass)
+                attempt.getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
                 } else {
-                    print("class added")
-                    print(tutorInfo)
-                    print(self.selectedClass)
-                    print(price)
-                    print(times)
-                    db.collection(self.selectedClass).document(email).setData(["info":tutorInfo, "price": price, "times": times])
-                    print("step 1")
-                    currTutor.addClass(clas: self.selectedClass)
-                    print(currTutor.classes)
-                    self.createAlert(title: "Class Added", message: "You can now teach " + self.selectedClass, buttonMsg: "Okay")
-                    db.collection("tutors").document(email).setData(["classes": currTutor.classes], merge: true)
-                    print("all through")
+                    print("step B")
+                    for document in querySnapshot!.documents {
+                        data.append(document.documentID)
+                    }
+                    if data.contains(email) {
+                        self.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay")
+                    } else {
+                        print("class added")
+                        print(tutorInfo)
+                        print(self.selectedClass)
+                        print(price)
+                        print(times)
+                        db.collection(self.selectedClass).document(email).setData(["info":tutorInfo, "price": price, "times": times])
+                        print("step 1")
+                        currTutor.addClass(clas: self.selectedClass)
+                        print(currTutor.classes)
+                        self.createAlert(title: "Class Added", message: "You can now teach " + self.selectedClass, buttonMsg: "Okay")
+                        db.collection("tutors").document(email).setData(["classes": currTutor.classes], merge: true)
+                        print("all through")
+                    }
                 }
             }
+        } catch let error {
+            createAlert(title: "Error", message: "Unable to add class. Please try again later", buttonMsg: "Okay")
+            print(error)
         }
         
         print(self.selectedSubject)

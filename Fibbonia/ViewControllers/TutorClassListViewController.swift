@@ -20,7 +20,7 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         tableView.delegate = self
         
-        savetoCoreData()
+        //savetoCoreData()
         // Do any additional setup after loading the view.
     }
     
