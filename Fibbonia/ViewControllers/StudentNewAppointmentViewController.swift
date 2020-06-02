@@ -105,7 +105,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
                         self.performSegue(withIdentifier: "showTutors", sender: output)
                             
                         } else {
-                            self.createAlert(title: "No Tutors Found", message: "Sorry, there are no tutors for this class :(", buttonMsg: "Okay")
+                            self.createAlert(title: "No Tutors Found", message: "Sorry, there are no tutors for this class", buttonMsg: "Okay")
                         }
                 }
                 
@@ -118,6 +118,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
         if segue.identifier == "showTutors"{
             let destination = segue.destination as! DesperationViewController
             destination.tutors = sender as! [Constants.tutorField]
+            destination.subject = selectedSubject
         }
     }
     

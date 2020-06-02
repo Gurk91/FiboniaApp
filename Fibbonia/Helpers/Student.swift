@@ -20,8 +20,9 @@ class Student {
     var appointments: [[String: Any]]
     var tutor: Bool
     var calEmail: String
+    var subjects: [String]
     
-    init(fn: String, ln: String, eml: String, appt: [[String: Any]]) {
+    init(fn: String, ln: String, eml: String, appt: [[String: Any]], subjects: [String]) {
         self.firstName = fn
         self.lastName = ln
         self.email = eml
@@ -32,6 +33,7 @@ class Student {
         self.appointments = appt
         self.tutor = false
         self.calEmail = ""
+        self.subjects = subjects
     }
     
     func addAppointment(appy: [String:Any]) {
@@ -48,7 +50,7 @@ class Student {
     func getData() -> [String:Any] {
         return ["email":self.email, "firstName":self.firstName, "lastName":self.lastName,
                 "appointments": self.appointments, "tutor": self.tutor, "calEmail": self.calEmail,
-                "address": self.address, "city": self.city, "state": self.state, "zip": self.zip]
+                "address": self.address, "city": self.city, "state": self.state, "zip": self.zip, "subjects": self.subjects]
     }
     
     func setTutor(eml: String) {

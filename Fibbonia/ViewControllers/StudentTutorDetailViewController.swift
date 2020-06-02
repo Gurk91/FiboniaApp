@@ -34,6 +34,8 @@ class StudentTutorDetailViewController: UIViewController {
     @IBOutlet weak var apptNotes: UITextField!
     
     var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: "", price: "", GPA: "", onlineID: "", major: "", email: "", timings: "", appointments: [] )
+    
+    var subject: String = ""
 
     func setTerms() {
         tutorName.text! = currentValue.name
@@ -53,14 +55,18 @@ class StudentTutorDetailViewController: UIViewController {
         let timezone = dateFormatter.timeZone.abbreviation()!
         let inputDate = dateFormatter.string(from: time)
         let uid = UUID().uuidString
-        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!, studentName: currName, selfEmail: currEmail, uid: uid, timezone: timezone)
+        let currAppt = Appointment(tutorEmail: currentValue.email, name: currentValue.name, time: datePicker.date, location: currentValue.onlineID, className: pickedClass, notes: apptNotes.text!, studentName: currName, selfEmail: currEmail, uid: uid, timezone: timezone, subject: subject)
         var dict = currAppt.toDict()
         dict["time"] = inputDate //necessary to change input from Date to String
         //dict["timezone"] = timezone //not necessary as input is already a string
         currStudent.addAppointment(appy: dict)
         let db = Firestore.firestore()
         let appts = currStudent.appointments
-        db.collection("users").document(currStudent.email).setData(["appointments": appts], merge: true)
+        if currStudent.subjects.contains(self.subject) != true {
+            currStudent.subjects.append(self.subject)
+        }
+        let subs = currStudent.subjects
+        db.collection("users").document(currStudent.email).setData(["appointments": appts, "subjects": subs], merge: true)
         db.collection("tutors")
             .document(self.currentValue.email)
             .getDocument { (document, error) in
@@ -74,7 +80,11 @@ class StudentTutorDetailViewController: UIViewController {
                     let documentData = document!.data()
                     var tutorappts = documentData!["appointments"] as! [[String: Any]]
                     tutorappts.append(dict)
-                    db.collection("tutors").document(self.currentValue.email).setData(["appointments": tutorappts], merge: true)
+                    var tutorSubjects = documentData!["subjects"] as! [String]
+                    if tutorSubjects.contains(self.subject) != true {
+                        tutorSubjects.append(self.subject)
+                    }
+                    db.collection("tutors").document(self.currentValue.email).setData(["appointments": tutorappts, "subjects": tutorSubjects], merge: true)
                 }
             }
         }

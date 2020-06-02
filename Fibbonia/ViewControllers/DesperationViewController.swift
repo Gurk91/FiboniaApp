@@ -14,6 +14,8 @@ class DesperationViewController: UIViewController {
     
     var tutors: [Constants.tutorField] = []
     
+    var subject: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -47,6 +49,7 @@ extension DesperationViewController: UITableViewDataSource, UITableViewDelegate 
         if segue.identifier == "tutorDetails"{
             let destination = segue.destination as! StudentTutorDetailViewController
             destination.currentValue = (sender as? Constants.tutorField)!
+            destination.subject = subject
         }
     }
 }

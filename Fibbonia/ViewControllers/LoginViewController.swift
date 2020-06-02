@@ -63,6 +63,7 @@ class LoginViewController: UIViewController {
                             print("************ PRINTING DOC VALS ************")
                             let name = documentData!["firstName"] as Any? as? String
                             let ln = documentData!["lastName"] as Any? as? String
+                            let subjects = documentData!["subjects"] //as! [String]
                             currName = name! + " " + ln!
                             print(currName)
                             currEmail = email
@@ -71,10 +72,10 @@ class LoginViewController: UIViewController {
                                 //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail, uid: "", timezone: "UTC")
                                 //let entryVal = dummy.toDict()
                                 docRef.setData(["appointments":[], "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String])
                                 
                             } else {
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String])
                                 print("set student")
                                 print(currStudent)
                             }

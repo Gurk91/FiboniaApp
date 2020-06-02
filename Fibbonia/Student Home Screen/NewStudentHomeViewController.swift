@@ -19,7 +19,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     
     var tut: Bool = false
-    var data = currStudent.appointments
+    var data = [0: ["COMPSCI 61A", "ECON 100B", "CHEM 3A", "EL ENG 16A"], 1: currStudent.appointments, 2: []] as [Int: Any]
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         
         tableView.dataSource = self
         tableView.delegate = self
-        data = currStudent.appointments
+        data[1] = currStudent.appointments
         tableView.reloadData()
         
         // Do any additional setup after loading the view.
@@ -50,7 +50,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        data = currStudent.appointments
+        data[1] = currStudent.appointments
         tableView.reloadData()
     }
     
@@ -167,32 +167,104 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     //Table Commands
 
-    // MARK: - Table view data source
+    // MARK: - Tableview Code
 
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return data.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.data.count
+        
+        switch (section) {
+            
+        case 0:
+            return 1
+            
+        case 1:
+            let step = data[section] as! [[String: String]]
+            return step.count
+            
+        case 2:
+            return 0
+            
+        default:
+            return 1
+        }
+        
     }
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let current = data[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-        if self.data.count > 0 {
-            cell.setVals(input: current)
+        
+        switch (indexPath.section) {
+            
+        case (0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! CollectionStudentTableViewCell
+            return cell
+        case (1):
+            let step1 = data[indexPath.section] as! [[String: String]]
+            let current = step1[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
+            if self.data.count > 0 {
+                cell.setVals(input: current)
+            }
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            
+            return cell
         }
-        return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let current = data[indexPath.row]
-        performSegue(withIdentifier: "apptDisplay", sender: current)
+        
+        switch (indexPath.section) {
+        
+        case (1):
+            let step1 = data[indexPath.section] as! [[String: String]]
+            let current = step1[indexPath.row]
+            performSegue(withIdentifier: "apptDisplay", sender: current)
+        default:
+            return
+        }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch (indexPath.section) {
+        
+        case(0):
+            return 150
+            
+        case(1):
+            return 80
+            
+        default:
+            return 80
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        print(section)
+        return ["YOUR RECENT CLASSES", "UPCOMING APPOINTMENTS", " "][section]
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 15)
+            headerView.textLabel?.textColor = UIColor.darkGray
+            //headerView.frame = CGRect(x: 10, y: 20, width: view.frame.width, height: 60)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "apptDisplay"{
@@ -201,5 +273,6 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-
+    
 }
+

@@ -20,8 +20,9 @@ class Appointment {
     var studentName: String
     var selfEmail: String
     var uid: String
+    var subject: String
     
-    init(tutorEmail: String, name: String, time: Date, location: String, className: String, notes: String, studentName: String, selfEmail: String, uid: String, timezone: String) {
+    init(tutorEmail: String, name: String, time: Date, location: String, className: String, notes: String, studentName: String, selfEmail: String, uid: String, timezone: String, subject: String) {
         self.email = tutorEmail
         self.name = name
         self.time = time
@@ -32,10 +33,11 @@ class Appointment {
         self.selfEmail = selfEmail
         self.uid = uid
         self.studentTimeZone = timezone
+        self.subject = subject
     }
     
     func toDict() -> Dictionary<String, Any>{
-        return ["tutorEmail": self.email, "tutorFN": self.name, "time": self.time, "location": self.location, "classname": self.className, "notes": self.notes, "studentName": self.studentName, "studentEmail": self.selfEmail, "uid": self.uid, "timezone": self.studentTimeZone]
+        return ["tutorEmail": self.email, "tutorFN": self.name, "time": self.time, "location": self.location, "classname": self.className, "notes": self.notes, "studentName": self.studentName, "studentEmail": self.selfEmail, "uid": self.uid, "timezone": self.studentTimeZone, "subject": self.subject]
     }
     
 }

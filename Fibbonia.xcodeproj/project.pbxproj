@@ -45,6 +45,8 @@
 		A4B2D11E2480055C00467DA3 /* MainMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B2D11D2480055C00467DA3 /* MainMenuTableVC.swift */; };
 		A4B2D1202480058700467DA3 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B2D11F2480058700467DA3 /* MenuCell.swift */; };
 		A4B2D12424800CCC00467DA3 /* Menu2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B2D12324800CCC00467DA3 /* Menu2TableViewCell.swift */; };
+		A4B80AA52484662400A2B8CA /* CollectionStudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B80AA42484662400A2B8CA /* CollectionStudentTableViewCell.swift */; };
+		A4B80AA72484667A00A2B8CA /* StudentClassesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */; };
 		A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2DB912421A6EF004B8A8A /* Constants.swift */; };
 		A4F6A02E245CDB370073783C /* ApptTutorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */; };
 		A4F6A030245CDC180073783C /* TutStudentDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F6A02F245CDC180073783C /* TutStudentDisplayViewController.swift */; };
@@ -93,6 +95,8 @@
 		A4B2D11D2480055C00467DA3 /* MainMenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableVC.swift; sourceTree = "<group>"; };
 		A4B2D11F2480058700467DA3 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		A4B2D12324800CCC00467DA3 /* Menu2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu2TableViewCell.swift; sourceTree = "<group>"; };
+		A4B80AA42484662400A2B8CA /* CollectionStudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionStudentTableViewCell.swift; sourceTree = "<group>"; };
+		A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentClassesCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4C2DB912421A6EF004B8A8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fibonia.entitlements; sourceTree = "<group>"; };
 		A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptTutorTableViewCell.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 		A412AA6D2402295400216FDB /* Fibbonia */ = {
 			isa = PBXGroup;
 			children = (
+				A49B6DDC248460890013E825 /* Student Home Screen */,
 				A4A07F7A24813D640049ACC1 /* Tutor Main Menu */,
 				A4B2D11C2480053F00467DA3 /* Student Main Menu */,
 				A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */,
@@ -155,6 +160,8 @@
 		A487AEB8241F686700381E82 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */,
+				A4751B552478817700EDAF5B /* NewTutorHomeViewController.swift */,
 				A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */,
 				A43BA71B241305B8006DFC10 /* ViewController.swift */,
 				A487AEB9241F68E000381E82 /* SignUpViewController.swift */,
@@ -171,15 +178,22 @@
 				A4A49892245C621A00A92E1A /* DesperationViewController.swift */,
 				A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */,
 				A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */,
-				A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */,
 				A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */,
-				A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */,
 				A4F6A02F245CDC180073783C /* TutStudentDisplayViewController.swift */,
 				A4F6A031245CDEF00073783C /* TutApptTableViewController.swift */,
-				A4751B5024782A3D00EDAF5B /* NewStudentHomeViewController.swift */,
-				A4751B552478817700EDAF5B /* NewTutorHomeViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A49B6DDC248460890013E825 /* Student Home Screen */ = {
+			isa = PBXGroup;
+			children = (
+				A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */,
+				A4751B5024782A3D00EDAF5B /* NewStudentHomeViewController.swift */,
+				A4B80AA42484662400A2B8CA /* CollectionStudentTableViewCell.swift */,
+				A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */,
+			);
+			path = "Student Home Screen";
 			sourceTree = "<group>";
 		};
 		A4A07F7A24813D640049ACC1 /* Tutor Main Menu */ = {
@@ -386,12 +400,14 @@
 				A4F6A02E245CDB370073783C /* ApptTutorTableViewCell.swift in Sources */,
 				A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */,
 				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,
+				A4B80AA72484667A00A2B8CA /* StudentClassesCollectionViewCell.swift in Sources */,
 				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
 				A4751B562478817700EDAF5B /* NewTutorHomeViewController.swift in Sources */,
 				A4B2D12424800CCC00467DA3 /* Menu2TableViewCell.swift in Sources */,
 				A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */,
 				A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */,
 				A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */,
+				A4B80AA52484662400A2B8CA /* CollectionStudentTableViewCell.swift in Sources */,
 				A479C346244D1EB000D59809 /* Tutor.swift in Sources */,
 				A424454B243D5EBB005E98ED /* Appointment.swift in Sources */,
 				A45EF77B2458946800B1C64F /* TutorClassListViewController.swift in Sources */,

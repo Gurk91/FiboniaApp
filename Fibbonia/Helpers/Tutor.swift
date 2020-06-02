@@ -27,6 +27,7 @@ class Tutor {
     var online: String
     var appointments: [[String: Any]]
     //var classRating: [String: Double]
+    var subjects: [String]
     
     init(name: String ,calEmail: String, GPA: Double, gradYear: Int, major: String) {
         self.name = name
@@ -43,6 +44,7 @@ class Tutor {
         self.phone = ""
         self.online = ""
         self.appointments = [["ABC":"DEF"]]
+        self.subjects = [""]
         
         //self.classRating = [:]
     }
@@ -59,7 +61,7 @@ class Tutor {
     
     func getData() -> [String:Any] {
         return ["name": self.name, "email":self.calEmail, "GPA": self.GPA, "Major": self.major, "classes": self.classes, "rating": self.rating, "experience": self.experience,
-                "address": self.address, "city": self.city, "state": self.state, "onlineID": self.online, "appointments": self.appointments]
+                "address": self.address, "city": self.city, "state": self.state, "onlineID": self.online, "appointments": self.appointments, "subjects": self.subjects]
     }
     
     
