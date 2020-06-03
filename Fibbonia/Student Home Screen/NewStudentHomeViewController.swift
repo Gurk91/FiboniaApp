@@ -237,25 +237,27 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         switch (indexPath.section) {
         
         case(0):
-            return 150
+            print("case 0")
+            return 90
             
         case(1):
-            return 80
+            print("case 1")
+            return 66
             
         default:
-            return 80
+            return 66
         }
     }
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         print(section)
-        return ["YOUR RECENT CLASSES", "UPCOMING APPOINTMENTS", " "][section]
+        return ["YOUR RECENT SUBJECTS", "UPCOMING APPOINTMENTS", " "][section]
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 15)
+            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 14)
             headerView.textLabel?.textColor = UIColor.darkGray
             //headerView.frame = CGRect(x: 10, y: 20, width: view.frame.width, height: 60)
         }

@@ -83,13 +83,9 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
         let price = pricePHfield.text!
         let times = availabilityField.text!
         var data: [String] = []
-        print("step A")
-        var rand = db.collection(selectedClass)
-        print("step C")
-        print(rand)
+        print(selectedClass)
         do {
-            var attempt = try db.collection(selectedClass)
-                attempt.getDocuments() { (querySnapshot, err) in
+            try db.collection(selectedClass).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

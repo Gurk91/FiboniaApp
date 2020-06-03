@@ -12,11 +12,13 @@ class CollectionStudentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.reloadData()
     }
     
     var collCelldata = currStudent.subjects
@@ -40,6 +42,9 @@ extension CollectionStudentTableViewCell: UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collCell", for: indexPath) as! StudentClassesCollectionViewCell
         cell.classLabel.text = collCelldata[indexPath.row]
+        let colors = [UIColor.init(red: 247/255, green: 71/255, blue: 10/255, alpha: 1), UIColor.init(red: 247/255, green: 190/255, blue: 10/255, alpha: 1), UIColor.init(red: 10/255, green: 247/255, blue: 190/255, alpha: 1), UIColor.init(red: 186/255, green: 247/255, blue: 10/255, alpha: 1)]
+        
+        cell.backView.backgroundColor = colors[indexPath.row % colors.count]
         
         if collCelldata[indexPath.row] == "COMPSCI" {
             cell.setImg(img: "COMPSCI")
@@ -66,7 +71,7 @@ extension CollectionStudentTableViewCell: UICollectionViewDataSource, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 253, height: 140)
+        return CGSize(width: 153, height: 74)
     }
     
 }

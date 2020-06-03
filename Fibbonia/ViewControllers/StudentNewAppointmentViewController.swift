@@ -45,16 +45,20 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
+            //print("ret 1")
             return subjects.count
         } else {
+            //print("ret 3")
             return classes.count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 1 {
+            //print("ret 2")
             return subjects[row]
         } else {
+            //print("ret 4")
             return classes[row]
         }
     }
@@ -67,7 +71,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
             self.classPicker.reloadAllComponents()
         } else {
             selectedClass = selectedSubject + " " + classes[row]
-            print(selectedClass)
+            print("selected", selectedClass)
         }
         
     }
@@ -75,12 +79,12 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     @IBAction func findPressed(_ sender: Any) {
 //        desperate = Constants.classTutors[selectedClass]!
         pickedClass = selectedClass
+        print("final", pickedClass)
         
-            
+            print("picked", pickedClass)
             var output: [Constants.tutorField] = []
             let db = Firestore.firestore()
-                db.collection(pickedClass)
-                    .getDocuments { (snapshot, error) in
+                db.collection(pickedClass).getDocuments { (snapshot, error) in
         
                     if error == nil && snapshot != nil {
                         if snapshot!.documents.count > 0 {
