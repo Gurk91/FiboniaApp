@@ -13,14 +13,24 @@ class StudentClassesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var imageContainer: UIView!
+    
     
     func setImg(img: String) {
+        image.backgroundColor = UIColor.white
         image.image = UIImage(named: img)
-        image.layer.borderWidth = 1.0
+        image.layer.borderWidth = 0
         image.layer.masksToBounds = false
-        image.layer.borderColor = UIColor.white.cgColor
-        image.layer.cornerRadius = image.frame.size.width / 2
         image.clipsToBounds = true
+        image.layer.cornerRadius = image.frame.size.width / 2
+        imageContainer.backgroundColor = UIColor.white
+        imageContainer.layer.borderColor = UIColor.gray.cgColor
+        imageContainer.layer.masksToBounds = false
+        imageContainer.layer.borderWidth = 1
+        imageContainer.layer.cornerRadius = imageContainer.frame.size.width / 2
+        imageContainer.clipsToBounds = true
+        
+        
     }
     
 }

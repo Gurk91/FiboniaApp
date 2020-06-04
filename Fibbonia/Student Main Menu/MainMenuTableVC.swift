@@ -192,7 +192,7 @@ class MainMenuTableVC: UITableViewController {
             performSegue(withIdentifier: "maintenance", sender: self)
             
         case (2, 1):
-            performSegue(withIdentifier: "help", sender: self)
+            performSegue(withIdentifier: "preferences", sender: self)
             
         case (3, 0):
             performSegue(withIdentifier: "about", sender: self)
