@@ -49,6 +49,10 @@
 		A4B80AA72484667A00A2B8CA /* StudentClassesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */; };
 		A4BC4B212488720F00BE08B1 /* StudentPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC4B202488720F00BE08B1 /* StudentPreferencesViewController.swift */; };
 		A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2DB912421A6EF004B8A8A /* Constants.swift */; };
+		A4EE3C0E2498DF4300A06515 /* StudentLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3C0D2498DF4300A06515 /* StudentLangViewController.swift */; };
+		A4EE3C102498DFDF00A06515 /* StudentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3C0F2498DFDF00A06515 /* StudentLocationViewController.swift */; };
+		A4EE3C122498E0E000A06515 /* StudentEduLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3C112498E0E000A06515 /* StudentEduLvlViewController.swift */; };
+		A4EE3C142498E1FA00A06515 /* StudentPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE3C132498E1FA00A06515 /* StudentPriceViewController.swift */; };
 		A4F6A02E245CDB370073783C /* ApptTutorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */; };
 		A4F6A030245CDC180073783C /* TutStudentDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F6A02F245CDC180073783C /* TutStudentDisplayViewController.swift */; };
 		A4F6A032245CDEF00073783C /* TutApptTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F6A031245CDEF00073783C /* TutApptTableViewController.swift */; };
@@ -101,6 +105,10 @@
 		A4BC4B202488720F00BE08B1 /* StudentPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentPreferencesViewController.swift; sourceTree = "<group>"; };
 		A4C2DB912421A6EF004B8A8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fibonia.entitlements; sourceTree = "<group>"; };
+		A4EE3C0D2498DF4300A06515 /* StudentLangViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLangViewController.swift; sourceTree = "<group>"; };
+		A4EE3C0F2498DFDF00A06515 /* StudentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationViewController.swift; sourceTree = "<group>"; };
+		A4EE3C112498E0E000A06515 /* StudentEduLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentEduLvlViewController.swift; sourceTree = "<group>"; };
+		A4EE3C132498E1FA00A06515 /* StudentPriceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentPriceViewController.swift; sourceTree = "<group>"; };
 		A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptTutorTableViewCell.swift; sourceTree = "<group>"; };
 		A4F6A02F245CDC180073783C /* TutStudentDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutStudentDisplayViewController.swift; sourceTree = "<group>"; };
 		A4F6A031245CDEF00073783C /* TutApptTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutApptTableViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +215,7 @@
 		A4B2D11C2480053F00467DA3 /* Student Main Menu */ = {
 			isa = PBXGroup;
 			children = (
+				A4EE3C0C2497FF0A00A06515 /* Preferences */,
 				A4B2D11D2480055C00467DA3 /* MainMenuTableVC.swift */,
 				A4B2D11F2480058700467DA3 /* MenuCell.swift */,
 				A4B2D12324800CCC00467DA3 /* Menu2TableViewCell.swift */,
@@ -236,6 +245,17 @@
 				A41E5521247C109600A5C456 /* UIButtonExtension.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A4EE3C0C2497FF0A00A06515 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				A4EE3C0D2498DF4300A06515 /* StudentLangViewController.swift */,
+				A4EE3C0F2498DFDF00A06515 /* StudentLocationViewController.swift */,
+				A4EE3C112498E0E000A06515 /* StudentEduLvlViewController.swift */,
+				A4EE3C132498E1FA00A06515 /* StudentPriceViewController.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		F3EBA9108AADFC500BED39EA /* Frameworks */ = {
@@ -392,6 +412,7 @@
 			files = (
 				A412AA6F2402295400216FDB /* AppDelegate.swift in Sources */,
 				A453D7CC245B4B3E00566824 /* TutorSelectionTableViewCell.swift in Sources */,
+				A4EE3C142498E1FA00A06515 /* StudentPriceViewController.swift in Sources */,
 				A4B2D11E2480055C00467DA3 /* MainMenuTableVC.swift in Sources */,
 				A412AA712402295400216FDB /* SceneDelegate.swift in Sources */,
 				A4F6A030245CDC180073783C /* TutStudentDisplayViewController.swift in Sources */,
@@ -400,6 +421,7 @@
 				A46A5999242D8DBB007C6AC0 /* TabBarController.swift in Sources */,
 				A4A86D932455ABF50009AE7A /* Student.swift in Sources */,
 				A463C6862459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld in Sources */,
+				A4EE3C0E2498DF4300A06515 /* StudentLangViewController.swift in Sources */,
 				A41E5522247C109600A5C456 /* UIButtonExtension.swift in Sources */,
 				A4BC4B212488720F00BE08B1 /* StudentPreferencesViewController.swift in Sources */,
 				A4A4989B245CA9C300A92E1A /* StudentDisplayApptViewController.swift in Sources */,
@@ -407,11 +429,13 @@
 				A4A07F7C24813D9E0049ACC1 /* TutorMenuTableVC.swift in Sources */,
 				A4F6A032245CDEF00073783C /* TutApptTableViewController.swift in Sources */,
 				A4751B5124782A3D00EDAF5B /* NewStudentHomeViewController.swift in Sources */,
+				A4EE3C122498E0E000A06515 /* StudentEduLvlViewController.swift in Sources */,
 				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,
 				A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */,
 				A4F6A02E245CDB370073783C /* ApptTutorTableViewCell.swift in Sources */,
 				A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */,
 				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,
+				A4EE3C102498DFDF00A06515 /* StudentLocationViewController.swift in Sources */,
 				A4B80AA72484667A00A2B8CA /* StudentClassesCollectionViewCell.swift in Sources */,
 				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
 				A4751B562478817700EDAF5B /* NewTutorHomeViewController.swift in Sources */,

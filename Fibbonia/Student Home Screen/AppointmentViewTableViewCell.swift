@@ -18,7 +18,7 @@ class AppointmentViewTableViewCell: UITableViewCell {
     func setVals(input: [String: Any]) {
         nameLabel.text! = input["tutorFN"] as! String
         timeLabel.text! = input["time"] as! String
-        print("cell looks great")
+        //print("cell looks great")
     }
 
 }

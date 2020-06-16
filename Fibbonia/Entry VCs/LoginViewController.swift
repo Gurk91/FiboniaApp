@@ -72,12 +72,17 @@ class LoginViewController: UIViewController {
                                 //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail, uid: "", timezone: "UTC")
                                 //let entryVal = dummy.toDict()
                                 docRef.setData(["appointments":[], "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String], setPrefs: false, preferences: [:])
                                 
-                            } else {
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String])
-                                print("set student")
-                                print(currStudent)
+                            }
+                            if documentData!["setPrefs"] == nil {
+                                docRef.setData(["setPrefs": false, "preferences": [:]], merge:true)
+                            }
+                        
+                            else {
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any])
+                                //print("set student")
+                                //print(currStudent)
                             }
                             
                             /*
@@ -88,6 +93,7 @@ class LoginViewController: UIViewController {
                             */
                             
                             print("entering bar sequence")
+                            print(currStudent.setPrefs)
                             
                             let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
                             self.view.window?.rootViewController = tabBarController

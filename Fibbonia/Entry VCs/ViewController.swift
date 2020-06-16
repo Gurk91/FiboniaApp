@@ -105,7 +105,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
                 do {
                     Constants.pulledOutput = try result.get()
                     print("pull complete")
-                    print("length", Constants.pulledOutput.count)
+                    //print("length", Constants.pulledOutput.count)
                 } catch {
                     print("output not saved")
                 }

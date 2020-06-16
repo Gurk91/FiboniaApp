@@ -49,7 +49,7 @@ class MainMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "profile")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (0, 1):
@@ -69,7 +69,7 @@ class MainMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "payment")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (1, 0):
@@ -77,7 +77,7 @@ class MainMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "history")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (1, 1):
@@ -85,7 +85,7 @@ class MainMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "statistics")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (2, 0):
@@ -93,7 +93,7 @@ class MainMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "favourite")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (2, 1):
@@ -101,25 +101,25 @@ class MainMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "preferences")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (3, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(txt: text)
             return cell
         case (3, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(txt: text)
             return cell
         case (3, 2):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            //print(text)
             cell.setUp(txt: text)
             cell.label.textColor = UIColor.red
             return cell
@@ -138,13 +138,13 @@ class MainMenuTableVC: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = self.sectionData[indexPath.section]![indexPath.row]
         //print("index stuff", indexPath.section, indexPath.row)
-        print("stuff", self.sectionData[indexPath.section]![indexPath.row])
+        //print("stuff", self.sectionData[indexPath.section]![indexPath.row])
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print(section)
+        //print(section)
         return ["PERSONAL INFORMATION", "APPOINTMENTS", "TUTORS", " ", " "][section]
     }
     

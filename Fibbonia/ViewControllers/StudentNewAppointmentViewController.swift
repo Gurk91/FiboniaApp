@@ -79,11 +79,22 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     @IBAction func findPressed(_ sender: Any) {
 //        desperate = Constants.classTutors[selectedClass]!
         pickedClass = selectedClass
-        print("final", pickedClass)
+        print("final", pickedClass=="")
         
-            print("picked", pickedClass)
-            var output: [Constants.tutorField] = []
-            let db = Firestore.firestore()
+        if pickedClass == "" {
+            print("no picked class")
+            createAlert(title: "Class Not Selected", message: "Please select a class first", buttonMsg: "Okay")
+            return
+        }
+        
+        if currStudent.setPrefs == false {
+            createAlert(title: "Preferences Not Set", message: "Go to Settings -> Preferences and set your tutor preferences to allow us to find you the best tutors for you!", buttonMsg: "Okay")
+            return
+        }
+        
+        print("picked", pickedClass)
+        var output: [Constants.tutorField] = []
+        let db = Firestore.firestore()
                 db.collection(pickedClass).getDocuments { (snapshot, error) in
         
                     if error == nil && snapshot != nil {

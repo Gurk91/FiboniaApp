@@ -12,8 +12,12 @@ import Firebase
 class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    //@IBOutlet weak var becomeTutorButton: UIButton!
+    //@IBOutlet weak var signOutButton: UIButton!
+    
     @IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
+    
     //@IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +32,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         tableView.delegate = self
         data[1] = currStudent.appointments
+        //print("std appts", currStudent.appointments)
         tableView.reloadData()
         
         // Do any additional setup after loading the view.
