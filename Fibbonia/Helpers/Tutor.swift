@@ -29,7 +29,7 @@ class Tutor {
     //var classRating: [String: Double]
     var subjects: [String]
     
-    init(name: String ,calEmail: String, GPA: Double, gradYear: Int, major: String) {
+    init(name: String ,calEmail: String, GPA: Double, gradYear: Int, major: String, subjects: [String]) {
         self.name = name
         self.calEmail = calEmail
         self.GPA = GPA
@@ -44,7 +44,7 @@ class Tutor {
         self.phone = ""
         self.online = ""
         self.appointments = [["ABC":"DEF"]]
-        self.subjects = [""]
+        self.subjects = subjects
         
         //self.classRating = [:]
     }

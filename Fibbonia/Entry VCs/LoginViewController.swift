@@ -72,11 +72,12 @@ class LoginViewController: UIViewController {
                                 //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail, uid: "", timezone: "UTC")
                                 //let entryVal = dummy.toDict()
                                 docRef.setData(["appointments":[], "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String], setPrefs: false, preferences: [:])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]])
                                 
                             }
                             if documentData!["setPrefs"] == nil {
-                                docRef.setData(["setPrefs": false, "preferences": [:]], merge:true)
+                                docRef.setData(["setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]]], merge:true)
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]])
                             }
                         
                             else {

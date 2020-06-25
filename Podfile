@@ -15,5 +15,6 @@ pod 'FirebaseUI/Facebook'
 pod 'FirebaseUI/Email'
 pod 'Firebase/Firestore'
 pod 'SwiftyJSON'
+pod 'Stripe'
 
 end

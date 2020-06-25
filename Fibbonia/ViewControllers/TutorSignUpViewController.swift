@@ -110,8 +110,7 @@ class TutorSignUpViewController: UIViewController {
                 } else {
                     //user is new. Proceed with sign up
                     //user created. now store first and last name
-                    //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", )
-                    //let entryVal = dummy.toDict()
+                    
                     db.collection("tutors").document(calEmail).setData(["calEmail": calEmail,
                                                                         "phone": phoneNumer,
                                                                         "major": major,
@@ -119,7 +118,7 @@ class TutorSignUpViewController: UIViewController {
                                                                         "GradYear": gradYear,
                                                                         "appointments":[], "classes": [],
                                                                         "name": currName,
-                                                                        "online": online]) { (error) in
+                                                                        "online": online, "subjects": []]) { (error) in
                                                                             if error != nil {
                                                                             self.errorTextDisplay.text = "Tutor Not Created"
                                                                                 self.errorTextDisplay.alpha = 1
@@ -131,7 +130,7 @@ class TutorSignUpViewController: UIViewController {
                     //Transitioning to Tutor Home
                     currStudent.calEmail = calEmail
                     currStudent.tutor = true
-                    currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major)
+                    currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major, subjects: [""])
                     currTutor.setAddress(addr: currStudent.address, cty: currStudent.city, ste: currStudent.state)
                     currTutor.setOnline(ID: online)
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)

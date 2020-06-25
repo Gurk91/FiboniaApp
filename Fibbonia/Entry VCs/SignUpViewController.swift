@@ -90,13 +90,13 @@ class SignUpViewController: UIViewController {
                             //user created. now store first and last name
                             //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: "dude", selfEmail: email)
                             //let entryVal = dummy.toDict()
-                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":result!.user.uid, "email":email, "appointments":[], "tutor": false, "address": "", "city": "", "calEmail": "", "state": "", "zip": "", "subjects": [], "setPrefs": false, "preferences": [:]]) { (error) in
+                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":result!.user.uid, "email":email, "appointments":[], "tutor": false, "address": "", "city": "", "calEmail": "", "state": "", "zip": "", "subjects": [], "setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]]]) { (error) in
                                 if error != nil {
                                     self.errorTextDisplay.text = "First and Last Name not saved"
                                     self.errorTextDisplay.alpha = 1
                                 }
                             }
-                            currStudent = Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], setPrefs: false, preferences: [:])
+                            currStudent = Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]])
                             //set current user name
                             currName = firstname
                             currEmail = email

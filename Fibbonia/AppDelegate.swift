@@ -9,14 +9,15 @@
 import UIKit
 import Firebase
 import CoreData
+import Stripe
 
 var currUser: User = Auth.auth().currentUser!
 var currName: String = "nope"
 var currEmail: String = ""
 var currTutorEmail: String = ""
 var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: [["":""]], subjects: [""], setPrefs: false, preferences: [:])
-var currTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
-var defaultTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "")
+var currTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "", subjects: [""])
+var defaultTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "", subjects: [""])
 var pickedClass: String = ""
 var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
@@ -32,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("app del entered")
+        
+        Stripe.setDefaultPublishableKey("pk_test_2bnlIAlJeAMamRB9cMcK1zzc00dWwA2gax")
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         

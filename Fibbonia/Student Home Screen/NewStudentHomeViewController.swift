@@ -23,7 +23,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     
     var tut: Bool = false
-    var data = [0: ["COMPSCI 61A", "ECON 100B", "CHEM 3A", "EL ENG 16A"], 1: currStudent.appointments, 2: []] as [Int: Any]
+    var data = [0: currStudent.subjects, 1: currStudent.appointments, 2: []] as [Int: Any]
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -32,11 +32,9 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         tableView.delegate = self
         data[1] = currStudent.appointments
-        //print("std appts", currStudent.appointments)
+        
         tableView.reloadData()
         
-        // Do any additional setup after loading the view.
-        //nameLabel.text = "Welcome – " + currName + "!"
         
         if Utils.Connection() == true {
             print("good connection")
@@ -51,6 +49,16 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             Utils.organizeSubjects()
             Utils.organizeClasses()
             alreadyEntered = true
+        }
+        
+        if currStudent.preferences["tutorPricing"] as! [Double] == [0, 0] || currStudent.preferences["location"] as! [Bool] == [false, false, false, false]{
+            let db = Firestore.firestore()
+            let docRef = db.collection("users").document(currEmail)
+            docRef.setData(["setPrefs": false], merge: true)
+        } else {
+            let db = Firestore.firestore()
+            let docRef = db.collection("users").document(currEmail)
+            docRef.setData(["setPrefs": true], merge: true)
         }
     }
     
@@ -144,8 +152,9 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                                     
                                     let gpa = documentData!["GPA"] as! String
                                     let gradyear = documentData!["GradYear"] as! String
+                                    let subs = documentData!["subjects"]
                                     
-                                    let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String)
+                                    let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String, subjects: subs as! [String])
                                     let ph = documentData!["phone"] as! String
                                     if documentData!["classes"] == nil {
                                         db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
