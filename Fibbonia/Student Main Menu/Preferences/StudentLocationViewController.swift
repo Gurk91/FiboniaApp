@@ -16,15 +16,24 @@ class StudentLocationViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var online: UISwitch!
+    @IBOutlet weak var travelling: UISwitch!
+    @IBOutlet weak var hostHome: UISwitch!
+    @IBOutlet weak var groupTutoring: UISwitch!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    
+    @IBAction func savePressed(_ sender: Any) {
+        if online.isOn {
+            online.setOn(true, animated: false)
+        }
+        if travelling.isOn{
+            travelling.setOn(true, animated: false)
+        }
     }
-    */
+    
+    
+    
+    
 
 }

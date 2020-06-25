@@ -83,6 +83,7 @@ class StudentPriceViewController: UIViewController {
     
     func setUp() {
         Utils.styleFilledButton(saveButton)
+        
         minDisplay.text = String(prices[0])
         maxDisplay.text = String(prices[1])
     }
