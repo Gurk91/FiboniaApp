@@ -10,22 +10,24 @@ import UIKit
 import Firebase
 import CoreData
 import Stripe
+import GoogleSignIn
 
 var currUser: User = Auth.auth().currentUser!
 var currName: String = "nope"
 var currEmail: String = ""
 var currTutorEmail: String = ""
-var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: [["":""]], subjects: [""], setPrefs: false, preferences: [:])
+var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: [["":""]], subjects: [""], setPrefs: false, preferences: [:], stripeID: "", google: false, facebook: false)
 var currTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "", subjects: [""])
 var defaultTutor: Tutor = Tutor(name: "", calEmail: "", GPA: 0.0, gradYear: 0, major: "", subjects: [""])
 var pickedClass: String = ""
 var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
-
+var currStripe: String = ""
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     
     var window: UIWindow?
     var hasAlreadyLaunched : Bool!
@@ -38,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        //GIDSignIn.sharedInstance().delegate = self
+        
         hasAlreadyLaunched = UserDefaults.standard.bool(forKey: "hasAlreadyLaunched")
         
         //check first launched
@@ -48,6 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+      -> Bool {
+      return GIDSignIn.sharedInstance().handle(url)
     }
     
     func sethasAlreadyLaunched(){

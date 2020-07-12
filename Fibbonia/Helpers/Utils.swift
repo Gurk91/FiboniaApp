@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import SystemConfiguration
 import SwiftyJSON
+import Alamofire
+import Stripe
 
 class Utils {
     
@@ -185,6 +187,23 @@ class Utils {
         //print("class List: ", Constants.pulledClasses)
         print("class list organized")
     }
+    
+    static func createCustomer() {
+        let baseURL = URL(string: "https://fibonia-stripe-server.herokuapp.com/")! //for use in createPaymentIntent
+        let url = baseURL.appendingPathComponent("create_customer")
+        AF.request(url).responseJSON { (data) in
+            switch data.result {
+                case .success(let value):
+                    if let JSON = value as? [String: Any] {
+                        currStripe = JSON["id"] as! String
+                        print("custID", currStripe)
+                }
+            case .failure(let error):
+                print("error: ", error)
+            }
+        }
+    }
+
     
     
     

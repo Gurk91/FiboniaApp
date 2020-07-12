@@ -23,8 +23,11 @@ class Student {
     var subjects: [String]
     var setPrefs: Bool
     var preferences: [String: Any]
+    var stripeID: String
+    var google: Bool
+    var facebook: Bool
     
-    init(fn: String, ln: String, eml: String, appt: [[String: Any]], subjects: [String], setPrefs: Bool, preferences: [String: Any]) {
+    init(fn: String, ln: String, eml: String, appt: [[String: Any]], subjects: [String], setPrefs: Bool, preferences: [String: Any], stripeID: String, google: Bool, facebook: Bool) {
         self.firstName = fn
         self.lastName = ln
         self.email = eml
@@ -38,6 +41,9 @@ class Student {
         self.subjects = subjects
         self.setPrefs = setPrefs
         self.preferences = preferences
+        self.stripeID = stripeID
+        self.google = google
+        self.facebook = facebook
     }
     
     func addAppointment(appy: [String:Any]) {
@@ -54,7 +60,7 @@ class Student {
     func getData() -> [String:Any] {
         return ["email":self.email, "firstName":self.firstName, "lastName":self.lastName,
                 "appointments": self.appointments, "tutor": self.tutor, "calEmail": self.calEmail,
-                "address": self.address, "city": self.city, "state": self.state, "zip": self.zip, "subjects": self.subjects, "setPrefs": self.setPrefs, "preferences": self.preferences]
+                "address": self.address, "city": self.city, "state": self.state, "zip": self.zip, "subjects": self.subjects, "setPrefs": self.setPrefs, "preferences": self.preferences, "stripe_id": self.stripeID]
     }
     
     func setTutor(eml: String) {

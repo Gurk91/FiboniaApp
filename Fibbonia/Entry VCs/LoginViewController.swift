@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
         setUpElements()
         //Utils.organizeSubjects()
         //Utils.organizeClasses()
+        Utils.createCustomer()
     }
 
     
@@ -72,16 +73,22 @@ class LoginViewController: UIViewController {
                                 //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail, uid: "", timezone: "UTC")
                                 //let entryVal = dummy.toDict()
                                 docRef.setData(["appointments":[], "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: false, facebook: false)
                                 
                             }
                             if documentData!["setPrefs"] == nil {
                                 docRef.setData(["setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]]], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: false, facebook: false)
+                            }
+                                
+                            if documentData!["stripe_id"] == nil {
+                                docRef.setData(["stripe_id": currStripe], merge: true)
+                                
                             }
                         
                             else {
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any])
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], stripeID: documentData!["stripe_id"] as! String, google: false, facebook: false)
+                                currStripe = currStudent.stripeID
                                 //print("set student")
                                 //print(currStudent)
                             }

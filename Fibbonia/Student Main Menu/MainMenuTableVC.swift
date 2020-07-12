@@ -180,7 +180,7 @@ class MainMenuTableVC: UITableViewController {
             }
             
         case (0, 2):
-            performSegue(withIdentifier: "maintenance", sender: self)
+            performSegue(withIdentifier: "payment", sender: self)
 
         case (1, 0):
             performSegue(withIdentifier: "maintenance", sender: self)

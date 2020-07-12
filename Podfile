@@ -16,5 +16,7 @@ pod 'FirebaseUI/Email'
 pod 'Firebase/Firestore'
 pod 'SwiftyJSON'
 pod 'Stripe'
+pod 'Alamofire'
+pod 'GoogleSignIn'
 
 end

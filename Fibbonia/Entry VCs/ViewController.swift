@@ -9,6 +9,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import CoreData
+import GoogleSignIn
 
 
 class ViewController: UIViewController, CAAnimationDelegate {
@@ -84,9 +85,15 @@ class ViewController: UIViewController, CAAnimationDelegate {
     }
     
     //ANIMATION CODE OVER
+    
+    //MARK: Regular Ability begins
 
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    
+    
+    //@IBOutlet weak var googleButton: GIDSignInButton!
+    
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -96,6 +103,8 @@ class ViewController: UIViewController, CAAnimationDelegate {
         // Do any additional setup after loading the view.
         //authenticateUser()
         setUpElements()
+        
+        
         // Begin pull from BerkeleyTime
         
         Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
@@ -183,6 +192,10 @@ class ViewController: UIViewController, CAAnimationDelegate {
     @IBAction func loginPressed(_ sender: Any) {
         (sender as! UIButton).pulsate()
     }
+    
+    
+
+    
     
     
     

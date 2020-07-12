@@ -51,6 +51,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             alreadyEntered = true
         }
         
+        /*
         if currStudent.preferences["tutorPricing"] as! [Double] == [0, 0] || currStudent.preferences["location"] as! [Bool] == [false, false, false, false]{
             let db = Firestore.firestore()
             let docRef = db.collection("users").document(currEmail)
@@ -60,6 +61,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             let docRef = db.collection("users").document(currEmail)
             docRef.setData(["setPrefs": true], merge: true)
         }
+ */
     }
     
     override func viewDidAppear(_ animated: Bool) {
