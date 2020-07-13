@@ -3644,11 +3644,17 @@
                                         <rect key="frame" x="0.0" y="167" width="324" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <state key="normal" title="Email"/>
+                                        <connections>
+                                            <segue destination="7dW-7i-Ju4" kind="show" id="A9y-Qx-1WV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTZ-Sf-D3b">
                                         <rect key="frame" x="0.0" y="220" width="324" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <state key="normal" title="Back"/>
+                                        <connections>
+                                            <segue destination="KfB-9j-oy5" kind="show" id="xEx-8d-XfA"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDS-iH-Sk8">
                                         <rect key="frame" x="0.0" y="273" width="324" height="24"/>
@@ -3700,7 +3706,7 @@
         <segue reference="4cY-9d-9N3"/>
         <segue reference="I8H-c7-8PK"/>
         <segue reference="Vxq-ow-1Rj"/>
-        <segue reference="q6z-Td-8iV"/>
+        <segue reference="xEx-8d-XfA"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
