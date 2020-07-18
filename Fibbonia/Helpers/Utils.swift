@@ -204,7 +204,18 @@ class Utils {
         }
     }
 
-    
-    
+    func checkTime(time: String, timezone: String) -> Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        formatter.timeZone = NSTimeZone(abbreviation: timezone) as TimeZone?
+        let inputTime = formatter.date(from: time)
+        
+        let newTime = formatter.string(from: inputTime!)
+        let GMTTime = Date()
+        let currTime = formatter.string(from: GMTTime)
+        
+        
+        return false
+    }
     
 }

@@ -51,7 +51,7 @@ class StudentTutorDetailViewController: UIViewController {
     @IBAction func appointmentPressed(_ sender: Any) {
         let time = datePicker.date
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
         let timezone = dateFormatter.timeZone.abbreviation()!
         let inputDate = dateFormatter.string(from: time)
         let uid = UUID().uuidString

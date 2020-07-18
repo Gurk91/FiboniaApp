@@ -77,8 +77,8 @@ class LoginViewController: UIViewController {
                                 
                             }
                             if documentData!["setPrefs"] == nil {
-                                docRef.setData(["setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]]], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "eductionLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: false, facebook: false)
+                                docRef.setData(["setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]]], merge:true)
+                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: false, facebook: false)
                             }
                                 
                             if documentData!["stripe_id"] == nil {
@@ -89,8 +89,14 @@ class LoginViewController: UIViewController {
                             else {
                                 currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], stripeID: documentData!["stripe_id"] as! String, google: false, facebook: false)
                                 currStripe = currStudent.stripeID
-                                //print("set student")
-                                //print(currStudent)
+                                if currStudent.setPrefs == false {
+                                    if currStudent.preferences["educationLvl"] as! String != "" && currStudent.preferences["languages"] as! String != "" &&
+                                        currStudent.preferences["tutorPricing"] as! [Int] != [0,0]{
+                                            currStudent.setPrefs = true
+                                            docRef.setData(["setPref": true], merge: true)
+                                    }
+                                }
+                                
                             }
                             
                             /*

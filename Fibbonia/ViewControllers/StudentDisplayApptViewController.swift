@@ -107,7 +107,7 @@ class StudentDisplayApptViewController: UIViewController {
     @IBAction func completedAction(_ sender: Any) {
         let time = timeLabel.text!
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
         let date = dateFormatter.date(from: time)
         
         

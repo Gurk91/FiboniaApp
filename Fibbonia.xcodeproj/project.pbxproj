@@ -16,6 +16,7 @@
 		A4202E0624BA51D5005116FA /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4202E0524BA51D5005116FA /* OptionsViewController.swift */; };
 		A4202E0824BB3A97005116FA /* LoginOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4202E0724BB3A97005116FA /* LoginOptionsViewController.swift */; };
 		A424454B243D5EBB005E98ED /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A424454A243D5EBB005E98ED /* Appointment.swift */; };
+		A439E31624C317F000BE9B08 /* TutorTimingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439E31524C317F000BE9B08 /* TutorTimingsViewController.swift */; };
 		A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BA71B241305B8006DFC10 /* ViewController.swift */; };
 		A44ABE782454CE8200475CDD /* TutorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ABE772454CE8200475CDD /* TutorProfileViewController.swift */; };
 		A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ABE792455111600475CDD /* TutorAddClassViewController.swift */; };
@@ -77,6 +78,7 @@
 		A4202E0524BA51D5005116FA /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		A4202E0724BB3A97005116FA /* LoginOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOptionsViewController.swift; sourceTree = "<group>"; };
 		A424454A243D5EBB005E98ED /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		A439E31524C317F000BE9B08 /* TutorTimingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorTimingsViewController.swift; sourceTree = "<group>"; };
 		A43BA71B241305B8006DFC10 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A44ABE772454CE8200475CDD /* TutorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorProfileViewController.swift; sourceTree = "<group>"; };
 		A44ABE792455111600475CDD /* TutorAddClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorAddClassViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		A412AA6D2402295400216FDB /* Fibbonia */ = {
 			isa = PBXGroup;
 			children = (
+				A4D53B3D24BC85380005C6C3 /* Tutor Appoinments */,
 				A4C2DB902421A6C8004B8A8A /* Helpers */,
 				A4B8EA72249FD102006296AD /* Tutor Home Screen */,
 				A4BC4B1F248871AC00BE08B1 /* Entry VCs */,
@@ -198,8 +201,6 @@
 				A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */,
 				A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */,
 				A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */,
-				A4F6A02F245CDC180073783C /* TutStudentDisplayViewController.swift */,
-				A4F6A031245CDEF00073783C /* TutApptTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -219,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */,
+				A439E31524C317F000BE9B08 /* TutorTimingsViewController.swift */,
 			);
 			path = "Tutor Main Menu";
 			sourceTree = "<group>";
@@ -268,6 +270,15 @@
 				A4C2EA8724B7A5F3006F4250 /* MyAPIClient.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A4D53B3D24BC85380005C6C3 /* Tutor Appoinments */ = {
+			isa = PBXGroup;
+			children = (
+				A4F6A02F245CDC180073783C /* TutStudentDisplayViewController.swift */,
+				A4F6A031245CDEF00073783C /* TutApptTableViewController.swift */,
+			);
+			path = "Tutor Appoinments";
 			sourceTree = "<group>";
 		};
 		A4EE3C0C2497FF0A00A06515 /* Preferences */ = {
@@ -434,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A412AA6F2402295400216FDB /* AppDelegate.swift in Sources */,
+				A439E31624C317F000BE9B08 /* TutorTimingsViewController.swift in Sources */,
 				A453D7CC245B4B3E00566824 /* TutorSelectionTableViewCell.swift in Sources */,
 				A4EE3C142498E1FA00A06515 /* StudentPriceViewController.swift in Sources */,
 				A4B2D11E2480055C00467DA3 /* MainMenuTableVC.swift in Sources */,

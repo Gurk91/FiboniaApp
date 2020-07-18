@@ -21,6 +21,8 @@ class TutStudentDisplayViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var completeButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class TutStudentDisplayViewController: UIViewController {
     
     func setUp() {
         Utils.styleHollowDeleteButton(cancelButton)
+        Utils.styleFilledButton(completeButton)
         
     }
 
@@ -101,5 +104,10 @@ class TutStudentDisplayViewController: UIViewController {
     
     
     }
+    
+    @IBAction func completePressed(_ sender: Any) {
+        
+    }
+    
 
 }

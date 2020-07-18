@@ -15,7 +15,6 @@ class TutorClassDisplayViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUp()
-        print(type(of: takenClass!))
     }
     
     var takenClass: String?

@@ -20,7 +20,7 @@ class TutorMenuTableVC: UITableViewController {
         tableView.dataSource = self
         
         self.sectionData = [
-        0: ["Edit Profile", "Student View", "Edit Payment Info"],
+        0: ["Edit Profile", "Student View", "Edit Payment Info", "Edit Tutor Timings"],
         1: ["History", "Stats"],
         2: ["Update/Upload Transcript", "My Classes"],
         3: ["About Fibonia", "Help and Support", "Sign Out"],
@@ -49,7 +49,7 @@ class TutorMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "profile")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (0, 1):
@@ -64,7 +64,15 @@ class TutorMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "payment")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
+            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
+            return cell
+        case (0, 3):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "time")
+            let rightImg = UIImage(named: "forwardArrow")
+            let text = sectionData[indexPath.section]![indexPath.row]
+            
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (1, 0):
@@ -72,7 +80,7 @@ class TutorMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "history")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (1, 1):
@@ -80,7 +88,7 @@ class TutorMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "statistics")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (2, 0):
@@ -88,7 +96,7 @@ class TutorMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "transcript")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (2, 1):
@@ -96,25 +104,25 @@ class TutorMenuTableVC: UITableViewController {
             let leftImg = UIImage(named: "classes")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (3, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(txt: text)
             return cell
         case (3, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(txt: text)
             return cell
         case (3, 2):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
-            print(text)
+            
             cell.setUp(txt: text)
             cell.label.textColor = UIColor.red
             return cell
@@ -133,7 +141,7 @@ class TutorMenuTableVC: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = self.sectionData[indexPath.section]![indexPath.row]
         //print("index stuff", indexPath.section, indexPath.row)
-        print("stuff", self.sectionData[indexPath.section]![indexPath.row])
+        //print("stuff", self.sectionData[indexPath.section]![indexPath.row])
         
         return cell
     }
@@ -170,6 +178,9 @@ class TutorMenuTableVC: UITableViewController {
             
         case (0, 2):
             performSegue(withIdentifier: "maintenance", sender: self)
+            
+        case (0, 3):
+            performSegue(withIdentifier: "times", sender: self)
             
         case (1, 0):
             performSegue(withIdentifier: "maintenance", sender: self)

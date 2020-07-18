@@ -17,7 +17,7 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     
     
     @IBOutlet weak var pricePHfield: UITextField!
-    @IBOutlet weak var availabilityField: UITextField!
+    //@IBOutlet weak var availabilityField: UITextField!
     @IBOutlet weak var newClassButton: UIButton!
     
     private var subjects: [String] = [String]()
@@ -39,7 +39,7 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
     
     func setUp() {
         Utils.styleFilledButton(newClassButton)
-        Utils.styleTextField(availabilityField)
+        //Utils.styleTextField(availabilityField)
         Utils.styleTextField(pricePHfield)
     }
     
@@ -81,7 +81,7 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
         let db = Firestore.firestore()
         let tutorInfo = currTutor.getData()
         let price = pricePHfield.text!
-        let times = availabilityField.text!
+        let times = "a"
         var data: [String] = []
         print(selectedClass)
         do {
