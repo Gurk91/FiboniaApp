@@ -218,4 +218,51 @@ class Utils {
         return false
     }
     
+    static func getUTCTimeDifference() -> Int {
+        let diffSeconds = TimeZone.current.secondsFromGMT()
+        let rawMins = diffSeconds / 60
+        let hours = (rawMins / 60) * 100
+        let mins = rawMins % 60
+        return hours + mins
+    }
+    
+    static func convertTime(timeDifference: Int, time: Int) -> Int {
+        var hrs = (time / 100) - (timeDifference / 100)
+        var mins = 0
+        if timeDifference < 0 {
+            mins = (time % 100) + ((-1 * timeDifference) % 100)
+        } else {
+            mins = (time % 100) - (timeDifference % 100)
+        }
+        hrs += mins / 60
+        hrs = modulus(number: hrs, divisor: 24)
+        mins = modulus(number: mins, divisor: 60)
+        let finalTime = (hrs * 100) + mins
+        return finalTime
+    }
+    
+    static func convertToLocalTime(timeDifference: Int, time: Int) -> Int {
+        var hrs = (time / 100) + (timeDifference / 100)
+        var mins = 0
+        if timeDifference < 0 {
+            mins = (time % 100) - ((-1 * timeDifference) % 100)
+        } else {
+            mins = (time % 100) + (timeDifference % 100)
+        }
+        hrs += mins / 60
+        hrs = modulus(number: hrs, divisor: 24)
+        mins = modulus(number: mins, divisor: 60)
+        let finalTime = (hrs * 100) + mins
+        return finalTime
+    }
+    
+    static func modulus(number: Int, divisor: Int) -> Int {
+        if number >= 0 {
+            return number % divisor
+        } else {
+            let rem = number % divisor
+            return rem + divisor
+        }
+    }
+    
 }

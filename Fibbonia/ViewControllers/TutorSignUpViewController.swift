@@ -130,8 +130,9 @@ class TutorSignUpViewController: UIViewController {
                     //Transitioning to Tutor Home
                     currStudent.calEmail = calEmail
                     currStudent.tutor = true
-                    currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major, subjects: [""])
-                    currTutor.setAddress(addr: currStudent.address, cty: currStudent.city, ste: currStudent.state)
+                    //currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major, subjects: [""])
+                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: Int(gradYear)!, subjects: [""], phone: "", zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()])
+                    
                     currTutor.setOnline(ID: online)
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                     self.view.window?.rootViewController = tutorTBC

@@ -83,8 +83,8 @@ class LoginViewController: UIViewController {
                                 
                             if documentData!["stripe_id"] == nil {
                                 docRef.setData(["stripe_id": currStripe], merge: true)
-                                
                             }
+                            
                         
                             else {
                                 currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], stripeID: documentData!["stripe_id"] as! String, google: false, facebook: false)

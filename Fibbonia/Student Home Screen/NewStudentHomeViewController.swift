@@ -156,7 +156,8 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                                     let gradyear = documentData!["GradYear"] as! String
                                     let subs = documentData!["subjects"]
                                     
-                                    let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String, subjects: subs as! [String])
+                                    //let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String, subjects: subs as! [String])
+                                    let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: Int(gradyear)!, subjects: subs as! [String], phone: documentData!["phone"] as! String, zoom: documentData!["zoom"] as! String, setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], img: "", firstlogin: documentData!["firstlogin"] as! Bool, prefTime: documentData!["prefTime"] as! [String: [Int]])
                                     let ph = documentData!["phone"] as! String
                                     if documentData!["classes"] == nil {
                                         db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
