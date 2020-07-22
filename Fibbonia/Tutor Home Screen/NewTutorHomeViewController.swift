@@ -26,7 +26,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         tableView.dataSource = self
         tableView.delegate = self
-        data[1] = currStudent.appointments
+        data[1] = currTutor.appointments
         tableView.reloadData()
         
         setUp()
@@ -118,10 +118,10 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! TutorCollectionTableViewCell
             return cell
         case (1):
-            let step1 = data[indexPath.section] as! [[String: String]]
-            let current = step1[indexPath.row]
+            let appts = data[indexPath.section] as! [[String: String]]
+            let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-            if self.data.count > 0 {
+            if appts.count > 0 {
                 cell.setVals(input: current)
             }
             return cell

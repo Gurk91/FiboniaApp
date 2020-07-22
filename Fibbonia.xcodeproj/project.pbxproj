@@ -185,7 +185,6 @@
 		A487AEB8241F686700381E82 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A4751B552478817700EDAF5B /* NewTutorHomeViewController.swift */,
 				A4F6A02D245CDB370073783C /* ApptTutorTableViewCell.swift */,
 				A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */,
 				A46A5998242D8DBB007C6AC0 /* TabBarController.swift */,
@@ -241,6 +240,7 @@
 		A4B8EA72249FD102006296AD /* Tutor Home Screen */ = {
 			isa = PBXGroup;
 			children = (
+				A4751B552478817700EDAF5B /* NewTutorHomeViewController.swift */,
 				A4B8EA75249FE570006296AD /* TutorCollectionTableViewCell.swift */,
 			);
 			path = "Tutor Home Screen";

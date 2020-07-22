@@ -27,8 +27,8 @@ class StudentTutorDetailViewController: UIViewController {
     
     @IBOutlet weak var tutorName: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var gpalabel: UILabel!
-    @IBOutlet weak var majorLabel: UILabel!
+    //@IBOutlet weak var gpalabel: UILabel!
+    //@IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var apptNotes: UITextField!
@@ -40,8 +40,8 @@ class StudentTutorDetailViewController: UIViewController {
     func setTerms() {
         tutorName.text! = currentValue.name
         priceLabel.text! = currentValue.price
-        gpalabel.text! = currentValue.GPA
-        majorLabel.text! = currentValue.major
+        //gpalabel.text! = currentValue.GPA
+        //majorLabel.text! = currentValue.major
         timeLabel.text! = currentValue.timings
     }
     

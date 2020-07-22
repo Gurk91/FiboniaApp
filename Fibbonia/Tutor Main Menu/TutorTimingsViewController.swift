@@ -25,6 +25,8 @@ class TutorTimingsViewController: UIViewController {
     
     @IBOutlet var timeButtons: [UIButton]!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
+    
     
     func setUp() {
         
@@ -44,15 +46,40 @@ class TutorTimingsViewController: UIViewController {
         }
         
         Utils.styleFilledButton(saveButton)
+        Utils.styleHollowDeleteButton(clearButton)
+    }
+    
+    @IBAction func clearTimes(_ sender: Any) {
+        self.data = ["0": [Int](), "1": [Int](), "2": [Int](), "3": [Int](), "4": [Int](), "5": [Int](),"6": [Int]()]
+        let db = Firestore.firestore()
+        let docRef = db.collection("tutors").document(currTutorEmail)
+        docRef.setData(["prefTime": self.data], merge: true)
+        currTutor.prefTime = self.data
+        
+        for button in self.timeButtons{
+            if button.tag == -1 {
+                button.backgroundColor = UIColor.red
+            } else {
+                button.backgroundColor = UIColor.systemTeal
+            }
+        }
     }
     
     @IBAction func timingSelected(_ sender: UIButton) {
         
-        sender.backgroundColor = UIColor.lightGray
-        data[self.selectedDay]!.append(sender.tag)
+        if sender.tag == -1 {
+            data[self.selectedDay]! = [Int]()
+            selectButtons(times: [])
+            sender.backgroundColor = UIColor.lightGray
+        } else if sender.backgroundColor == UIColor.lightGray {
+            sender.backgroundColor = UIColor.systemTeal
+            data[self.selectedDay]! = removeFromArray(arr: data[self.selectedDay]!, obj: sender.tag)
+        } else {
+            sender.backgroundColor = UIColor.lightGray
+            data[self.selectedDay]!.append(sender.tag)
+        }
     }
     
-   
     @IBAction func dayPicker(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -90,7 +117,7 @@ class TutorTimingsViewController: UIViewController {
             if times.contains(button.tag) {
                 button.backgroundColor = UIColor.lightGray
             } else {
-                button.backgroundColor = UIColor.init(red: 84/255, green: 199/255, blue: 252/255, alpha: 1)
+                button.backgroundColor = UIColor.systemTeal
             }
             if button.tag == -1 && times.contains(-1) != true {
                 button.backgroundColor = UIColor.red
@@ -121,6 +148,17 @@ class TutorTimingsViewController: UIViewController {
         docRef.setData(["prefTime": finalTimes], merge: true)
         currTutor.prefTime = finalTimes
          
+    }
+    
+    func removeFromArray(arr: [Int], obj: Int) -> [Int] {
+        var array = arr
+        for i in 0..<arr.count {
+            if array[i] == obj {
+                array.remove(at: i)
+                return array
+            }
+        }
+        return array
     }
     
 }

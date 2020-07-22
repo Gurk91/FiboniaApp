@@ -29,7 +29,7 @@ class TutorSignUpViewController: UIViewController {
     @IBOutlet weak var calEmailField: UITextField!
     @IBOutlet weak var phoneNumberField: UITextField!
     @IBOutlet weak var GPAField: UITextField!
-    @IBOutlet weak var majorField: UITextField!
+    //@IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
     @IBOutlet weak var onlineID: UITextField!
     
@@ -46,7 +46,7 @@ class TutorSignUpViewController: UIViewController {
         Utils.styleTextField(calEmailField)
         Utils.styleTextField(phoneNumberField)
         Utils.styleTextField(GPAField)
-        Utils.styleTextField(majorField)
+        //Utils.styleTextField(majorField)
         Utils.styleTextField(gradYearField)
         Utils.styleTextField(onlineID)
         
@@ -66,7 +66,7 @@ class TutorSignUpViewController: UIViewController {
         
         if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || phoneNumberField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             GPAField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            majorField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            //majorField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
             return "Please fill in all fields"
@@ -91,7 +91,7 @@ class TutorSignUpViewController: UIViewController {
             //Reassigning fields
             let calEmail = self.calEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let phoneNumer = self.phoneNumberField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let major = self.majorField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            //let major = self.majorField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let gradYear = self.gradYearField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let gpa = self.GPAField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let online = self.onlineID.text!
@@ -111,14 +111,7 @@ class TutorSignUpViewController: UIViewController {
                     //user is new. Proceed with sign up
                     //user created. now store first and last name
                     
-                    db.collection("tutors").document(calEmail).setData(["calEmail": calEmail,
-                                                                        "phone": phoneNumer,
-                                                                        "major": major,
-                                                                        "GPA":gpa,
-                                                                        "GradYear": gradYear,
-                                                                        "appointments":[], "classes": [],
-                                                                        "name": currName,
-                                                                        "online": online, "subjects": []]) { (error) in
+                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "phone": "", "zoom": "", "setPrefs": false, "preferences": ["languages": [], "location": []], "img": "", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()]]) { (error) in
                                                                             if error != nil {
                                                                             self.errorTextDisplay.text = "Tutor Not Created"
                                                                                 self.errorTextDisplay.alpha = 1

@@ -152,8 +152,8 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                                     
                                     let documentData = document!.data()
                                     
-                                    let gpa = documentData!["GPA"] as! String
-                                    let gradyear = documentData!["GradYear"] as! String
+                                    //let gpa = documentData!["GPA"] as! String
+                                    let gradyear = documentData!["gradyear"] as! String
                                     let subs = documentData!["subjects"]
                                     
                                     //let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String, subjects: subs as! [String])
@@ -221,10 +221,10 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! CollectionStudentTableViewCell
             return cell
         case (1):
-            let step1 = data[indexPath.section] as! [[String: String]]
-            let current = step1[indexPath.row]
+            let appts = data[indexPath.section] as! [[String: String]]
+            let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-            if self.data.count > 0 {
+            if appts.count > 0 {
                 cell.setVals(input: current)
             }
             return cell
