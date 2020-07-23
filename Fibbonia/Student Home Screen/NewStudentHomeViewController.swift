@@ -165,9 +165,14 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                                         tutor.classes = documentData!["classes"] as! [String]
                                     }
                                     currTutor = tutor
-                                    currTutor.appointments = documentData!["appointments"] as! [[String : Any]]
-                                    //print(currTutor.classes)
-                                    currTutor.phone = ph
+                                    if let appts = documentData?["appointments"] {
+                                        currTutor.appointments = appts as! [[String : Any]]
+                                        print("got tutor appts")
+                                    } else {
+                                        currTutor.appointments = []
+                                        print("no tutor appts")
+                                    }
+                        
                                 
                                 }
                             }

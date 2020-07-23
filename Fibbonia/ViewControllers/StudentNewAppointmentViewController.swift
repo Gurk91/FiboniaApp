@@ -106,13 +106,11 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
                             let name = info["name"] as! String
                             let rating = info["rating"] as! Double
                             let price = documentData["price"] as! String
-                            let GPA = info["GPA"] as! Double
                             let online = info["onlineID"] as! String
-                            let major = info["Major"] as! String
                             let email = info["email"] as! String
                             let time = documentData["times"] as! String
                             let appointments = info["appointments"] as! [[String: Any]]
-                            let object = Constants.tutorField(name: name, rating: String(rating), price: price, GPA: String(GPA), onlineID: online, major: major, email: email, timings: time, appointments: appointments)
+                            let object = Constants.tutorField(name: name, rating: String(rating), price: price, onlineID: online, email: email, timings: time, appointments: appointments)
     
                             print(name, rating, price)
                             output.append(object)

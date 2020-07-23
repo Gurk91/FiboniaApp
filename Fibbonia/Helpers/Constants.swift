@@ -50,9 +50,9 @@ struct Constants {
         var name: String
         var rating: String
         var price: String
-        var GPA: String
+        //var GPA: String
         var onlineID: String
-        var major: String
+        //var major: String
         var email: String
         var timings: String
         var appointments: [[String: Any]]
