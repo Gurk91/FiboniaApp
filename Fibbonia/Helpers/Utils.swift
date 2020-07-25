@@ -264,5 +264,26 @@ class Utils {
             return rem + divisor
         }
     }
+    
+    static func next7Days() -> [String] {
+        var result = [String]()
+        
+        let date = Date()
+        print(date, "date")
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d"
+        let day = DateFormatter()
+        day.dateFormat = "EEEE"
+        
+        for i in 1...7 {
+            let newDate = Date(timeInterval: 60*60*24*Double(i), since: date)
+            let curr = formatter.string(from: newDate)
+            //let dayString = day.string(from: newDate)
+            result.append(curr)
+        }
+        
+        return result
+    }
         
 }

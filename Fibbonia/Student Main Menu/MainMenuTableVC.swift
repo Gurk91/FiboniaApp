@@ -22,7 +22,7 @@ class MainMenuTableVC: UITableViewController {
         self.sectionData = [
         0: ["Edit Profile", "Become Tutor", "Edit Payment Info"],
         1: ["History", "Stats"],
-        2: ["Favourite Tutors", "Preferences"],
+        2: ["Favourite Tutors"],
         3: ["About Fibonia", "Help and Support", "Sign Out"],
         4: []]
 
@@ -91,14 +91,6 @@ class MainMenuTableVC: UITableViewController {
         case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "favourite")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            //print(text)
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
-        case (2, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "preferences")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
             //print(text)
@@ -190,9 +182,6 @@ class MainMenuTableVC: UITableViewController {
             
         case (2, 0):
             performSegue(withIdentifier: "maintenance", sender: self)
-            
-        case (2, 1):
-            performSegue(withIdentifier: "preferences", sender: self)
             
         case (3, 0):
             performSegue(withIdentifier: "about", sender: self)

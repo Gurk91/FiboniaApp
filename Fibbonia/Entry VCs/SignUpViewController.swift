@@ -78,6 +78,7 @@ class SignUpViewController: UIViewController {
                     print("user exists")
                     self.errorTextDisplay.text = "User Exists"
                     self.errorTextDisplay.alpha = 1
+                    return
                 } else {
                     //user is new. Proceed with sign up
                     print("Proceed with signup")
@@ -89,8 +90,29 @@ class SignUpViewController: UIViewController {
                             self.errorTextDisplay.alpha = 1
                         } else {
                             //user created. now store first and last name
-                            //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: "dude", selfEmail: email)
-                            //let entryVal = dummy.toDict()
+                            //Time to verify email
+                            let user = Auth.auth().currentUser
+                            user?.reload(completion: { (error) in
+                                switch user!.isEmailVerified {
+                                case true:
+                                    print("users email is verified")
+                                case false:
+                                    
+                                    user!.sendEmailVerification { (error) in
+                                        
+                                        guard let error = error else {
+                                            self.createAlert(title: "Verify Email", message: "Check your email for a verification link and come back to sign-up.", buttonMsg: "Okay")
+                                            print("user email verification sent")
+                                            return
+                                        }
+                                        
+                                        self.handleError(error: error)
+                                    }
+                                    
+                                    print("verify it now")
+                                }
+                            })
+                            
                             let uid = result?.user.uid
                             db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid!, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "email", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png"]) { (error) in
                                 if error != nil {
@@ -130,6 +152,39 @@ class SignUpViewController: UIViewController {
         
         Utils.styleFilledButton(signUpButton)
         //Utils.styleHollowButton(backButton)
+    }
+    
+    func createAlert(title: String, message: String, buttonMsg: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func handleError(error: Error) {
+        
+        /// the user is not registered
+        /// user not found
+        
+        let errorAuthStatus = AuthErrorCode.init(rawValue: error._code)!
+        switch errorAuthStatus {
+        case .wrongPassword:
+            print("wrongPassword")
+        case .invalidEmail:
+            print("invalidEmail")
+        case .operationNotAllowed:
+            print("operationNotAllowed")
+        case .userDisabled:
+            print("userDisabled")
+        case .userNotFound:
+            print("userNotFound")
+        case .tooManyRequests:
+            print("tooManyRequests, oooops")
+        default: fatalError("error not supported here")
+        }
+        
     }
     
 

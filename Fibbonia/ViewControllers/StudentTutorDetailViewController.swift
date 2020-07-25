@@ -27,22 +27,18 @@ class StudentTutorDetailViewController: UIViewController {
     
     @IBOutlet weak var tutorName: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    //@IBOutlet weak var gpalabel: UILabel!
-    //@IBOutlet weak var majorLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    
     
     @IBOutlet weak var apptNotes: UITextField!
     
-    var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: "", price: "", onlineID: "", email: "", timings: "", appointments: [] )
+    var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: 0, price: "", zoom: "", calEmail: "", prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], appointments: [["ABC":"DEF"]], bio: "")
     
     var subject: String = ""
 
     func setTerms() {
         tutorName.text! = currentValue.name
         priceLabel.text! = currentValue.price
-        //gpalabel.text! = currentValue.GPA
-        //majorLabel.text! = currentValue.major
-        timeLabel.text! = currentValue.timings
+        
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!

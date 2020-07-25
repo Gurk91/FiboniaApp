@@ -27,11 +27,11 @@ class TutorSignUpViewController: UIViewController {
     
     //Text Fields
     @IBOutlet weak var calEmailField: UITextField!
-    @IBOutlet weak var phoneNumberField: UITextField!
-    @IBOutlet weak var GPAField: UITextField!
-    //@IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
     @IBOutlet weak var onlineID: UITextField!
+    @IBOutlet weak var levelField: UITextField!
+    @IBOutlet weak var bioField: UITextField!
+    
     
     
     @IBAction func backPressed(_ sender: Any) {
@@ -44,9 +44,8 @@ class TutorSignUpViewController: UIViewController {
         errorTextDisplay.alpha = 0
         
         Utils.styleTextField(calEmailField)
-        Utils.styleTextField(phoneNumberField)
-        Utils.styleTextField(GPAField)
-        //Utils.styleTextField(majorField)
+        Utils.styleTextField(bioField)
+        Utils.styleTextField(levelField)
         Utils.styleTextField(gradYearField)
         Utils.styleTextField(onlineID)
         
@@ -64,18 +63,15 @@ class TutorSignUpViewController: UIViewController {
     
     func validateFields() -> String? {
         
-        if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || phoneNumberField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            GPAField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            //majorField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+        if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            levelField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            bioField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return "Please fill in all fields"
         }
         if Utils.validCalEmail(email: calEmailField.text!) != true {
             return "Enter Valid Cal Email"
-        }
-        if Utils.validPhone(phone: phoneNumberField.text!) != true {
-            return "Enter Valid Phone Number"
         }
         
         return nil
@@ -90,9 +86,10 @@ class TutorSignUpViewController: UIViewController {
         } else {
             //Reassigning fields
             let calEmail = self.calEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            //let major = self.majorField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let gradYear = self.gradYearField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let online = self.onlineID.text!
+            let bio = self.bioField.text!
+            let level = self.levelField.text!
             
             //Creating user
             let db = Firestore.firestore()
@@ -109,11 +106,11 @@ class TutorSignUpViewController: UIViewController {
                     //user is new. Proceed with sign up
                     //user created. now store first and last name
                     
-                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "phone": "", "zoom": "", "setPrefs": false, "preferences": ["languages": [], "location": []], "img": "", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()]]) { (error) in
-                                                                            if error != nil {
-                                                                            self.errorTextDisplay.text = "Tutor Not Created"
-                                                                                self.errorTextDisplay.alpha = 1
-                                                                            }
+                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "zoom": "", "setPrefs": false, "preferences": ["languages": []], "img": "https://www.work.fibonia.com/1/html/img.png", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], "transcript_date": "", "newsletter": false, "uniqid": "", "transcript_file": "", "rating": 0, "experience": 0]) { (error) in
+                            if error != nil {
+                                self.errorTextDisplay.text = "Tutor Not Created"
+                                self.errorTextDisplay.alpha = 1
+                            }
                     }
                     
                     //Attaching tutor profile to user profile
@@ -122,7 +119,7 @@ class TutorSignUpViewController: UIViewController {
                     currStudent.calEmail = calEmail
                     currStudent.tutor = true
                     //currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major, subjects: [""])
-                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: gradYear, subjects: [""], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "")
+                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: gradYear, subjects: [""], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: level, bio: bio)
                     
                     currTutor.setOnline(ID: online)
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)

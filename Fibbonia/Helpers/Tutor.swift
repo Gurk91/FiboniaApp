@@ -27,8 +27,9 @@ class Tutor {
     var firstlogin: Bool
     var prefTime: [String: [Int]]
     var educationLevel: String
+    var bio: String
     
-    init(name: String ,calEmail: String, gradyear: String, subjects: [String], zoom: String, setPrefs: Bool, preferences: [String: Any], img: String, firstlogin: Bool, prefTime: [String: [Int]], educationLevel: String) {
+    init(name: String ,calEmail: String, gradyear: String, subjects: [String], zoom: String, setPrefs: Bool, preferences: [String: Any], img: String, firstlogin: Bool, prefTime: [String: [Int]], educationLevel: String, bio: String) {
         self.name = name
         self.calEmail = calEmail
         self.gradyear = gradyear
@@ -44,6 +45,7 @@ class Tutor {
         self.img = img
         self.prefTime = prefTime
         self.educationLevel = educationLevel
+        self.bio = bio
         
         //self.classRating = [:]
     }

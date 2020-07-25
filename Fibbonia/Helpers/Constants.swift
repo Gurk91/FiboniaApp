@@ -48,34 +48,21 @@ struct Constants {
     
     struct tutorField {
         var name: String
-        var rating: String
+        var rating: Double
         var price: String
-        //var GPA: String
-        var onlineID: String
-        //var major: String
-        var email: String
-        var timings: String
+        var zoom: String
+        var calEmail: String
+        var prefTime: [String:[Int]]
         var appointments: [[String: Any]]
+        var bio: String
     }
-    
-    static var classTutors = ["CS61A": [Constants.tutorField](),
-                              "CS61B": [Constants.tutorField](),
-                              "CS61C": [Constants.tutorField](),
-                              "CS70": [Constants.tutorField](),
-                              "Econ 100B": [Constants.tutorField](),
-                              "Econ 1": [Constants.tutorField](),
-                              "Econ 2": [Constants.tutorField](),
-                              "Math 1A": [Constants.tutorField](),
-                              "Math 1B": [Constants.tutorField](),
-                              "Physics 7A": [Constants.tutorField](),
-                              "Physics 7B": [Constants.tutorField]()]
-    static let activeClasses = ["CS61A", "CS61B", "CS61C", "CS70", "Econ 100B", "Econ 1",
-                              "Econ 2", "Math 1A", "Math 1B", "Physics 7A", "Physics 7B"]
     
     static var pulledOutput: JSON = []
     
     static var pulledSubjects = [String]()
     
     static var pulledClasses = [String:[String]]()
+    
+    static var nextDates = Utils.next7Days()
         
 }
