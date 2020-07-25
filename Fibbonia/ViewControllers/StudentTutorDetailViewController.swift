@@ -33,7 +33,7 @@ class StudentTutorDetailViewController: UIViewController {
     
     @IBOutlet weak var apptNotes: UITextField!
     
-    var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: "", price: "", GPA: "", onlineID: "", major: "", email: "", timings: "", appointments: [] )
+    var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: "", price: "", onlineID: "", email: "", timings: "", appointments: [] )
     
     var subject: String = ""
 

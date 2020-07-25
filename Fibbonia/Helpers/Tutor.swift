@@ -13,11 +13,10 @@ import Firebase
 class Tutor {
     
     var calEmail: String
-    var gradyear: Int
+    var gradyear: String
     var classes: [String]
     var rating: Double
     var experience: Int
-    var phone: String
     var name: String
     var zoom: String
     var appointments: [[String: Any]]
@@ -27,8 +26,9 @@ class Tutor {
     var img: String
     var firstlogin: Bool
     var prefTime: [String: [Int]]
+    var educationLevel: String
     
-    init(name: String ,calEmail: String, gradyear: Int, subjects: [String], phone: String, zoom: String, setPrefs: Bool, preferences: [String: Any], img: String, firstlogin: Bool, prefTime: [String: [Int]]) {
+    init(name: String ,calEmail: String, gradyear: String, subjects: [String], zoom: String, setPrefs: Bool, preferences: [String: Any], img: String, firstlogin: Bool, prefTime: [String: [Int]], educationLevel: String) {
         self.name = name
         self.calEmail = calEmail
         self.gradyear = gradyear
@@ -36,7 +36,6 @@ class Tutor {
         self.classes = []
         self.rating = 0.0
         self.experience = 0
-        self.phone = phone
         self.zoom = zoom
         self.appointments = [["ABC":"DEF"]]
         self.subjects = subjects
@@ -44,6 +43,7 @@ class Tutor {
         self.preferences = preferences
         self.img = img
         self.prefTime = prefTime
+        self.educationLevel = educationLevel
         
         //self.classRating = [:]
     }

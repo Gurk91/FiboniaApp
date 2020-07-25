@@ -81,13 +81,15 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
             let lastname = user.profile.familyName!
             let uid = user.userID!
             
-            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid, "email":email, "appointments":[], "tutor": false, "address": "", "city": "", "calEmail": "", "state": "", "zip": "", "subjects": [], "setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], "stripe_id": currStripe]) { (error) in
+            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "google", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png"]) { (error) in
                 if error != nil {
                     self.errorTextDisplay.text = "First and Last Name not saved"
                     self.errorTextDisplay.alpha = 1
                 }
             }
-            currStudent = Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: true, facebook: false)
+            currStudent = Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], stripeID: currStripe, accntType: "google", firstlogin: true)
+                
+                //Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: true, facebook: false)
             //set current user name
             currName = firstname
             currEmail = email

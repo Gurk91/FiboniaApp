@@ -21,6 +21,7 @@
 		A44ABE782454CE8200475CDD /* TutorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ABE772454CE8200475CDD /* TutorProfileViewController.swift */; };
 		A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44ABE792455111600475CDD /* TutorAddClassViewController.swift */; };
 		A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */; };
+		A453777924CB1C1D00532A0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A453777824CB1C1C00532A0A /* GoogleService-Info.plist */; };
 		A453D7C4245B1AF000566824 /* StudentNewAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453D7C3245B1AF000566824 /* StudentNewAppointmentViewController.swift */; };
 		A453D7CC245B4B3E00566824 /* TutorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A453D7CB245B4B3D00566824 /* TutorSelectionTableViewCell.swift */; };
 		A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */; };
@@ -37,7 +38,6 @@
 		A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBD241F690D00381E82 /* LoginViewController.swift */; };
 		A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */; };
 		A487AEC2242175BB00381E82 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A487AEC1242175BB00381E82 /* Utils.swift */; };
-		A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A487AEC32421900E00381E82 /* GoogleService-Info.plist */; };
 		A4A07F7C24813D9E0049ACC1 /* TutorMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */; };
 		A4A49893245C621A00A92E1A /* DesperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49892245C621A00A92E1A /* DesperationViewController.swift */; };
 		A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */; };
@@ -83,6 +83,7 @@
 		A44ABE772454CE8200475CDD /* TutorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorProfileViewController.swift; sourceTree = "<group>"; };
 		A44ABE792455111600475CDD /* TutorAddClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorAddClassViewController.swift; sourceTree = "<group>"; };
 		A451D7DF244BDFCD00ABBB03 /* TutorSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSignUpViewController.swift; sourceTree = "<group>"; };
+		A453777824CB1C1C00532A0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A453D7C3245B1AF000566824 /* StudentNewAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNewAppointmentViewController.swift; sourceTree = "<group>"; };
 		A453D7CB245B4B3D00566824 /* TutorSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		A45EF7782458943500B1C64F /* TutorClassDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorClassDisplayViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		A487AEBD241F690D00381E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A487AEBF241F691A00381E82 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		A487AEC1242175BB00381E82 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		A487AEC32421900E00381E82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorMenuTableVC.swift; sourceTree = "<group>"; };
 		A4A49892245C621A00A92E1A /* DesperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesperationViewController.swift; sourceTree = "<group>"; };
 		A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTutorDetailViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				A412AA792402295500216FDB /* LaunchScreen.storyboard */,
 				A412AA7C2402295500216FDB /* Info.plist */,
 				A47A18E0245476BF00A8D91B /* icon.png */,
-				A487AEC32421900E00381E82 /* GoogleService-Info.plist */,
+				A453777824CB1C1C00532A0A /* GoogleService-Info.plist */,
 				A463C6842459AAEE00A3B6A8 /* Fibbonia.xcdatamodeld */,
 			);
 			path = Fibbonia;
@@ -372,9 +372,9 @@
 			files = (
 				A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */,
 				A47A18E1245476C100A8D91B /* icon.png in Resources */,
+				A453777924CB1C1D00532A0A /* GoogleService-Info.plist in Resources */,
 				A412AA782402295500216FDB /* Assets.xcassets in Resources */,
 				A412AA762402295400216FDB /* Main.storyboard in Resources */,
-				A487AEC42421900E00381E82 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,15 +638,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fibbonia/Fibonia.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 37Z8B8HWZZ;
+				DEVELOPMENT_TEAM = 5F3R4CXFXV;
 				INFOPLIST_FILE = Fibbonia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gurk91.Fibonia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Gurk99.Fibonia;
 				PRODUCT_NAME = Fibonia;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -658,15 +660,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fibbonia/Fibonia.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 37Z8B8HWZZ;
+				DEVELOPMENT_TEAM = 5F3R4CXFXV;
 				INFOPLIST_FILE = Fibbonia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gurk91.Fibonia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Gurk99.Fibonia;
 				PRODUCT_NAME = Fibonia;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

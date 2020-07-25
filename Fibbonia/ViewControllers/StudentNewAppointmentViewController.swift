@@ -87,10 +87,6 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
             return
         }
         
-        if currStudent.setPrefs == false {
-            createAlert(title: "Preferences Not Set", message: "Go to Settings -> Preferences and set your tutor preferences to allow us to find you the best tutors for you!", buttonMsg: "Okay")
-            return
-        }
         
         print("picked", pickedClass)
         var output: [Constants.tutorField] = []

@@ -126,63 +126,52 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func checkTutor() {
-        let db = Firestore.firestore()
-        db.collection("users")
-            .document(currEmail)
-            .getDocument { (document, error) in
-            // Check for error
-            if error == nil {
-                // Check that this document exists
-                if document != nil && document!.exists {
+        if currStudent.tutor == true {
+            self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
+            self.tut = true
+            currTutorEmail = currStudent.calEmail
+            let db = Firestore.firestore()
+            db.collection("tutors")
+                .document(currTutorEmail)
+                .getDocument { (document, error) in
+                
+                // Check for error
+                if error == nil {
                     
-                    let data = document!.data()
-                    if data!["tutor"] as! Bool == true {
-                        self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
-                        self.tut = true
-                        currTutorEmail = data!["calEmail"] as! String
-                        db.collection("tutors")
-                            .document(currTutorEmail)
-                            .getDocument { (document, error) in
-                            
-                            // Check for error
-                            if error == nil {
-                                
-                                // Check that this document exists
-                                if document != nil && document!.exists {
-                                    
-                                    let documentData = document!.data()
-                                    
-                                    //let gpa = documentData!["GPA"] as! String
-                                    let gradyear = documentData!["gradyear"] as! String
-                                    let subs = documentData!["subjects"]
-                                    
-                                    //let tutor = Tutor(name: currName, calEmail: currTutorEmail, GPA: Double(gpa)!, gradYear: Int(gradyear)!, major: documentData!["major"] as! String, subjects: subs as! [String])
-                                    let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: Int(gradyear)!, subjects: subs as! [String], phone: documentData!["phone"] as! String, zoom: documentData!["zoom"] as! String, setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], img: "", firstlogin: documentData!["firstlogin"] as! Bool, prefTime: documentData!["prefTime"] as! [String: [Int]])
-                                    let ph = documentData!["phone"] as! String
-                                    if documentData!["classes"] == nil {
-                                        db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
-                                    } else {
-                                        tutor.classes = documentData!["classes"] as! [String]
-                                    }
-                                    currTutor = tutor
-                                    if let appts = documentData?["appointments"] {
-                                        currTutor.appointments = appts as! [[String : Any]]
-                                        print("got tutor appts")
-                                    } else {
-                                        currTutor.appointments = []
-                                        print("no tutor appts")
-                                    }
+                    // Check that this document exists
+                    if document != nil && document!.exists {
                         
-                                
-                                }
-                            }
-                                
+                        //Get all tutor data and set to currTutor
+                        let documentData = document!.data()
+                        
+                        let gradyear = documentData!["gradyear"] as! String
+                        let subs = documentData!["subjects"]
+                        
+                        let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: documentData!["zoom"] as! String, setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], img: documentData!["img"] as! String, firstlogin: false, prefTime: documentData!["prefTime"] as! [String: [Int]], educationLevel: documentData!["educationLevel"] as! String)
+                
+                        if documentData!["classes"] == nil {
+                            db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
+                        } else {
+                            tutor.classes = documentData!["classes"] as! [String]
                         }
-                    } else {
-                        self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
+                        currTutor = tutor
+                        if let appts = documentData?["appointments"] {
+                            currTutor.appointments = appts as! [[String : Any]]
+                            print("got tutor appts")
+                        } else {
+                            currTutor.appointments = []
+                            print("no tutor appts")
+                        }
+                        currTutor.rating = documentData!["rating"] as! Double
+                        currTutor.experience = documentData!["experience"] as! Int
+            
+                    
                     }
                 }
+                    
             }
+        } else {
+            self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
         }
     }
     

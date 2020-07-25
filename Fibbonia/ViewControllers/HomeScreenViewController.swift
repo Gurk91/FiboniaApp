@@ -80,34 +80,8 @@ class HomeScreenViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     
     @IBAction func saveInfoPressed(_ sender: Any) {
-        if addline1.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || addline2.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            cityline.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            zipcodeline.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        pickerSelecter == ""{
-            
-            createAlert(title: "Empty Fields", message: "Please fill out all fields", buttonMsg: "Okay")
-            return
-        }
-        let add1 = addline1.text!
-        let add2 = addline2.text!
-        let city = cityline.text!
-        let zip = zipcodeline.text!
-        let state = pickerSelecter
-
         
-        let address = add1 + " " + add2
         
-        currStudent.setAddress(addr: address, cty: city, ste: state, zp: zip)
-        
-        let db = Firestore.firestore()
-        db.collection("users").document(currEmail).setData(
-            ["address":address,
-            "city":city,
-            "zip": zip, "state": state], merge: true)
-        
-        print("address updated")
-        createAlert(title: "Info Updated!", message: "Your information has been updated", buttonMsg: "Okay")
-        return
     }
     
     

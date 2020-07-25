@@ -22,7 +22,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.Gurk91.Fibonia</string>
+			<string>com.Gurk99.Fibonia</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>myFibonia</string>
@@ -33,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.588850587483-69ujdbpothhspu2ecoe6lj02blt3584l</string>
+				<string>com.googleusercontent.apps.588850587483-oi8dkqc2k9o576vp4h4q1b8f6ire0ulb</string>
 			</array>
 		</dict>
 	</array>

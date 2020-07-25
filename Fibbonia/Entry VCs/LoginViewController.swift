@@ -62,58 +62,26 @@ class LoginViewController: UIViewController {
                         if document != nil && document!.exists {
                             let documentData = document!.data()
                             print("************ PRINTING DOC VALS ************")
-                            let name = documentData!["firstName"] as Any? as? String
-                            let ln = documentData!["lastName"] as Any? as? String
+                            let name = documentData!["firstName"] as! String
+                            let ln = documentData!["lastName"] as! String
                             let subjects = documentData!["subjects"] //as! [String]
-                            currName = name! + " " + ln!
+                            currName = name + " " + ln
                             print(currName)
                             currEmail = email
                             
-                            if documentData!["appointments"] == nil || documentData!["tutor"] == nil {
-                                //let dummy = Appointment(tutorEmail: "anemail@email.com", name: "RandDude", time: Date(), location: "Home", className: "CS61A", notes: "dummy node", studentName: currName, selfEmail: currEmail, uid: "", timezone: "UTC")
-                                //let entryVal = dummy.toDict()
-                                docRef.setData(["appointments":[], "tutor": false], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: [], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: false, facebook: false)
-                                
-                            }
-                            if documentData!["setPrefs"] == nil {
-                                docRef.setData(["setPrefs": false, "preferences": ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]]], merge:true)
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: false, preferences: ["languages":"", "tutorPricing":[0, 0], "educationLvl":"", "location": [false, false, false, false]], stripeID: currStripe, google: false, facebook: false)
-                            }
-                                
-                            if documentData!["stripe_id"] == nil {
-                                docRef.setData(["stripe_id": currStripe], merge: true)
-                            }
+                            currStudent = Student(fn: name, ln: ln, eml: email, appt: documentData!["appointments"] as! [[String: Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
                             
-                        
-                            else {
-                                currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], stripeID: documentData!["stripe_id"] as! String, google: false, facebook: false)
-                                currStripe = currStudent.stripeID
-                                if currStudent.setPrefs == false {
-                                    if currStudent.preferences["educationLvl"] as! String != "" && currStudent.preferences["languages"] as! String != "" &&
-                                        currStudent.preferences["tutorPricing"] as! [Int] != [0,0]{
-                                            currStudent.setPrefs = true
-                                            docRef.setData(["setPref": true], merge: true)
-                                    }
-                                }
-                                
-                            }
-                            
-                            /*
-                            let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
-                                
-                            self.view.window?.rootViewController = homeViewController
-                            self.view.window?.makeKeyAndVisible()
-                            */
                             
                             print("entering bar sequence")
-                            print(currStudent.setPrefs)
                             
                             let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
                             self.view.window?.rootViewController = tabBarController
                             self.view.window?.makeKeyAndVisible()
                             
                         }
+                    } else {
+                        self.createAlert(title: "Error Logging In", message: error!.localizedDescription, buttonMsg: "Okay")
+                        return
                     }
                 }
             
@@ -132,6 +100,16 @@ class LoginViewController: UIViewController {
         Utils.styleFilledButton(loginButton)
         Utils.styleHollowButton(backButton)
     }
+    
+    func createAlert(title: String, message: String, buttonMsg: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
     
 
 }
