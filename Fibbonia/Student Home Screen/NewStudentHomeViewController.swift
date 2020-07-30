@@ -88,7 +88,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             self.view.window?.makeKeyAndVisible()
             
         } else {
-            let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorSignUpVC) as? TutorSignUpViewController
+            let tutorVC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.signUpTutor)
             self.view.window?.rootViewController = tutorVC
             self.view.window?.makeKeyAndVisible()
             
@@ -144,10 +144,17 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                         //Get all tutor data and set to currTutor
                         let documentData = document!.data()
                         
-                        let gradyear = documentData!["gradyear"] as! String
+                        let gradyear = documentData!["gradyear"] as! Int
                         let subs = documentData!["subjects"]
+                        let zoom = documentData!["zoom"] as! String
+                        let setPrefs = documentData!["setPrefs"] as! Bool
+                        let preferences = documentData!["preferences"] as! [String : Any]
+                        let img = documentData!["img"] as! String
+                        let prefTime = documentData!["prefTime"] as! [String: [Int]]
+                        let educationLevel = documentData!["educationLevel"] as! String
+                        let bio = documentData!["bio"] as! String
                         
-                        let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: documentData!["zoom"] as! String, setPrefs: documentData!["setPrefs"] as! Bool, preferences: documentData!["preferences"] as! [String : Any], img: documentData!["img"] as! String, firstlogin: false, prefTime: documentData!["prefTime"] as! [String: [Int]], educationLevel: documentData!["educationLevel"] as! String)
+                        let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio)
                 
                         if documentData!["classes"] == nil {
                             db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
@@ -218,7 +225,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             let appts = data[indexPath.section] as! [[String: String]]
             let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-            if appts.count > 0 {
+            if appts.count > 1 {
                 cell.setVals(input: current)
             }
             return cell
@@ -248,11 +255,9 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         switch (indexPath.section) {
         
         case(0):
-            print("case 0")
             return 90
             
         case(1):
-            print("case 1")
             return 66
             
         default:
@@ -262,7 +267,6 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print(section)
         return ["YOUR RECENT SUBJECTS", "UPCOMING APPOINTMENTS", " "][section]
     }
     

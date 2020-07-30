@@ -12,6 +12,7 @@
 		A412AA762402295400216FDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A412AA742402295400216FDB /* Main.storyboard */; };
 		A412AA782402295500216FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A412AA772402295500216FDB /* Assets.xcassets */; };
 		A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A412AA792402295500216FDB /* LaunchScreen.storyboard */; };
+		A41B28C424D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41B28C324D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift */; };
 		A41E5522247C109600A5C456 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E5521247C109600A5C456 /* UIButtonExtension.swift */; };
 		A4202E0624BA51D5005116FA /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4202E0524BA51D5005116FA /* OptionsViewController.swift */; };
 		A4202E0824BB3A97005116FA /* LoginOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4202E0724BB3A97005116FA /* LoginOptionsViewController.swift */; };
@@ -69,6 +70,7 @@
 		A412AA772402295500216FDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A412AA7A2402295500216FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A412AA7C2402295500216FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A41B28C324D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorPaymentPrefsViewController.swift; sourceTree = "<group>"; };
 		A41E5521247C109600A5C456 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		A4202E0524BA51D5005116FA /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		A4202E0724BB3A97005116FA /* LoginOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOptionsViewController.swift; sourceTree = "<group>"; };
@@ -157,12 +159,12 @@
 				A49B6DDC248460890013E825 /* Student Home Screen */,
 				A4A07F7A24813D640049ACC1 /* Tutor Main Menu */,
 				A4B2D11C2480053F00467DA3 /* Student Main Menu */,
-				A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */,
 				A487AEB8241F686700381E82 /* ViewControllers */,
 				A412AA6E2402295400216FDB /* AppDelegate.swift */,
 				A412AA702402295400216FDB /* SceneDelegate.swift */,
 				A412AA742402295400216FDB /* Main.storyboard */,
 				A412AA772402295500216FDB /* Assets.xcassets */,
+				A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */,
 				A412AA792402295500216FDB /* LaunchScreen.storyboard */,
 				A412AA7C2402295500216FDB /* Info.plist */,
 				A47A18E0245476BF00A8D91B /* icon.png */,
@@ -210,6 +212,7 @@
 			children = (
 				A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */,
 				A439E31524C317F000BE9B08 /* TutorTimingsViewController.swift */,
+				A41B28C324D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift */,
 			);
 			path = "Tutor Main Menu";
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */,
 				A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */,
 				A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */,
+				A41B28C424D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift in Sources */,
 				A4B80AA52484662400A2B8CA /* CollectionStudentTableViewCell.swift in Sources */,
 				A479C346244D1EB000D59809 /* Tutor.swift in Sources */,
 				A4C2EA8624B76B4A006F4250 /* PaymentIntroViewController.swift in Sources */,

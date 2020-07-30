@@ -214,7 +214,7 @@ class Utils {
         let GMTTime = Date()
         let currTime = formatter.string(from: GMTTime)
         
-        
+        //Incomplete function
         return false
     }
     
@@ -269,21 +269,33 @@ class Utils {
         var result = [String]()
         
         let date = Date()
-        print(date, "date")
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM d"
-        let day = DateFormatter()
-        day.dateFormat = "EEEE"
+        formatter.dateFormat = "EEEE MMM d"
         
         for i in 1...7 {
             let newDate = Date(timeInterval: 60*60*24*Double(i), since: date)
             let curr = formatter.string(from: newDate)
-            //let dayString = day.string(from: newDate)
             result.append(curr)
         }
         
         return result
+    }
+    
+    static func createAlert(title: String, message: String, buttonMsg: String, viewController: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
+            viewController.dismiss(animated: true, completion: nil)
+        }))
+        viewController.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    static func char50UID() -> String {
+        let twent1 = UUID().uuidString.components(separatedBy: "-")
+        let twent2 = UUID().uuidString.components(separatedBy: "-")
+        let ten1 = UUID().uuidString.components(separatedBy: "-")
+        return twent1[0] + twent1[4] + twent2[0] + twent2[4] + ten1[0] + "GK"
     }
         
 }

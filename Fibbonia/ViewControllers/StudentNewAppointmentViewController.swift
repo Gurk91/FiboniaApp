@@ -98,15 +98,16 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     
                         for document in snapshot!.documents {
                             let documentData = document.data()
-                            let info = documentData["info"] as! [String: Any]
-                            let name = info["name"] as! String
-                            let rating = info["rating"] as! Double
+                            let name = documentData["name"] as! String
+                            let rating = documentData["rating"] as! Double
                             let price = documentData["price"] as! String
-                            let online = info["zoom"] as! String
-                            let email = info["calEmail"] as! String
+                            let online = documentData["zoom"] as! String
+                            let email = documentData["calEmail"] as! String
                             let time = documentData["prefTime"] as! [String: [Int]]
-                            let appointments = info["appointments"] as! [[String: Any]]
-                            let object = Constants.tutorField(name: name, rating: rating, price: price, zoom: online, calEmail: email, prefTime: time, appointments: appointments)
+                            let appointments = documentData["appointments"] as! [[String: Any]]
+                            let bio = documentData["bio"] as! String
+                            let classes = documentData["classes"] as! [String]
+                            let object = Constants.tutorField(name: name, rating: rating, price: price, zoom: online, calEmail: email, prefTime: time, appointments: appointments, bio: bio, classes: classes)
     
                             print(name, rating, price)
                             output.append(object)

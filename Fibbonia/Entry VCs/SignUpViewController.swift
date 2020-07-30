@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController {
         Utils.organizeSubjects()
         Utils.organizeClasses()
         Utils.createCustomer()
+        
     }
 
     @IBOutlet weak var firstNameField: UITextField!
@@ -73,8 +74,7 @@ class SignUpViewController: UIViewController {
             let docRef = db.collection("users").document(email)
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
+                    //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     print("user exists")
                     self.errorTextDisplay.text = "User Exists"
                     self.errorTextDisplay.alpha = 1

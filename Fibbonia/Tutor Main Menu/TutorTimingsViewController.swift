@@ -74,9 +74,16 @@ class TutorTimingsViewController: UIViewController {
         } else if sender.backgroundColor == UIColor.lightGray {
             sender.backgroundColor = UIColor.systemTeal
             data[self.selectedDay]! = removeFromArray(arr: data[self.selectedDay]!, obj: sender.tag)
-        } else {
+        } else if data[self.selectedDay]!.count < 5 {
             sender.backgroundColor = UIColor.lightGray
             data[self.selectedDay]!.append(sender.tag)
+        } else if (data[self.selectedDay]?.contains(sender.tag + 30))! || (data[self.selectedDay]?.contains(sender.tag - 30))! {
+            Utils.createAlert(title: "Can't select adjacent times", message: "You may not select times that are adjacent to one another as each time represents a 1 hour time-slot", buttonMsg: "Okay", viewController: self)
+            return
+        }
+        else {
+            Utils.createAlert(title: "Max Times Selected", message: "You may not select more than 5 preferred times for each day", buttonMsg: "Okay", viewController: self)
+            return
         }
     }
     
@@ -143,10 +150,17 @@ class TutorTimingsViewController: UIViewController {
             
             finalTimes[day.key] = dayArr
         }
+        
+        print(finalTimes)
         let db = Firestore.firestore()
         let docRef = db.collection("tutors").document(currTutorEmail)
+        print("docref 1")
         docRef.setData(["prefTime": finalTimes], merge: true)
+        print("docref 2")
         currTutor.prefTime = finalTimes
+        currTutor.setPrefs = true
+        docRef.setData(["setPrefs": true], merge: true)
+        print("docref 3")
          
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -78,57 +79,55 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
 
     @IBAction func newClassPressed(_ sender: Any) {
         let email = currTutor.calEmail
-        let db = Firestore.firestore()
-        let tutorInfo = currTutor.getData()
         let price = pricePHfield.text!
-        let times = "a"
         var data: [String] = []
         print(selectedClass)
+        let db = Firestore.firestore()
         do {
             try db.collection(selectedClass).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
+                    Utils.createAlert(title: "Error", message: "Unable to add class. Please try again later", buttonMsg: "Okay", viewController: self)
                 } else {
                     print("step B")
                     for document in querySnapshot!.documents {
                         data.append(document.documentID)
                     }
                     if data.contains(email) {
-                        self.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay")
+                        Utils.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay", viewController: self)
+                        return
                     } else {
-                        print("class added")
-                        print(tutorInfo)
-                        print(self.selectedClass)
-                        print(price)
-                        print(times)
-                        db.collection(self.selectedClass).document(email).setData(["info":tutorInfo, "price": price, "times": times])
-                        print("step 1")
-                        currTutor.addClass(clas: self.selectedClass)
-                        print(currTutor.classes)
-                        self.createAlert(title: "Class Added", message: "You can now teach " + self.selectedClass, buttonMsg: "Okay")
-                        db.collection("tutors").document(email).setData(["classes": currTutor.classes], merge: true)
-                        print("all through")
+                        currTutor.classes.append(self.selectedClass)
+                        db.collection(self.selectedClass).document(currTutor.calEmail).setData(["appointments": currTutor.appointments, "verified": false, "classes": currTutor.classes, "calEmail": currTutor.calEmail, "experience":currTutor.experience, "name": currTutor.name, "zoom": currTutor.zoom, "rating": currTutor.rating, "subjects":currTutor.subjects, "price": price, "prefTime": currTutor.prefTime, "bio": currTutor.bio]) { (error) in
+                            if error != nil {
+                                Utils.createAlert(title: "Error Adding Class", message: "An unknown error occured while adding your class. Please try again later", buttonMsg: "Okay", viewController: self)
+                                return
+                            }
+                        }
+                        let url = Constants.emailServerURL.appendingPathComponent("confirm-class")
+                        let params = ["name":currTutor.name, "email": currTutor.calEmail, "class": self.selectedClass]
+                        let jsondata = try? JSONSerialization.data(withJSONObject: params)
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                        request.httpBody = jsondata
+                        let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+                            if error != nil {
+                                print("Error occured", error.debugDescription)
+                            } else {
+                                print("response", response?.description as Any)
+                                print("data", data?.description as Any)
+                            }
+                        }
+                        task.resume()
                     }
+                    
                 }
             }
-        } catch let error {
-            createAlert(title: "Error", message: "Unable to add class. Please try again later", buttonMsg: "Okay")
-            print(error)
         }
-        
         print(self.selectedSubject)
         print(self.selectedClass)
     }
-    
-    func createAlert(title: String, message: String, buttonMsg: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: buttonMsg, style: .cancel, handler: { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
     
 }
 

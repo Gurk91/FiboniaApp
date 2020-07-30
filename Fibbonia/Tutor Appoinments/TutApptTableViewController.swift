@@ -40,7 +40,7 @@ class TutApptTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let current = data[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "displayStudent") as! ApptTutorTableViewCell
-        if self.data.count > 0 {
+        if self.data.count > 1 {
             cell.setVals(input: current)
         }
         return cell

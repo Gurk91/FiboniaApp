@@ -62,15 +62,16 @@ class LoginViewController: UIViewController {
                         if document != nil && document!.exists {
                             let documentData = document!.data()
                             print("************ PRINTING DOC VALS ************")
-                            let name = documentData!["firstName"] as! String
-                            let ln = documentData!["lastName"] as! String
+                            let name = documentData!["firstName"] as Any? as? String
+                            let ln = documentData!["lastName"] as Any? as? String
                             let subjects = documentData!["subjects"] //as! [String]
-                            currName = name + " " + ln
+                            currName = name! + " " + ln!
                             print(currName)
                             currEmail = email
-                            
-                            currStudent = Student(fn: name, ln: ln, eml: email, appt: documentData!["appointments"] as! [[String: Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
-                            
+                            currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
+                            currStripe = currStudent.stripeID
+                            currStudent.tutor = documentData!["tutor"] as! Bool
+                            currStudent.calEmail = documentData!["calEmail"] as! String
                             
                             print("entering bar sequence")
                             

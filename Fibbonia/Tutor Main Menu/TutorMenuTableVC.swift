@@ -177,7 +177,7 @@ class TutorMenuTableVC: UITableViewController {
             self.view.window?.makeKeyAndVisible()
             
         case (0, 2):
-            performSegue(withIdentifier: "maintenance", sender: self)
+            performSegue(withIdentifier: "payment", sender: self)
             
         case (0, 3):
             performSegue(withIdentifier: "times", sender: self)

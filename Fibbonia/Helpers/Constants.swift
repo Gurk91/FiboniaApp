@@ -35,6 +35,7 @@ struct Constants {
     
     static let emptyList = ["---", "---","---", "---", "---", "---", "---", "---", "---", "---",
                             "---", "---", "---", "---", "---", "---", "---", "---", "---", "---"]
+    static let emailServerURL = URL(string: "https://fibonia-stripe-server.herokuapp.com/")!
     
     struct Storyboard {
         static let homeViewController = "HomeVC"
@@ -43,6 +44,7 @@ struct Constants {
         static let tutorSignUpVC = "TutorSUVC"
         static let tutorHomeVC = "TutorHomeVC"
         static let tlist2Class = "TlistToDetail"
+        static let signUpTutor = "tutorSignUpNavController"
         
     }
     
@@ -55,6 +57,7 @@ struct Constants {
         var prefTime: [String:[Int]]
         var appointments: [[String: Any]]
         var bio: String
+        var classes: [String]
     }
     
     static var pulledOutput: JSON = []

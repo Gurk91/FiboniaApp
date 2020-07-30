@@ -121,7 +121,8 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             let appts = data[indexPath.section] as! [[String: String]]
             let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-            if appts.count > 0 {
+            if appts.count > 1 {
+                print("appts is more than 0")
                 cell.setVals(input: current)
             }
             return cell

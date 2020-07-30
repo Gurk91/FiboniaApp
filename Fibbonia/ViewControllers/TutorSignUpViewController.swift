@@ -11,13 +11,15 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-class TutorSignUpViewController: UIViewController {
+class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setUp()
+        levelPicker.delegate = self
+        levelPicker.dataSource = self
     }
     
     //Buttons
@@ -29,10 +31,13 @@ class TutorSignUpViewController: UIViewController {
     @IBOutlet weak var calEmailField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
     @IBOutlet weak var onlineID: UITextField!
-    @IBOutlet weak var levelField: UITextField!
     @IBOutlet weak var bioField: UITextField!
     
     
+    @IBOutlet weak var levelPicker: UIPickerView!
+    
+    let levels: [String] = ["---","Freshman", "Sophomore", "Junior", "Senior", "Grad Student", "PhD Candidate"]
+    var pickedLevel: String = ""
     
     @IBAction func backPressed(_ sender: Any) {
         
@@ -45,7 +50,6 @@ class TutorSignUpViewController: UIViewController {
         
         Utils.styleTextField(calEmailField)
         Utils.styleTextField(bioField)
-        Utils.styleTextField(levelField)
         Utils.styleTextField(gradYearField)
         Utils.styleTextField(onlineID)
         
@@ -64,10 +68,10 @@ class TutorSignUpViewController: UIViewController {
     func validateFields() -> String? {
         
         if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            levelField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            bioField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            bioField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            pickedLevel == "" || pickedLevel == "---"{
             return "Please fill in all fields"
         }
         if Utils.validCalEmail(email: calEmailField.text!) != true {
@@ -75,6 +79,22 @@ class TutorSignUpViewController: UIViewController {
         }
         
         return nil
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.levels.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.levels[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickedLevel = self.levels[row]
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -89,7 +109,6 @@ class TutorSignUpViewController: UIViewController {
             let gradYear = self.gradYearField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let online = self.onlineID.text!
             let bio = self.bioField.text!
-            let level = self.levelField.text!
             
             //Creating user
             let db = Firestore.firestore()
@@ -104,9 +123,9 @@ class TutorSignUpViewController: UIViewController {
                     self.errorTextDisplay.alpha = 1
                 } else {
                     //user is new. Proceed with sign up
-                    //user created. now store first and last name
+                    //user created. Now store details
                     
-                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "zoom": "", "setPrefs": false, "preferences": ["languages": []], "img": "https://www.work.fibonia.com/1/html/img.png", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], "transcript_date": "", "newsletter": false, "uniqid": "", "transcript_file": "", "rating": 0, "experience": 0]) { (error) in
+                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "zoom": online, "setPrefs": false, "preferences": ["languages": []], "img": "https://www.work.fibonia.com/1/html/img.png", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], "transcript_date": "", "newsletter": false, "uniqid": "", "transcript_file": "", "rating": 0, "experience": 0, "appointments": [["ABC":"DEF"]], "educationLevel": self.pickedLevel, "bio": bio, "stripe_id": "", "venmo_id": "", "venmo_balance": 0]) { (error) in
                             if error != nil {
                                 self.errorTextDisplay.text = "Tutor Not Created"
                                 self.errorTextDisplay.alpha = 1
@@ -118,10 +137,9 @@ class TutorSignUpViewController: UIViewController {
                     //Transitioning to Tutor Home
                     currStudent.calEmail = calEmail
                     currStudent.tutor = true
-                    //currTutor = Tutor(name: currName ,calEmail: calEmail, GPA:Double(gpa)!, gradYear: Int(gradYear)!, major: major, subjects: [""])
-                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: gradYear, subjects: [""], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: level, bio: bio)
                     
-                    currTutor.setOnline(ID: online)
+                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: Int(gradYear)!, subjects: [""], zoom: online, setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: self.pickedLevel, bio: bio)
+                    
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                     self.view.window?.rootViewController = tutorTBC
                     self.view.window?.makeKeyAndVisible()

@@ -20,10 +20,10 @@ class TutorSelectionTableViewCell: UITableViewCell {
         newTutorLabel.alpha = 0
         nameLabel.text! = input.name
         if Double(input.rating) == 0 {
-            ratingLabel.text! = input.rating
+            ratingLabel.text! = String(input.rating)
             newTutorLabel.alpha = 1
         } else{
-            ratingLabel.text! = input.rating
+            ratingLabel.text! = String(input.rating)
         }
         priceLabel.text! = "$" + input.price + " /hr"
     }

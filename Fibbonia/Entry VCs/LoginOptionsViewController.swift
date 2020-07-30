@@ -83,7 +83,8 @@ class LoginOptionsViewController: UIViewController, GIDSignInDelegate {
                         currEmail = email
                         currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
                         currStripe = currStudent.stripeID
-                     
+                        currStudent.tutor = documentData!["tutor"] as! Bool
+                        currStudent.calEmail = documentData!["calEmail"] as! String
                         
                         print("entering bar sequence")
                         
