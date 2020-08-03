@@ -23,6 +23,7 @@ var pickedClass: String = ""
 var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
 var currStripe: String = ""
+var tempSubjects: [String] = []
 
 
 @UIApplicationMain

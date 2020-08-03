@@ -8,18 +8,19 @@
 
 import UIKit
 import Firebase
+import SafariServices
 
-class StudentDisplayApptViewController: UIViewController {
+class StudentDisplayApptViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var currAppt: [String: Any] = ["":""]
     
     
     @IBOutlet weak var tutorName: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var onlineLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
+    
+    
     
     @IBOutlet weak var ApptFinButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -40,14 +41,42 @@ class StudentDisplayApptViewController: UIViewController {
 
     func enterParams() {
         tutorName.text! = currAppt["tutorFN"] as! String
-        emailLabel.text! = currAppt["tutorEmail"] as! String
-        onlineLabel.text! = currAppt["location"] as! String
         notesLabel.text! = currAppt["notes"] as! String
-        timeLabel.text! = currAppt["time"] as! String
         classLabel.text! = currAppt["classname"] as! String
+        
+        let importedTime = currAppt["time"] as! String
+        let timecomps = importedTime.components(separatedBy: " ")
+        let date = timecomps[0] + " " + timecomps[1] + " " + timecomps[2]
+        let timings = timecomps[3..<timecomps.count]
+        var finalTimes = ""
+        let timedifference = Utils.getUTCTimeDifference()
+        for time in timings {
+            let converted = Utils.convertToLocalTime(timeDifference: timedifference, time: Int(time)!)
+            finalTimes = finalTimes + String(converted) + " "
+        }
+        timeLabel.text! = date + " " + finalTimes
+        
+    }
+    
+    @IBAction func zoomButton(_ sender: UIButton) {
+        guard let zoomurl = URL(string: currAppt["zoom"] as! String) else {
+            Utils.createAlert(title: "Fault Zoom/ Online ID URL", message: "Please contact Fibonia Support and we shall resolve your situation as soon as possible", buttonMsg: "Okay", viewController: self)
+            return
+        }
+        
+        let safariViewController = SFSafariViewController(url: zoomurl)
+        safariViewController.delegate = self
+
+        present(safariViewController, animated: true, completion: nil)
+        
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        return
     }
     
     
+    //MARK: Worry about this when doing Appt. Completion (task 3/4)
     @IBAction func cancelPressed(_ sender: Any) {
         deleteNCreateAlert(title: "Cancel Appointment", message: "Are you sure you want to cancel this appointment?")
     }

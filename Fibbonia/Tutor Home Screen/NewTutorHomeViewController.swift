@@ -98,7 +98,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             return 1
             
         case 1:
-            let step = data[section] as! [[String: String]]
+            let step = data[section] as! [[String: Any]]
             return step.count
             
         case 2:
@@ -118,7 +118,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! TutorCollectionTableViewCell
             return cell
         case (1):
-            let appts = data[indexPath.section] as! [[String: String]]
+            let appts = data[indexPath.section] as! [[String: Any]]
             let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
             if appts.count > 1 {

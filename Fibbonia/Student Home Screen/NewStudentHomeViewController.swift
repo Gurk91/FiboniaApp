@@ -201,7 +201,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             return 1
             
         case 1:
-            let step = data[section] as! [[String: String]]
+            let step = data[section] as! [[String: Any]]
             return step.count
             
         case 2:
@@ -222,10 +222,10 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! CollectionStudentTableViewCell
             return cell
         case (1):
-            let appts = data[indexPath.section] as! [[String: String]]
+            let appts = data[indexPath.section] as! [[String: Any]]
             let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-            if appts.count > 1 {
+            if appts.count > 0 {
                 cell.setVals(input: current)
             }
             return cell
@@ -242,7 +242,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         switch (indexPath.section) {
         
         case (1):
-            let step1 = data[indexPath.section] as! [[String: String]]
+            let step1 = data[indexPath.section] as! [[String: Any]]
             let current = step1[indexPath.row]
             performSegue(withIdentifier: "apptDisplay", sender: current)
         default:
