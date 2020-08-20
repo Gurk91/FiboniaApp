@@ -6,6 +6,7 @@
 //  Copyright © 2020 Gurkarn Goindi. All rights reserved.
 //
 
+//MARK: WE NO LONGER DISPLAY COMMON SUBJECTS FOR THE TUTOR
 import UIKit
 
 class TutorCollectionTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

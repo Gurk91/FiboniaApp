@@ -25,10 +25,10 @@ class TutorPaymentPrefsViewController: UIViewController, SFSafariViewControllerD
     
     @IBAction func didSelectConnectWithStripe(_ sender: Any) {
         //let redirect = "https://fibonia-stripe-server.herokuapp.com/connect/oauth"
-        print("https://connect.stripe.com/express/oauth/authorize?client_id=\(clientID)&state=\(state)&redirect_uri=https://fibonia-stripe-server.herokuapp.com/connect/oauth?tutorEmail=\(currTutor.calEmail)")
+        print("https://connect.stripe.com/express/oauth/authorize?client_id=\(clientID)&state=\(state)&stripe_user[email]=\(currTutor.calEmail)&redirect_uri=https://fibonia-stripe-server.herokuapp.com/connect/oauth")
         
         // Construct authorization URL
-        guard let authorizationURL = URL(string: "https://connect.stripe.com/express/oauth/authorize?client_id=\(clientID)&state=\(state)&redirect_uri=https://fibonia-stripe-server.herokuapp.com/connect/oauth?tutorEmail=\(currTutor.calEmail)") else {
+        guard let authorizationURL = URL(string: "https://connect.stripe.com/express/oauth/authorize?client_id=\(clientID)&state=\(state)&stripe_user[email]=\(currTutor.calEmail)&redirect_uri=https://fibonia-stripe-server.herokuapp.com/connect/oauth") else {
             return
         }
 

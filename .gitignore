@@ -1,3 +1,5 @@
 *.plist
 *.png
 *.DS_Store
+*.p8
+*.p12

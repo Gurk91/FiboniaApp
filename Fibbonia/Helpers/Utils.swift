@@ -59,6 +59,12 @@ class Utils {
         button.tintColor = UIColor.black
     }
     
+    static func styleFilledGreenButton(_ button: UIButton) {
+        button.backgroundColor =  UIColor.init(red: 25/255, green: 179/255, blue: 4/255, alpha: 1)
+        button.layer.cornerRadius = button.frame.height / 2
+        button.tintColor = UIColor.white
+    }
+    
     static func isPasswordValid(_ password : String) -> Bool {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
@@ -296,6 +302,25 @@ class Utils {
         let twent2 = UUID().uuidString.components(separatedBy: "-")
         let ten1 = UUID().uuidString.components(separatedBy: "-")
         return twent1[0] + twent1[4] + twent2[0] + twent2[4] + ten1[0] + "GK"
+    }
+    
+    static func resetAll() {
+        currName = "nope"
+        currEmail = ""
+        currTutorEmail = ""
+        currStudent = Student(fn: "", ln: "", eml: "", appt: [["ABC":"DEF"]], subjects: [], stripeID: "", accntType: "", firstlogin: false)
+        currTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "")
+        defaultTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "")
+        pickedClass = ""
+        desperate = []
+        alreadyEntered = false
+        currStripe = ""
+        tempSubjects = []
+        studentUnconfirmedAppts = []
+        studentConfirmedAppts = []
+        tutorUnconfirmedAppts = []
+        tutorConfirmedAppts = []
+        
     }
         
 }

@@ -53,42 +53,85 @@ class LoginViewController: UIViewController {
                 self.errorTextDisplay.alpha = 1
             }
             else {
-                let db = Firestore.firestore()
-                let docRef = db.collection("users").document(email)
-                docRef.getDocument { (document, error) in
-                    // Check for error
-                    if error == nil {
-                        // Check that this document exists
-                        if document != nil && document!.exists {
-                            let documentData = document!.data()
-                            print("************ PRINTING DOC VALS ************")
-                            let name = documentData!["firstName"] as Any? as? String
-                            let ln = documentData!["lastName"] as Any? as? String
-                            let subjects = documentData!["subjects"] //as! [String]
-                            currName = name! + " " + ln!
-                            print(currName)
-                            currEmail = email
-                            currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
-                            currStripe = currStudent.stripeID
-                            currStudent.tutor = documentData!["tutor"] as! Bool
-                            currStudent.calEmail = documentData!["calEmail"] as! String
-                            
-                            print("entering bar sequence")
-                            
-                            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
-                            self.view.window?.rootViewController = tabBarController
-                            self.view.window?.makeKeyAndVisible()
-                            
+                let user = Auth.auth().currentUser
+                user?.reload(completion: { (error) in
+                    switch user!.isEmailVerified {
+                    case true:
+                        print("users email is verified")
+                        let db = Firestore.firestore()
+                        let docRef = db.collection("users").document(email)
+                        docRef.getDocument { (document, error) in
+                            // Check for error
+                            if error == nil {
+                                // Check that this document exists
+                                if document != nil && document!.exists {
+                                    let documentData = document!.data()
+                                    print("************ PRINTING DOC VALS ************")
+                                    let name = documentData!["firstName"] as Any? as? String
+                                    let ln = documentData!["lastName"] as Any? as? String
+                                    let subjects = documentData!["subjects"] //as! [String]
+                                    currName = name! + " " + ln!
+                                    print(currName)
+                                    currEmail = email
+                                    currStudent = Student(fn: name!, ln: ln!, eml: email, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
+                                    currStripe = currStudent.stripeID
+                                    currStudent.tutor = documentData!["tutor"] as! Bool
+                                    currStudent.calEmail = documentData!["calEmail"] as! String
+                                    for appt in currStudent.appointments {
+                                        
+                                        if (appt["tutor_read"] as! Bool) == true {
+                                            studentConfirmedAppts.append(appt)
+                                        } else {
+                                            studentUnconfirmedAppts.append(appt)
+                                        }
+                                    }
+                                    
+                                    print("entering bar sequence")
+                                    
+                                    let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+                                    self.view.window?.rootViewController = tabBarController
+                                    self.view.window?.makeKeyAndVisible()
+                                    
+                                }
+                            } else {
+                                self.createAlert(title: "Error Logging In", message: error!.localizedDescription, buttonMsg: "Okay")
+                                return
+                            }
                         }
-                    } else {
-                        self.createAlert(title: "Error Logging In", message: error!.localizedDescription, buttonMsg: "Okay")
+                    case false:
+                        self.errorTextDisplay.text = "Unverified User. Please verify your email first."
+                        self.errorTextDisplay.alpha = 1
                         return
                     }
-                }
+                })
             
             }
         }
         
+        
+    }
+    
+    func handleError(error: Error) {
+        
+        // the user is not registered
+        // user not found
+        
+        let errorAuthStatus = AuthErrorCode.init(rawValue: error._code)!
+        switch errorAuthStatus {
+        case .wrongPassword:
+            print("wrongPassword")
+        case .invalidEmail:
+            print("invalidEmail")
+        case .operationNotAllowed:
+            print("operationNotAllowed")
+        case .userDisabled:
+            print("userDisabled")
+        case .userNotFound:
+            print("userNotFound")
+        case .tooManyRequests:
+            print("tooManyRequests, oooops")
+        default: fatalError("error not supported here")
+        }
         
     }
     

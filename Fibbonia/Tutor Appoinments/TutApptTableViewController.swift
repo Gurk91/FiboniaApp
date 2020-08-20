@@ -39,7 +39,7 @@ class TutApptTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let current = data[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "displayStudent") as! ApptTutorTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! TutorAppointmentTableViewCell
         if self.data.count > 1 {
             cell.setVals(input: current)
         }

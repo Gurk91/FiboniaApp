@@ -103,6 +103,8 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
                                 Utils.createAlert(title: "Error Adding Class", message: "An unknown error occured while adding your class. Please try again later", buttonMsg: "Okay", viewController: self)
                                 return
                             }
+                            let docRef = db.collection("tutors").document(currTutor.calEmail)
+                            docRef.setData(["classes": currTutor.classes], merge: true)
                         }
                         let url = Constants.emailServerURL.appendingPathComponent("confirm-class")
                         let params = ["name":currTutor.name, "email": currTutor.calEmail, "class": self.selectedClass]

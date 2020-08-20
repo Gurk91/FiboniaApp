@@ -11,6 +11,9 @@ import Firebase
 import CoreData
 import Stripe
 import GoogleSignIn
+import UserNotifications
+import FirebaseMessaging
+
 
 var currUser: User = Auth.auth().currentUser!
 var currName: String = "nope"
@@ -24,6 +27,13 @@ var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
 var currStripe: String = ""
 var tempSubjects: [String] = []
+var studentUnconfirmedAppts: [[String: Any]] = []
+var studentConfirmedAppts: [[String: Any]] = []
+var tutorUnconfirmedAppts: [[String: Any]] = []
+var tutorConfirmedAppts: [[String: Any]] = []
+var switchedTutorBefore: Bool = false
+var currentAppointment:[String: Any] = ["":""]
+var unratedAppointment:[String: Any] = ["":""]
 
 
 @UIApplicationMain
@@ -127,4 +137,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

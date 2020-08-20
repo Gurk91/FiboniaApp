@@ -18,5 +18,7 @@ pod 'SwiftyJSON'
 pod 'Stripe'
 pod 'Alamofire'
 pod 'GoogleSignIn'
+pod 'Firebase/Messaging'
+
 
 end

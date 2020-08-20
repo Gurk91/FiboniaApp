@@ -215,7 +215,7 @@ class TutorMenuTableVC: UITableViewController {
             do {
                 try Auth.auth().signOut()
                 print("signed out")
-                currName = ""
+                Utils.resetAll()
                 
                 let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
                 self.present(viewController!, animated: true, completion: nil)

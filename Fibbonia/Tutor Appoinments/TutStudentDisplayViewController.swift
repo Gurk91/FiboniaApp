@@ -15,10 +15,11 @@ class TutStudentDisplayViewController: UIViewController {
     
     @IBOutlet weak var studentName: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var onlineLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+    //@IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var completeButton: UIButton!
@@ -34,19 +35,39 @@ class TutStudentDisplayViewController: UIViewController {
     func setUp() {
         Utils.styleHollowDeleteButton(cancelButton)
         Utils.styleFilledButton(completeButton)
+        if currAppt["tutor_read"] as! Bool == false {
+            completeButton.isHidden = true
+        }
         
     }
 
     func enterParams() {
         studentName.text! = currAppt["studentName"] as! String
-        emailLabel.text! = currAppt["studentEmail"] as! String
-        onlineLabel.text! = currAppt["location"] as! String
-        notesLabel.text! = currAppt["notes"] as! String
-        timeLabel.text! = currAppt["time"] as! String
+        //emailLabel.text! = currAppt["studentEmail"] as! String
+        notesLabel.text! = "Student Notes: " + (currAppt["notes"] as! String)
+        
+        let importedTime = currAppt["time"] as! String
+        let timecomps = importedTime.components(separatedBy: " ")
+        let date = timecomps[0] + " " + timecomps[1] + " " + timecomps[2]
+        let timings = timecomps[3..<timecomps.count]
+        var finalTimes = ""
+        let timedifference = Utils.getUTCTimeDifference()
+        for time in timings {
+            let converted = Utils.convertToLocalTime(timeDifference: timedifference, time: Int(time)!)
+            finalTimes = finalTimes + String(converted) + " "
+        }
+        timeLabel.text! = date + " " + finalTimes
         classLabel.text! = currAppt["classname"] as! String
+        
+        if (currAppt["tutor_read"] as! Bool) == true {
+            statusLabel.text! = "Confirmed"
+            statusLabel.textColor = UIColor.green
+        } else {
+            statusLabel.text! = "Yet To Be Confirmed"
+            statusLabel.textColor = UIColor.red
+        }
+        
     }
-    
-    
     
     @IBAction func cancelPressed(_ sender: Any) {
         deleteNCreateAlert(title: "Cancel Appointment", message: "Are you sure you want to cancel this appointment?")
@@ -106,8 +127,15 @@ class TutStudentDisplayViewController: UIViewController {
     }
     
     @IBAction func completePressed(_ sender: Any) {
-        
+        performSegue(withIdentifier: "beginAppt", sender: currAppt)
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "beginAppt"{
+            let destination = segue.destination as! StartAppointmentViewController
+            destination.currAppt = sender as! [String: Any]
+            print("segue done")
+        }
+    }
+    
 }

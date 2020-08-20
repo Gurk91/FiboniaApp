@@ -23,7 +23,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tableView: UITableView!
     
     var tut: Bool = false
-    var data = [0: currStudent.subjects, 1: currStudent.appointments, 2: []] as [Int: Any]
+    var data = [0: currStudent.subjects, 1: [], 2: [], 3: []] as [Int: Any]
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -31,7 +31,8 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         
         tableView.dataSource = self
         tableView.delegate = self
-        data[1] = currStudent.appointments
+        data[1] = studentUnconfirmedAppts
+        data[2] = studentConfirmedAppts
         
         tableView.reloadData()
         
@@ -51,21 +52,32 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             alreadyEntered = true
         }
         
-        /*
-        if currStudent.preferences["tutorPricing"] as! [Double] == [0, 0] || currStudent.preferences["location"] as! [Bool] == [false, false, false, false]{
-            let db = Firestore.firestore()
-            let docRef = db.collection("users").document(currEmail)
-            docRef.setData(["setPrefs": false], merge: true)
-        } else {
-            let db = Firestore.firestore()
-            let docRef = db.collection("users").document(currEmail)
-            docRef.setData(["setPrefs": true], merge: true)
+        for i in 0..<currStudent.appointments.count {
+            if currStudent.appointments[i]["pay_created"] as! Bool == true {
+                currentAppointment = currStudent.appointments[i]
+                let newViewController = self.storyboard?.instantiateViewController(identifier: "currentAppt") as! CurrentAppointmentViewController
+                self.present(newViewController, animated: true, completion: nil)
+                break
+            }
         }
- */
+        
+        for i in 0..<currStudent.appointments.count {
+            if currStudent.appointments[i]["rated"] as! Bool == false && currStudent.appointments[i]["txn_id"] as! String != "" {
+                unratedAppointment = currStudent.appointments[i]
+                let newViewController = self.storyboard?.instantiateViewController(identifier: "rateAppt") as! RatingViewController
+                self.present(newViewController, animated: true, completion: nil)
+                break
+            }
+        }
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        data[1] = currStudent.appointments
+        data[1] = studentUnconfirmedAppts
+        data[2] = studentConfirmedAppts
+        
         tableView.reloadData()
     }
     
@@ -104,8 +116,8 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             do {
                 try Auth.auth().signOut()
                 print("signed out")
-                currName = ""
-                
+                Utils.resetAll()
+
                 let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
                 self.present(viewController!, animated: true, completion: nil)
                 //self.view.window?.rootViewController = viewController
@@ -129,54 +141,69 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         if currStudent.tutor == true {
             self.becomeTutorButton.setTitle("Go to Tutor View", for: .normal)
             self.tut = true
-            currTutorEmail = currStudent.calEmail
-            let db = Firestore.firestore()
-            db.collection("tutors")
-                .document(currTutorEmail)
-                .getDocument { (document, error) in
-                
-                // Check for error
-                if error == nil {
-                    
-                    // Check that this document exists
-                    if document != nil && document!.exists {
-                        
-                        //Get all tutor data and set to currTutor
-                        let documentData = document!.data()
-                        
-                        let gradyear = documentData!["gradyear"] as! Int
-                        let subs = documentData!["subjects"]
-                        let zoom = documentData!["zoom"] as! String
-                        let setPrefs = documentData!["setPrefs"] as! Bool
-                        let preferences = documentData!["preferences"] as! [String : Any]
-                        let img = documentData!["img"] as! String
-                        let prefTime = documentData!["prefTime"] as! [String: [Int]]
-                        let educationLevel = documentData!["educationLevel"] as! String
-                        let bio = documentData!["bio"] as! String
-                        
-                        let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio)
-                
-                        if documentData!["classes"] == nil {
-                            db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
-                        } else {
-                            tutor.classes = documentData!["classes"] as! [String]
-                        }
-                        currTutor = tutor
-                        if let appts = documentData?["appointments"] {
-                            currTutor.appointments = appts as! [[String : Any]]
-                            print("got tutor appts")
-                        } else {
-                            currTutor.appointments = []
-                            print("no tutor appts")
-                        }
-                        currTutor.rating = documentData!["rating"] as! Double
-                        currTutor.experience = documentData!["experience"] as! Int
             
+            if switchedTutorBefore == false {
+                currTutorEmail = currStudent.calEmail
+                let db = Firestore.firestore()
+                db.collection("tutors")
+                    .document(currTutorEmail)
+                    .getDocument { (document, error) in
                     
+                    // Check for error
+                    if error == nil {
+                        
+                        // Check that this document exists
+                        if document != nil && document!.exists {
+                            
+                            //Get all tutor data and set to currTutor
+                            let documentData = document!.data()
+                            
+                            let gradyear = documentData!["gradyear"] as! Int
+                            let subs = documentData!["subjects"]
+                            let zoom = documentData!["zoom"] as! String
+                            let setPrefs = documentData!["setPrefs"] as! Bool
+                            let preferences = documentData!["preferences"] as! [String : Any]
+                            let img = documentData!["img"] as! String
+                            let prefTime = documentData!["prefTime"] as! [String: [Int]]
+                            let educationLevel = documentData!["educationLevel"] as! String
+                            let bio = documentData!["bio"] as! String
+                            
+                            let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio)
+                    
+                            if documentData!["classes"] == nil {
+                                db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
+                            } else {
+                                tutor.classes = documentData!["classes"] as! [String]
+                            }
+                            currTutor = tutor
+                            if let appts = documentData?["appointments"] {
+                                currTutor.appointments = appts as! [[String : Any]]
+                                print("got tutor appts")
+                            } else {
+                                currTutor.appointments = []
+                                print("no tutor appts")
+                            }
+                            currTutor.rating = documentData!["rating"] as! Double
+                            currTutor.experience = documentData!["experience"] as! Int
+                            
+                            for appt in currTutor.appointments {
+                                
+                                if (appt["tutor_read"] as! Bool) == true {
+                                    tutorConfirmedAppts.append(appt)
+                                } else {
+                                    tutorUnconfirmedAppts.append(appt)
+                                }
+                                
+                            }
+                
+                        
+                        }
                     }
+                        
                 }
-                    
+                switchedTutorBefore = true
             }
+            
         } else {
             self.becomeTutorButton.setTitle("Become A Tutor!", for: .normal)
         }
@@ -205,6 +232,10 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             return step.count
             
         case 2:
+            let step = data[section] as! [[String: Any]]
+            return step.count
+    
+        case 3:
             return 0
             
         default:
@@ -229,6 +260,14 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                 cell.setVals(input: current)
             }
             return cell
+        case (2):
+            let appts = data[indexPath.section] as! [[String: Any]]
+            let current = appts[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
+            if appts.count > 0 {
+                cell.setVals(input: current)
+            }
+            return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             
@@ -245,6 +284,12 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             let step1 = data[indexPath.section] as! [[String: Any]]
             let current = step1[indexPath.row]
             performSegue(withIdentifier: "apptDisplay", sender: current)
+            
+        case (2):
+            let step1 = data[indexPath.section] as! [[String: Any]]
+            let current = step1[indexPath.row]
+            performSegue(withIdentifier: "apptDisplay", sender: current)
+            
         default:
             return
         }
@@ -267,7 +312,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ["YOUR RECENT SUBJECTS", "UPCOMING APPOINTMENTS", " "][section]
+        return ["YOUR RECENT SUBJECTS", "UNCONFIRMED APPOINTMENTS","CONFIRMED APPOINTMENTS" , " "][section]
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

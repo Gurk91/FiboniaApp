@@ -9,8 +9,7 @@
 import UIKit
 import Firebase
 
-class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TutUnconfirmedDelegate {
     
     @IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
@@ -18,23 +17,20 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     
-    var data = [0: currTutor.subjects, 1: currTutor.appointments, 2: []] as [Int: Any]
+    var data = [0: tutorUnconfirmedAppts, 1: tutorConfirmedAppts, 2: []] as [Int: [Any]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("tutsubs: ", currTutor.subjects)
         
         tableView.dataSource = self
         tableView.delegate = self
-        data[1] = currTutor.appointments
-        tableView.reloadData()
         
         setUp()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        data[1] = currTutor.appointments
-        tableView.reloadData()
+        data[0] = tutorUnconfirmedAppts
+        data[1] = tutorConfirmedAppts
     }
     
     @IBAction func becomeTutorPressed(_ sender: Any) {
@@ -55,12 +51,11 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             do {
                 try Auth.auth().signOut()
                 print("signed out")
-                currName = ""
+                Utils.resetAll()
                 
                 let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
                 self.present(viewController!, animated: true, completion: nil)
-                //self.view.window?.rootViewController = viewController
-                //self.view.window?.makeKeyAndVisible()
+                
                 
             } catch let error {
                 print("sign out failed", error)
@@ -82,6 +77,65 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     //Table Commands
+    //MARK: Unconfirmed Appointment Delegate Methods
+    func acceptAppointment(appointment: [String : Any]) {
+        print("appointment accepted")
+        for i in 0..<currTutor.appointments.count {
+            if (currTutor.appointments[i]["uid"] as! String) == (appointment["uid"] as! String) {
+                currTutor.appointments[i]["tutor_read"] = true
+                break
+            }
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("tutors").document(currTutor.calEmail).setData(["appointments": currTutor.appointments], merge: true)
+        db.collection("users").document(appointment["studentEmail"] as! String).getDocument { (document, error) in
+            if error != nil {
+                Utils.createAlert(title: "Error Confirming Appointment", message: "There was an unknown error confirming the appointment. Please try again later", buttonMsg: "Okay", viewController: self)
+                return
+            } else {
+                if document != nil && document!.exists {
+                    
+                    let documentData = document!.data()
+                    var studAppts = documentData!["appointments"] as! [[String: Any]]
+                    for i in 0..<studAppts.count {
+                        if (studAppts[i]["uid"] as! String) == (appointment["uid"] as! String) {
+                            studAppts[i]["tutor_read"] = true
+                            break
+                        }
+                    }
+                    db.collection("users").document(appointment["studentEmail"] as! String).setData(["appointments": studAppts], merge: true)
+                }
+            }
+        }
+        for clas in currTutor.classes {
+            db.collection(clas).document(currTutor.calEmail).setData(["appointments": currTutor.appointments], merge: true) { (error) in
+                if error != nil {
+                    Utils.createAlert(title: "Error Confirming Appointment", message: "There was an unknown error confirming the appointment. Please try again later", buttonMsg: "Okay", viewController: self)
+                    return
+                }
+            }
+        }
+        tutorConfirmedAppts = []
+        tutorUnconfirmedAppts = []
+        
+        for appt in currTutor.appointments {
+            
+            if (appt["tutor_read"] as! Bool) == true {
+                tutorConfirmedAppts.append(appt)
+            } else {
+                tutorUnconfirmedAppts.append(appt)
+            }
+            
+        }
+        tableView.reloadData()
+        
+        Utils.createAlert(title: "Confirmed!", message: "Your appointment is confirmed! You're all set!", buttonMsg: "Okay", viewController: self)
+    }
+    
+    func rejectAppointment(appointment: [String : Any]) {
+        print("appointment rejected", appointment)
+    }
 
     // MARK: - Tableview Code
     
@@ -95,15 +149,11 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
         switch (section) {
             
         case 0:
-            return 1
-            
+            return data[0]!.count
         case 1:
-            let step = data[section] as! [[String: Any]]
-            return step.count
-            
+            return data[1]!.count
         case 2:
             return 0
-            
         default:
             return 1
         }
@@ -115,17 +165,23 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
         switch (indexPath.section) {
             
         case (0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! TutorCollectionTableViewCell
-            return cell
-        case (1):
-            let appts = data[indexPath.section] as! [[String: Any]]
-            let current = appts[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
-            if appts.count > 1 {
+            let current = data[0]![indexPath.row] as! [String: Any]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UCdisplay") as! TutUnconfirmedTableViewCell
+            cell.delegate = self
+            if tutorUnconfirmedAppts.count > 0 {
                 print("appts is more than 0")
                 cell.setVals(input: current)
             }
             return cell
+        case (1):
+            let current = data[1]![indexPath.row] as! [String: Any]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! TutorAppointmentTableViewCell
+            if tutorConfirmedAppts.count > 0 {
+                print("appts is more than 0")
+                cell.setVals(input: current)
+            }
+            return cell
+            
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             
@@ -136,9 +192,11 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section) {
         
+        case (0):
+            let current = data[0]![indexPath.row] as! [String: Any]
+            performSegue(withIdentifier: "apptDetails", sender: current)
         case (1):
-            let step1 = data[indexPath.section] as! [[String: String]]
-            let current = step1[indexPath.row]
+            let current = data[1]![indexPath.row] as! [String: Any]
             performSegue(withIdentifier: "apptDetails", sender: current)
         default:
             return
@@ -150,11 +208,6 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
         switch (indexPath.section) {
         
         case(0):
-            print("case 0")
-            return 90
-            
-        case(1):
-            print("case 1")
             return 66
             
         default:
@@ -164,8 +217,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print(section)
-        return ["YOUR RECENT SUBJECTS", "UPCOMING APPOINTMENTS", " "][section]
+        return ["UNCONFIRMED APPOINTMENTS","CONFIRMED APPOINTMENTS", " "][section]
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

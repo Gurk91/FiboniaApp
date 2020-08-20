@@ -152,15 +152,21 @@ class TutorTimingsViewController: UIViewController {
         }
         
         print(finalTimes)
+        
         let db = Firestore.firestore()
-        let docRef = db.collection("tutors").document(currTutorEmail)
-        print("docref 1")
+        let docRef = db.collection("tutors").document(currTutor.calEmail)
         docRef.setData(["prefTime": finalTimes], merge: true)
         print("docref 2")
         currTutor.prefTime = finalTimes
         currTutor.setPrefs = true
         docRef.setData(["setPrefs": true], merge: true)
-        print("docref 3")
+        let classes = currTutor.classes
+        for item in classes {
+            let db = Firestore.firestore()
+            let docRef = db.collection(item).document(currTutor.calEmail)
+            docRef.setData(["prefTime": finalTimes], merge: true)
+        }
+        print("set for classes")
          
     }
     

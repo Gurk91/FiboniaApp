@@ -99,11 +99,25 @@ class SignUpViewController: UIViewController {
                                 case false:
                                     
                                     user!.sendEmailVerification { (error) in
+                                        print("sent verification email")
                                         
                                         guard let error = error else {
-                                            self.createAlert(title: "Verify Email", message: "Check your email for a verification link and come back to sign-up.", buttonMsg: "Okay")
                                             print("user email verification sent")
-                                            return
+                                            let uid = result?.user.uid
+                                        db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid!, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "email", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png"]) { (error) in
+                                                if error != nil {
+                                                    self.errorTextDisplay.text = "First and Last Name not saved"
+                                                    self.errorTextDisplay.alpha = 1
+                                                }
+                                            }
+                                            currStudent = Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], stripeID: currStripe, accntType: "email", firstlogin: true)
+                                            //set current user name
+                                            currName = firstname
+                                            currEmail = email
+                                            //transition to home screen
+                                            //self.transitionToHome()
+                                            self.performSegue(withIdentifier: "home", sender: nil)
+                                            return 
                                         }
                                         
                                         self.handleError(error: error)
@@ -113,19 +127,6 @@ class SignUpViewController: UIViewController {
                                 }
                             })
                             
-                            let uid = result?.user.uid
-                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid!, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "email", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png"]) { (error) in
-                                if error != nil {
-                                    self.errorTextDisplay.text = "First and Last Name not saved"
-                                    self.errorTextDisplay.alpha = 1
-                                }
-                            }
-                            currStudent = Student(fn: firstname, ln: lastname, eml: email, appt: [], subjects: [], stripeID: currStripe, accntType: "email", firstlogin: true)
-                            //set current user name
-                            currName = firstname
-                            currEmail = email
-                            //transition to home screen
-                            self.transitionToHome()
                         }
                     }
                 }
@@ -133,10 +134,14 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "home" {
+            _ = segue.destination as! WelcomeScreenViewController
+        }
+    }
+    
     func transitionToHome() {
-        
-        print("entering bar sequence")
-        
+                
         let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
         self.view.window?.rootViewController = tabBarController
         self.view.window?.makeKeyAndVisible()
@@ -165,8 +170,8 @@ class SignUpViewController: UIViewController {
     
     func handleError(error: Error) {
         
-        /// the user is not registered
-        /// user not found
+        // the user is not registered
+        // user not found
         
         let errorAuthStatus = AuthErrorCode.init(rawValue: error._code)!
         switch errorAuthStatus {

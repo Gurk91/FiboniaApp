@@ -19,7 +19,9 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
-    
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     
     
     @IBOutlet weak var ApptFinButton: UIButton!
@@ -28,6 +30,19 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let db = Firestore.firestore()
+        db.collection(currAppt["classname"] as! String).document(currAppt["tutorEmail"] as! String).getDocument { (document, error) in
+            if error != nil {
+                Utils.createAlert(title: "Error", message: "There was an error loading the appointment details. Please try again", buttonMsg: "Okay", viewController: self)
+                print(error.debugDescription)
+            }
+            if document != nil && document!.exists {
+                let documentData = document!.data()
+                self.ratingLabel.text! = String(documentData!["rating"] as! Double)
+                self.priceLabel.text! = documentData!["price"] as! String
+            }
+        }
+        
         enterParams()
         setUp()
         // Do any additional setup after loading the view.
@@ -41,7 +56,7 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
 
     func enterParams() {
         tutorName.text! = currAppt["tutorFN"] as! String
-        notesLabel.text! = currAppt["notes"] as! String
+        notesLabel.text! = "Appointment Notes: " + (currAppt["notes"] as! String)
         classLabel.text! = currAppt["classname"] as! String
         
         let importedTime = currAppt["time"] as! String
@@ -55,6 +70,14 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
             finalTimes = finalTimes + String(converted) + " "
         }
         timeLabel.text! = date + " " + finalTimes
+        
+        if (currAppt["tutor_read"] as! Bool) == true {
+            statusLabel.text! = "Confirmed"
+            statusLabel.textColor = UIColor.green
+        } else {
+            statusLabel.text! = "Yet To Be Confirmed"
+            statusLabel.textColor = UIColor.red
+        }
         
     }
     
@@ -131,16 +154,6 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
     }))
     self.present(alert, animated: true, completion: nil)
     
-    }
-    
-    @IBAction func completedAction(_ sender: Any) {
-        let time = timeLabel.text!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        let date = dateFormatter.date(from: time)
-        
-        
-        createAlert(title: "Not Yet!", message: "This appointment hasn't begun yet. You can complete it and rate your tutor after it has begun", buttonMsg: "Okay")
     }
     
     func createAlert(title: String, message: String, buttonMsg: String) {
