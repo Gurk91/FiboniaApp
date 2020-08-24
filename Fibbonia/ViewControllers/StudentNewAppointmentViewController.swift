@@ -29,6 +29,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         Utils.styleFilledButton(findTutorbutton)
+        self.hideKeyboardWhenTappedAround() 
 
         // Do any additional setup after loading the view.
         subjects = Constants.pulledSubjects
@@ -101,7 +102,7 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
                             if verified == true {
                                 let name = documentData["name"] as! String
                                 let rating = documentData["rating"] as! Double
-                                let price = documentData["price"] as! String
+                                let price = documentData["price"] as! Int
                                 let online = documentData["zoom"] as! String
                                 let email = documentData["calEmail"] as! String
                                 let time = documentData["prefTime"] as! [String: [Int]]

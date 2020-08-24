@@ -25,7 +25,7 @@ class TutorSelectionTableViewCell: UITableViewCell {
         } else{
             ratingLabel.text! = String(input.rating)
         }
-        priceLabel.text! = "$" + input.price + " /hr"
+        priceLabel.text! = "$" + String(input.price) + " /hr"
     }
     
 

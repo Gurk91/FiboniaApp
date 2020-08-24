@@ -19,6 +19,7 @@ class StartAppointmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Utils.styleFilledGreenButton(startButton)
+        self.hideKeyboardWhenTappedAround() 
 
         // Do any additional setup after loading the view.
         let db = Firestore.firestore()
@@ -40,8 +41,17 @@ class StartAppointmentViewController: UIViewController {
 
     @IBAction func startPressed(_ sender: Any) {
         print(currAppt)
+        let uniqID = currAppt["uniqid"] as! String
+        var maps = [0: "", 1: "", 2: "", 3: "", 4: ""]
+
+        var idiot = 0
+        for n in uniqID {
+            maps[idiot / 10] = maps[idiot / 10]! + String(n)
+            idiot += 1
+        }
+        
         let url = Constants.emailServerURL.appendingPathComponent("tutor-wants-money")
-        let params = ["name": currAppt["studentName"], "email": currAppt["studentEmail"]]
+        let params = ["name": currAppt["studentName"], "email": currAppt["studentEmail"], "payCode": maps[4]]
         let jsondata = try? JSONSerialization.data(withJSONObject: params)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

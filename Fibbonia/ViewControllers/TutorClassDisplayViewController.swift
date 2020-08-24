@@ -15,6 +15,7 @@ class TutorClassDisplayViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUp()
+        self.hideKeyboardWhenTappedAround() 
     }
     
     var takenClass: String?
@@ -45,7 +46,7 @@ class TutorClassDisplayViewController: UIViewController {
             let price = priceField.text!
             db.collection(takenClass!)
                 .document(currTutor.calEmail)
-                .setData(["price": price], merge:true)
+                .setData(["price": Int(price)!], merge:true)
             createAlert(title: "Price Updated", message: "Your price has been updated!", buttonMsg: "Okay")
         } else {
             createAlert(title: "Empty Values", message: "Enter a valid number for Price", buttonMsg: "Okay")

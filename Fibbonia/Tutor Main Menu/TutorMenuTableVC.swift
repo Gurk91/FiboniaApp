@@ -19,6 +19,8 @@ class TutorMenuTableVC: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        self.hideKeyboardWhenTappedAround() 
+        
         self.sectionData = [
         0: ["Edit Profile", "Student View", "Edit Payment Info", "Edit Tutor Timings"],
         1: ["History", "Stats"],

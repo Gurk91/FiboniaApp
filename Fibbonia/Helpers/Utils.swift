@@ -140,7 +140,7 @@ class Utils {
         URLSession.shared.dataTask(with: url) { data, response, error in
             // the task has completed – push our work back to the main thread
             DispatchQueue.main.async {
-                if let data = data {
+                if data != nil {
                 
                    do {
                       let data = try Data(contentsOf: url, options: .alwaysMapped)
@@ -309,8 +309,8 @@ class Utils {
         currEmail = ""
         currTutorEmail = ""
         currStudent = Student(fn: "", ln: "", eml: "", appt: [["ABC":"DEF"]], subjects: [], stripeID: "", accntType: "", firstlogin: false)
-        currTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "")
-        defaultTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "")
+        currTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
+        defaultTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
         pickedClass = ""
         desperate = []
         alreadyEntered = false
@@ -320,6 +320,38 @@ class Utils {
         studentConfirmedAppts = []
         tutorUnconfirmedAppts = []
         tutorConfirmedAppts = []
+        switchedTutorBefore = false
+        currentAppointment = ["":""]
+        unratedAppointment = ["":""]
+        studentCurrentAppointments = []
+        studentUnratedAppointments = []
+    }
+    
+    static func reloadAppointments() {
+        
+        studentConfirmedAppts = []
+        studentUnconfirmedAppts = []
+        studentUnratedAppointments = []
+        studentCurrentAppointments = []
+        
+        for appt in currStudent.appointments {
+            if (appt["tutor_read"] as! Bool) == true && appt["pay_created"] as! Bool == false {
+                print("conf")
+                studentConfirmedAppts.append(appt)
+            }
+            else if (appt["tutor_read"] as! Bool) == false {
+                print("unconf")
+                studentUnconfirmedAppts.append(appt)
+            }
+            else if appt["rated"] as! Bool == false && appt["txn_id"] as! String != "" {
+                print("unrated")
+                studentUnratedAppointments.append(appt)
+            }
+            else if appt["pay_created"] as! Bool == true && appt["txn_id"] as! String == "" {
+                print("curr")
+                studentCurrentAppointments.append(appt)
+            }
+        }
         
     }
         

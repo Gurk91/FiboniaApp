@@ -12,13 +12,9 @@ import Firebase
 class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-    //@IBOutlet weak var becomeTutorButton: UIButton!
-    //@IBOutlet weak var signOutButton: UIButton!
-    
     @IBOutlet weak var becomeTutorButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
-    
-    //@IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var newAppointmentButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,10 +27,15 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         
         tableView.dataSource = self
         tableView.delegate = self
-        data[1] = studentUnconfirmedAppts
-        data[2] = studentConfirmedAppts
+        
+        Utils.reloadAppointments()
+        
+        data[1] = studentConfirmedAppts
+        data[2] = studentCurrentAppointments
+        data[3] = studentUnratedAppointments
         
         tableView.reloadData()
+        self.hideKeyboardWhenTappedAround() 
         
         
         if Utils.Connection() == true {
@@ -52,32 +53,16 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             alreadyEntered = true
         }
         
-        for i in 0..<currStudent.appointments.count {
-            if currStudent.appointments[i]["pay_created"] as! Bool == true {
-                currentAppointment = currStudent.appointments[i]
-                let newViewController = self.storyboard?.instantiateViewController(identifier: "currentAppt") as! CurrentAppointmentViewController
-                self.present(newViewController, animated: true, completion: nil)
-                break
-            }
-        }
-        
-        for i in 0..<currStudent.appointments.count {
-            if currStudent.appointments[i]["rated"] as! Bool == false && currStudent.appointments[i]["txn_id"] as! String != "" {
-                unratedAppointment = currStudent.appointments[i]
-                let newViewController = self.storyboard?.instantiateViewController(identifier: "rateAppt") as! RatingViewController
-                self.present(newViewController, animated: true, completion: nil)
-                break
-            }
-        }
-        
         
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        data[1] = studentUnconfirmedAppts
-        data[2] = studentConfirmedAppts
+        Utils.reloadAppointments()
         
+        data[1] = studentConfirmedAppts
+        data[2] = studentCurrentAppointments
+        data[3] = studentUnratedAppointments
         tableView.reloadData()
     }
     
@@ -86,6 +71,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     func setUp() {
         Utils.styleHollowDeleteButton(signOutButton)
         Utils.styleFilledButton(becomeTutorButton)
+        Utils.styleFilledButton(newAppointmentButton)
     }
     
     @IBAction func signOutPressed(_ sender: Any) {
@@ -167,8 +153,10 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                             let prefTime = documentData!["prefTime"] as! [String: [Int]]
                             let educationLevel = documentData!["educationLevel"] as! String
                             let bio = documentData!["bio"] as! String
+                            let stpID = documentData!["stripe_id"] as! String
+                            let venID = documentData!["venmo_id"] as! String
                             
-                            let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio)
+                            let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio, stripe_id: stpID, venmo_id: venID)
                     
                             if documentData!["classes"] == nil {
                                 db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)
@@ -228,15 +216,20 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             return 1
             
         case 1:
-            let step = data[section] as! [[String: Any]]
-            return step.count
+            if currStudent.appointments.count == 0 {
+                return 1
+            } else {
+                let step = data[section] as! [[String: Any]]
+                return step.count
+            }
             
         case 2:
             let step = data[section] as! [[String: Any]]
             return step.count
     
         case 3:
-            return 0
+            let step = data[section] as! [[String: Any]]
+            return step.count
             
         default:
             return 1
@@ -250,28 +243,48 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         switch (indexPath.section) {
             
         case (0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! CollectionStudentTableViewCell
-            return cell
+            if currStudent.subjects.count == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "noSub")
+                return cell!
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! CollectionStudentTableViewCell
+                return cell
+            }
+            
         case (1):
             let appts = data[indexPath.section] as! [[String: Any]]
+            print("count", currStudent.appointments.count)
+            if currStudent.appointments.count == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "empty")
+                return cell!
+            }
             let current = appts[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
             if appts.count > 0 {
                 cell.setVals(input: current)
             }
             return cell
+        
         case (2):
             let appts = data[indexPath.section] as! [[String: Any]]
             let current = appts[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! AppointmentViewTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "startAppt") as! CurrentAppointmentTableViewCell
             if appts.count > 0 {
                 cell.setVals(input: current)
             }
             return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            
+        case (3):
+            let appts = data[indexPath.section] as! [[String: Any]]
+            let current = appts[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "unratedAppt") as! UnratedAppointmentTableViewCell
+            if appts.count > 0 {
+                cell.setVals(input: current)
+            }
             return cell
+            
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "empty")
+            return cell!
         }
         
     }
@@ -288,7 +301,12 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         case (2):
             let step1 = data[indexPath.section] as! [[String: Any]]
             let current = step1[indexPath.row]
-            performSegue(withIdentifier: "apptDisplay", sender: current)
+            performSegue(withIdentifier: "currentAppt", sender: current)
+            
+        case (3):
+            let step1 = data[indexPath.section] as! [[String: Any]]
+            let current = step1[indexPath.row]
+            performSegue(withIdentifier: "rateAppt", sender: current)
             
         default:
             return
@@ -300,11 +318,12 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         switch (indexPath.section) {
         
         case(0):
-            return 90
-            
-        case(1):
-            return 66
-            
+            if currStudent.subjects.count == 0 {
+                return 66
+            } else {
+                return 90
+            }
+                        
         default:
             return 66
         }
@@ -312,7 +331,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ["YOUR RECENT SUBJECTS", "UNCONFIRMED APPOINTMENTS","CONFIRMED APPOINTMENTS" , " "][section]
+        return ["YOUR RECENT SUBJECTS", "CONFIRMED APPOINTMENTS","CURRENT APPOINTMENTS" , "UNRATED APPOINTMENTS"][section]
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -327,10 +346,20 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         return 50
     }
     
+    //MARK: Segue functions
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "apptDisplay"{
             let destination = segue.destination as! StudentDisplayApptViewController
+            destination.currAppt = sender as! [String: Any]
+        }
+        else if segue.identifier == "currentAppt" {
+            let destination = segue.destination as! CurrentAppointmentViewController
+            destination.currAppt = sender as! [String: Any]
+        }
+        else if segue.identifier == "rateAppt" {
+            let destination = segue.destination as! RatingViewController
             destination.currAppt = sender as! [String: Any]
         }
     }

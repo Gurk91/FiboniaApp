@@ -29,6 +29,7 @@ class TutStudentDisplayViewController: UIViewController {
         super.viewDidLoad()
         enterParams()
         setUp()
+        self.hideKeyboardWhenTappedAround() 
         // Do any additional setup after loading the view.
     }
     

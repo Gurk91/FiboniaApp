@@ -38,9 +38,17 @@ class TutApptTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*
+        let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! TutorAppointmentTableViewCell
+        if self.data.count > 0 {
+            cell.setVals(input: current)
+        }
+        return cell
+ */
         let current = data[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "display") as! TutorAppointmentTableViewCell
-        if self.data.count > 1 {
+        if currTutor.appointments.count > 0 {
+            print("appts is more than 0")
             cell.setVals(input: current)
         }
         return cell

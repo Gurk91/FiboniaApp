@@ -29,12 +29,14 @@ class LoginOptionsViewController: UIViewController, GIDSignInDelegate {
         Utils.styleFilledButton(emailButton)
         Utils.styleHollowButton(backButton)
         errorTextDisplay.alpha = 0
+        self.hideKeyboardWhenTappedAround() 
         
         // Do any additional setup after loading the view.
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
     }
     
+    //MARK: Google Sign-In
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let err = error {
             print("Failed to log in to Google", err)
@@ -42,6 +44,7 @@ class LoginOptionsViewController: UIViewController, GIDSignInDelegate {
             self.errorTextDisplay.alpha = 1
             return
         }
+        self.showSpinner(onView: self.view)
         print("Google log-in success")
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
@@ -86,8 +89,11 @@ class LoginOptionsViewController: UIViewController, GIDSignInDelegate {
                         currStudent.tutor = documentData!["tutor"] as! Bool
                         currStudent.calEmail = documentData!["calEmail"] as! String
                         
+                        Utils.reloadAppointments()
+                        
                         print("entering bar sequence")
                         
+                        self.removeSpinner()
                         let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
                         self.view.window?.rootViewController = tabBarController
                         self.view.window?.makeKeyAndVisible()
@@ -98,6 +104,9 @@ class LoginOptionsViewController: UIViewController, GIDSignInDelegate {
             
         }
     }
+    
+    //MARK: Facebook Sign-In
+    
  
 
 }

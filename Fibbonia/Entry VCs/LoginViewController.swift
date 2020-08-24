@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
         //Utils.organizeSubjects()
         //Utils.organizeClasses()
         Utils.createCustomer()
+        
+        self.hideKeyboardWhenTappedAround()
     }
 
     
@@ -57,7 +59,7 @@ class LoginViewController: UIViewController {
                 user?.reload(completion: { (error) in
                     switch user!.isEmailVerified {
                     case true:
-                        print("users email is verified")
+                        self.showSpinner(onView: self.view)
                         let db = Firestore.firestore()
                         let docRef = db.collection("users").document(email)
                         docRef.getDocument { (document, error) in
@@ -77,15 +79,10 @@ class LoginViewController: UIViewController {
                                     currStripe = currStudent.stripeID
                                     currStudent.tutor = documentData!["tutor"] as! Bool
                                     currStudent.calEmail = documentData!["calEmail"] as! String
-                                    for appt in currStudent.appointments {
-                                        
-                                        if (appt["tutor_read"] as! Bool) == true {
-                                            studentConfirmedAppts.append(appt)
-                                        } else {
-                                            studentUnconfirmedAppts.append(appt)
-                                        }
-                                    }
                                     
+                                    Utils.reloadAppointments()
+                                    
+                                    self.removeSpinner()
                                     print("entering bar sequence")
                                     
                                     let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)

@@ -24,7 +24,6 @@ class PaymentIntroViewController: UIViewController, STPPaymentContextDelegate {
         paymentContext.delegate = self
         paymentContext.hostViewController = self
         //paymentContext.paymentAmount = 3000
-        let dict = ["amount": 60, "customer": currStripe] as [String : Any]
         
         //self.createPaymentIntent(dict: dict)
         //createCustomer()
@@ -103,7 +102,7 @@ class PaymentIntroViewController: UIViewController, STPPaymentContextDelegate {
                 print("success")
                 completion(.success, nil)
             case .failed:
-                print("cant", error)
+                print("cant", error!)
                 completion(.error, error)
             case .canceled:
                 completion(.userCancellation, nil)

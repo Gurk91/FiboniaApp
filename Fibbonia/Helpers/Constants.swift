@@ -51,7 +51,7 @@ struct Constants {
     struct tutorField {
         var name: String
         var rating: Double
-        var price: String
+        var price: Int
         var zoom: String
         var calEmail: String
         var prefTime: [String:[Int]]

@@ -30,7 +30,7 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     
     
     var currAppt: [String: Any] = ["":""]
-    var price = ""
+    var price = 0
     var rating = ""
     
     var customerContext = STPCustomerContext(keyProvider: MyAPIClient())
@@ -39,21 +39,40 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     var clientSecretFinal = ""
     var customerID = ""
     var tutorStripeID = ""
+    var tutorAppts: [[String: Any]] = []
+    var tutorClasses = [""]
+    var pars: [String: Any] = ["":""]
+    var stripeMoney = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currAppt = currentAppointment
         getTutorStuff()
+        self.hideKeyboardWhenTappedAround() 
         // Do any additional setup after loading the view.
         
         Utils.styleFilledGreenButton(payButton)
         Utils.styleHollowDeleteButton(cancelButton)
         //Stripe
-        let customerContext = STPCustomerContext(keyProvider: MyAPIClient())
-        paymentContext = STPPaymentContext(customerContext: customerContext)
-        paymentContext.delegate = self
-        paymentContext.hostViewController = self
-        enterParams()
+        let db = Firestore.firestore()
+        let docRef = db.collection("tutors").document(currAppt["tutorEmail"] as! String)
+        docRef.getDocument { (document, error) in
+            if error == nil {
+                if document != nil && document!.exists {
+                    let documentData = document!.data()
+                    self.tutorStripeID = documentData!["stripe_id"] as! String
+                    self.rating = String(documentData!["rating"] as! Double)
+                    self.tutorAppts = documentData!["appointments"] as! [[String: Any]]
+                    self.tutorClasses = documentData!["classes"] as! [String]
+                    self.customerContext = STPCustomerContext(keyProvider: MyAPIClient())
+                    self.paymentContext = STPPaymentContext(customerContext: self.customerContext)
+                    self.paymentContext.delegate = self
+                    self.paymentContext.hostViewController = self
+                    self.enterParams()
+                }
+            } else {
+                print("unknown error retriving data 1")
+            }
+        }
     }
     
     //MARK: Visual and PaymentIntent Setup
@@ -67,7 +86,7 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
             if document != nil && document!.exists {
                 let documentData = document!.data()
                 self.ratingLabel.text! = String(documentData!["rating"] as! Double)
-                self.priceLabel.text! = documentData!["price"] as! String
+                self.priceLabel.text! = String(documentData!["price"] as! Int)
             }
         }
 
@@ -87,36 +106,48 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
             finalTimes = finalTimes + String(converted) + " "
         }
         timeLabel.text! = date + " " + finalTimes
-        let tutAmount = timings.count * Int(price)!
-        let procAmount = Double(tutAmount) * 0.1
-        let totalAmount = Double(tutAmount) + procAmount
-        amountPayLabel.text = "Total Amount: $" + String(totalAmount)
-        tutorChargeLabel.text! = String(timings.count) + "hour appointment @ " + price + "/hr: $" + String(tutAmount)
-        processingFeesLabel.text! = "Stripe Fees + Convenience Fee @ 10%: $" + String(procAmount)
-        let params = ["amount": totalAmount, "customer": currStudent.stripeID, "tutorID": tutorStripeID] as [String : Any]
-        self.createPaymentIntent(dict: params)
     }
     
     func getTutorStuff() {
         let db = Firestore.firestore()
-        let docRef = db.collection("tutors").document(currAppt["tutorEmail"] as! String)
-        docRef.getDocument { (document, error) in
+        let docRef2 = db.collection(currAppt["classname"] as! String).document(currAppt["tutorEmail"] as! String)
+        docRef2.getDocument { (document, error) in
             if error == nil {
                 if document != nil && document!.exists {
                     let documentData = document!.data()
-                    self.tutorStripeID = documentData!["stripe_id"] as! String
-                    self.rating = String(documentData!["rating"] as! Double)
-                    self.price = documentData!["price"] as! String
+                    self.price = documentData!["price"] as! Int
+                    let importedTime = self.currAppt["time"] as! String
+                    let timecomps = importedTime.components(separatedBy: " ")
+                    let timings = timecomps[3..<timecomps.count]
+                    let tutAmount = timings.count * self.price
+                    
+                    var procAmount = 0.0
+                    if self.currAppt["group_tutoring"] as! Bool == true {
+                        procAmount = Double(tutAmount) * 0.06
+                    } else {
+                        procAmount = Double(tutAmount) * 0.1
+                    }
+                    
+                    let totalAmount = Double(tutAmount) + procAmount
+                    self.amountPayLabel.text = "Total Amount: $" + String(totalAmount)
+                    self.tutorChargeLabel.text! = String(timings.count) + "hour appointment @ " + String(self.price) + "/hr: $" + String(tutAmount)
+                    self.processingFeesLabel.text! = "Processing Fees @ 10%: $" + String(procAmount)
+                    self.pars = ["amount": totalAmount * 100, "customer": currStudent.stripeID, "tutorID": self.tutorStripeID] as [String : Any]
+                    print(self.pars)
+                    
                 }
             } else {
-                print("unknown error retriving data")
+                print("unknown error retriving data 2")
             }
         }
+        
 
     }
     
     //MARK: Stripe Payment Stuff
     @IBAction func payPressed(_ sender: Any) {
+        print("tutor", self.tutorStripeID)
+        self.createPaymentIntent(dict: pars)
         self.paymentContext.requestPayment()
     }
     
@@ -147,12 +178,31 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPPaymentStatusBlock) {
         let paymentIntentParams = STPPaymentIntentParams(clientSecret: self.clientSecretFinal)
         paymentIntentParams.configure(with: paymentResult)
-        paymentIntentParams.returnURL = "myStripeTest://payments-redirect"
+        paymentIntentParams.returnURL = "myFibonia://payments-redirect"
         
         STPPaymentHandler.shared().confirmPayment(withParams: paymentIntentParams, authenticationContext: paymentContext) { status, paymentIntent, error in
             switch status {
             case .succeeded:
                 print("success")
+                self.currAppt["txn_id"] = paymentIntent!.stripeId
+                let db = Firestore.firestore()
+                
+                let docRef = db.collection("users").document(currStudent.email)
+                var newStudentAppts = self.removeAppointment(array: currStudent.appointments, appt: self.currAppt)
+                newStudentAppts.append(self.currAppt)
+                docRef.setData(["appointments": newStudentAppts], merge: true)
+                currStudent.appointments = newStudentAppts
+                
+                let docRef2 = db.collection("tutors").document(self.currAppt["tutorEmail"] as! String)
+                var newTutorAppts = self.removeAppointment(array: self.tutorAppts, appt: self.currAppt)
+                newTutorAppts.append(self.currAppt)
+                docRef2.setData(["appointments": newTutorAppts], merge: true)
+                
+                for clas in self.tutorClasses {
+                    let docRef3 = db.collection(clas).document(self.currAppt["tutorEmail"] as! String)
+                    docRef3.setData(["appointments": newTutorAppts], merge: true)
+                }
+                
                 completion(.success, nil)
             case .failed:
                 print("cant", error!)
@@ -175,9 +225,8 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
         case .success:
             title = "Payment Successful!"
             message = "Your payment was successful! Happy Learning!"
-            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
-            self.view.window?.rootViewController = tabBarController
-            self.view.window?.makeKeyAndVisible()
+            self.payButton.isHidden = true
+            self.cancelButton.isHidden = true
         case .userCancellation:
             return()
         @unknown default:
@@ -220,6 +269,7 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     
     
     @IBAction func cancelPressed(_ sender: Any) {
+        
     }
     
     
@@ -241,6 +291,19 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
         //MARK: Segue to rating appointment screen
         
         return
+    }
+    
+    func removeAppointment(array: [[String: Any]], appt: [String: Any]) -> [[String: Any]] {
+        var input = array
+        for i in 0..<input.count {
+            if appt["uid"] as! String == input[i]["uid"] as! String {
+                input.remove(at: i)
+                print("removed")
+                print(input.count)
+                break
+            }
+        }
+        return input
     }
     
 

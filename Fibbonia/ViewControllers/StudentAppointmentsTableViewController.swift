@@ -14,6 +14,7 @@ class StudentAppointmentsTableViewController: UITableViewController {
         super.viewDidLoad()
         data = currStudent.appointments
         tableView.reloadData()
+        self.hideKeyboardWhenTappedAround() 
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -10,6 +10,7 @@ import FirebaseUI
 import FirebaseDatabase
 import CoreData
 import GoogleSignIn
+import Firebase
 
 
 class ViewController: UIViewController, CAAnimationDelegate {
@@ -103,7 +104,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         // Do any additional setup after loading the view.
         //authenticateUser()
         setUpElements()
-        
+        //authenticateUser()
         
         // Begin pull from BerkeleyTime
         
@@ -173,14 +174,18 @@ class ViewController: UIViewController, CAAnimationDelegate {
     }
     
     func authenticateUser() {
-        if Auth.auth().currentUser == nil {
+        if Auth.auth().currentUser != nil {
+            print("auth")
+            let user = Auth.auth().currentUser
+            print("llama", user?.displayName)
+            print("email", user?.email)
             DispatchQueue.main.async {
-                let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeScreenViewController
-                
-                self.view.window?.rootViewController = homeViewController
+                let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+                self.view.window?.rootViewController = tabBarController
                 self.view.window?.makeKeyAndVisible()
             }
         } else {
+            print("no auth")
             return 
         }
     }
@@ -211,6 +216,41 @@ class ViewController: UIViewController, CAAnimationDelegate {
     
 }
 
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
 
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 
+var vSpinner : UIView?
+ 
+extension UIViewController {
+    func showSpinner(onView : UIView) {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let ai = UIActivityIndicatorView.init(style: .medium)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            onView.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
+    }
+    
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            vSpinner?.removeFromSuperview()
+            vSpinner = nil
+        }
+    }
+}
 

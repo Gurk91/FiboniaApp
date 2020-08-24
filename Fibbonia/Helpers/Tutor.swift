@@ -28,8 +28,10 @@ class Tutor {
     var prefTime: [String: [Int]]
     var educationLevel: String
     var bio: String
+    var stripe_id: String
+    var venmo_id: String
     
-    init(name: String ,calEmail: String, gradyear: Int, subjects: [String], zoom: String, setPrefs: Bool, preferences: [String: Any], img: String, firstlogin: Bool, prefTime: [String: [Int]], educationLevel: String, bio: String) {
+    init(name: String ,calEmail: String, gradyear: Int, subjects: [String], zoom: String, setPrefs: Bool, preferences: [String: Any], img: String, firstlogin: Bool, prefTime: [String: [Int]], educationLevel: String, bio: String, stripe_id: String, venmo_id: String) {
         self.name = name
         self.calEmail = calEmail
         self.gradyear = gradyear
@@ -46,6 +48,8 @@ class Tutor {
         self.prefTime = prefTime
         self.educationLevel = educationLevel
         self.bio = bio
+        self.stripe_id = stripe_id
+        self.venmo_id = venmo_id
         
         //self.classRating = [:]
     }

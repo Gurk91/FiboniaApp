@@ -19,6 +19,7 @@ class TranscriptViewController: UIViewController, SFSafariViewControllerDelegate
 
         // Do any additional setup after loading the view.
         Utils.styleFilledButton(uploadButton)
+        self.hideKeyboardWhenTappedAround() 
     }
     
     @IBAction func uploadPressed(_ sender: Any) {

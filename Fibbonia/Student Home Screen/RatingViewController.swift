@@ -14,14 +14,31 @@ class RatingViewController: UIViewController {
     var currAppt: [String: Any] = ["":""]
     var exper: Int = 0
     var oldrate: Double = 0.0
-    var tutorClasses: [String] = []
-    var tutorAppointments: [[String: Any]] = [["":""]]
+    var tutorAppts: [[String: Any]] = []
+    var tutorClasses = [""]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         Utils.styleFilledButton(rateButton)
+        self.hideKeyboardWhenTappedAround() 
         // Do any additional setup after loading the view.
-        currAppt = unratedAppointment
+        
+        let db = Firestore.firestore()
+        let docRef = db.collection("tutors").document(currAppt["tutorEmail"] as! String)
+        docRef.getDocument { (document, error) in
+            if error == nil {
+                if document != nil && document!.exists {
+                    let documentData = document!.data()
+                    self.oldrate = documentData!["rating"] as! Double
+                    self.tutorAppts = documentData!["appointments"] as! [[String: Any]]
+                    self.tutorClasses = documentData!["classes"] as! [String]
+    
+                    self.enterParams()
+                }
+            } else {
+                print("unknown error retriving data 1")
+            }
+        }
     }
     
     @IBOutlet weak var priceLabel: UILabel!
@@ -56,7 +73,7 @@ class RatingViewController: UIViewController {
                 let documentData = document!.data()
                 self.oldrate = documentData!["rating"] as! Double
                 self.ratingLabel.text! = String(self.oldrate)
-                self.priceLabel.text! = documentData!["price"] as! String
+                self.priceLabel.text! = String(documentData!["price"] as! Int)
                 self.exper = documentData!["experience"] as! Int
             }
         }
@@ -84,23 +101,41 @@ class RatingViewController: UIViewController {
 
         let apptUID = currAppt["uid"] as! String
         var index = 0
-        for appt in tutorAppointments{
+        for appt in tutorAppts{
             if appt["uid"] as! String == apptUID {
-                tutorAppointments.remove(at: index)
+                tutorAppts.remove(at: index)
                 break
             }
             index += 1
         }
-        docRef.setData(["experience": exper, "rating": newRating, "appointments": tutorAppointments], merge: true)
+        docRef.setData(["experience": exper, "rating": newRating, "appointments": tutorAppts], merge: true)
         for clas in tutorClasses{
             let docRef2 = db.collection(clas).document(currAppt["tutorEmail"] as! String)
-            docRef2.setData(["experience": exper, "rating": newRating, "appointments": tutorAppointments], merge: true)
+            docRef2.setData(["experience": exper, "rating": newRating, "appointments": tutorAppts], merge: true)
         }
+        currStudent.appointments = removeAppointment(array: currStudent.appointments, appt: currAppt)
+        let docRef2 = db.collection("users").document(currStudent.email)
+        docRef2.setData(["appointments": currStudent.appointments], merge: true)
+        
         Utils.createAlert(title: "Thank You!", message: "We hope you were able to find what you were looking for! Hope to see you again in future!", buttonMsg: "Okay", viewController: self)
         let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
         self.view.window?.rootViewController = tabBarController
         self.view.window?.makeKeyAndVisible()
 
     }
+    
+    func removeAppointment(array: [[String: Any]], appt: [String: Any]) -> [[String: Any]] {
+        var input = array
+        for i in 0..<input.count {
+            if appt["uid"] as! String == input[i]["uid"] as! String {
+                input.remove(at: i)
+                print("removed")
+                print(input.count)
+                break
+            }
+        }
+        return input
+    }
+
     
 }

@@ -36,6 +36,7 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
         self.classPicker.delegate = self
         self.subjectPicker.delegate = self
         self.subjectPicker.delegate = self
+        self.hideKeyboardWhenTappedAround() 
     }
     
     func setUp() {
@@ -96,9 +97,17 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
                     if data.contains(email) {
                         Utils.createAlert(title: "Class Already Added", message: "Looks like you're already in this class", buttonMsg: "Okay", viewController: self)
                         return
+                    }
+                    else if currTutor.stripe_id == "" && currTutor.venmo_id == "" {
+                        Utils.createAlert(title: "Incomplete Payment Information", message: "Please complete your payment information in Settings > Edit Payment Info in order to receive money from your students", buttonMsg: "Okay", viewController: self)
+                        return
+                    }
+                    else if currTutor.prefTime == ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()] {
+                        Utils.createAlert(title: "Time Preferences Not Added", message: "Please update your preffered tutoring times at Settings > Edit Tutor Timings", buttonMsg: "Okay", viewController: self)
+                        return
                     } else {
                         currTutor.classes.append(self.selectedClass)
-                        db.collection(self.selectedClass).document(currTutor.calEmail).setData(["appointments": currTutor.appointments, "verified": false, "classes": currTutor.classes, "calEmail": currTutor.calEmail, "experience":currTutor.experience, "name": currTutor.name, "zoom": currTutor.zoom, "rating": currTutor.rating, "subjects":currTutor.subjects, "price": price, "prefTime": currTutor.prefTime, "bio": currTutor.bio]) { (error) in
+                        db.collection(self.selectedClass).document(currTutor.calEmail).setData(["appointments": currTutor.appointments, "verified": false, "classes": currTutor.classes, "calEmail": currTutor.calEmail, "experience":currTutor.experience, "name": currTutor.name, "zoom": currTutor.zoom, "rating": currTutor.rating, "subjects":currTutor.subjects, "price": Int(price)!, "prefTime": currTutor.prefTime, "bio": currTutor.bio]) { (error) in
                             if error != nil {
                                 Utils.createAlert(title: "Error Adding Class", message: "An unknown error occured while adding your class. Please try again later", buttonMsg: "Okay", viewController: self)
                                 return

@@ -21,6 +21,7 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
         dayPicker.dataSource = self
         setTerms()
         setUp()
+        self.hideKeyboardWhenTappedAround() 
         
     }
     
@@ -44,7 +45,7 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
     @IBOutlet weak var groupTutoringBool: UISwitch!
     
     
-    var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: 0, price: "", zoom: "", calEmail: "", prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], appointments: [["ABC":"DEF"]], bio: "", classes: [])
+    var currentValue: Constants.tutorField = Constants.tutorField(name: "", rating: 0, price: 0, zoom: "", calEmail: "", prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], appointments: [["ABC":"DEF"]], bio: "", classes: [])
     var subject: String = ""
     var dayData: [String] = Constants.nextDates
     let dayDict: [String: String] = ["Monday": "0", "Tuesday": "1", "Wednesday": "2", "Thursday":"3", "Friday": "4", "Saturday": "5", "Sunday": "6"]
@@ -82,7 +83,7 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
     //MARK: Everything else
     func setTerms() {
         tutorName.text! = currentValue.name
-        priceLabel.text! = currentValue.price
+        priceLabel.text! = String(currentValue.price)
         ratingLabel.text! = String(currentValue.rating)
         bioLabel.text! = currentValue.bio
         
@@ -143,7 +144,7 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
         let uniqid = Utils.char50UID()
         let timeComps = Date().description.components(separatedBy: " ")
         let timeCreated = timeComps[0] + " " + timeComps[1]
-        let appt = ["classname":classname, "notes": notes, "studentEmail": currStudent.email, "studentName": currStudent.firstName + " " + currStudent.lastName, "subject": subject, "time": time, "tutorEmail": tutorEmail, "rated": false, "group_tutoring": group, "uniqid": uniqid, "tutorFN": tutorFN, "tutor_read": false, "student_read": true, "txn_id": "", "uid": uid, "timeCreated":timeCreated, "zoom": currentValue.zoom] as [String : Any]
+        let appt = ["classname":classname, "notes": notes, "studentEmail": currStudent.email, "studentName": currStudent.firstName + " " + currStudent.lastName, "subject": subject, "time": time, "tutorEmail": tutorEmail, "rated": false, "group_tutoring": group, "uniqid": uniqid, "tutorFN": tutorFN, "tutor_read": false, "student_read": true, "txn_id": "", "uid": uid, "timeCreated":timeCreated, "zoom": currentValue.zoom, "pay_created": false] as [String : Any]
         currStudent.appointments.append(appt)
         let db = Firestore.firestore()
         let docRef = db.collection("users").document(currStudent.email)
@@ -166,6 +167,32 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
             }
         }
         tempSubjects = []
+        
+        var maps = [0: "", 1: "", 2: "", 3: "", 4: ""]
+        
+        var index = 0
+        for n in uniqid {
+            maps[index / 10] = maps[index / 10]! + String(n)
+            index += 1
+        }
+        print("appt", appt)
+        let url = Constants.emailServerURL.appendingPathComponent("tutor-appt-request")
+        let params = ["name":appt["tutorFN"], "email": tutorEmail, "class": appt["classname"], "group": appt["group_tutoring"], "time":hoursTime, "date": selectedDate, "acceptUID": maps[0], "rejectUID": maps[1]]
+        let jsondata = try? JSONSerialization.data(withJSONObject: params)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsondata
+        let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print("Error occured", error.debugDescription)
+            } else {
+                print("response", response?.description as Any)
+                print("data", data?.description as Any)
+            }
+        }
+        task.resume()
+        
         Utils.createAlert(title: "Appointment Created!", message: "Your tutor has been sent your appointment request. If they accept, we'll email you about it! Have fun!", buttonMsg: "Okay", viewController: self)
         
     }

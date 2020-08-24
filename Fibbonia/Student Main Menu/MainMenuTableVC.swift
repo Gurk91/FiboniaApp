@@ -20,7 +20,7 @@ class MainMenuTableVC: UITableViewController {
         tableView.dataSource = self
         
         self.sectionData = [
-        0: ["Edit Profile", "Become Tutor", "Edit Payment Info"],
+        0: ["Become Tutor", "Edit Payment Info"],
         1: ["History", "Stats"],
         2: ["Favourite Tutors"],
         3: ["About Fibonia", "Help and Support", "Sign Out"],
@@ -44,15 +44,8 @@ class MainMenuTableVC: UITableViewController {
         
         switch (indexPath.section, indexPath.row) {
             
+
         case (0, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "profile")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            //print(text)
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
-        case (0, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "tutor")
             let rightImg = UIImage(named: "forwardArrow")
@@ -64,7 +57,7 @@ class MainMenuTableVC: UITableViewController {
             }
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
-        case (0, 2):
+        case (0, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "payment")
             let rightImg = UIImage(named: "forwardArrow")
@@ -125,14 +118,6 @@ class MainMenuTableVC: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "identity", for: indexPath)
-        
-        // Configure the cell...
-        cell.textLabel?.text = self.sectionData[indexPath.section]![indexPath.row]
-        //print("index stuff", indexPath.section, indexPath.row)
-        //print("stuff", self.sectionData[indexPath.section]![indexPath.row])
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -157,10 +142,8 @@ class MainMenuTableVC: UITableViewController {
         
         switch (indexPath.section, indexPath.row) {
             
-        case (0, 0):
-            performSegue(withIdentifier: "editProfile", sender: self)
             
-        case (0, 1):
+        case (0, 0):
             if currTutor.name != "" {
                 let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                 self.view.window?.rootViewController = tutorTBC
@@ -171,7 +154,7 @@ class MainMenuTableVC: UITableViewController {
                 self.view.window?.makeKeyAndVisible()
             }
             
-        case (0, 2):
+        case (0, 1):
             performSegue(withIdentifier: "payment", sender: self)
 
         case (1, 0):

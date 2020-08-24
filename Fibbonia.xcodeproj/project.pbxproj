@@ -51,6 +51,8 @@
 		A4A49899245C9FE400A92E1A /* AppointmentViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */; };
 		A4A4989B245CA9C300A92E1A /* StudentDisplayApptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */; };
 		A4A86D932455ABF50009AE7A /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A86D922455ABF50009AE7A /* Student.swift */; };
+		A4AF330724F105EE00699983 /* UnratedAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF330624F105ED00699983 /* UnratedAppointmentTableViewCell.swift */; };
+		A4AF330924F1074E00699983 /* CurrentAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF330824F1074E00699983 /* CurrentAppointmentTableViewCell.swift */; };
 		A4B2D11E2480055C00467DA3 /* MainMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B2D11D2480055C00467DA3 /* MainMenuTableVC.swift */; };
 		A4B2D1202480058700467DA3 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B2D11F2480058700467DA3 /* MenuCell.swift */; };
 		A4B2D12424800CCC00467DA3 /* Menu2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B2D12324800CCC00467DA3 /* Menu2TableViewCell.swift */; };
@@ -115,6 +117,8 @@
 		A4A49898245C9FE400A92E1A /* AppointmentViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewTableViewCell.swift; sourceTree = "<group>"; };
 		A4A4989A245CA9C300A92E1A /* StudentDisplayApptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDisplayApptViewController.swift; sourceTree = "<group>"; };
 		A4A86D922455ABF50009AE7A /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		A4AF330624F105ED00699983 /* UnratedAppointmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnratedAppointmentTableViewCell.swift; sourceTree = "<group>"; };
+		A4AF330824F1074E00699983 /* CurrentAppointmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentAppointmentTableViewCell.swift; sourceTree = "<group>"; };
 		A4B2D11D2480055C00467DA3 /* MainMenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableVC.swift; sourceTree = "<group>"; };
 		A4B2D11F2480058700467DA3 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		A4B2D12324800CCC00467DA3 /* Menu2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu2TableViewCell.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 				A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */,
 				A4D5AE6B24EDB35C0022FD07 /* CurrentAppointmentViewController.swift */,
 				A498752A24EE5FAD0057ADE4 /* RatingViewController.swift */,
+				A4AF330624F105ED00699983 /* UnratedAppointmentTableViewCell.swift */,
+				A4AF330824F1074E00699983 /* CurrentAppointmentTableViewCell.swift */,
 			);
 			path = "Student Home Screen";
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 				A4F6A02E245CDB370073783C /* ApptTutorTableViewCell.swift in Sources */,
 				A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */,
 				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,
+				A4AF330724F105EE00699983 /* UnratedAppointmentTableViewCell.swift in Sources */,
 				A4B8EA76249FE570006296AD /* TutorCollectionTableViewCell.swift in Sources */,
 				A4B80AA72484667A00A2B8CA /* StudentClassesCollectionViewCell.swift in Sources */,
 				A43BA71C241305B8006DFC10 /* ViewController.swift in Sources */,
@@ -490,6 +497,7 @@
 				A487AEC0241F691A00381E82 /* HomeScreenViewController.swift in Sources */,
 				A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */,
 				A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */,
+				A4AF330924F1074E00699983 /* CurrentAppointmentTableViewCell.swift in Sources */,
 				A41B28C424D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift in Sources */,
 				A4B80AA52484662400A2B8CA /* CollectionStudentTableViewCell.swift in Sources */,
 				A479C346244D1EB000D59809 /* Tutor.swift in Sources */,

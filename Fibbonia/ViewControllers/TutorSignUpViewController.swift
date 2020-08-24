@@ -20,6 +20,7 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
         setUp()
         levelPicker.delegate = self
         levelPicker.dataSource = self
+        self.hideKeyboardWhenTappedAround() 
     }
     
     //Buttons
@@ -31,7 +32,6 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
     @IBOutlet weak var calEmailField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
     @IBOutlet weak var onlineID: UITextField!
-    @IBOutlet weak var bioField: UITextField!
     
     
     @IBOutlet weak var levelPicker: UIPickerView!
@@ -49,7 +49,6 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
         errorTextDisplay.alpha = 0
         
         Utils.styleTextField(calEmailField)
-        Utils.styleTextField(bioField)
         Utils.styleTextField(gradYearField)
         Utils.styleTextField(onlineID)
         
@@ -70,7 +69,6 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
         if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            bioField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             pickedLevel == "" || pickedLevel == "---"{
             return "Please fill in all fields"
         }
@@ -108,7 +106,6 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
             let calEmail = self.calEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let gradYear = self.gradYearField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let online = self.onlineID.text!
-            let bio = self.bioField.text!
             
             //Creating user
             let db = Firestore.firestore()
@@ -125,7 +122,7 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
                     //user is new. Proceed with sign up
                     //user created. Now store details
                     
-                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "zoom": online, "setPrefs": false, "preferences": ["languages": []], "img": "https://www.work.fibonia.com/1/html/img.png", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], "transcript_date": "", "newsletter": false, "uniqid": "", "transcript_file": "", "rating": 0, "experience": 0, "appointments": [["ABC":"DEF"]], "educationLevel": self.pickedLevel, "bio": bio, "stripe_id": "", "venmo_id": "", "venmo_balance": 0]) { (error) in
+                    db.collection("tutors").document(calEmail).setData(["name": currName, "calEmail": calEmail, "gradyear": Int(gradYear)!, "subjects": [""], "zoom": online, "setPrefs": false, "preferences": ["languages": []], "img": "https://www.work.fibonia.com/1/html/img.png", "firstlogin": true, "prefTime": ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], "transcript_date": "", "newsletter": false, "uniqid": "", "transcript_file": "", "rating": 0, "experience": 0, "appointments": [["ABC":"DEF"]], "educationLevel": self.pickedLevel, "bio": "", "stripe_id": "", "venmo_id": "", "venmo_balance": 0]) { (error) in
                             if error != nil {
                                 self.errorTextDisplay.text = "Tutor Not Created"
                                 self.errorTextDisplay.alpha = 1
@@ -138,7 +135,7 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
                     currStudent.calEmail = calEmail
                     currStudent.tutor = true
                     
-                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: Int(gradYear)!, subjects: [""], zoom: online, setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: self.pickedLevel, bio: bio)
+                    currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: Int(gradYear)!, subjects: [""], zoom: online, setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: self.pickedLevel, bio: "", stripe_id: "", venmo_id: "")
                     
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                     self.view.window?.rootViewController = tutorTBC

@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController {
         Utils.organizeSubjects()
         Utils.organizeClasses()
         Utils.createCustomer()
+        self.hideKeyboardWhenTappedAround() 
         
     }
 
@@ -68,6 +69,7 @@ class SignUpViewController: UIViewController {
             let email = self.emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             //create the user
+            self.showSpinner(onView: self.view)
             let db = Firestore.firestore()
             
             //checking if the user already exists or if email is being reused
@@ -116,6 +118,8 @@ class SignUpViewController: UIViewController {
                                             currEmail = email
                                             //transition to home screen
                                             //self.transitionToHome()
+                                            self.removeSpinner()
+                                            
                                             self.performSegue(withIdentifier: "home", sender: nil)
                                             return 
                                         }
@@ -194,3 +198,4 @@ class SignUpViewController: UIViewController {
     
 
 }
+

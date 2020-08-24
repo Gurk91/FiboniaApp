@@ -24,12 +24,13 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
     @IBOutlet weak var statusLabel: UILabel!
     
     
-    @IBOutlet weak var ApptFinButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        
         let db = Firestore.firestore()
         db.collection(currAppt["classname"] as! String).document(currAppt["tutorEmail"] as! String).getDocument { (document, error) in
             if error != nil {
@@ -39,7 +40,8 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
             if document != nil && document!.exists {
                 let documentData = document!.data()
                 self.ratingLabel.text! = String(documentData!["rating"] as! Double)
-                self.priceLabel.text! = documentData!["price"] as! String
+                let prce = documentData!["price"] as! Int
+                self.priceLabel.text! = String(prce)
             }
         }
         
@@ -49,7 +51,6 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
     }
     
     func setUp() {
-        Utils.styleFilledButton(ApptFinButton)
         Utils.styleHollowDeleteButton(cancelButton)
         
     }

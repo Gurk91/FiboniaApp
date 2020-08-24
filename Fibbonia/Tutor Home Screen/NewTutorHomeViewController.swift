@@ -26,6 +26,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         
         setUp()
+        self.hideKeyboardWhenTappedAround() 
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,6 +81,8 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
     //MARK: Unconfirmed Appointment Delegate Methods
     func acceptAppointment(appointment: [String : Any]) {
         print("appointment accepted")
+        self.showSpinner(onView: self.view)
+        
         for i in 0..<currTutor.appointments.count {
             if (currTutor.appointments[i]["uid"] as! String) == (appointment["uid"] as! String) {
                 currTutor.appointments[i]["tutor_read"] = true
@@ -128,13 +131,88 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             }
             
         }
-        tableView.reloadData()
+        
+        Utils.reloadAppointments()
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        self.removeSpinner()
         
         Utils.createAlert(title: "Confirmed!", message: "Your appointment is confirmed! You're all set!", buttonMsg: "Okay", viewController: self)
     }
     
     func rejectAppointment(appointment: [String : Any]) {
         print("appointment rejected", appointment)
+        //code for sending email about rejected appointment
+        self.showSpinner(onView: self.view)
+        
+        var count = 0
+        //tutor side
+        for appt in currTutor.appointments {
+            if appt["uid"] as! String == appointment["uid"] as! String{
+                currTutor.appointments.remove(at: count)
+                break
+            }
+            count += 1
+        }
+        let db = Firestore.firestore()
+        let docRef = db.collection("tutors").document(currTutor.calEmail)
+        docRef.setData(["appointments": currTutor.appointments], merge: true)
+        
+        Utils.reloadAppointments()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        tableView.reloadData()
+        
+        //for each class
+        for clas in currTutor.classes {
+            let docRef2 = db.collection(clas).document(currTutor.calEmail)
+            docRef2.setData(["appointments": currTutor.appointments], merge: true)
+        }
+        //Student side
+        db.collection("users").document(appointment["studentEmail"] as! String).getDocument { (document, error) in
+            if error != nil {
+                Utils.createAlert(title: "Error Confirming Appointment", message: "There was an unknown error confirming the appointment. Please try again later", buttonMsg: "Okay", viewController: self)
+                return
+            } else {
+                if document != nil && document!.exists {
+                    
+                    let documentData = document!.data()
+                    var studAppts = documentData!["appointments"] as! [[String: Any]]
+                    for i in 0..<studAppts.count {
+                        if (studAppts[i]["uid"] as! String) == (appointment["uid"] as! String) {
+                            studAppts.remove(at: i)
+                            break
+                        }
+                    }
+                    db.collection("users").document(appointment["studentEmail"] as! String).setData(["appointments": studAppts], merge: true)
+                }
+            }
+        }
+        let url = Constants.emailServerURL.appendingPathComponent("tutor-appt-reject")
+        let params = ["name":appointment["studentName"], "time": appointment["time"], "class": appointment["classname"], "email":appointment["studentEmail"]]
+        let jsondata = try? JSONSerialization.data(withJSONObject: params)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsondata
+        let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print("Error occured", error.debugDescription)
+            } else {
+                print("response", response?.description as Any)
+                print("data", data?.description as Any)
+            }
+        }
+        task.resume()
+        
+        
+        self.removeSpinner()
+        Utils.createAlert(title: "Rejected!", message: "This appointment has been rejected", buttonMsg: "Okay", viewController: self)
     }
 
     // MARK: - Tableview Code

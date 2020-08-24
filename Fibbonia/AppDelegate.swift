@@ -13,6 +13,8 @@ import Stripe
 import GoogleSignIn
 import UserNotifications
 import FirebaseMessaging
+import FBSDKCoreKit
+import FacebookCore
 
 
 var currUser: User = Auth.auth().currentUser!
@@ -20,8 +22,8 @@ var currName: String = "nope"
 var currEmail: String = ""
 var currTutorEmail: String = ""
 var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: [["ABC":"DEF"]], subjects: [], stripeID: "", accntType: "", firstlogin: false)
-var currTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "")
-var defaultTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "")
+var currTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
+var defaultTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
 var pickedClass: String = ""
 var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
@@ -34,6 +36,8 @@ var tutorConfirmedAppts: [[String: Any]] = []
 var switchedTutorBefore: Bool = false
 var currentAppointment:[String: Any] = ["":""]
 var unratedAppointment:[String: Any] = ["":""]
+var studentCurrentAppointments: [[String: Any]] = []
+var studentUnratedAppointments: [[String: Any]] = []
 
 
 @UIApplicationMain
@@ -63,11 +67,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "hasAlreadyLaunched")
         }
         
+        window?.addGestureRecognizer(
+            UITapGestureRecognizer(
+              target: window,
+              action: #selector(UIWindow.endEditing(_:))
+            )
+        )
+        
         return true
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
       -> Bool {
+        
       return GIDSignIn.sharedInstance().handle(url)
     }
     

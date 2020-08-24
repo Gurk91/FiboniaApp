@@ -11,6 +11,8 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import FacebookCore
+import FacebookLogin
 
 class OptionsViewController: UIViewController, GIDSignInDelegate {
     
@@ -23,9 +25,11 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
         errorTextDisplay.alpha = 0
         Utils.createCustomer()
     
+        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
+        
     }
     
     @IBOutlet weak var googleButton: GIDSignInButton!
@@ -34,8 +38,6 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var errorTextDisplay: UILabel!
-    
-    
     
     @IBAction func googlePressed(_ sender: Any) {
         
@@ -48,6 +50,7 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
             self.errorTextDisplay.alpha = 1
             return
         }
+        self.showSpinner(onView: self.view)
         print("Google log-in success")
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
@@ -94,6 +97,22 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
             currName = firstname
             currEmail = email
             
+            for appt in currStudent.appointments {
+                
+                if (appt["tutor_read"] as! Bool) == true {
+                    studentConfirmedAppts.append(appt)
+                } else {
+                    studentUnconfirmedAppts.append(appt)
+                }
+                if appt["rated"] as! Bool == false && appt["txn_id"] as! String != "" {
+                    studentUnratedAppointments.append(appt)
+                }
+                else if appt["pay_created"] as! Bool == true {
+                    studentCurrentAppointments.append(appt)
+                }
+            }
+            
+            self.removeSpinner()
             print("entering bar sequence")
             
             let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
@@ -101,5 +120,6 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
             self.view.window?.makeKeyAndVisible()
         }
     }
+    
 
 }

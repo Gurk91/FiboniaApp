@@ -12,75 +12,38 @@ import Firebase
 class TutorProfileViewController: UIViewController {
 
     
-    @IBOutlet weak var phoneNumber: UITextField!
-    @IBOutlet weak var GPAField: UITextField!
-    @IBOutlet weak var majorField: UITextField!
     @IBOutlet weak var gradYearField: UITextField!
     @IBOutlet weak var onlineIDfield: UITextField!
+    @IBOutlet weak var bioField: UITextField!
+    @IBOutlet weak var calEmailLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var experienceLabel: UILabel!
     
+    @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var saveInfoButton: UIButton!
-    @IBOutlet weak var studentViewButton: UIButton!
-    @IBOutlet weak var signOutButton: UIButton!
-    
-    @IBAction func studentViewPressed(_ sender: Any) {
-        print("entering student view")
-        
-        let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
-        self.view.window?.rootViewController = tabBarController
-        self.view.window?.makeKeyAndVisible()
-    }
-    
-    @IBAction func signOutPressed(_ sender: Any) {
-        signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hideKeyboardWhenTappedAround()
         setUp()
         // Do any additional setup after loading the view.
+        nameLabel.text! = "Welcome " + currTutor.name + "!"
+        calEmailLabel.text! = "Tutor Email: " + currTutor.calEmail
+        ratingLabel.text! = "Rating: " + String(currTutor.rating)
+        experienceLabel.text! = "Appointments Taught: " + String(currTutor.experience)
     }
     
     func setUp() {
-        Utils.styleHollowButton(signOutButton)
-        Utils.styleFilledButton(studentViewButton)
+
         Utils.styleHollowButton(saveInfoButton)
-        
-        Utils.styleTextField(phoneNumber)
-        Utils.styleTextField(GPAField)
-        Utils.styleTextField(majorField)
+
         Utils.styleTextField(gradYearField)
         Utils.styleTextField(onlineIDfield)
+        Utils.styleTextField(bioField)
     }
-    
-    func signOutNCreateAlert(title: String, message:String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Sign Out", style: .default, handler: { (action) in
-            do {
-                try Auth.auth().signOut()
-                print("signed out")
-                currName = ""
-                print()
-                let viewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.viewController) as? ViewController
-                self.present(viewController!, animated: true, completion: nil)
-                //self.view.window?.rootViewController = viewController
-                //self.view.window?.makeKeyAndVisible()
-                
-            } catch let error {
-                print("sign out failed", error)
-                let alt = UIAlertController(title: "Hmm Something's wrong", message: "Error Signing out", preferredStyle: .alert)
-                alt.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
-    
-    }
-    
     
     @IBAction func savePressed(_ sender: Any) {
         let db = Firestore.firestore()
@@ -88,12 +51,19 @@ class TutorProfileViewController: UIViewController {
             let online = onlineIDfield.text!
             db.collection("tutors").document(currTutor.calEmail).setData(["onlineID": online], merge: true)
             currTutor.setOnline(ID: online)
+            Utils.createAlert(title: "Profile Updated", message: "Your profile was updated", buttonMsg: "Okay", viewController: self)
+        }
+        if gradYearField.text! != "" {
+            db.collection("tutors").document(currTutor.calEmail).setData(["gradyear": gradYearField.text!], merge: true)
+            currTutor.gradyear = Int(gradYearField.text!)!
+            Utils.createAlert(title: "Profile Updated", message: "Your profile was updated", buttonMsg: "Okay", viewController: self)
+        }
+        if bioField.text! != "" {
+            db.collection("tutors").document(currTutor.calEmail).setData(["bio": bioField.text!], merge: true)
+            currTutor.bio = bioField.text!
+            Utils.createAlert(title: "Profile Updated", message: "Your profile was updated", buttonMsg: "Okay", viewController: self)
         }
         
-        
     }
-    
-    
-
 
 }

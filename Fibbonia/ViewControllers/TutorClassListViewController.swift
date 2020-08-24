@@ -19,7 +19,7 @@ class TutorClassListViewController: UIViewController, UITableViewDelegate, UITab
         
         tableView.dataSource = self
         tableView.delegate = self
-        
+        self.hideKeyboardWhenTappedAround() 
         //savetoCoreData()
         // Do any additional setup after loading the view.
     }

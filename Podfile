@@ -19,6 +19,7 @@ pod 'Stripe'
 pod 'Alamofire'
 pod 'GoogleSignIn'
 pod 'Firebase/Messaging'
-
+pod 'FacebookCore'
+pod 'FacebookLogin'
 
 end
