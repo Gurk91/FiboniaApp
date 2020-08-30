@@ -146,9 +146,14 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
         let timeCreated = timeComps[0] + " " + timeComps[1]
         let appt = ["classname":classname, "notes": notes, "studentEmail": currStudent.email, "studentName": currStudent.firstName + " " + currStudent.lastName, "subject": subject, "time": time, "tutorEmail": tutorEmail, "rated": false, "group_tutoring": group, "uniqid": uniqid, "tutorFN": tutorFN, "tutor_read": false, "student_read": true, "txn_id": "", "uid": uid, "timeCreated":timeCreated, "zoom": currentValue.zoom, "pay_created": false] as [String : Any]
         currStudent.appointments.append(appt)
+        
+        if currStudent.subjects.contains(subject) != true {
+            currStudent.subjects.append(subject)
+        }
+        
         let db = Firestore.firestore()
         let docRef = db.collection("users").document(currStudent.email)
-        docRef.setData(["appointments": currStudent.appointments], merge: true) {(error) in
+        docRef.setData(["appointments": currStudent.appointments, "subjects": currStudent.subjects], merge: true) {(error) in
             if error != nil {
                 Utils.createAlert(title: "Error Creating Appointment", message: "There was an error creating your appointment. Please try again later", buttonMsg: "Okay", viewController: self)
             }

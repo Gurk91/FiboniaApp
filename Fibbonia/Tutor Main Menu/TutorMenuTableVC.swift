@@ -23,10 +23,9 @@ class TutorMenuTableVC: UITableViewController {
         
         self.sectionData = [
         0: ["Edit Profile", "Student View", "Edit Payment Info", "Edit Tutor Timings"],
-        1: ["History", "Stats"],
-        2: ["Update/Upload Transcript", "My Classes"],
-        3: ["About Fibonia", "Help and Support", "Sign Out"],
-        4: []]
+        1: ["Update/Upload Transcript", "My Classes"],
+        2: ["About Fibonia", "Help and Support", "Sign Out"],
+        3: []]
 
     }
 
@@ -77,23 +76,8 @@ class TutorMenuTableVC: UITableViewController {
             
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
+
         case (1, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "history")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
-        case (1, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "statistics")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
-        case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "transcript")
             let rightImg = UIImage(named: "forwardArrow")
@@ -101,27 +85,28 @@ class TutorMenuTableVC: UITableViewController {
             
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
-        case (2, 1):
+        case (1, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "classes")
             let rightImg = UIImage(named: "forwardArrow")
             let text = sectionData[indexPath.section]![indexPath.row]
-            
+        
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
-        case (3, 0):
+            
+        case (2, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
             
             cell.setUp(txt: text)
             return cell
-        case (3, 1):
+        case (2, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
             
             cell.setUp(txt: text)
             return cell
-        case (3, 2):
+        case (2, 2):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
             
@@ -185,24 +170,18 @@ class TutorMenuTableVC: UITableViewController {
             performSegue(withIdentifier: "times", sender: self)
             
         case (1, 0):
-            performSegue(withIdentifier: "maintenance", sender: self)
-            
-        case (1, 1):
-            performSegue(withIdentifier: "maintenance", sender: self)
-            
-        case (2, 0):
             performSegue(withIdentifier: "transcript", sender: self)
             
-        case (2, 1):
+        case (1, 1):
             performSegue(withIdentifier: "classes", sender: self)
             
-        case (3, 0):
+        case (2, 0):
             performSegue(withIdentifier: "about", sender: self)
             
-        case (3, 2):
+        case (2, 2):
             signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
             
-        case (3, 1):
+        case (2, 1):
             performSegue(withIdentifier: "help", sender: self)
             
         default:

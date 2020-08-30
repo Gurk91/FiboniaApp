@@ -39,6 +39,8 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     var clientSecretFinal = ""
     var customerID = ""
     var tutorStripeID = ""
+    var tutorvenmoID = ""
+    var tutorVenmoBal = 0.0
     var tutorAppts: [[String: Any]] = []
     var tutorClasses = [""]
     var pars: [String: Any] = ["":""]
@@ -63,6 +65,8 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
                     self.rating = String(documentData!["rating"] as! Double)
                     self.tutorAppts = documentData!["appointments"] as! [[String: Any]]
                     self.tutorClasses = documentData!["classes"] as! [String]
+                    self.tutorvenmoID = documentData!["venmo_id"] as! String
+                    self.tutorVenmoBal = documentData!["venmo_balance"] as! Double
                     self.customerContext = STPCustomerContext(keyProvider: MyAPIClient())
                     self.paymentContext = STPPaymentContext(customerContext: self.customerContext)
                     self.paymentContext.delegate = self
@@ -120,19 +124,25 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
                     let timecomps = importedTime.components(separatedBy: " ")
                     let timings = timecomps[3..<timecomps.count]
                     let tutAmount = timings.count * self.price
-                    
+                    self.stripeMoney = Double(tutAmount)
                     var procAmount = 0.0
                     if self.currAppt["group_tutoring"] as! Bool == true {
-                        procAmount = Double(tutAmount) * 0.06
+                        procAmount = Double(tutAmount) * 0.05 + 0.3
                     } else {
-                        procAmount = Double(tutAmount) * 0.1
+                        procAmount = Double(tutAmount) * 0.09 + 0.3
                     }
                     
                     let totalAmount = Double(tutAmount) + procAmount
                     self.amountPayLabel.text = "Total Amount: $" + String(totalAmount)
                     self.tutorChargeLabel.text! = String(timings.count) + "hour appointment @ " + String(self.price) + "/hr: $" + String(tutAmount)
                     self.processingFeesLabel.text! = "Processing Fees @ 10%: $" + String(procAmount)
-                    self.pars = ["amount": totalAmount * 100, "customer": currStudent.stripeID, "tutorID": self.tutorStripeID] as [String : Any]
+                    
+                    if self.tutorStripeID == "" {
+                        self.pars = ["amount": totalAmount * 100, "customer": currStudent.stripeID] as [String : Any]
+                    } else {
+                        self.pars = ["amount": totalAmount * 100, "customer": currStudent.stripeID, "tutorID": self.tutorStripeID] as [String : Any]
+                    }
+                    
                     print(self.pars)
                     
                 }
@@ -147,7 +157,7 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     //MARK: Stripe Payment Stuff
     @IBAction func payPressed(_ sender: Any) {
         print("tutor", self.tutorStripeID)
-        self.createPaymentIntent(dict: pars)
+        self.createPaymentIntent(dict: self.pars)
         self.paymentContext.requestPayment()
     }
     
@@ -184,6 +194,9 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
             switch status {
             case .succeeded:
                 print("success")
+                if self.tutorStripeID == "" {
+                    self.tutorVenmoBal += self.stripeMoney
+                }
                 self.currAppt["txn_id"] = paymentIntent!.stripeId
                 let db = Firestore.firestore()
                 
@@ -196,7 +209,7 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
                 let docRef2 = db.collection("tutors").document(self.currAppt["tutorEmail"] as! String)
                 var newTutorAppts = self.removeAppointment(array: self.tutorAppts, appt: self.currAppt)
                 newTutorAppts.append(self.currAppt)
-                docRef2.setData(["appointments": newTutorAppts], merge: true)
+                docRef2.setData(["appointments": newTutorAppts, "venmo_balance": self.tutorVenmoBal], merge: true)
                 
                 for clas in self.tutorClasses {
                     let docRef3 = db.collection(clas).document(self.currAppt["tutorEmail"] as! String)

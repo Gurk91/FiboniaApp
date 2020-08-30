@@ -45,6 +45,7 @@
 		A498752B24EE5FAD0057ADE4 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498752A24EE5FAD0057ADE4 /* RatingViewController.swift */; };
 		A498752D24EE60BE0057ADE4 /* RatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498752C24EE60BD0057ADE4 /* RatingController.swift */; };
 		A4A07F7C24813D9E0049ACC1 /* TutorMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */; };
+		A4A2637D24F624A600D49DC0 /* VenmoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A2637C24F624A600D49DC0 /* VenmoViewController.swift */; };
 		A4A49893245C621A00A92E1A /* DesperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49892245C621A00A92E1A /* DesperationViewController.swift */; };
 		A4A49895245C79A300A92E1A /* StudentTutorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */; };
 		A4A49897245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */; };
@@ -111,6 +112,7 @@
 		A498752A24EE5FAD0057ADE4 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		A498752C24EE60BD0057ADE4 /* RatingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingController.swift; sourceTree = "<group>"; };
 		A4A07F7B24813D9E0049ACC1 /* TutorMenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorMenuTableVC.swift; sourceTree = "<group>"; };
+		A4A2637C24F624A600D49DC0 /* VenmoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenmoViewController.swift; sourceTree = "<group>"; };
 		A4A49892245C621A00A92E1A /* DesperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesperationViewController.swift; sourceTree = "<group>"; };
 		A4A49894245C79A300A92E1A /* StudentTutorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTutorDetailViewController.swift; sourceTree = "<group>"; };
 		A4A49896245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAppointmentsTableViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				A439E31524C317F000BE9B08 /* TutorTimingsViewController.swift */,
 				A41B28C324D08D6B00B0C6F8 /* TutorPaymentPrefsViewController.swift */,
 				A47047D324ED52F200C61C75 /* TranscriptViewController.swift */,
+				A4A2637C24F624A600D49DC0 /* VenmoViewController.swift */,
 			);
 			path = "Tutor Main Menu";
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				A4B5D9F524EC707400B9049F /* WelcomeScreenViewController.swift in Sources */,
 				A424454B243D5EBB005E98ED /* Appointment.swift in Sources */,
 				A4D5AE6C24EDB35D0022FD07 /* CurrentAppointmentViewController.swift in Sources */,
+				A4A2637D24F624A600D49DC0 /* VenmoViewController.swift in Sources */,
 				A45EF77B2458946800B1C64F /* TutorClassListViewController.swift in Sources */,
 				A479C3482451D36A00D59809 /* TutorTabBarController.swift in Sources */,
 				A4A49897245C9FB600A92E1A /* StudentAppointmentsTableViewController.swift in Sources */,
@@ -660,6 +664,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fibbonia/Fibonia.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5F3R4CXFXV;
 				INFOPLIST_FILE = Fibbonia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -682,6 +687,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fibbonia/Fibonia.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5F3R4CXFXV;
 				INFOPLIST_FILE = Fibbonia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

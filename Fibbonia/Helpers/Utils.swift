@@ -309,8 +309,8 @@ class Utils {
         currEmail = ""
         currTutorEmail = ""
         currStudent = Student(fn: "", ln: "", eml: "", appt: [["ABC":"DEF"]], subjects: [], stripeID: "", accntType: "", firstlogin: false)
-        currTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
-        defaultTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
+        currTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "", venmo_bal: 0.0)
+        defaultTutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "", venmo_bal: 0.0)
         pickedClass = ""
         desperate = []
         alreadyEntered = false

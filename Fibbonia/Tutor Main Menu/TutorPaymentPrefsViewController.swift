@@ -24,6 +24,7 @@ class TutorPaymentPrefsViewController: UIViewController, SFSafariViewControllerD
         }
         
         Utils.styleFilledButton(stripeButton)
+        Utils.styleFilledButton(venmoButton)
         
         let url = Constants.emailServerURL.appendingPathComponent("access-express/\(currTutor.stripe_id)")
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -39,6 +40,7 @@ class TutorPaymentPrefsViewController: UIViewController, SFSafariViewControllerD
     var reply: String = ""
     
     @IBOutlet weak var stripeButton: UIButton!
+    @IBOutlet weak var venmoButton: UIButton!
     
     
     @IBAction func didSelectConnectWithStripe(_ sender: Any) {

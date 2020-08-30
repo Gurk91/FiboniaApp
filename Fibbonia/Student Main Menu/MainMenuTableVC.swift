@@ -20,11 +20,10 @@ class MainMenuTableVC: UITableViewController {
         tableView.dataSource = self
         
         self.sectionData = [
-        0: ["Become Tutor", "Edit Payment Info"],
-        1: ["History", "Stats"],
-        2: ["Favourite Tutors"],
-        3: ["About Fibonia", "Help and Support", "Sign Out"],
-        4: []]
+        0: ["Edit Payment Info"],
+        1: ["Become Tutor", "Tutor Eligibility"],
+        2: ["About Fibonia", "Help and Support", "Sign Out"],
+        3: []]
 
     }
 
@@ -43,9 +42,16 @@ class MainMenuTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch (indexPath.section, indexPath.row) {
-            
-
+        
         case (0, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
+            let leftImg = UIImage(named: "payment")
+            let rightImg = UIImage(named: "forwardArrow")
+            let text = sectionData[indexPath.section]![indexPath.row]
+            //print(text)
+            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
+            return cell
+        case (1, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
             let leftImg = UIImage(named: "tutor")
             let rightImg = UIImage(named: "forwardArrow")
@@ -57,51 +63,26 @@ class MainMenuTableVC: UITableViewController {
             }
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
-        case (0, 1):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "payment")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            //print(text)
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
-        case (1, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "history")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            //print(text)
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
         case (1, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "statistics")
+            let leftImg = UIImage(named: "reportcard")
             let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            //print(text)
+            let text = "Tutor Eligibility"
             cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
             return cell
         case (2, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identity") as! MenuCell
-            let leftImg = UIImage(named: "favourite")
-            let rightImg = UIImage(named: "forwardArrow")
-            let text = sectionData[indexPath.section]![indexPath.row]
-            //print(text)
-            cell.setUp(Rimg: rightImg!, txt: text, Limg: leftImg!)
-            return cell
-        case (3, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
             //print(text)
             cell.setUp(txt: text)
             return cell
-        case (3, 1):
+        case (2, 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
             //print(text)
             cell.setUp(txt: text)
             return cell
-        case (3, 2):
+        case (2, 2):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as! Menu2TableViewCell
             let text = sectionData[indexPath.section]![indexPath.row]
             //print(text)
@@ -122,7 +103,7 @@ class MainMenuTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         //print(section)
-        return ["PERSONAL INFORMATION", "APPOINTMENTS", "TUTORS", " ", " "][section]
+        return ["PERSONAL INFORMATION", "TUTORING", " ", " "][section]
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -144,6 +125,9 @@ class MainMenuTableVC: UITableViewController {
             
             
         case (0, 0):
+            performSegue(withIdentifier: "payment", sender: self)
+            
+        case (1, 0):
             if currTutor.name != "" {
                 let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                 self.view.window?.rootViewController = tutorTBC
@@ -153,30 +137,20 @@ class MainMenuTableVC: UITableViewController {
                 self.view.window?.rootViewController = tutorVC
                 self.view.window?.makeKeyAndVisible()
             }
-            
-        case (0, 1):
-            performSegue(withIdentifier: "payment", sender: self)
-
-        case (1, 0):
-            performSegue(withIdentifier: "maintenance", sender: self)
-
         case (1, 1):
-            performSegue(withIdentifier: "maintenance", sender: self)
-            
+            performSegue(withIdentifier: "tutorSignUp", sender: self)
+        
         case (2, 0):
-            performSegue(withIdentifier: "maintenance", sender: self)
-            
-        case (3, 0):
             performSegue(withIdentifier: "about", sender: self)
             
-        case (3, 2):
+        case (2, 2):
             signOutNCreateAlert(title: "Sign Out", message: "Are you sure you want to sign out?")
             
-        case (3, 1):
+        case (2, 1):
             performSegue(withIdentifier: "help", sender: self)
             
         default:
-            performSegue(withIdentifier: "maintenance", sender: self)
+            performSegue(withIdentifier: "about", sender: self)
 
         }
     }

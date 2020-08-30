@@ -131,6 +131,7 @@ class TutorAddClassViewController: UIViewController, UIPickerViewDataSource, UIP
                             }
                         }
                         task.resume()
+                        Utils.createAlert(title: "Class Added", message: "We'll verify your transcript and let you know if you're eligible within 24 hours. Feel free to upload/updated your transcript within the next hour", buttonMsg: "Okay", viewController: self)
                     }
                     
                 }

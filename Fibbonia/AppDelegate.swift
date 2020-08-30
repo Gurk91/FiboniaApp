@@ -22,8 +22,8 @@ var currName: String = "nope"
 var currEmail: String = ""
 var currTutorEmail: String = ""
 var currStudent: Student = Student(fn: "", ln: "", eml: "", appt: [["ABC":"DEF"]], subjects: [], stripeID: "", accntType: "", firstlogin: false)
-var currTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
-var defaultTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "")
+var currTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "", venmo_bal: 0.0)
+var defaultTutor: Tutor = Tutor(name: "", calEmail: "", gradyear: 0, subjects: [], zoom: "", setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: false, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: "", bio: "", stripe_id: "", venmo_id: "", venmo_bal: 0.0)
 var pickedClass: String = ""
 var desperate: [Constants.tutorField] = []
 var alreadyEntered: Bool = false
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("app del entered")
         
-        Stripe.setDefaultPublishableKey("pk_test_2bnlIAlJeAMamRB9cMcK1zzc00dWwA2gax")
+        Stripe.setDefaultPublishableKey("pk_live_MWSXfRNcKD5h89THVll1lzG200e0D3Mwdb")
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         

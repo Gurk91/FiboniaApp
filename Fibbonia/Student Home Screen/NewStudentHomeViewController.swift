@@ -155,8 +155,9 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                             let bio = documentData!["bio"] as! String
                             let stpID = documentData!["stripe_id"] as! String
                             let venID = documentData!["venmo_id"] as! String
+                            let venBal = documentData!["venmo_balance"] as! Double
                             
-                            let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio, stripe_id: stpID, venmo_id: venID)
+                            let tutor = Tutor(name: currName, calEmail: currTutorEmail, gradyear: gradyear, subjects: subs as! [String], zoom: zoom , setPrefs: setPrefs, preferences: preferences, img: img, firstlogin: false, prefTime: prefTime, educationLevel: educationLevel, bio: bio, stripe_id: stpID, venmo_id: venID, venmo_bal: venBal)
                     
                             if documentData!["classes"] == nil {
                                 db.collection("tutors").document(currTutorEmail).setData(["classes": currTutor.classes], merge: true)

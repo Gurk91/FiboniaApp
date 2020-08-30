@@ -89,7 +89,7 @@ class StartAppointmentViewController: UIViewController {
         for clas in currTutor.classes {
             db.collection(clas).document(currTutor.calEmail).setData(["appointments": currTutor.appointments], merge: true)
         }
-        
+        Utils.createAlert(title: "Appointment Begun", message: "Your student will join your tutoring session soon! Please ensure that they have paid you, before you begin tutoring.", buttonMsg: "Okay", viewController: self)
         print("FINALLY done")
         
     }
