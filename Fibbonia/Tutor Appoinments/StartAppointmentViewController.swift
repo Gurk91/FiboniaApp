@@ -51,7 +51,7 @@ class StartAppointmentViewController: UIViewController {
         }
         
         let url = Constants.emailServerURL.appendingPathComponent("tutor-wants-money")
-        let params = ["name": currAppt["studentName"], "email": currAppt["studentEmail"], "payCode": maps[4]]
+        let params = ["name": currAppt["studentName"], "email": currAppt["studentEmail"], "payCode": maps[3]]
         let jsondata = try? JSONSerialization.data(withJSONObject: params)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

@@ -47,6 +47,7 @@ class TutorTimingsViewController: UIViewController {
         
         Utils.styleFilledButton(saveButton)
         Utils.styleHollowDeleteButton(clearButton)
+        
     }
     
     @IBAction func clearTimes(_ sender: Any) {
@@ -68,23 +69,40 @@ class TutorTimingsViewController: UIViewController {
     @IBAction func timingSelected(_ sender: UIButton) {
         
         if sender.tag == -1 {
+            //for case "None" selected
             data[self.selectedDay]! = [Int]()
             selectButtons(times: [])
             sender.backgroundColor = UIColor.lightGray
+            print("none picked")
+            print("times for day", data[self.selectedDay]!)
         } else if sender.backgroundColor == UIColor.lightGray {
+        //deselect a time
             sender.backgroundColor = UIColor.systemTeal
             data[self.selectedDay]! = removeFromArray(arr: data[self.selectedDay]!, obj: sender.tag)
-        } else if data[self.selectedDay]!.count < 5 {
-            sender.backgroundColor = UIColor.lightGray
-            data[self.selectedDay]!.append(sender.tag)
-        } else if (data[self.selectedDay]?.contains(sender.tag + 30))! || (data[self.selectedDay]?.contains(sender.tag - 30))! {
+            print("deselected")
+            print("times for day", data[self.selectedDay]!)
+        } else if (data[self.selectedDay]!.contains(sender.tag + 70)) || (data[self.selectedDay]!.contains(sender.tag - 30)) {
+            //If an adjacent time is picked
             Utils.createAlert(title: "Can't select adjacent times", message: "You may not select times that are adjacent to one another as each time represents a 1 hour time-slot", buttonMsg: "Okay", viewController: self)
+            print("adj picked")
+            print("times for day", data[self.selectedDay]!)
+            return
+        } else if data[self.selectedDay]!.count > 5 {
+            //if there are more than 5 times picked
+            Utils.createAlert(title: "Max Times Selected", message: "You may not select more than 5 preferred times for each day", buttonMsg: "Okay", viewController: self)
+            print("too many")
+            print("times for day", data[self.selectedDay]!)
             return
         }
         else {
-            Utils.createAlert(title: "Max Times Selected", message: "You may not select more than 5 preferred times for each day", buttonMsg: "Okay", viewController: self)
-            return
+            //selects a time
+            sender.backgroundColor = UIColor.lightGray
+            data[self.selectedDay]!.append(sender.tag)
+            print("good picked")
+            print("times for day", data[self.selectedDay]!)
+            
         }
+        
     }
     
     @IBAction func dayPicker(_ sender: UISegmentedControl) {
@@ -151,12 +169,10 @@ class TutorTimingsViewController: UIViewController {
             finalTimes[day.key] = dayArr
         }
         
-        print(finalTimes)
         
         let db = Firestore.firestore()
         let docRef = db.collection("tutors").document(currTutor.calEmail)
         docRef.setData(["prefTime": finalTimes], merge: true)
-        print("docref 2")
         currTutor.prefTime = finalTimes
         currTutor.setPrefs = true
         docRef.setData(["setPrefs": true], merge: true)
@@ -166,7 +182,6 @@ class TutorTimingsViewController: UIViewController {
             let docRef = db.collection(item).document(currTutor.calEmail)
             docRef.setData(["prefTime": finalTimes], merge: true)
         }
-        print("set for classes")
          
     }
     

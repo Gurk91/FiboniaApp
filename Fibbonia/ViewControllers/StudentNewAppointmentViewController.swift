@@ -38,6 +38,22 @@ class StudentNewAppointmentViewController: UIViewController, UIPickerViewDataSou
         self.classPicker.delegate = self
         self.subjectPicker.delegate = self
         self.subjectPicker.delegate = self
+        
+        if subjects.count == 0 {
+            
+            let alertController = UIAlertController(
+                title: "Error",
+                message: "There appears to be an issue with your internet connection. Please try again later",
+                preferredStyle: .alert
+            )
+            let cancel = UIAlertAction(title: "Okay", style: .cancel, handler: { action in
+                // Need to assign to _ because optional binding loses @discardableResult value
+                // https://bugs.swift.org/browse/SR-1681
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

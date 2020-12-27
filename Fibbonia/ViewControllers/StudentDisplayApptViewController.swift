@@ -108,6 +108,25 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
     func deleteNCreateAlert(title: String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Delete Appointment", style: .default, handler: { (action) in
+            //cancellation code begins
+            self.showSpinner(onView: self.view)
+            let url = Constants.emailServerURL.appendingPathComponent("student-appt-cancel")
+            let params = ["name":self.currAppt["tutorFN"], "time": self.currAppt["time"], "class": self.currAppt["classname"], "email":self.currAppt["tutorEmail"]]
+            let jsondata = try? JSONSerialization.data(withJSONObject: params)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsondata
+            let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if error != nil {
+                    print("Error occured", error.debugDescription)
+                } else {
+                    print("response", response?.description as Any)
+                    print("data", data?.description as Any)
+                }
+            }
+            task.resume()
+            
             var count = 0
             for appt in currStudent.appointments{
                 if appt["uid"] as! String == self.currAppt["uid"] as! String {
@@ -131,6 +150,7 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
                         
                         let documentData = document!.data()
                         var tutAppts = documentData!["appointments"] as! [[String: Any]]
+                        var tutClasses = documentData!["classes"] as! [String]
                         var count = 0
                         for appt in tutAppts{
                             if appt["uid"] as! String == self.currAppt["uid"] as! String {
@@ -140,11 +160,17 @@ class StudentDisplayApptViewController: UIViewController, SFSafariViewController
                             count += 1
                         }
                     db.collection("tutors").document(self.currAppt["tutorEmail"] as! String).setData(["appointments": tutAppts], merge: true)
+                        for clas in tutClasses {
+                            db.collection(clas).document(self.currAppt["tutorEmail"] as! String).setData(["appointments": tutAppts], merge: true)
+                        }
                     }
                     
-                }
+                } else {
+                    Utils.createAlert(title: "Error", message: "An Unknown Error Occured and the operation could not be completed", buttonMsg: "Okay", viewController: self)
+                    }
                 
             }
+            self.removeSpinner()
             
             let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
             self.view.window?.rootViewController = tabBarController

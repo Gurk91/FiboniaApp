@@ -138,6 +138,23 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
             self.tableView.reloadData()
         }
         
+        let url = Constants.emailServerURL.appendingPathComponent("tutor-appt-accept")
+        let params = ["name":appointment["studentName"], "time": appointment["time"], "class": appointment["classname"], "email":appointment["studentEmail"]]
+        let jsondata = try? JSONSerialization.data(withJSONObject: params)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsondata
+        let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print("Error occured", error.debugDescription)
+            } else {
+                print("response", response?.description as Any)
+                print("data", data?.description as Any)
+            }
+        }
+        task.resume()
+        
         self.removeSpinner()
         
         Utils.createAlert(title: "Confirmed!", message: "Your appointment is confirmed! You're all set!", buttonMsg: "Okay", viewController: self)
@@ -212,7 +229,7 @@ class NewTutorHomeViewController: UIViewController, UITableViewDelegate, UITable
         
         
         self.removeSpinner()
-        Utils.createAlert(title: "Rejected!", message: "This appointment has been rejected", buttonMsg: "Okay", viewController: self)
+        Utils.createAlert(title: "Rejected!", message: "This appointment has been rejected and the student has been notified.", buttonMsg: "Okay", viewController: self)
     }
 
     // MARK: - Tableview Code

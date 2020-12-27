@@ -78,6 +78,20 @@ class Utils {
         return regex.firstMatch(in: email, options: [], range: range) != nil
     }
     
+    static func validFirstName(name: String) -> Bool {
+        
+        let range = NSRange(location: 0, length: name.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "^[\\p{L} .'-]+$")
+        return regex.firstMatch(in: name, options: [], range: range) != nil
+    }
+    
+    static func validZoomID(zoom: String) -> Bool {
+        
+        let range = NSRange(location: 0, length: zoom.utf16.count)
+        let regex = try! NSRegularExpression(pattern: "https://berkeley.zoom.us/j/[0-9]{10}")
+        return regex.firstMatch(in: zoom, options: [], range: range) != nil
+    }
+    
     static func validPhone(phone: String) -> Bool {
         
         let range = NSRange(location: 0, length: phone.utf16.count)

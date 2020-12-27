@@ -85,7 +85,7 @@ class OptionsViewController: UIViewController, GIDSignInDelegate {
             let lastname = user.profile.familyName!
             let uid = user.userID!
             print("currStripe", currStripe)
-            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "google", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png"]) { (error) in
+            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "google", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png", "transactionHistory": []]) { (error) in
                 if error != nil {
                     self.errorTextDisplay.text = "First and Last Name not saved"
                     self.errorTextDisplay.alpha = 1

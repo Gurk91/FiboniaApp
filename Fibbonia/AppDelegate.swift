@@ -38,6 +38,7 @@ var currentAppointment:[String: Any] = ["":""]
 var unratedAppointment:[String: Any] = ["":""]
 var studentCurrentAppointments: [[String: Any]] = []
 var studentUnratedAppointments: [[String: Any]] = []
+var BerkeleyTimePulled: Bool = false
 
 
 @UIApplicationMain

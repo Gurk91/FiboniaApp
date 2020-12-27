@@ -124,6 +124,15 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
     
     @IBAction func appointmentPressed(_ sender: Any) {
         //prepare the times from selectedTimes array
+        if selectedTimes.count == 0 {
+            Utils.createAlert(title: "No Time Picked", message: "Please pick a time before you can create this appointment", buttonMsg: "Okay", viewController: self)
+            return
+        }
+        else if apptNotes.text! == "" {
+            Utils.createAlert(title: "No Notes Added", message: "Please add some notes to let your tutor know how to help you best", buttonMsg: "Okay", viewController: self)
+            return
+        }
+        
         var hoursTime = ""
         for time in selectedTimes {
             let currTime = String(time)
@@ -161,7 +170,7 @@ class StudentTutorDetailViewController: UIViewController, UIPickerViewDataSource
         currentValue.appointments.append(appt)
         let docRefTut = db.collection("tutors").document(tutorEmail)
         docRefTut.setData(["appointments": currentValue.appointments], merge: true)
-        //Updates the appts array for every class this tutor teached :(
+        //Updates the appts array for every class this tutor teaches :(
         for item in tempSubjects{
             let docRefClass = db.collection(item).document(tutorEmail)
             docRefClass.setData(["appointments": currentValue.appointments], merge: true) { (error) in

@@ -39,6 +39,11 @@ class TutStudentDisplayViewController: UIViewController {
         if currAppt["tutor_read"] as! Bool == false {
             completeButton.isHidden = true
         }
+        else if currAppt["pay_created"] as! Bool == true {
+            statusLabel.text! = "Currently Ongoing"
+            statusLabel.textColor = UIColor.green
+            completeButton.isHidden = true
+        }
         
     }
 
@@ -77,6 +82,23 @@ class TutStudentDisplayViewController: UIViewController {
     func deleteNCreateAlert(title: String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Delete Appointment", style: .default, handler: { (action) in
+            let url = Constants.emailServerURL.appendingPathComponent("tutor-appt-cancel")
+            let params = ["name":self.currAppt["studentName"], "time": self.currAppt["time"], "class": self.currAppt["classname"], "email":self.currAppt["studentEmail"]]
+            let jsondata = try? JSONSerialization.data(withJSONObject: params)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsondata
+            let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if error != nil {
+                    print("Error occured", error.debugDescription)
+                } else {
+                    print("response", response?.description as Any)
+                    print("data", data?.description as Any)
+                }
+            }
+            task.resume()
+            
             var count = 0
             for appt in currTutor.appointments{
                 if appt["uid"] as! String == self.currAppt["uid"] as! String {
@@ -87,7 +109,11 @@ class TutStudentDisplayViewController: UIViewController {
             }
             let db = Firestore.firestore()
             db.collection("tutors").document(currTutor.calEmail).setData(["appointments": currTutor.appointments], merge: true)
+            for clas in currTutor.classes {
+                db.collection(clas).document(currTutor.calEmail).setData(["appointments": currTutor.appointments], merge: true)
+            }
             print("tutor side appointment deleted")
+
             db.collection("users")
                 .document(self.currAppt["studentEmail"] as! String)
                 .getDocument { (document, error) in
@@ -110,7 +136,6 @@ class TutStudentDisplayViewController: UIViewController {
                         }
                     db.collection("users").document(self.currAppt["studentEmail"] as! String).setData(["appointments": studAppts], merge: true)
                     }
-                    
                 }
                 
             }
@@ -123,7 +148,6 @@ class TutStudentDisplayViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }))
     self.present(alert, animated: true, completion: nil)
-    
     
     }
     

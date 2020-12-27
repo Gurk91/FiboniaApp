@@ -11,7 +11,7 @@ import FirebaseDatabase
 import CoreData
 import GoogleSignIn
 import Firebase
-
+import Network
 
 class ViewController: UIViewController, CAAnimationDelegate {
     
@@ -36,7 +36,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
         createGradientView()
     }
     
-    /// Creates gradient view
+    // Creates gradient view
     
     func createGradientView() {
         
@@ -97,75 +97,72 @@ class ViewController: UIViewController, CAAnimationDelegate {
     
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("home entered")
-        // Do any additional setup after loading the view.
-        //authenticateUser()
-        setUpElements()
-        //authenticateUser()
-        
-        // Begin pull from BerkeleyTime
-        
-        Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
-            switch result {
-            case .success(let _):
-                //print("pull success")
-                do {
-                    Constants.pulledOutput = try result.get()
-                    print("pull complete")
-                    //print("length", Constants.pulledOutput.count)
-                } catch {
-                    print("output not saved")
-                }
-            case .failure(let error):
-                self.createAlert(title: "Error", message: error.localizedDescription + " Please try again later.", buttonMsg: "Okay")
-                }
-            }
-        
-    }
+    var internetComs: Bool = false
     
     override func viewDidAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
+        super.viewDidLoad()
+        print("home entered")
+
+        setUpElements()
         
-        if Utils.Connection() == false {
-            print("bad connection")
-            
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserData")
-            
-            var classList = [String]()
-            
-            do {
-                let results = try context.fetch(request)
-                for data in results as! [NSManagedObject] {
-                    currName = data.value(forKey: "name") as! String
-                    currEmail =  data.value(forKey: "email") as! String
-                }
-            } catch {
-                print("data pull fail")
-            }
-            
-            let tutrequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TutorData")
-            do {
-                let results = try context.fetch(tutrequest)
+        // Begin pull from BerkeleyTime
                 
-                for data in results as! [NSManagedObject] {
-                    currTutorEmail = data.value(forKey: "tutorEmail") as! String
-                    classList.append(data.value(forKey: "classes") as! String)
+    }
+    
+    override func viewDidLoad() {
+        setUpElements()
+        
+        if (Auth.auth().currentUser != nil){
+            self.showSpinner(onView: self.view)
+            print("user signed in")
+            let user = Auth.auth().currentUser
+            let email = user?.email
+            user?.reload(completion: { (error) in
+                switch user!.isEmailVerified {
+                case true:
+                    let db = Firestore.firestore()
+                    let docRef = db.collection("users").document(email!)
+                    docRef.getDocument { (document, error) in
+                        // Check for error
+                        if error == nil {
+                            // Check that this document exists
+                            if document != nil && document!.exists {
+                                let documentData = document!.data()
+                                print("************ PRINTING DOC VALS ************")
+                                let name = documentData!["firstName"] as Any? as? String
+                                let ln = documentData!["lastName"] as Any? as? String
+                                let subjects = documentData!["subjects"] //as! [String]
+                                currName = name! + " " + ln!
+                                print(currName)
+                                currEmail = email!
+                                currStudent = Student(fn: name!, ln: ln!, eml: email!, appt: documentData!["appointments"] as! [[String : Any]], subjects: subjects as! [String], stripeID: documentData!["stripe_id"] as! String, accntType: documentData!["accntType"] as! String, firstlogin: false)
+                                currStripe = currStudent.stripeID
+                                currStudent.tutor = documentData!["tutor"] as! Bool
+                                currStudent.calEmail = documentData!["calEmail"] as! String
+                                
+                                Utils.reloadAppointments()
+                                
+                                print("entering bar sequence")
+                                
+                                let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
+                                self.view.window?.rootViewController = tabBarController
+                                self.view.window?.makeKeyAndVisible()
+                                
+                            }
+                        } else {
+                            self.createAlert(title: "Error Logging In", message: error!.localizedDescription, buttonMsg: "Okay")
+                            self.removeSpinner()
+                            return
+                        }
+                    }
+                case false:
+                    return
                 }
-            } catch {
-                print("data pull fail")
-            }
-            print(classList)
-            print("entering bar sequence from VC")
-            
-            let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
-            self.view.window?.rootViewController = tabBarController
-            self.view.window?.makeKeyAndVisible()
-            
+            })
+        } else {
+            return
         }
+        
     }
     
     func setUpElements() {
@@ -173,22 +170,6 @@ class ViewController: UIViewController, CAAnimationDelegate {
         Utils.styleFilledButton(loginButton)
     }
     
-    func authenticateUser() {
-        if Auth.auth().currentUser != nil {
-            print("auth")
-            let user = Auth.auth().currentUser
-            print("llama", user?.displayName)
-            print("email", user?.email)
-            DispatchQueue.main.async {
-                let tabBarController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tabBarCont)
-                self.view.window?.rootViewController = tabBarController
-                self.view.window?.makeKeyAndVisible()
-            }
-        } else {
-            print("no auth")
-            return 
-        }
-    }
     
     @IBAction func signUpPressed(_ sender: UIButton) {
         sender.pulsate()
@@ -197,11 +178,6 @@ class ViewController: UIViewController, CAAnimationDelegate {
     @IBAction func loginPressed(_ sender: Any) {
         (sender as! UIButton).pulsate()
     }
-    
-    
-
-    
-    
     
     
     func createAlert(title: String, message: String, buttonMsg: String) {

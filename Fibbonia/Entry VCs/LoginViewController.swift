@@ -92,12 +92,14 @@ class LoginViewController: UIViewController {
                                 }
                             } else {
                                 self.createAlert(title: "Error Logging In", message: error!.localizedDescription, buttonMsg: "Okay")
+                                self.removeSpinner()
                                 return
                             }
                         }
                     case false:
                         self.errorTextDisplay.text = "Unverified User. Please verify your email first."
                         self.errorTextDisplay.alpha = 1
+                        self.removeSpinner()
                         return
                     }
                 })

@@ -23,17 +23,13 @@ class TutorClassDisplayViewController: UIViewController {
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var savePriceButton: UIButton!
-    @IBOutlet weak var timingsField: UITextField!
-    @IBOutlet weak var updateTimingsButton: UIButton!
     @IBOutlet weak var deleteClassButton: UIButton!
     
     func setUp() {
         classNameLabel.text = takenClass
         
         Utils.styleTextField(priceField)
-        Utils.styleTextField(timingsField)
         
-        Utils.styleFilledButton(updateTimingsButton)
         Utils.styleHollowButton(savePriceButton)
         
         Utils.styleHollowDeleteButton(deleteClassButton)
@@ -54,35 +50,6 @@ class TutorClassDisplayViewController: UIViewController {
         
     }
     
-    @IBAction func updateTimingsPressed(_ sender: Any) {
-        let db = Firestore.firestore()
-        if timingsField.text != "" {
-            let time = timingsField.text!
-            db.collection(takenClass!)
-                .document(currTutor.calEmail)
-                .setData(["times": time], merge:true)
-            createAlert(title: "Timings Updated", message: "Your timings have been updated!", buttonMsg: "Okay")
-        } else {
-            createAlert(title: "Empty Values", message: "Enter a valid time for timing", buttonMsg: "Okay")
-        }
-    }
-    
-    /*
-    @IBAction func deletePressed(_ sender: Any) {
-        let db = Firestore.firestore()
-        db.collection(takenClass!)
-            .document(currTutor.calEmail).delete()
-        createAlert(title: "Class Removed", message: "You would not be teaching this class anymore", buttonMsg: "Okay")
-        var index = 0
-        for clas in currTutor.classes {
-            if clas == takenClass!{
-                currTutor.classes.remove(at: index)
-            }
-            index += 1
-        }
-        print(currTutor.classes)
-    }
- */
     
     func createAlert(title: String, message: String, buttonMsg: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

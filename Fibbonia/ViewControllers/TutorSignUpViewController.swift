@@ -66,14 +66,21 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     func validateFields() -> String? {
         
-        if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+        if pickedLevel == "" || pickedLevel == "---"{
+            return "Please enter your year"
+        }
+        
+        else if calEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             gradYearField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            pickedLevel == "" || pickedLevel == "---"{
+            onlineID.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return "Please fill in all fields"
         }
-        if Utils.validCalEmail(email: calEmailField.text!) != true {
-            return "Enter Valid Cal Email"
+        else if Utils.validCalEmail(email: calEmailField.text!) != true {
+            return "Please Enter Valid @berkeley.edu"
+        }
+        
+        else if Utils.validZoomID(zoom: onlineID.text!) == false {
+            return "Please enter a valid https://berkeley.zoom.us Zoom URL"
         }
         
         return nil
@@ -97,10 +104,12 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     @IBAction func signUpPressed(_ sender: Any) {
         
+        self.showSpinner(onView: view)
         let errorText = validateFields()
         if errorText != nil {
             errorTextDisplay.text = errorText!
             errorTextDisplay.alpha = 1
+            self.removeSpinner()
         } else {
             //Reassigning fields
             let calEmail = self.calEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -118,6 +127,7 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
                     print("user exists")
                     self.errorTextDisplay.text = "User Exists"
                     self.errorTextDisplay.alpha = 1
+                    self.removeSpinner()
                 } else {
                     //user is new. Proceed with sign up
                     //user created. Now store details
@@ -137,6 +147,7 @@ class TutorSignUpViewController: UIViewController, UIPickerViewDataSource, UIPic
                     
                     currTutor = Tutor(name: currName, calEmail: calEmail, gradyear: Int(gradYear)!, subjects: [""], zoom: online, setPrefs: false, preferences: ["languages": [], "location": []], img: "", firstlogin: true, prefTime: ["0": [Int](), "1":[Int](), "2":[Int](), "3":[Int](), "4":[Int](), "5":[Int](), "6":[Int]()], educationLevel: self.pickedLevel, bio: "", stripe_id: "", venmo_id: "", venmo_bal: 0.0)
                     
+                    self.removeSpinner()
                     let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
                     self.view.window?.rootViewController = tutorTBC
                     self.view.window?.makeKeyAndVisible()

@@ -25,6 +25,35 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if Utils.Connection() == false {
+            Utils.createAlert(title: "No Internet Connection", message: "Your internet does not seem to be working at the moment. Please try again later.", buttonMsg: "Okay", viewController: self)
+        }
+        
+        if Utils.Connection() == true && BerkeleyTimePulled == false {
+            self.showSpinner(onView: self.view)
+            Utils.fetchData(from: "https://www.berkeleytime.com/api/catalog/catalog_json/") { result in
+            switch result {
+            case .success(let _):
+                //print("pull success")
+                do {
+                    Constants.pulledOutput = try result.get()
+                    print("pull complete")
+                    BerkeleyTimePulled = true
+                    //print("length", Constants.pulledOutput.count)
+                    Utils.organizeSubjects()
+                    Utils.organizeClasses()
+                    self.removeSpinner()
+                    Utils.createAlert(title: "Welcome " + currStudent.firstName + "!", message: "Welcome (back) to Fibonia! Ready to Learn?", buttonMsg: "Yes!", viewController: self)
+                } catch {
+                    print("output not saved")
+                }
+            case .failure(let error):
+                Utils.createAlert(title: "Error", message: error.localizedDescription + " Please try again later.", buttonMsg: "Okay", viewController: self)
+                self.removeSpinner()
+                }
+            }
+        }
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -46,14 +75,6 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             tut = true
         }
         setUp()
-        
-        if alreadyEntered == false {
-            Utils.organizeSubjects()
-            Utils.organizeClasses()
-            alreadyEntered = true
-        }
-        
-        
         
     }
     
@@ -191,6 +212,20 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
                         
                 }
                 switchedTutorBefore = true
+            } else {
+                
+                tutorConfirmedAppts = []
+                tutorUnconfirmedAppts = []
+                
+                for appt in currTutor.appointments {
+                    
+                    if (appt["tutor_read"] as! Bool) == true {
+                        tutorConfirmedAppts.append(appt)
+                    } else {
+                        tutorUnconfirmedAppts.append(appt)
+                    }
+                    
+                }
             }
             
         } else {
@@ -246,6 +281,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         case (0):
             if currStudent.subjects.count == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "noSub")
+                cell?.isUserInteractionEnabled = false
                 return cell!
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "collView", for: indexPath) as! CollectionStudentTableViewCell
@@ -257,6 +293,7 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
             print("count", currStudent.appointments.count)
             if currStudent.appointments.count == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "empty")
+                cell?.isUserInteractionEnabled = false
                 return cell!
             }
             let current = appts[indexPath.row]
@@ -296,18 +333,30 @@ class NewStudentHomeViewController: UIViewController, UITableViewDelegate, UITab
         
         case (1):
             let step1 = data[indexPath.section] as! [[String: Any]]
-            let current = step1[indexPath.row]
-            performSegue(withIdentifier: "apptDisplay", sender: current)
+            if step1.count > 0 {
+                let current = step1[indexPath.row]
+                performSegue(withIdentifier: "apptDisplay", sender: current)
+            } else {
+                return
+            }
             
         case (2):
             let step1 = data[indexPath.section] as! [[String: Any]]
-            let current = step1[indexPath.row]
-            performSegue(withIdentifier: "currentAppt", sender: current)
+            if step1.count > 0 {
+                let current = step1[indexPath.row]
+                performSegue(withIdentifier: "currentAppt", sender: current)
+            } else {
+                return
+            }
             
         case (3):
             let step1 = data[indexPath.section] as! [[String: Any]]
-            let current = step1[indexPath.row]
-            performSegue(withIdentifier: "rateAppt", sender: current)
+            if step1.count > 0 {
+                let current = step1[indexPath.row]
+                performSegue(withIdentifier: "rateAppt", sender: current)
+            } else {
+                return
+            }
             
         default:
             return

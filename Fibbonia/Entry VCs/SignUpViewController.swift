@@ -31,6 +31,8 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var errorTextDisplay: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var backbutton: UIButton!
+    
     //@IBOutlet weak var backButton: UIButton!
     
     //check fields and validate that the data is correct. if evrything is correct, this method returns nil. Otherwise it returns the error message
@@ -45,10 +47,16 @@ class SignUpViewController: UIViewController {
         
         //check if password is correct: tutorial time 52:46 (optional)
         let cleanedPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanedFirstName = firstNameField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if Utils.isPasswordValid(cleanedPassword) == false {
             // Password isn't secure enough
             return "Please make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        
+        if Utils.validFirstName(name: cleanedFirstName) == false {
+            //First Name isn't valid
+            return "Please enter an actual, valid name"
         }
         
         return nil
@@ -58,10 +66,12 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpTapped(_ sender: Any) {
         
         //validate the fields
+        self.showSpinner(onView: view)
         let error = validateFields()
         if error != nil {
             errorTextDisplay.text = error!
             errorTextDisplay.alpha = 1
+            self.removeSpinner()
         } else {
             //make data accessible
             let firstname = self.firstNameField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -69,7 +79,6 @@ class SignUpViewController: UIViewController {
             let email = self.emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             //create the user
-            self.showSpinner(onView: self.view)
             let db = Firestore.firestore()
             
             //checking if the user already exists or if email is being reused
@@ -80,6 +89,7 @@ class SignUpViewController: UIViewController {
                     print("user exists")
                     self.errorTextDisplay.text = "User Exists"
                     self.errorTextDisplay.alpha = 1
+                    self.removeSpinner()
                     return
                 } else {
                     //user is new. Proceed with sign up
@@ -90,6 +100,8 @@ class SignUpViewController: UIViewController {
                             //there is an error
                             self.errorTextDisplay.text = "Error creating user"
                             self.errorTextDisplay.alpha = 1
+                            self.removeSpinner()
+                            return
                         } else {
                             //user created. now store first and last name
                             //Time to verify email
@@ -98,6 +110,10 @@ class SignUpViewController: UIViewController {
                                 switch user!.isEmailVerified {
                                 case true:
                                     print("users email is verified")
+                                    self.errorTextDisplay.text = "User Already Exists"
+                                    self.errorTextDisplay.alpha = 1
+                                    self.removeSpinner()
+                                    return
                                 case false:
                                     
                                     user!.sendEmailVerification { (error) in
@@ -106,7 +122,7 @@ class SignUpViewController: UIViewController {
                                         guard let error = error else {
                                             print("user email verification sent")
                                             let uid = result?.user.uid
-                                        db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid!, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "email", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png"]) { (error) in
+                                            db.collection("users").document(email).setData(["firstName":firstname, "lastName":lastname, "uid":uid!, "email":email, "appointments":[], "tutor": false, "calEmail": "", "subjects": [], "stripe_id": currStripe, "accntType": "email", "newsletter": false, "update_classes": [], "firstlogin":false, "img": "https://www.work.fibonia.com/1/html/img.png", "transactionHistory":[]]) { (error) in
                                                 if error != nil {
                                                     self.errorTextDisplay.text = "First and Last Name not saved"
                                                     self.errorTextDisplay.alpha = 1
@@ -123,7 +139,7 @@ class SignUpViewController: UIViewController {
                                             self.performSegue(withIdentifier: "home", sender: nil)
                                             return 
                                         }
-                                        
+                                        self.removeSpinner()
                                         self.handleError(error: error)
                                     }
                                     
@@ -160,7 +176,7 @@ class SignUpViewController: UIViewController {
         Utils.styleTextField(passwordField)
         
         Utils.styleFilledButton(signUpButton)
-        //Utils.styleHollowButton(backButton)
+        Utils.styleHollowButton(backbutton)
     }
     
     func createAlert(title: String, message: String, buttonMsg: String) {

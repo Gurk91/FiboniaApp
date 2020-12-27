@@ -189,6 +189,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="shT-DR-sqg"/>
                     <connections>
+                        <outlet property="backbutton" destination="IO4-TC-PAM" id="Oe1-Af-uhX"/>
                         <outlet property="emailField" destination="SSx-U5-Uzr" id="1cW-hm-hLz"/>
                         <outlet property="errorTextDisplay" destination="jGU-Ia-gA5" id="b4g-XY-Ail"/>
                         <outlet property="firstNameField" destination="sdt-iK-ijd" id="XS3-Du-bfL"/>
@@ -387,7 +388,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="eyQ-mH-PGJ">
-                                <rect key="frame" x="40" y="224" width="295" height="356.5"/>
+                                <rect key="frame" x="40" y="222" width="295" height="381.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="berkeley.edu email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vAI-SA-gjp">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="34"/>
@@ -395,7 +396,7 @@
                                             <constraint firstAttribute="height" constant="34" id="pzu-wH-wiF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Graduation Year" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gx0-L7-KHn">
                                         <rect key="frame" x="0.0" y="49" width="295" height="34"/>
@@ -403,24 +404,24 @@
                                             <constraint firstAttribute="height" constant="34" id="Ha9-bl-l2P"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Online Meeting ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBp-YW-R84">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="berkeley.zoom.us meeting ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBp-YW-R84">
                                         <rect key="frame" x="0.0" y="98" width="295" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="bHY-WP-rEG"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                     </textField>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ht5-Te-XOI">
-                                        <rect key="frame" x="0.0" y="147" width="295" height="65"/>
+                                        <rect key="frame" x="0.0" y="147" width="295" height="90"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="65" id="XYk-jz-Cqw"/>
+                                            <constraint firstAttribute="height" constant="90" id="XYk-jz-Cqw"/>
                                         </constraints>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z5-PQ-Gbi">
-                                        <rect key="frame" x="0.0" y="227" width="295" height="40"/>
+                                        <rect key="frame" x="0.0" y="252" width="295" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="s6A-fq-Gdi"/>
                                             <constraint firstAttribute="height" constant="40" id="tFe-XR-EZL"/>
@@ -433,7 +434,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1X-yA-XOS">
-                                        <rect key="frame" x="0.0" y="282" width="295" height="40"/>
+                                        <rect key="frame" x="0.0" y="307" width="295" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="IZr-AB-FNr"/>
                                             <constraint firstAttribute="height" constant="40" id="OYv-Ps-llG"/>
@@ -445,7 +446,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Display" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXx-vp-mTc">
-                                        <rect key="frame" x="0.0" y="337" width="295" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="362" width="295" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -472,7 +473,7 @@
                             <constraint firstItem="AzS-jO-q7V" firstAttribute="trailing" secondItem="caT-wr-KWW" secondAttribute="trailing" constant="40" id="Qp2-pZ-fta"/>
                             <constraint firstItem="eUZ-Qu-xQj" firstAttribute="top" secondItem="AzS-jO-q7V" secondAttribute="top" constant="8" id="Ump-3k-qcy"/>
                             <constraint firstItem="caT-wr-KWW" firstAttribute="leading" secondItem="eUZ-Qu-xQj" secondAttribute="trailing" constant="10" id="WgN-Ni-n84"/>
-                            <constraint firstItem="eyQ-mH-PGJ" firstAttribute="top" secondItem="eUZ-Qu-xQj" secondAttribute="bottom" constant="40" id="dho-01-c69"/>
+                            <constraint firstItem="eyQ-mH-PGJ" firstAttribute="top" secondItem="eUZ-Qu-xQj" secondAttribute="bottom" constant="38" id="dho-01-c69"/>
                             <constraint firstItem="caT-wr-KWW" firstAttribute="top" secondItem="AzS-jO-q7V" secondAttribute="top" constant="24" id="f7V-KS-0ca"/>
                             <constraint firstItem="eUZ-Qu-xQj" firstAttribute="leading" secondItem="AzS-jO-q7V" secondAttribute="leading" constant="40" id="hvr-ud-fd7"/>
                             <constraint firstItem="eyQ-mH-PGJ" firstAttribute="leading" secondItem="AzS-jO-q7V" secondAttribute="leading" constant="40" id="t6s-JV-bm8"/>
@@ -508,12 +509,12 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Graduation Year" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zQU-uB-gtM">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Online Meeting ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YgL-j0-pLG">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Berkeley Zoom ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YgL-j0-pLG">
                                         <rect key="frame" x="0.0" y="64" width="295" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write something about yourself!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ak-pn-txb">
                                         <rect key="frame" x="0.0" y="128" width="295" height="34"/>
@@ -595,7 +596,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nf6-7y-vbr">
-                                <rect key="frame" x="0.0" y="174" width="375" height="444"/>
+                                <rect key="frame" x="0.0" y="51" width="375" height="567"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="OMt-CZ-9Kl">
@@ -807,7 +808,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mXi-WU-dLe">
-                                <rect key="frame" x="40" y="116" width="295" height="309.5"/>
+                                <rect key="frame" x="40" y="116" width="295" height="199.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0B-Kd-E7k">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="33.5"/>
@@ -818,7 +819,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter New Price (in $/hr)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JyY-yE-t42">
                                         <rect key="frame" x="0.0" y="53.5" width="295" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fi-I6-2JZ">
                                         <rect key="frame" x="0.0" y="107.5" width="295" height="36"/>
@@ -828,21 +829,8 @@
                                             <action selector="savePricePressed:" destination="xUi-lA-ndg" eventType="touchUpInside" id="YGm-SO-iD0"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter New Timings" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gX-VJ-src">
-                                        <rect key="frame" x="0.0" y="163.5" width="295" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bD-ee-f9S">
-                                        <rect key="frame" x="0.0" y="217.5" width="295" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Update Timings"/>
-                                        <connections>
-                                            <action selector="updateTimingsPressed:" destination="xUi-lA-ndg" eventType="touchUpInside" id="oxi-AY-1CE"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufm-CF-DaS">
-                                        <rect key="frame" x="0.0" y="273.5" width="295" height="36"/>
+                                        <rect key="frame" x="0.0" y="163.5" width="295" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Delete Class"/>
                                         <connections>
@@ -866,8 +854,6 @@
                         <outlet property="deleteClassButton" destination="Ufm-CF-DaS" id="rdJ-Y9-CrD"/>
                         <outlet property="priceField" destination="JyY-yE-t42" id="6PV-nR-HsD"/>
                         <outlet property="savePriceButton" destination="4Fi-I6-2JZ" id="nMq-mY-CGo"/>
-                        <outlet property="timingsField" destination="1gX-VJ-src" id="fko-BN-ijx"/>
-                        <outlet property="updateTimingsButton" destination="0bD-ee-f9S" id="s4T-VL-hdP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ljr-ep-ofp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1015,7 +1001,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="x6n-zB-s82">
-                                <rect key="frame" x="0.0" y="96" width="375" height="488"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="a5a-kZ-cUm">
@@ -1361,7 +1347,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing yet. Sign up to learn now!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJp-uv-paU">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favourite subjects yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJp-uv-paU">
                                                     <rect key="frame" x="55" y="21" width="265" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" red="0.0" green="0.1764705882" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1992,7 +1978,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hff-nL-4mG">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="30"/>
-                                        <state key="normal" title="Zoom/ Online ID Link"/>
+                                        <state key="normal" title="Go To Zoom Meeting"/>
                                         <connections>
                                             <action selector="zoomButton:" destination="5P5-E8-zMH" eventType="touchUpInside" id="Vwt-Xo-RrX"/>
                                             <action selector="zoomPressed:" destination="PgG-s6-pT6" eventType="touchUpInside" id="rYt-GO-9uv"/>
@@ -2097,30 +2083,30 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gf2-sB-Pi3">
-                                <rect key="frame" x="20" y="282" width="335" height="59"/>
+                                <rect key="frame" x="20" y="282" width="335" height="56.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Atu-cc-jzs">
-                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="56.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timefilled" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ls-uO-wFE">
-                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" red="0.3294117647" green="0.78039215689999997" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVp-tW-VpG">
-                                                <rect key="frame" x="0.0" y="36" width="157.5" height="23"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <rect key="frame" x="0.0" y="35" width="157.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="1" green="0.42745098040000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ziY-aN-Fcf">
-                                        <rect key="frame" x="177.5" y="0.0" width="157.5" height="59"/>
+                                        <rect key="frame" x="177.5" y="0.0" width="157.5" height="56.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notesfilled" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6C1-LR-EF9">
-                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="59"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="56.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <nil key="highlightedColor"/>
@@ -2138,7 +2124,6 @@
                             <constraint firstItem="Kai-Vh-0nE" firstAttribute="trailing" secondItem="UC1-Pb-LC5" secondAttribute="trailing" constant="20" id="4d9-Pz-i22"/>
                             <constraint firstItem="Kai-Vh-0nE" firstAttribute="trailing" secondItem="lTF-hb-jKe" secondAttribute="trailing" constant="40" id="57c-Fh-2w1"/>
                             <constraint firstItem="Kai-Vh-0nE" firstAttribute="trailing" secondItem="vo2-m4-gnI" secondAttribute="trailing" constant="20" id="6SQ-9e-quu"/>
-                            <constraint firstItem="lTF-hb-jKe" firstAttribute="top" secondItem="UC1-Pb-LC5" secondAttribute="bottom" constant="30" id="9jq-1D-hqr"/>
                             <constraint firstItem="vo2-m4-gnI" firstAttribute="top" secondItem="0Na-h8-isT" secondAttribute="bottom" constant="15" id="EXG-En-C8e"/>
                             <constraint firstItem="gf2-sB-Pi3" firstAttribute="top" secondItem="vo2-m4-gnI" secondAttribute="bottom" constant="20" id="JPy-XR-xZr"/>
                             <constraint firstItem="UC1-Pb-LC5" firstAttribute="leading" secondItem="Kai-Vh-0nE" secondAttribute="leading" constant="20" id="JfQ-pe-xuL"/>
@@ -2148,6 +2133,7 @@
                             <constraint firstItem="V9F-KT-9xa" firstAttribute="top" secondItem="Kai-Vh-0nE" secondAttribute="top" constant="45" id="beP-uo-7cI"/>
                             <constraint firstItem="vo2-m4-gnI" firstAttribute="leading" secondItem="Kai-Vh-0nE" secondAttribute="leading" constant="20" id="dNH-Co-VVT"/>
                             <constraint firstItem="V9F-KT-9xa" firstAttribute="leading" secondItem="0Na-h8-isT" secondAttribute="trailing" constant="20" id="f3n-Rb-UPb"/>
+                            <constraint firstItem="lTF-hb-jKe" firstAttribute="top" secondItem="UC1-Pb-LC5" secondAttribute="bottom" constant="30" id="hVU-Gs-TBN"/>
                             <constraint firstItem="Kai-Vh-0nE" firstAttribute="trailing" secondItem="gf2-sB-Pi3" secondAttribute="trailing" constant="20" id="nZk-PH-HTu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kai-Vh-0nE"/>
@@ -2285,7 +2271,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUn-J6-5hc">
                                         <rect key="frame" x="0.0" y="127.5" width="295" height="30"/>
-                                        <state key="normal" title="Zoom/ Online ID Link"/>
+                                        <state key="normal" title="Zoom Link"/>
                                         <connections>
                                             <action selector="zoomButton:" destination="5P5-E8-zMH" eventType="touchUpInside" id="sjj-9G-KsM"/>
                                         </connections>
@@ -2893,7 +2879,7 @@
                                     <constraint firstAttribute="height" constant="20" id="KLT-Tc-g8r"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fibonia Version 1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9P-Dn-noL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fibonia Version 1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9P-Dn-noL">
                                 <rect key="frame" x="70" y="266" width="235" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -2956,8 +2942,8 @@
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acW-gM-mzN">
-                                <rect key="frame" x="70" y="230.5" width="235" height="203"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="14" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acW-gM-mzN">
+                                <rect key="frame" x="40" y="230.5" width="295" height="183"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">You will be prompted to upload your informal transcript (a print of CalCentral would be fine) in order to verify the classes you have taken and the grades your received. Your information is safe with us as we do not share any information, other than your name and Zoom/Online Id, with anyone</string>
@@ -2975,9 +2961,9 @@
                         <constraints>
                             <constraint firstItem="0yF-xb-TbL" firstAttribute="leading" secondItem="pQK-vf-Z8c" secondAttribute="leading" constant="70" id="CRg-BC-Wla"/>
                             <constraint firstItem="acW-gM-mzN" firstAttribute="top" secondItem="0yF-xb-TbL" secondAttribute="bottom" constant="30" id="FdH-L5-a7v"/>
-                            <constraint firstItem="pQK-vf-Z8c" firstAttribute="trailing" secondItem="acW-gM-mzN" secondAttribute="trailing" constant="70" id="GJr-xv-KU9"/>
+                            <constraint firstItem="pQK-vf-Z8c" firstAttribute="trailing" secondItem="acW-gM-mzN" secondAttribute="trailing" constant="40" id="GJr-xv-KU9"/>
                             <constraint firstItem="pQK-vf-Z8c" firstAttribute="trailing" secondItem="0yF-xb-TbL" secondAttribute="trailing" constant="70" id="RhG-ho-KCH"/>
-                            <constraint firstItem="acW-gM-mzN" firstAttribute="leading" secondItem="pQK-vf-Z8c" secondAttribute="leading" constant="70" id="WRg-ui-0Ad"/>
+                            <constraint firstItem="acW-gM-mzN" firstAttribute="leading" secondItem="pQK-vf-Z8c" secondAttribute="leading" constant="40" id="WRg-ui-0Ad"/>
                             <constraint firstItem="0yF-xb-TbL" firstAttribute="top" secondItem="pQK-vf-Z8c" secondAttribute="top" constant="40" id="gsR-XR-6Af"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pQK-vf-Z8c"/>
@@ -3050,7 +3036,7 @@
                                     <constraint firstAttribute="height" constant="20" id="646-eS-Pn0"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fibonia Version 1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHJ-U1-vJC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fibonia Version 1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHJ-U1-vJC">
                                 <rect key="frame" x="70" y="276" width="235" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -4558,8 +4544,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="YbO-7P-TL0"/>
         <segue reference="h5r-aC-UGc"/>
-        <segue reference="I8H-c7-8PK"/>
-        <segue reference="5ZS-Pa-Ajb"/>
+        <segue reference="oCO-Gu-ahD"/>
+        <segue reference="04g-7p-r3x"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

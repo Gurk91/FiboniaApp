@@ -281,8 +281,59 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     }
     
     
+    //MARK: Appointment Cancellation
     @IBAction func cancelPressed(_ sender: Any) {
-        
+        deleteNCreateAlert(title: "Cancel Appointment", message: "Are you sure you want to cancel this appointment?")
+    }
+    
+    func deleteNCreateAlert(title: String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete Appointment", style: .default, handler: { (action) in
+            //cancellation code begins
+            let url = Constants.emailServerURL.appendingPathComponent("student-appt-cancel")
+            let params = ["name":self.currAppt["tutorFN"], "time": self.currAppt["time"], "class": self.currAppt["classname"], "email":self.currAppt["tutorEmail"]]
+            let jsondata = try? JSONSerialization.data(withJSONObject: params)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsondata
+            let task =  URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if error != nil {
+                    print("Error occured", error.debugDescription)
+                } else {
+                    print("response", response?.description as Any)
+                    print("data", data?.description as Any)
+                }
+            }
+            task.resume()
+            
+            var count = 0
+            for appt in self.tutorAppts{
+                if appt["uid"] as! String == self.currAppt["uid"] as! String {
+                    self.tutorAppts.remove(at: count)
+                    break
+                }
+                count += 1
+            }
+            let db = Firestore.firestore()
+            db.collection("tutors").document(self.currAppt["tutorEmail"] as! String).setData(["appointments": self.tutorAppts], merge: true)
+            for clas in self.tutorClasses {
+                db.collection(clas).document(self.currAppt["tutorEmail"] as! String).setData(["appointments": self.tutorAppts], merge: true)
+            }
+            print("tutor side appointment deleted")
+            currStudent.appointments = self.removeAppointment(array: currStudent.appointments, appt: self.currAppt)
+            db.collection("users").document(currStudent.email).setData(["appointments": currStudent.appointments], merge: true)
+            
+            let tutorTBC = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.tutorHomeVC)
+            self.view.window?.rootViewController = tutorTBC
+            self.view.window?.makeKeyAndVisible()
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+        self.dismiss(animated: true, completion: nil)
+    }))
+    self.present(alert, animated: true, completion: nil)
+    
+    
     }
     
     
@@ -301,8 +352,6 @@ class CurrentAppointmentViewController: UIViewController, SFSafariViewController
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        //MARK: Segue to rating appointment screen
-        
         return
     }
     

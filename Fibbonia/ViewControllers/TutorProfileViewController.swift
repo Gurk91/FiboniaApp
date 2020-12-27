@@ -47,14 +47,18 @@ class TutorProfileViewController: UIViewController {
     
     @IBAction func savePressed(_ sender: Any) {
         let db = Firestore.firestore()
-        if onlineIDfield.text! != "" {
+        if Utils.validZoomID(zoom: onlineIDfield.text!) == true {
             let online = onlineIDfield.text!
-            db.collection("tutors").document(currTutor.calEmail).setData(["onlineID": online], merge: true)
-            currTutor.setOnline(ID: online)
+            db.collection("tutors").document(currTutor.calEmail).setData(["zoom": online], merge: true)
+            currTutor.zoom = online
             Utils.createAlert(title: "Profile Updated", message: "Your profile was updated", buttonMsg: "Okay", viewController: self)
         }
+        if onlineIDfield.text! != "" && Utils.validZoomID(zoom: onlineIDfield.text!) == false {
+            Utils.createAlert(title: "Invalid Zoom ID", message: "Please enter a valid https://berkeley.zoom.us Zoom ID", buttonMsg: "Okay", viewController: self)
+            return
+        }
         if gradYearField.text! != "" {
-            db.collection("tutors").document(currTutor.calEmail).setData(["gradyear": gradYearField.text!], merge: true)
+            db.collection("tutors").document(currTutor.calEmail).setData(["gradyear": Int(gradYearField.text!)!], merge: true)
             currTutor.gradyear = Int(gradYearField.text!)!
             Utils.createAlert(title: "Profile Updated", message: "Your profile was updated", buttonMsg: "Okay", viewController: self)
         }
