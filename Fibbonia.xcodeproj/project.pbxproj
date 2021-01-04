@@ -61,6 +61,19 @@
 		A4B80AA52484662400A2B8CA /* CollectionStudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B80AA42484662400A2B8CA /* CollectionStudentTableViewCell.swift */; };
 		A4B80AA72484667A00A2B8CA /* StudentClassesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */; };
 		A4B8EA76249FE570006296AD /* TutorCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B8EA75249FE570006296AD /* TutorCollectionTableViewCell.swift */; };
+		A4BEC03A25A3A49000829A48 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC02E25A3A47F00829A48 /* Roboto-Thin.ttf */; };
+		A4BEC03B25A3A49000829A48 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC02F25A3A47F00829A48 /* Roboto-ThinItalic.ttf */; };
+		A4BEC03C25A3A49000829A48 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03025A3A48000829A48 /* Roboto-Bold.ttf */; };
+		A4BEC03D25A3A49000829A48 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03125A3A48200829A48 /* Roboto-Light.ttf */; };
+		A4BEC03E25A3A49000829A48 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03225A3A48300829A48 /* Roboto-Black.ttf */; };
+		A4BEC03F25A3A49000829A48 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03325A3A48600829A48 /* Roboto-Italic.ttf */; };
+		A4BEC04025A3A49000829A48 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03425A3A48800829A48 /* Roboto-BlackItalic.ttf */; };
+		A4BEC04125A3A49000829A48 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03525A3A48900829A48 /* Roboto-LightItalic.ttf */; };
+		A4BEC04225A3A49000829A48 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03625A3A48B00829A48 /* Roboto-Medium.ttf */; };
+		A4BEC04325A3A49000829A48 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03725A3A48C00829A48 /* Roboto-MediumItalic.ttf */; };
+		A4BEC04425A3A49000829A48 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03825A3A48E00829A48 /* Roboto-Regular.ttf */; };
+		A4BEC04525A3A49000829A48 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BEC03925A3A48F00829A48 /* Roboto-BoldItalic.ttf */; };
+		A4BEC04825A3A95600829A48 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BEC04725A3A95600829A48 /* ForgotPasswordViewController.swift */; };
 		A4C2DB922421A6EF004B8A8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2DB912421A6EF004B8A8A /* Constants.swift */; };
 		A4C2EA8624B76B4A006F4250 /* PaymentIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2EA8524B76B4A006F4250 /* PaymentIntroViewController.swift */; };
 		A4C2EA8824B7A5F3006F4250 /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2EA8724B7A5F3006F4250 /* MyAPIClient.swift */; };
@@ -128,6 +141,19 @@
 		A4B80AA42484662400A2B8CA /* CollectionStudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionStudentTableViewCell.swift; sourceTree = "<group>"; };
 		A4B80AA62484667A00A2B8CA /* StudentClassesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentClassesCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4B8EA75249FE570006296AD /* TutorCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		A4BEC02E25A3A47F00829A48 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		A4BEC02F25A3A47F00829A48 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		A4BEC03025A3A48000829A48 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		A4BEC03125A3A48200829A48 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		A4BEC03225A3A48300829A48 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		A4BEC03325A3A48600829A48 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		A4BEC03425A3A48800829A48 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		A4BEC03525A3A48900829A48 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		A4BEC03625A3A48B00829A48 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		A4BEC03725A3A48C00829A48 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		A4BEC03825A3A48E00829A48 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A4BEC03925A3A48F00829A48 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		A4BEC04725A3A95600829A48 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		A4C2DB912421A6EF004B8A8A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A4C2DB932421AA0B004B8A8A /* Fibonia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fibonia.entitlements; sourceTree = "<group>"; };
 		A4C2EA8524B76B4A006F4250 /* PaymentIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentIntroViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +198,7 @@
 		A412AA6D2402295400216FDB /* Fibbonia */ = {
 			isa = PBXGroup;
 			children = (
+				A4BEC04625A3A4C200829A48 /* Fonts */,
 				A4D53B3D24BC85380005C6C3 /* Tutor Appoinments */,
 				A4C2DB902421A6C8004B8A8A /* Helpers */,
 				A4B8EA72249FD102006296AD /* Tutor Home Screen */,
@@ -274,8 +301,28 @@
 				A4202E0524BA51D5005116FA /* OptionsViewController.swift */,
 				A4202E0724BB3A97005116FA /* LoginOptionsViewController.swift */,
 				A4B5D9F424EC707400B9049F /* WelcomeScreenViewController.swift */,
+				A4BEC04725A3A95600829A48 /* ForgotPasswordViewController.swift */,
 			);
 			path = "Entry VCs";
+			sourceTree = "<group>";
+		};
+		A4BEC04625A3A4C200829A48 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A4BEC03225A3A48300829A48 /* Roboto-Black.ttf */,
+				A4BEC03425A3A48800829A48 /* Roboto-BlackItalic.ttf */,
+				A4BEC03025A3A48000829A48 /* Roboto-Bold.ttf */,
+				A4BEC03925A3A48F00829A48 /* Roboto-BoldItalic.ttf */,
+				A4BEC03325A3A48600829A48 /* Roboto-Italic.ttf */,
+				A4BEC03125A3A48200829A48 /* Roboto-Light.ttf */,
+				A4BEC03525A3A48900829A48 /* Roboto-LightItalic.ttf */,
+				A4BEC03625A3A48B00829A48 /* Roboto-Medium.ttf */,
+				A4BEC03725A3A48C00829A48 /* Roboto-MediumItalic.ttf */,
+				A4BEC03825A3A48E00829A48 /* Roboto-Regular.ttf */,
+				A4BEC02E25A3A47F00829A48 /* Roboto-Thin.ttf */,
+				A4BEC02F25A3A47F00829A48 /* Roboto-ThinItalic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A4C2DB902421A6C8004B8A8A /* Helpers */ = {
@@ -388,9 +435,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4BEC04225A3A49000829A48 /* Roboto-Medium.ttf in Resources */,
+				A4BEC03C25A3A49000829A48 /* Roboto-Bold.ttf in Resources */,
+				A4BEC03B25A3A49000829A48 /* Roboto-ThinItalic.ttf in Resources */,
+				A4BEC04125A3A49000829A48 /* Roboto-LightItalic.ttf in Resources */,
+				A4BEC04325A3A49000829A48 /* Roboto-MediumItalic.ttf in Resources */,
 				A412AA7B2402295500216FDB /* LaunchScreen.storyboard in Resources */,
 				A453777924CB1C1D00532A0A /* GoogleService-Info.plist in Resources */,
 				A412AA782402295500216FDB /* Assets.xcassets in Resources */,
+				A4BEC03E25A3A49000829A48 /* Roboto-Black.ttf in Resources */,
+				A4BEC04025A3A49000829A48 /* Roboto-BlackItalic.ttf in Resources */,
+				A4BEC04525A3A49000829A48 /* Roboto-BoldItalic.ttf in Resources */,
+				A4BEC03A25A3A49000829A48 /* Roboto-Thin.ttf in Resources */,
+				A4BEC03F25A3A49000829A48 /* Roboto-Italic.ttf in Resources */,
+				A4BEC04425A3A49000829A48 /* Roboto-Regular.ttf in Resources */,
+				A4BEC03D25A3A49000829A48 /* Roboto-Light.ttf in Resources */,
 				A412AA762402295400216FDB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +546,7 @@
 				A4751B5124782A3D00EDAF5B /* NewStudentHomeViewController.swift in Sources */,
 				A451D7E0244BDFCD00ABBB03 /* TutorSignUpViewController.swift in Sources */,
 				A45EF7792458943500B1C64F /* TutorClassDisplayViewController.swift in Sources */,
+				A4BEC04825A3A95600829A48 /* ForgotPasswordViewController.swift in Sources */,
 				A4F6A02E245CDB370073783C /* ApptTutorTableViewCell.swift in Sources */,
 				A44ABE7A2455111600475CDD /* TutorAddClassViewController.swift in Sources */,
 				A487AEBE241F690D00381E82 /* LoginViewController.swift in Sources */,

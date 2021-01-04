@@ -20,6 +20,7 @@ class LoginOptionsViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
+    
     @IBOutlet weak var errorTextDisplay: UILabel!
     
     
